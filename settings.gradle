@@ -1,0 +1,4 @@
+rootProject.name = 'tripdat'
+include 'core'
+include 'web'
+
