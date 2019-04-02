@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display users for example</title>
+</head>
+<body>
+    <div align="center">
+        <table border="1" cellpadding="5">
+            <caption><h2>Users</h2></caption>
+
+            <tr>
+                <th>user_id</th>
+                <th>user_first_name</th>
+                <th>user_last_name</th>
+                <th>user_city</th>
+                <th>user_email</th>
+                <th>user_home_airport</th>
+                <th>user_login</th>
+                <th>user_password</th>
+                <th>user_display_name</th>
+            </tr>
+
+            <tr th:each="user: ${users}" >
+                <td th:text="${user.userId}"></td>
+                <td th:text="${user.userFirstName}"></td>
+                <td th:text="${user.userLastName}"></td>
+                <td th:text="${user.userCity}"></td>
+                <td th:text="${user.userEmail}"></td>
+                <td th:text="${user.userHomeAirport}"></td>
+                <td th:text="${user.userLogin}"></td>
+                <td th:text="${user.userPassword}"></td>
+                <td th:text="${user.userDisplayName}"></td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+</html>
