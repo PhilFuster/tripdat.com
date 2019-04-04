@@ -1,6 +1,5 @@
 package dev.phasterinc.tripdat.model;
 
-
 import lombok.Data;
 
 import javax.persistence.*;
@@ -27,8 +26,9 @@ import javax.validation.constraints.NotEmpty;
 public class TripdatUser {
 
     @Id
+    @SequenceGenerator(name = "user_generator", sequenceName = "tripdat_user_user_id_seq")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "user_generator")
     @Column(name = "user_id", columnDefinition = "BIGSERIAL")
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long userId;
 
     @Column(name = "user_first_name", columnDefinition = "TEXT")

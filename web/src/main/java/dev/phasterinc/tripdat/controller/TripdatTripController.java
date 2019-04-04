@@ -1,6 +1,6 @@
 package dev.phasterinc.tripdat.controller;
 
-import dev.phasterinc.tripdat.service.TripdatUserService;
+import dev.phasterinc.tripdat.service.TripdatTripService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,20 +9,21 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Slf4j
 @Controller
-public class TripDatController {
+public class TripdatTripController {
+
 
     @Autowired
-    private TripdatUserService tripdatUserService;
+    private TripdatTripService tripdatTripService;
 
     // == constructors ==
     @Autowired
-    public TripDatController(TripdatUserService tripdatUserService) {
-        this.tripdatUserService = tripdatUserService;
+    public TripdatTripController(TripdatTripService tripdatTripService ) {
+        this.tripdatTripService = tripdatTripService;
     }
 
-    @GetMapping("/")
+    @GetMapping("/trip/")
     public String userForm(Model model) {
-        model.addAttribute("users", tripdatUserService.list());
+        model.addAttribute("users", tripdatTripService.list());
         return "users";
 
     }
