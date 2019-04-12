@@ -1,11 +1,18 @@
 package dev.phasterinc.tripdat.dao;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 import java.util.List;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 /**
  * Name: AbstractHibernateDAO
@@ -13,7 +20,7 @@ import java.util.List;
  *          and is meant to be extended for each entity.
  * @param <T> : the dao to perform operations on.
  */
-public abstract class AbstractHibernateDAO< T extends Serializable> {
+public abstract class AbstractHibernateDao< T extends Serializable> implements IGenericDao<T>{
 
     // == fields ==
     private Class< T > clazz;
@@ -28,8 +35,8 @@ public abstract class AbstractHibernateDAO< T extends Serializable> {
      * Purpose: set the clazz object to perform operations on
      * @param clazzToSet - the dao to perform operations on
      */
-    public void setClazz ( final Class< T > clazzToSet ) {
-        clazz = clazzToSet;
+    public void setClazz ( Class< T > clazzToSet ) {
+        this.clazz = clazzToSet;
     }
 
     /**
@@ -53,12 +60,12 @@ public abstract class AbstractHibernateDAO< T extends Serializable> {
     }
 
     /**
-     * Name: save
+     * Name: create
      * Purpose: Persist the passed entity  in the db
      * @param entity - the entity to persist.
      */
-    public void save( final T entity ){
-        getCurrentSession().persist( entity );
+    public void create( final T entity ){
+       getCurrentSession().persist( entity );
     }
 
     /**
@@ -81,5 +88,9 @@ public abstract class AbstractHibernateDAO< T extends Serializable> {
 
     protected final Session getCurrentSession(){
         return sessionFactory.getCurrentSession();
+    }
+
+    protected Criteria createEntityCriteria(){
+        return getCurrentSession().createCriteria(clazz);
     }
 }

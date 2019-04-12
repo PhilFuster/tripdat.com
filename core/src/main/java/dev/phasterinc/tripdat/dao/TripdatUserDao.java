@@ -2,10 +2,10 @@ package dev.phasterinc.tripdat.dao;
 
 import dev.phasterinc.tripdat.model.TripdatUser;
 
-import java.util.List;
 
-public interface TripdatUserDao {
-    void save(TripdatUser user );
+public interface TripdatUserDao extends IGenericDao<TripdatUser> {
 
-    List<TripdatUser> list();
+    TripdatUser findByEmail(String email);
+    TripdatUser findByLogin(String loginId);
+
 }

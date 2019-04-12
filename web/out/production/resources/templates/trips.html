@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Display users for example</title>
+</head>
+<body>
+    <div align="center">
+        <table border="1" cellpadding="5">
+            <caption><h2>Users</h2></caption>
+
+            <tr>
+                <th>trip_id</th>
+                <th>user_id</th>
+                <th>trip_name</th>
+                <th>trip_start_date</th>
+                <th>trip_end_date</th>
+                <th>trip_description</th>
+                <th>trip_image_link</th>
+                <th>trip_destination_city</th>
+                <th>trip_is_user_traveler</th>
+
+            </tr>
+
+            <tr th:each="trip: ${trips}" >
+                <td th:text="${trip.tripId}"></td>
+                <td th:text="${trip.user.userId}"></td>
+                <td th:text="${trip.tripName}"></td>
+                <td th:text="${trip.tripStartDate}"></td>
+                <td th:text="${trip.tripEndDate}"></td>
+                <td th:text="${trip.tripDescription}"></td>
+                <td th:text="${trip.tripImageLink}"></td>
+                <td th:text="${trip.destinationCity}"></td>
+                <td th:text="${trip.isUserTraveler}"></td>
+            </tr>
+
+        </table>
+    </div>
+
+</body>
+</html>

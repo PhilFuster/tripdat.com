@@ -4,8 +4,8 @@ import dev.phasterinc.tripdat.model.TripdatTrip;
 
 import java.util.List;
 
-public interface TripdatTripDao {
-    void save(TripdatTrip trip);
+public interface TripdatTripDao extends IGenericDao<TripdatTrip> {
 
-    List<TripdatTrip> list();
+    List<TripdatTrip> getTripItemsByTripId();
+
 }

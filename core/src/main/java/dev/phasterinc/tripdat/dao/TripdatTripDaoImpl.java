@@ -1,29 +1,20 @@
 package dev.phasterinc.tripdat.dao;
 
 import dev.phasterinc.tripdat.model.TripdatTrip;
-import dev.phasterinc.tripdat.model.TripdatUser;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Repository
-public class TripdatTripDaoImpl implements TripdatTripDao {
-
-    @Autowired
-    private SessionFactory sessionFactory;
+public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implements TripdatTripDao {
 
     @Override
-    public void save(TripdatTrip trip) {
-        sessionFactory.getCurrentSession().save(trip);
-    }
+    public List<TripdatTrip> getTripItemsByTripId() {
 
-    @Override
-    public List<TripdatTrip> list() {
-        @SuppressWarnings("unchecked")
-        TypedQuery<TripdatTrip> query = sessionFactory.getCurrentSession().createQuery("FROM TripdatTrip");
-        return query.getResultList();
+        List<TripdatTrip> list = getCurrentSession().createQuery("SELECT trip FROM TripdatTrip trip JOIN trip.tripItems tripItems ").list();
+        for(TripdatTrip tripItem : list) {
+            System.out.println(tripItem.toString());
+        }
+        return list;
     }
 }

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Tripdat Travel Itinerary - log in</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <h1>Welcome to Philip Fuster's Senior Project - Tripdat Travel Itinerary Application</h1>
+        <h2>Tripdat is meant to store all your travel information in one easy to access location.</h2>
+        <ul>
+          <li>Go to the <a href="/user" th:href="@{/user}">secured pages</a></li>
+        </ul>
+    </div>
+</body>
+</html>

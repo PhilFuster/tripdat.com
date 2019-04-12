@@ -4,9 +4,25 @@ import dev.phasterinc.tripdat.model.TripdatTrip;
 
 import java.util.List;
 
-public interface TripdatTripService {
-    void save(TripdatTrip tripdatTrip);
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
-    List<TripdatTrip> list();
+/**
+ * Name: TripdatTripService: Interface for TripdatTripService
+ * Purpose: The service for TripdatTrip table in db
+ */
+public interface TripdatTripService {
+    List<TripdatTrip> findAll();
+    TripdatTrip findOne(final long id);
+    void create(final TripdatTrip entity);
+    TripdatTrip update(final TripdatTrip entity);
+    void delete(final TripdatTrip entity);
+    void deleteById(final long entityId);
+    List<TripdatTrip> getTripItemsByTripId();
+
 
 }

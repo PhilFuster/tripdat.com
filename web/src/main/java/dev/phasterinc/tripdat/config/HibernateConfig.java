@@ -26,7 +26,7 @@ public class HibernateConfig {
     private Environment env;
 
     @Bean
-    public LocalSessionFactoryBean getSessionFactory() {
+    public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
         sessionFactory.setPackagesToScan(new String[]{"dev.phasterinc.tripdat.model"});
@@ -38,7 +38,7 @@ public class HibernateConfig {
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
         HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory().getObject());
+        transactionManager.setSessionFactory(sessionFactory);
         return transactionManager;
     }
 
@@ -63,9 +63,12 @@ public class HibernateConfig {
             {
                 setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
                 setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
-                setProperty("hibernate.globally_quoted_identifiers", "true");
+                setProperty("hibernate.globally_quoted_identifiers", "false");
+                setProperty("hibernate.query.substitutions", "true 1, false 0, yes 'Y', no 'N");
+                setProperty("hibernate.show_sql", "true");
             }
         };
     }
+
 
 }
