@@ -12,35 +12,48 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Service
 @Transactional
 public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
 
-    @Autowired
+    // == fields ==
+
     private TripdatUserService tripdatUserService;
 
-    @Autowired
+
+    private RoleService roleService;
+
+
     private BCryptPasswordEncoder passwordEncoder;
 
+    // == constructors ==
+    @Autowired
+    public CustomUserDetailsServiceImpl(TripdatUserService tripdatUserService, RoleService roleService, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.tripdatUserService = tripdatUserService;
+        this.roleService = roleService;
+        this.passwordEncoder = bCryptPasswordEncoder;
+    }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        TripdatUser user = tripdatUserService.findByEmail(email);
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        TripdatUser user = tripdatUserService.findByLogin(login);
 
         if(user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
 
-        return new org.springframework.security.core.userdetails.User(user.getUserEmail(),
+
+        return new org.springframework.security.core.userdetails.User(user.getUserLogin(),
                 user.getUserPassword(),
                 mapRolesToAuthorities(user.getRoles()));
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
+
         return roles.stream()
                 .map(role -> new SimpleGrantedAuthority(role.getName()))
                 .collect(Collectors.toList());
@@ -65,7 +78,9 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
         user.setUserEmail(registrationDto.getEmail());
         user.setUserPassword(passwordEncoder.encode( registrationDto.getPassword()));
         user.setUserLogin(registrationDto.getLogin());
-        user.setRoles(Arrays.asList(new Role("ROLE_USER") ));
+        Role role = roleService.findByName("ROLE_USER");
+        System.out.println(role.toString());
+        user.addRole(role);
         tripdatUserService.create(user);
         return user;
 

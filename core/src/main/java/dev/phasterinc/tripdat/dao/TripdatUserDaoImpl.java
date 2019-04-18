@@ -34,8 +34,5 @@ public class TripdatUserDaoImpl extends AbstractHibernateDao<TripdatUser> implem
         TripdatUser user = q.uniqueResult();
         return user;
 
-
-
-
     }
 }

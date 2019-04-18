@@ -4,6 +4,7 @@ import dev.phasterinc.tripdat.dao.TripdatTripDao;
 import dev.phasterinc.tripdat.model.TripdatTrip;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 /************************************************************
@@ -18,6 +19,7 @@ import java.util.List;
  * Purpose: Implementation to the TripdatTripService interface
  */
 @Service
+@Transactional
 public class TripdatTripServiceImpl implements TripdatTripService{
 
 
@@ -31,6 +33,7 @@ public class TripdatTripServiceImpl implements TripdatTripService{
 
     @Override
     public List<TripdatTrip> findAll() {
+        System.out.println("Looking for all trips...");
         return dao.findAll();
     }
 
@@ -63,6 +66,7 @@ public class TripdatTripServiceImpl implements TripdatTripService{
 
     @Override
     public List<TripdatTrip> getTripItemsByTripId() {
+        System.out.println("Looking for all trips by trip item id...");
         return dao.getTripItemsByTripId();
     }
 }

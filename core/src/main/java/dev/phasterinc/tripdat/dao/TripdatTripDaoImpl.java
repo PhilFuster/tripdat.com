@@ -2,10 +2,12 @@ package dev.phasterinc.tripdat.dao;
 
 import dev.phasterinc.tripdat.model.TripdatTrip;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implements TripdatTripDao {
 
     @Override

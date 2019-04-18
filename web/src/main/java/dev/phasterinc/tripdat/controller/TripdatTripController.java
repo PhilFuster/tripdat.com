@@ -25,12 +25,12 @@ public class TripdatTripController {
         this.tripdatTripItemService = tripdatTripItemService;
     }
 
-    @GetMapping("/trip/")
+    @GetMapping("/user/trips")
     public String tripForm(Model model) {
         model.addAttribute("trips", tripdatTripService.findAll());
         model.addAttribute("tripItems", tripdatTripService.getTripItemsByTripId());
 
-        return "trips";
+        return "user/trips";
 
     }
 

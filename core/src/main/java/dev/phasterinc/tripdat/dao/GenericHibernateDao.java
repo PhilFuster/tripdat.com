@@ -4,6 +4,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,6 +24,7 @@ import java.util.List;
 @Repository
 @Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Primary
+@Transactional
 public class GenericHibernateDao<T extends Serializable>
 extends AbstractHibernateDao<T> implements IGenericDao<T>{
 

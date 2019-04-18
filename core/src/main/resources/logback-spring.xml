@@ -4,7 +4,7 @@
     <logger name="dev.phasterinc.tripdat" level="DEBUG"/>
     <logger name="org.springframework" level="DEBUG"/>
     <logger name="org.springframework.boot" level="INFO"/>
-    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.web" level="DEBUG"/>
     <logger name="org.thymeleaf" level="INFO"/>
     <logger name="org.springframework.security" level="INFO"/>
 

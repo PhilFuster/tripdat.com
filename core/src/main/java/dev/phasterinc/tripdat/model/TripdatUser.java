@@ -7,7 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 
 /************************************************************
@@ -63,14 +64,16 @@ public class TripdatUser implements Serializable {
     @Column(name = "user_display_name", columnDefinition = "TEXT")
     private String userDisplayName;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
-                    name = "user_id", referencedColumnName = "user_id"),
+                    name = "user_id"),
             inverseJoinColumns = @JoinColumn(
-                    name = "role_id", referencedColumnName = "role_id"))
-    private Collection<Role> roles;
+                    name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+
 
     // == constructors ==
 
@@ -83,12 +86,45 @@ public class TripdatUser implements Serializable {
         this.userPassword = userPassword;
     }
 
-    public TripdatUser(String userFirstName, String userLastName, String userEmail, String userPassword, Collection<Role> roles ) {
+    public TripdatUser(String userFirstName, String userLastName, String userEmail, String userPassword, Set<Role> roles ) {
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.roles = roles;
+    }
+
+    // == public methods ==
+    public void addRole(Role role) {
+        roles.add(role);
+        role.getUsers().add(this);
+    }
+
+
+
+    public void removeRole(Role role) {
+        roles.remove(role);
+        role.getUsers().remove(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TripdatUser)) return false;
+        return userId != null && userId.equals(((TripdatUser) o).getUserId());
+    }
+
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    @Override
+    public String toString() {
+        return "[UserId: " + userId + ", userFirstName: " + userFirstName + ", userLastName: " + userLastName
+                + ", userCity: " + userCity + ", userEmail: " + userEmail + ", userHomeAirport: " + userHomeAirport
+                + ", userLogin: " + userLogin + ", userPassword: " + userPassword + ", userDisplayName: " + userDisplayName
+                + ", roles: " + roles + "]";
     }
 
 

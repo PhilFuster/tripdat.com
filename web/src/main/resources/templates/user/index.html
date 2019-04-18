@@ -7,6 +7,38 @@
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
+
+    <div id="home-index-main-content" class="wrapper" data-selectors="#upcomging-trip-module, #next-up-module">
+
+        <div class="content">
+            <div class="row">
+                <div class="col-4">
+                    <div class="upcoming-trips">
+                        <div  class="card">
+                            <div class="card-header">
+                                <p id="upcoming-trip">Upcoming Trips</p>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="next-up">
+                        <div class="card">
+                            <div class="card-header container-dark">
+                                Next Up:
+                            </div>
+                            <div class="card-body">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h1>This is a secured page!</h1>
     <p><a href="/" th:href="@{/}">Back to home page</a></p>
 </div>
