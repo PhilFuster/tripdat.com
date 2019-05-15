@@ -13,10 +13,6 @@ import java.time.LocalTime;
 public class CruiseStop implements Serializable {
 
     // == fields ==
-
-    // TODO: Adjust database to have an ID for each tripItem's segment information
-    //  ex: CruiseInformation - CruiseStop needs id, FlightInformation - FlightSegment needs id
-    //  this will correct the OneToMany Association
     @Id
     @SequenceGenerator(name = "cruiseStop_generator", sequenceName = "cruise_stop_cruise_stop_id_seq", allocationSize = 1)
     @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "cruiseStop_generator")
@@ -43,7 +39,7 @@ public class CruiseStop implements Serializable {
     @Column(name = "cruise_stop_departure_time", columnDefinition = "TIME WITHOUT TIME ZONE")
     private LocalTime cruiseStopDepartureTime;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
     private CruiseInformation cruiseInformation;
 

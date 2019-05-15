@@ -9,38 +9,61 @@
 <div layout:fragment="content" th:remove="tag">
 
     <div id="home-index-main-content" class="wrapper" data-selectors="#upcomging-trip-module, #next-up-module">
-
         <div class="content">
-            <div class="row">
-                <div class="col-4">
-                    <div class="upcoming-trips">
-                        <div  class="card">
-                            <div class="card-header">
-                                <p id="upcoming-trip">Upcoming Trips</p>
-                            </div>
-                            <div class="card-body">
-
+            <div class="upcoming-trips">
+                <div  class="card">
+                    <div class="card-header">
+                        <p id="upcoming-trip" th:text="|Upcoming Trips|">Upcoming Trips</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <div class="trip"  th:each="trip, iter: ${trips}" >
+                                <p>
+                                    <a class="trip-title" href="" th:text="${trip.tripName}">
+                                        Trip Name
+                                    </a>
+                                </p>
+                                <p th:text="${trip.destinationCity}">Destination City</p>
+                                <p th:inline="text">
+                                    [[${formattedDateStrings[iter.index]}]]
+                                    <span class="duration-of-trip" th:text="${durationOfTrips[iter.index]}">Duration Of Trip</span>
+                                </p>
+                                <div class="trip-actions">
+                                    <a href="/trip/edit" th:text="Edit" >Edit</a>
+                                    <span class="separator"></span>
+                                    <a href="/trip/print" th:text="Print">Print</a>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <a href="/createtrip" class="card-link" th:text="'Add a trip'" >Trip</a>
+                        <span class="separator"></span>
+                        <a href="/trip" class="card-link" th:text="'See all trips'">See all trips</a>
+                    </div>
                 </div>
+            </div>
+            <div class="next-up">
+                <div class="card">
+                    <div class="card-header container-dark">
+                        <p th:text="${'next up: ' +trips.get(0).getTripName()}">Next up: </p>
+                    </div>
+                    <div class="card-body">
+                        <div class="list-group list-group-flush">
+                            <div th:include="~{fragments/next-up::next-up}" th:with="nextUpItems=${nextUpItems}, tripId=${trips.get(0).getTripId()}" class="trip-items-list">
 
-                <div class="col-6">
-                    <div class="next-up">
-                        <div class="card">
-                            <div class="card-header container-dark">
-                                Next Up:
-                            </div>
-                            <div class="card-body">
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+
         </div>
     </div>
-    <h1>This is a secured page!</h1>
-    <p><a href="/" th:href="@{/}">Back to home page</a></p>
+
+
 </div>
 </body>
 </html>

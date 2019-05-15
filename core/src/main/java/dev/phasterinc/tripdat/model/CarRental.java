@@ -11,12 +11,16 @@ package dev.phasterinc.tripdat.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Name: CarRental
- * Purpose: Derived class from TripdatTripItem. Models a CarRental tripItem
+ * Purpose: Derived class from TripdatTripItemDao. Models a CarRental tripItem
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -35,6 +39,18 @@ public class CarRental extends TripdatTripItem implements Serializable {
 
     @Column(name = "car_rental_confirmation_number", columnDefinition = "TEXT")
     private String carRentalConfirmationNumber;
+
+    @Column(name = "car_rental_pick_up_date", columnDefinition = "DATE")
+    private LocalDate carRentalPickUpDate;
+
+    @Column(name = "car_rental_pick_up_time", columnDefinition = "TIME")
+    private LocalTime carRentalPickUpTime;
+
+    @Column(name = "car_rental_drop_off_date", columnDefinition = "DATE")
+    private LocalDate carRentalDropOffDate;
+
+    @Column(name = "car_rental_drop_off_time", columnDefinition = "TIME")
+    private LocalTime carRentalDropOffTime;
 
     @Column(name = "car_rental_pick_up_location_name", columnDefinition = "TEXT")
     private String carRentalPickUpLocationName;
@@ -62,6 +78,11 @@ public class CarRental extends TripdatTripItem implements Serializable {
 
     @Column(name = "car_rental_drop_off_phone_number", columnDefinition = "TEXT")
     private String carRentalDropOffPhoneNumber;
+
+    public CarRental() {
+        System.out.println("CarRental Item type set");
+        super.setTripItemType("A");
+    }
 
 
 

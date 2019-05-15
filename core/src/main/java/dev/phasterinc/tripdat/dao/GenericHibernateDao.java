@@ -16,9 +16,9 @@ import java.util.List;
  ************************************************************/
 
 /**
- * Name: GenericHibernateDao - model a generic dao object to inject into my services
+ * Name: GenericHibernateDao - model a generic dao implementation object to inject into my services
  *
- * @param <T> - The model for this dao to represent
+ * @param <T> - The model for this dao implementation to represent
  */
 
 @Repository

@@ -2,6 +2,8 @@ package dev.phasterinc.tripdat.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,7 +17,7 @@ import java.util.List;
  ************************************************************/
 
 /**
- * Name: TripdatTripItem - model the database table tripdat_trip_item
+ * Name: TripdatTripItemDao - model the database table tripdat_trip_item
  */
 
 @Data
@@ -32,7 +34,7 @@ public class TripdatTripItem implements Serializable {
     @Column(name = "trip_item_id", columnDefinition = "BIGINT")
     private Long tripItemId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_id", referencedColumnName = "trip_id")
     private TripdatTrip tripdatTrip;
 
@@ -51,11 +53,33 @@ public class TripdatTripItem implements Serializable {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<Attendee> attendees = new ArrayList<>();
 
+    @OneToOne(
+            mappedBy = "tripItem", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, optional = false
+    )
+    private TravelAgency travelAgency;
+
+    @OneToOne(
+            mappedBy = "tripItem", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, optional = false
+    )
+    private Supplier supplier;
+
+    @OneToOne(
+            mappedBy = "tripItem", cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER, optional = false
+    )
+    private BookingDetail bookingDetail;
 
 
-    // TODO: must implement later :o
+    @Transient
+    private String tripItemType;
+
+
+    // TODO: must implement later :o (Is implemented as far as I am concerned. Leaving as a note for now
     // helpful link: https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
     public void addAttendee(Attendee attendee) {
         attendees.add(attendee);
@@ -69,4 +93,19 @@ public class TripdatTripItem implements Serializable {
 
     }
 
+    @Override
+    public String toString() {
+        return "TripdatTripItem{" +
+                "tripItemId=" + tripItemId +
+                ", tripId=" + tripdatTrip.getTripId() +
+                ", user=" + user +
+                ", tripItemNote='" + tripItemNote + '\'' +
+                ", tripItemPhotoLink='" + tripItemPhotoLink + '\'' +
+                ", attendees=" + attendees +
+                ", travelAgency=" + travelAgency +
+                ", supplier=" + supplier +
+                ", bookingDetail=" + bookingDetail +
+                ", tripItemType='" + tripItemType + '\'' +
+                '}';
+    }
 }

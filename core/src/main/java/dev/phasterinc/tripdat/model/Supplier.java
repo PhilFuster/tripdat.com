@@ -25,11 +25,13 @@ public class Supplier implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
     @MapsId
     private TripdatTripItem tripItem;
 
+    @Column(name = "supplier_name", columnDefinition = "TEXT")
+    private String supplierName;
     @Column(name = "supplier_contact_name", columnDefinition = "TEXT")
     private String supplierContactName;
 
@@ -42,4 +44,15 @@ public class Supplier implements Serializable {
     @Column(name = "supplier_url", columnDefinition = "TEXT")
     private String supplierUrl;
 
+    @Override
+    public String toString() {
+        return "Supplier{" +
+                "id=" + id +
+                ", supplierName" + supplierName + '\'' +
+                ", supplierContactName='" + supplierContactName + '\'' +
+                ", supplierPhoneNumber='" + supplierPhoneNumber + '\'' +
+                ", supplierEmail='" + supplierEmail + '\'' +
+                ", supplierUrl='" + supplierUrl + '\'' +
+                '}';
+    }
 }

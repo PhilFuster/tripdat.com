@@ -1,9 +1,12 @@
 package dev.phasterinc.tripdat.service;
 
-import dev.phasterinc.tripdat.dao.IGenericDao;
+import dev.phasterinc.tripdat.dao.TripdatTripItemDao;
 import dev.phasterinc.tripdat.model.TripdatTripItem;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 /************************************************************
  * Name:  Philip Fuster                                     *
@@ -17,10 +20,16 @@ import java.util.List;
  * Purpose: calls dao methods for the TripdatItem table
  */
 @Service
+@Transactional
 public class TripdatTripItemServiceImpl implements TripdatTripItemService {
 
     // == fields ==
-    IGenericDao<TripdatTripItem> dao;
+    TripdatTripItemDao dao;
+
+    @Autowired
+    public TripdatTripItemServiceImpl(TripdatTripItemDao dao) {
+        this.dao = dao;
+    }
 
     @Override
     public List<TripdatTripItem> findAll() {
@@ -53,5 +62,18 @@ public class TripdatTripItemServiceImpl implements TripdatTripItemService {
     public void deleteById(long entityId) {
         dao.deleteById(entityId);
 
+    }
+
+    @Override
+    public HashSet<TripdatTripItem> getItemsByTripId(long id) {
+
+
+        return dao.findByTripId(id);
+
+    }
+
+    @Override
+    public HashSet<TripdatTripItem> getMax4ItemsById(long id) {
+        return dao.findMax4ByTripId(id);
     }
 }

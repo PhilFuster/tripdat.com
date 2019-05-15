@@ -25,7 +25,7 @@ public class TravelAgency implements Serializable {
     @Id
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
     @MapsId
     private TripdatTripItem tripItem;
@@ -48,10 +48,16 @@ public class TravelAgency implements Serializable {
     @Column(name = "travel_agency_email", columnDefinition = "TEXT")
     private String travelAgencyEmail;
 
-
-
-
-
-
-
+    @Override
+    public String toString() {
+        return "TravelAgency{" +
+                "id=" + id +
+                ", travelAgencyName='" + travelAgencyName + '\'' +
+                ", travelAgencyUrl='" + travelAgencyUrl + '\'' +
+                ", travelAgencyConfirmationNumber='" + travelAgencyConfirmationNumber + '\'' +
+                ", travelAgencyContactName='" + travelAgencyContactName + '\'' +
+                ", travelAgencyPhoneNumber='" + travelAgencyPhoneNumber + '\'' +
+                ", travelAgencyEmail='" + travelAgencyEmail + '\'' +
+                '}';
+    }
 }

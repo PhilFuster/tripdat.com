@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <th:block th:fragment="flight-fragment(item)">
+        <div th:id="'trip-item-' + ${item.id}">
+            <div th:class="|trip-item-object|">
+                <div th:class="|trip-item-row|">
+                    <div th:class="|trip-item-icon|">
+                        <span class="flight-trip-item-icon-m"></span>
+                    </div>
+                    <div th:class="|trip-item-object-pane|">
+                        <div th:class="|trip-item-header|">
+                            <div th:class="date" th:text="${#temporals.format(item.startDate, 'MM/dd/yyyy')}"></div>
+                            <div th:class="main-info">
+
+                                <span th:text="${item.tripItem.flightDepartureAirport + ' to ' + item.tripItem.flightArrivalAirport}"></span>
+                                <span th:class="|separator|"></span>
+                                <span th:class="|more-info|" th:utext="${ '<br/>' + item.tripItem.airlineName + ' ' + item.tripItem.flightNumber}"></span>
+                            </div>
+                            <div th:class="other-info">
+                                Confirmation #:
+                                <strong th:text="${item.confirmationNumber}">confirmation number</strong>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:id="${item.id}" >
+                    <div th:class="|trip-item-row|">
+                        <div th:class="|trip-item-time-cell|">
+                            <span th:class="|trip-item-time|">
+                                <span th:class="|time-display|" th:text="${#temporals.format(item.startTime, 'h:mm a')}">
+                                    <span th:class="|crosshairs|"></span>
+                                </span>
+                                <span th:class="time-display-details">
+                                    <span th:class="|am-pm|"></span>
+                                    <span th:class="|time-zone|"></span>
+                                </span>
+                            </span>
+                        </div>
+                        <div th:class="|trip-item-object-pane|">
+                            <div th:class="|checkpoint|">
+                                <h3 th:class="|checkpoint-type|" th:text="|Depart|">Depart</h3>
+                                <h2 th:class="|airport-name|" th:text="${item.tripItem.flightDepartureAirport}"></h2>
+
+                                <div th:class="gate-location">
+                                    <span th:class="terminal-section">
+                                        Terminal:
+                                        <span th:class="terminal" th:text="${item.tripItem.flightDepartureTerminal}"></span>
+                                    </span>
+                                    <span th:class="gate-section">
+                                        Gate:
+                                        <span th:class="gate" th:text="${item.tripItem.flightDepartureGate}"></span>
+                                    </span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div th:class="|trip-item-row|">
+                        <div th:class="trip-item-time-cell">
+                                <span th:class="|trip-item-time|">
+                                    <span th:class="|time-display|" th:text="${#temporals.format(item.endTime, 'h:mm a')}">
+                                        <span th:class="|crosshairs|"></span>
+                                    </span>
+                                        <span th:class="time-display-details">
+                                            <span th:class="|am-pm|"></span>
+                                            <span th:class="|time-zone|"></span>
+                                        </span>
+                                </span>
+                        </div>
+                        <div th:class="|trip-item-object-pane|">
+                            <div th:class="|checkpoint|">
+                                <h3 th:class="|checkpoint-type|" th:text="|Arrival|">Arrival</h3>
+                                <h2 th:class="airport-name" th:text="${item.tripItem.flightArrivalAirport}"></h2>
+
+                                <div th:class="gate-location">
+                                    <span th:class="terminal-section">
+                                        Terminal:
+                                        <span th:class="terminal" th:text="${item.tripItem.flightArrivalTerminal}"></span>
+                                    </span>
+                                    <span th:class="gate-section">
+                                        Gate:
+                                        <span th:class="gate" th:text="${item.tripItem.flightArrivalGate}"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div th:class="|trip-item-row|">
+                        <div th:class="|object-actions|">
+                            <ul>
+                                <li>
+                                    <a th:text="|Edit|" th:class="|edit-trip-item|" th:href="@{/edit/id/}">
+                                        Edit
+                                        <span th:class="|icon edit-icon|"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:text="|Copy|" th:class="|copy-trip-item|" th:href="@{/edit/id/}">
+                                        Copy
+                                        <span th:class="|icon copy-icon|"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:text="|Move|" th:class="|move-trip-item|" th:href="@{/updateMove/id/}">
+                                        Move
+                                        <span th:class="|icon move-icon|"></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a th:text="|Delete|" th:class="|delete-trip-item|" th:href="@{/delete/id/}">
+                                        Delete
+                                        <span th:class="|icon delete-icon|"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div th:class="|trip-item-object-pane|">
+                            <!--MAIN CONTENT-->
+                            <div th:class="trip-item-content">
+                                <div th:class="|duration-checkpoint|">
+                                    <div th:class="duration-section">
+                                        Duration:
+                                        <span th:class="duration" th:text="${item.getDurationOfSegment()?:'-'}">
+                                        </span>
+                                    </div>
+                                    <div th:class="|seats-section|">
+                                        Seat(s):
+                                        <span th:class="|seats|" th:text="${item.tripItem.flightSeat?:'-'}"></span>
+                                    </div>
+                                </div>
+
+                                <details th:class="|traveler-info-details grey-border|">
+                                    <summary th:text="|Traveler Info|"></summary>
+                                    <th:block th:each="attendee, iter : ${item.attendees}">
+                                        <div th:class="|traveler-details|">
+                                            <span th:class="|traveler-name|" th:text="${attendee.attendeeName}">Name</span>
+                                            <span th:class="|other-traverler-details|" th:text="|Frequent Flyer#: ${attendee.attendeeLoyaltyProgramNumber}|">Frequent Flyer #: </span>
+                                            <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.attendeeTicketNumber}|"></span>
+                                        </div>
+                                    </th:block>
+                                </details>
+                                <details th:class="|aircraft-service-info grey-border|" th:object="${item.tripItem}">
+                                    <summary th:text="|Aircraft and Service Details|">Aircraft and Service Details</summary>
+                                    <div th:class="|aircraft-service-details|">
+                                        <ul>
+                                            <li th:text="|Baggage Claim:  *{flightBaggageClaim?:'-'}|"></li>
+                                            <li th:text="|Flight Entertainment:  *{flightEntertainment?:'-'}|"></li>
+                                            <li th:text="|Meal: *{flightMeal?: '-'}|"></li>
+                                            <li th:text="|On-time %: *{flightOnTimePercentage?: '-'}|"></li>
+                                            <li th:text="|Aircraft Type: *{flightAircraftType?: '-'}|"></li>
+                                            <li th:text="|Fare Class: *{flightFareClass?: '-'}|"></li>
+                                            <li th:text="|Stops: *{flightStops?: '-'}|"></li>
+                                            <li th:text="|Distance: *{flightDistance?: '-'}|"></li>
+                                            <li th:text="|Segment Notes: *{flightSegmentNotes?: '-'}|"></li>
+                                        </ul>
+                                    </div>
+                                </details>
+                                <details th:class="|travel-agency-information grey-border|" th:object="${item.travelAgency}">
+                                    <summary th:text="|Travel Agency|">Travel Agency</summary>
+                                    <div th:class="|travel-agency-details|">
+                                        <ul>
+                                            <li th:text="|Travel Agency Name: *{travelAgencyName?:'-'}|">Travel Agency Name</li>
+                                            <li th:text="|Travel Agency Confirmation#: *{travelAgencyConfirmationNumber?:'-'} |">Travel Agency Confirmation #</li>
+                                            <li th:text="|Travel Agency URL: *{travelAgencyUrl?:'-'} |">Travel Agency URL</li>
+                                            <li th:text="|Travel Agency Phone: *{travelAgencyPhoneNumber?:'-'}|">Travel Agency Phone #</li>
+                                            <li th:text="|Travel Agency Email: *{travelAgencyEmail?:'-'}|">Travel Agency Email</li>
+                                            <li th:text="|Travel Agency Contact: *{travelAgencyContactName?:'-'}|"></li>
+                                        </ul>
+                                    </div>
+                                </details>
+                                <details th:class="|supplier-information grey-border|" th:object="${item.supplier}">
+                                    <summary th:text="|Supplier Info|">Supplier Info</summary>
+                                    <div th:class="|supplier-details|">
+                                        <ul>
+                                            <li th:text="|Supplier Name: *{supplierName?:'-'}|">Supplier Name</li>
+                                            <li th:text="|Supplier Url: *{supplierUrl?:'-'}|">Supplier Url</li>
+                                            <li th:text="|Supplier Email: *{supplierEmail?:'-'}|">Supplier Email</li>
+                                            <li th:text="|Suppler Phone #: *{supplierPhoneNumber?:'-'}|">Supplier Phone #</li>
+                                            <li th:text="|Supplier Contact: *{supplierContactName?:'-'}|">Supplier Contact Name</li>
+                                        </ul>
+                                    </div>
+                                </details>
+                                <details th:class="|booking-detail-information grey-border|" th:object="${item.bookingDetail}">
+                                    <summary th:text="|Booking Site|"></summary>
+                                    <div th:class="|booking-details|">
+                                        <ul>
+                                            <li th:text="|Booking Reference #: *{bookingReferenceNumber?:'-'} |">Booking Reference #</li>
+                                            <li th:text="|Booking Site: *{bookingSiteName?:'-'}|"></li>
+                                            <li th:text="|Booking Date: ${#temporals.format(item.bookingDetail.bookingDate, 'MM/dd/yyyy')}|">Booking Date</li>
+                                            <li th:text="|Booking Site URL: *{bookingSiteUrl?:'-'}|">Booking Site Url</li>
+                                            <li th:text="|Booking Site Phone: *{bookingSitePhoneNumber?:'-'}|">Booking Site Phone #</li>
+                                            <li th:text="|Booking Site Email: *{bookingSiteEmail?:'-'}|">Booking Site Email</li>
+                                            <li th:text="|Total Cost: *{bookingTotalCost?:'-'}|"></li>
+                                            <li th:text="|Reservation Purchased: *{bookingIsPurchased?:'-'}|"></li>
+                                        </ul>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

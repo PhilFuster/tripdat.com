@@ -28,7 +28,7 @@ public class Attendee implements Serializable {
     @Column(name = "attendee_id", columnDefinition = "BIGINT")
     private Long attendeeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id", referencedColumnName = "trip_item_id")
     private TripdatTripItem tripItem;
 

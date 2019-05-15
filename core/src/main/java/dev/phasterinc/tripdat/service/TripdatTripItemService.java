@@ -9,6 +9,7 @@ package dev.phasterinc.tripdat.service;
 
 import dev.phasterinc.tripdat.model.TripdatTripItem;
 
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -23,4 +24,6 @@ public interface TripdatTripItemService {
     TripdatTripItem update(final TripdatTripItem entity);
     void delete(final TripdatTripItem entity);
     void deleteById(final long entityId);
+    HashSet<TripdatTripItem> getItemsByTripId(final long  id);
+    HashSet<TripdatTripItem> getMax4ItemsById(final long id);
 }

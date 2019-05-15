@@ -27,7 +27,7 @@ public class BookingDetail implements Serializable {
     @Column(name = "trip_item_id")
     private Long tripItemId;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
     @MapsId
     private TripdatTripItem tripItem;
@@ -55,4 +55,19 @@ public class BookingDetail implements Serializable {
 
     @Column(name = "booking_is_purchased", columnDefinition = "BOOLEAN")
     private Boolean bookingIsPurchased;
+
+    @Override
+    public String toString() {
+        return "BookingDetail{" +
+                "tripItemId=" + tripItemId +
+                ", bookingSiteName='" + bookingSiteName + '\'' +
+                ", bookingSiteUrl='" + bookingSiteUrl + '\'' +
+                ", bookingDate=" + bookingDate +
+                ", bookingReferenceNumber='" + bookingReferenceNumber + '\'' +
+                ", bookingSitePhoneNumber='" + bookingSitePhoneNumber + '\'' +
+                ", bookingSiteEmail='" + bookingSiteEmail + '\'' +
+                ", bookingTotalCost='" + bookingTotalCost + '\'' +
+                ", bookingIsPurchased=" + bookingIsPurchased +
+                '}';
+    }
 }

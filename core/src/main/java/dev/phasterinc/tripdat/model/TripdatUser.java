@@ -64,7 +64,7 @@ public class TripdatUser implements Serializable {
     @Column(name = "user_display_name", columnDefinition = "TEXT")
     private String userDisplayName;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(

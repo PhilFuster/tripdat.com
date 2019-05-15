@@ -7,8 +7,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 /************************************************************
  * Name:  Philip Fuster                                     *
@@ -38,11 +38,12 @@ public class TripdatTrip implements Serializable {
     @OneToMany(
             mappedBy = "tripdatTrip",
             cascade = CascadeType.ALL,
-            orphanRemoval = true
+            orphanRemoval = true,
+            fetch = FetchType.EAGER
     )
-    private List< TripdatTripItem > tripItems = new ArrayList<>();
+    private Set< TripdatTripItem > tripItems = new HashSet<>();
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="user_id", referencedColumnName = "user_id")
     private TripdatUser user;
 
@@ -81,4 +82,19 @@ public class TripdatTrip implements Serializable {
         tripItem.setTripdatTrip(null);
     }
 
+    @Override
+    public String toString() {
+        return "TripdatTrip{" +
+                "tripId=" + tripId +
+                ", tripItems=" + tripItems +
+                ", user=" + user +
+                ", tripName='" + tripName + '\'' +
+                ", tripStartDate=" + tripStartDate +
+                ", tripEndDate=" + tripEndDate +
+                ", tripDescription='" + tripDescription + '\'' +
+                ", tripImageLink='" + tripImageLink + '\'' +
+                ", destinationCity='" + destinationCity + '\'' +
+                ", isUserTraveler=" + isUserTraveler +
+                '}';
+    }
 }

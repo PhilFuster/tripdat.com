@@ -10,6 +10,17 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
+/**
+ * Name: CruiseInformation - model cruise_information table in db. Extends TripdatTripItem and implements Serializable
+ *
+ */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "CruiseInformation")

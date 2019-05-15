@@ -3,11 +3,11 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
 <th:block th:fragment="header">
-    <nav class="navbar navbar-dark navbar-static-top navbar-expand-sm">
+    <nav class="navbar navbar-dark navbar-static-top navbar-expand-md">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" th:href="@{/user/index}">
-                    <img th:src="@{/images/globe.png}" alt="globe logo"/>
+                    <img th:class="|navbar-img|" th:src="@{/images/globe.png}" alt="globe logo"/>
                 </a>
             </div>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,16 +22,21 @@
                         <a class="nav-item" th:href="@{/user/trips}">Trips</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav mr-left">
-                    <div class="dropdown">
-                        <a class="nav-link nav-item dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <ul class="navbar-nav mr-left user-dropdown">
+                    <div th:if="${#authorization.expression('isAuthenticated()')}" class="dropdown user-dropdown">
+                        <a class="nav-link user-dropdown nav-item dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span sec:authentication="name"></span>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <div class="dropdown-menu user-dropdown" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
                             <a class="dropdown-item" href="#">Settings</a>
                             <a class="dropdown-item" href="#">Sign Out</a>
                         </div>
+                    </div>
+                    <div th:if="${#authorization.expression('!isAuthenticated()')}" >
+                        <a href="/signin" th:href="@{/signin}">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
+                        </a>
                     </div>
                 </ul>
             </div>

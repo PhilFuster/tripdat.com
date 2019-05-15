@@ -4,6 +4,7 @@ import dev.phasterinc.tripdat.dao.TripdatUserDao;
 import dev.phasterinc.tripdat.model.TripdatUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,9 +19,12 @@ import java.util.List;
  * Name: TripdatUserServiceImpl - implements the TripdatUserService interface
  */
 @Service
+@Transactional
 public class TripdatUserServiceImpl implements TripdatUserService {
     @Autowired
     TripdatUserDao dao;
+
+
 
     @Autowired
     public void setDao(TripdatUserDao daoToSet) {

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Trip Details</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div th:id="|flush-layout|">
+        <div th:id="|trip-content|">
+            <div id="trip-header">
+                <div th:class="|ribbon|">
+                    <div th:class="|the-ribbon|" th:text="${trip.tripName}">
+                    </div>
+                </div>
+                <div th:class="trip-meta-data">
+                    <h3 th:text="${tripFormattedDate} + ' / '  + ${trip.destinationCity}"></h3>
+                    <p th:text="${trip.tripDescription}">Trip Description</p>
+                </div>
+            </div>
+            <div th:id="trip-navigation-container">
+                <div id="trip-navigation">
+                    <details class="trip-settings">
+                        <summary class="gear-summary"></summary>
+                        <div class="trip-settings-modal">
+                            <a th:class="|trip-settings-link|" th:text="|Edit Trip|" th:href="@{/trip/edit(trip.tripId)}">Edit Trip</a>
+                            <p><a th:class="|trip-settings-link|" th:text="|Delete Trip|" th:href="@{/trip/delete(trip.tripId)}">Delete Trip</a></p>
+                        </div>
+                    </details>
+                    <span><a id="print" title="Print" class="trip-navigation trip-navigation-options" href="#">
+                    <img th:id="|printer|" th:src="@{/images/printer.png}"/></a></span>
+                </div>
+            </div>
+            <div th:replace="~{fragments/trip-item-list}" th:id="|trip-item-list|" th:with="itemsMap=${itemsMap}, tripId=${trip.tripId}">
+                 <!--
+                <div th:include="~{fragments/date-header::date-header}" th:with="date=${items.get(0).getSmallIconDate()}" class="trip-items-list">
+                </div>-->
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

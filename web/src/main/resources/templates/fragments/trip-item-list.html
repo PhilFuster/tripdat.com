@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<div th:fragment="trip-item-list" id="trip-item-list">
+
+
+
+    <!--For each element in itemsMap-->
+    <div th:remove="tag" th:each="element : ${itemsMap}">
+        <!--For each element.value in itemsMap print a header-->
+        <div th:replace="~{fragments/date-header::date-header(${T(dev.phasterinc.tripdat.util.DateFormatter).formatDate(element.key)})}" >
+        </div>
+
+        <!--For each ArrayList of itemWrappers-->
+        <th:block th:each="list, iter: ${element.value}">
+            <!--For each item in the ArrayLists-->
+            <th:block th:each="item, iter : ${list}">
+                <!--Switch statement for determining which fragment to insert based on the tripItemTypeCode-->
+                <th:block th:switch="${item.tripItemTypeCode}">
+                    <th:block th:case="F">
+                        <th:block th:include="~{fragments/item-detail-fragments::flight-fragment(${item})}">
+                        </th:block>
+                    </th:block>
+                </th:block>
+
+            </th:block>
+        </th:block>
+    </div>
+
+
+</div>
+</body>
+</html>
