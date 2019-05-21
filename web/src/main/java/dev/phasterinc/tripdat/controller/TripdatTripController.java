@@ -84,8 +84,10 @@ public class TripdatTripController {
         // query DB for a user's Trips
         Set<TripdatTrip> trips = tripdatTripService.getTripsByUserId(user.getUserId());
         // Declare upcoming and past Sets that will store the upcoming and past trips
-        Set<TripdatTrip> upcoming = new HashSet<>();
-        Set<TripdatTrip> past = new HashSet<>();
+
+        TreeSet<TripdatTrip> upcoming = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
+
+        TreeSet<TripdatTrip> past = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
         // populate the upcoming and past trip collections with the trips from trips Collection
         tripdatTripService.createUpcomingAndPastTripsCollections(trips, upcoming, past);
         model.addAttribute("upcomingTrips", upcoming);
