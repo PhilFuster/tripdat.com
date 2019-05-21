@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Trips</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <nav>
+            <div th:class="|trips-filter-bar nav nav-tabs|" th:id="|nav-tab|" role="tablist">
+                <a th:class="|nav-item nav-link|" th:id="|nav-pastTrips-tab|" data-toggle="tab" th:href="|#nav-pastTrips|" role="tab" aria-controls="nav-pastTrips" aria-selected="false" th:text="|Past Trips|">Past Trips</a>
+                <a th:class="|nav-item nav-link active|" th:id="|nav-upcomingTrips-tab|" data-toggle="tab" th:href="|#nav-upcomingTrips|" role="tab" aria-controls="nav-upcomingTrips" aria-selected="true" th:text="|Upcoming Trips|">Upcoming Trips</a>
+            </div>
+        </nav>
+        <div th:class="|tab-content|" th:id="|nav-tabContent|">
+            <div th:class="|tab-pane fade show active|" th:id="|nav-upcomingTrips|" role="tabpanel" aria-labelledby="nav-upcomingTrips-tab">
+                <div th:class="|upcoming-trips-tabView|">
+                    <th:block th:each="trip, iter: ${upcomingTrips}">
+                        <div th:class="trip-tab-view">
+                            <a th:text="${trip.tripName}">Trip Name</a>
+                            <div th:class="|trip-tab-details|">
+                                <p th:text="|${trip.destinationCity}|">Destination</p>
+                            </div>
+                        </div>
+
+                    </th:block>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" th:id="|nav-pastTrips|" role="tabpanel" aria-labelledby="nav-pastTrips-tab"></div>
+
+        </div>
+    </div>
+</body>
+</html>

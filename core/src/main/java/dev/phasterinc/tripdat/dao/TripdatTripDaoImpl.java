@@ -5,7 +5,6 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -24,36 +23,52 @@ import java.util.Set;
 @Transactional
 public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implements TripdatTripDao {
 
+    /**
+     * name: getTripByTripId
+     * Purpose: To retrieve a Trip by its tripid
+     * @param id - id of trip
+     * @return - A singular Trip if a trip has that id
+     */
     @Override
-    public Set<TripdatTrip> getTripItemsByTripId(final Long id) {
+    public TripdatTrip getTripByTripId(final Long id) {
 
-        List<TripdatTrip> list = getCurrentSession().createQuery("SELECT trip FROM TripdatTrip trip WHERE trip.tripId =:id ").setParameter("id", id).list();
-        for(TripdatTrip tripItem : list) {
-            System.out.println(tripItem.toString());
-        }
-        HashSet set = new HashSet(list);
-        return set;
+        TripdatTrip trip = (TripdatTrip) getCurrentSession().createQuery(
+                "SELECT trip FROM TripdatTrip trip WHERE trip.tripId =:id ")
+                .setParameter("id", id).getSingleResult();
+
+
+        return trip;
     }
 
+    /**
+     * name: get3TripsByUserIdOrderByDateAsc
+     * Purpose: Query the DB for the 3 most recent Trips and order by ascending date
+     * @return - List of TripdatTrip objects
+     */
     @Override
-    public List<TripdatTrip> findThreeByDateAsc() {
+    public List<TripdatTrip> get3TripsByUserIdOrderByDateAsc(final Long userId) {
         Query query = getCurrentSession().createQuery(
                 "from TripdatTrip trip " +
+                        "where trip.user.userId = :id " +
                         "order by trip.tripStartDate asc"
-        );
 
+        );
+        query.setParameter("id", userId);
         query.setMaxResults(3);
 
         List<TripdatTrip> list = query.list();
 
-        for (TripdatTrip trip : list) {
-            System.out.println(
-                    "Trip Name: " + trip.getTripName() +
-                            "Trip Date: " + trip.getTripStartDate()
 
-            );
-        }
         return list;
+    }
 
+    /**
+     * Name: getTripsByUserid
+     * Purpose: query DB for TripdatTrip objects by userId
+     * @return
+     */
+    @Override
+    public Set<TripdatTrip> getTripsByUserId() {
+        return null;
     }
 }

@@ -8,8 +8,9 @@ public final class Mappings {
     public static final String USER_INDEX = "/user/index";
     public static final String LOGIN = "/login";
     public static final String ACCESS_DENIED = "/access-denied";
-    public static final String USER_TRIPS = "/user/trips";
-    public static final String TRIP_DETAILS = "/user/trip/show";
+    public static final String USER_TRIPS = "/user/trip/show/trips";
+    public static final String TRIP_DETAILS = "/user/trip/show/details";
+    public static final String REGISTRATION = "/registration";
     // == constructors ==
     private Mappings() {}
 }

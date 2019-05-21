@@ -199,6 +199,7 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                                                                  .travelAgency(flightInfo.getTravelAgency())
                                                                  .bookingDetail(flightInfo.getBookingDetail())
                                                                  .id(item.getTripItemId())
+                                                                 .notes(item.getTripItemNote())
                                                                  .endDate(segment.getFlightArrivalDate())
                                                                  .endTime(segment.getFlightArrivalTime())
                                                                  .attendees(flightInfo.getAttendees()).build();

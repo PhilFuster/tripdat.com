@@ -15,7 +15,7 @@
                     <div class="nextUp-trip-item-header">
                         <div class="primary-info">
                             <div class="item-header-detail">
-                                <a th:href="@{/user/trip/show(segmentId=${item.getIdAsString()}, tripId=${tripId})}" th:class="|item-header-detail|" href="" th:text="${item.getMainTitle()}">
+                                <a th:href="@{/user/trip/show/details(segmentId=${item.getIdAsString()}, tripId=${tripId})}" th:class="|item-header-detail|" href="" th:text="${item.getMainTitle()}">
                                 </a>
                             </div>
                             <div class="item-header-detail" th:text="${item.getSubTitle()}" >

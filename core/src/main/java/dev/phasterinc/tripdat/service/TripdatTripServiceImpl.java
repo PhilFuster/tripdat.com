@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Set;
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -66,14 +65,14 @@ public class TripdatTripServiceImpl implements TripdatTripService{
     }
 
     @Override
-    public Set<TripdatTrip> getTripItemsByTripId(final Long id) {
-        System.out.println("Looking for a trips items by trip  id...");
-        return dao.getTripItemsByTripId(id);
+    public TripdatTrip getTripByTripId(final Long id) {
+
+        return dao.getTripByTripId(id);
     }
 
     @Override
-    public List<TripdatTrip> findThreeByDateAsc() {
-        return dao.findThreeByDateAsc();
+    public List<TripdatTrip> get3TripsByUserIdOrderByDateAsc(final Long userId) {
+        return dao.get3TripsByUserIdOrderByDateAsc(userId);
     }
 
 }

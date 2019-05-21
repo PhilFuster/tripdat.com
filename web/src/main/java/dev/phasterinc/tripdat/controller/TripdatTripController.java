@@ -3,6 +3,7 @@ package dev.phasterinc.tripdat.controller;
 
 import dev.phasterinc.tripdat.model.TripItemWrapper;
 import dev.phasterinc.tripdat.model.TripdatTrip;
+import dev.phasterinc.tripdat.model.TripdatUserPrincipal;
 import dev.phasterinc.tripdat.service.TripItemWrapperService;
 import dev.phasterinc.tripdat.service.TripdatTripItemService;
 import dev.phasterinc.tripdat.service.TripdatTripService;
@@ -10,6 +11,7 @@ import dev.phasterinc.tripdat.util.Mappings;
 import dev.phasterinc.tripdat.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,8 +53,8 @@ public class TripdatTripController {
      */
     @GetMapping(Mappings.USER_INDEX)
     public String userIndexPage(Model model) {
-
-        List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.findThreeByDateAsc();
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.get3TripsByUserIdOrderByDateAsc(user.getUserId());
         List<String> formattedDateStrings = tripItemWrapperService.getFormattedDateStrings(tripsInAscendingOrder);
         List<String> durationOfTrips = tripItemWrapperService.getDurationOfTrips(tripsInAscendingOrder);
 
@@ -67,11 +69,22 @@ public class TripdatTripController {
 
         model.addAttribute("nextUpItems", nextUpItems);
 
-
-
-
         return ViewNames.USER_INDEX;
 
+    }
+
+    /**
+     * name: tripsPage
+     * Purpose: Controller for the mapping /user/trip/show/trips
+     *          Displays the users past trips and upcoming trips.
+     *          Gives them options to edit or delete trips and to add a new trip
+     * @param model
+     * @return - trips view name
+     */
+    @GetMapping(Mappings.USER_TRIPS)
+    public String tripsPage(Model model) {
+
+        return ViewNames.USER_TRIPS;
     }
 
     /**

@@ -21,7 +21,7 @@ html {
     height: 45px;
 }
 
-.nav-item {
+ul.main-nav li a.nav-item {
     padding: 5px;
     font-size: 20px;
     color: #ffffff;
@@ -30,7 +30,6 @@ html {
 .nav-item:hover {
     color: maroon;
 }
-
 
 .user-dropdown {
     font-size: 14px;
@@ -803,9 +802,15 @@ div.object-actions ul li a{
     align-items: center;
     align-self: start;
     margin-bottom: 0;
+    padding: 5px;
 }
 .seats-section {
     margin-left: 5px;
+    padding: 5px;
+}
+
+.duration-section {
+    padding: 5px;
 }
 
 .grey-border {
@@ -816,14 +821,15 @@ div.object-actions ul li a{
 }
 
 .traveler-info-details, .aircraft-service-info, .travel-agency-information,
-.supplier-information, .booking-detail-information {
+.supplier-information, .booking-detail-information, .item-notes-info {
     padding: 5px;
 }
 /*
     Setting the details marker for specific details tags to rtl
 */
 details.traveler-info-details summary, details.aircraft-service-info summary,
-details.travel-agency-information summary, details.supplier-information summary, details.booking-detail-information summary {
+details.travel-agency-information summary, details.supplier-information summary, details.booking-detail-information summary,
+details.item-notes-info summary{
     direction: rtl;
 }
 
@@ -846,10 +852,20 @@ div.traveler-details {
     flex-wrap: nowrap;
     justify-self: flex-end;
 }
-div.aircraft-service-details, div.travel-agency-details, div.supplier-details, div.booking-details {
+div.aircraft-service-details, div.travel-agency-details, div.supplier-details, div.booking-details,
+div.item-notes-details {
     padding: 5px;
 }
 .aircraft-service-details ul, div.travel-agency-details ul, div.supplier-details ul,
 div.booking-details ul {
     list-style: none;
+}
+
+/*
+    Trips page trip-filter nav styles
+*/
+div.trips-filter-bar ul li {
+    padding: 5px;
+    font-size: 20px;
+    font-weight: 600;
 }

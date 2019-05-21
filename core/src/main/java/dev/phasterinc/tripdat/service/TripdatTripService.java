@@ -3,7 +3,6 @@ package dev.phasterinc.tripdat.service;
 import dev.phasterinc.tripdat.model.TripdatTrip;
 
 import java.util.List;
-import java.util.Set;
 
 /************************************************************
  * Name:  Philip Fuster                                     *
@@ -23,8 +22,8 @@ public interface TripdatTripService {
     TripdatTrip update(final TripdatTrip entity);
     void delete(final TripdatTrip entity);
     void deleteById(final Long entityId);
-    Set<TripdatTrip> getTripItemsByTripId(final Long id);
-    List<TripdatTrip> findThreeByDateAsc();
+    TripdatTrip getTripByTripId(final Long id);
+    List<TripdatTrip> get3TripsByUserIdOrderByDateAsc(final Long userId);
 
 
 }

@@ -70,27 +70,13 @@ public class TripItemWrapper {
 
     private List<Attendee> attendees = new ArrayList<>();
 
+    private String notes;
+
 
 
     // == public methods ==
 
-    /**
-     * Name: getStartDateTime
-     * Purpose: return a LocalDateTime object created with startDate and starTime to be used when comparing itemWrappers
-     *          If either startDate or startTime are null
-     * @return LocalDateTime - a LocalDateTime object.
-     */
-    /*public LocalDateTime  getStartDateTime() {
 
-        if(startDate != null && startTime != null) {
-            return LocalDateTime.parse(startDate.toString() + startTime.toString());
-        }
-        if(startDate == null )
-
-
-        return
-
-    }*/
 
     public TripItemWrapper(String tripItemTypeCode, LocalDate startDate, LocalTime startTime) {
         this.tripItemTypeCode = tripItemTypeCode;

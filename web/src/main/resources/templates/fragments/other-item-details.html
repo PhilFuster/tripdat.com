@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <th:block th:fragment="other-details(travelAgency, supplier, bookingSite, notes)">
+        <details th:class="|travel-agency-information grey-border|" th:object="${travelAgency}">
+            <summary th:text="|Travel Agency|">Travel Agency</summary>
+            <div th:class="|travel-agency-details|">
+                <ul>
+                    <li th:text="|Travel Agency Name: *{travelAgencyName?:'-'}|">Travel Agency Name</li>
+                    <li th:text="|Travel Agency Confirmation#: *{travelAgencyConfirmationNumber?:'-'} |">Travel Agency Confirmation #</li>
+                    <li th:text="|Travel Agency URL: *{travelAgencyUrl?:'-'} |">Travel Agency URL</li>
+                    <li th:text="|Travel Agency Phone: *{travelAgencyPhoneNumber?:'-'}|">Travel Agency Phone #</li>
+                    <li th:text="|Travel Agency Email: *{travelAgencyEmail?:'-'}|">Travel Agency Email</li>
+                    <li th:text="|Travel Agency Contact: *{travelAgencyContactName?:'-'}|"></li>
+                </ul>
+            </div>
+        </details>
+        <details th:class="|supplier-information grey-border|" th:object="${supplier}">
+            <summary th:text="|Supplier Info|">Supplier Info</summary>
+            <div th:class="|supplier-details|">
+                <ul>
+                    <li th:text="|Supplier Name: *{supplierName?:'-'}|">Supplier Name</li>
+                    <li th:text="|Supplier Url: *{supplierUrl?:'-'}|">Supplier Url</li>
+                    <li th:text="|Supplier Email: *{supplierEmail?:'-'}|">Supplier Email</li>
+                    <li th:text="|Suppler Phone #: *{supplierPhoneNumber?:'-'}|">Supplier Phone #</li>
+                    <li th:text="|Supplier Contact: *{supplierContactName?:'-'}|">Supplier Contact Name</li>
+                </ul>
+            </div>
+        </details>
+        <details th:class="|booking-detail-information grey-border|" th:object="${bookingSite}">
+            <summary th:text="|Booking Site|"></summary>
+            <div th:class="|booking-details|">
+                <ul>
+                    <li th:text="|Booking Reference #: *{bookingReferenceNumber?:'-'} |">Booking Reference #</li>
+                    <li th:text="|Booking Site: *{bookingSiteName?:'-'}|"></li>
+                    <li th:text="|Booking Date: *{#temporals.format(bookingDate, 'MM/dd/yyyy')}|">Booking Date</li>
+                    <li th:text="|Booking Site URL: *{bookingSiteUrl?:'-'}|">Booking Site Url</li>
+                    <li th:text="|Booking Site Phone: *{bookingSitePhoneNumber?:'-'}|">Booking Site Phone #</li>
+                    <li th:text="|Booking Site Email: *{bookingSiteEmail?:'-'}|">Booking Site Email</li>
+                    <li th:text="|Total Cost: *{bookingTotalCost?:'-'}|"></li>
+                    <li th:text="|Reservation Purchased: *{bookingIsPurchased?:'-'}|"></li>
+                </ul>
+            </div>
+        </details>
+        <details th:class="|item-notes-info grey-border|" >
+            <summary th:text="Notes">Notes</summary>
+            <div th:class="|item-notes-details|">
+                <p th:text="|${notes?:'No notes added'}|"></p>
+            </div>
+        </details>
+    </th:block>
+
+    <th:block th:fragment="traveler-info-fragment(travelers)">
+        <details th:class="|traveler-info-details grey-border|">
+            <summary th:text="|Traveler Info|"></summary>
+            <th:block th:each="attendee, iter : ${travelers}">
+                <div th:class="|traveler-details|">
+                    <span th:class="|traveler-name|" th:text="${attendee.attendeeName}">Name</span>
+                    <span th:class="|other-traverler-details|" th:text="|Frequent Flyer#: ${attendee.attendeeLoyaltyProgramNumber}|">Frequent Flyer #: </span>
+                    <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.attendeeTicketNumber}|"></span>
+                </div>
+            </th:block>
+        </details>
+    </th:block>
+</body>
+</html>

@@ -2,6 +2,7 @@ package dev.phasterinc.tripdat.service;
 
 import dev.phasterinc.tripdat.model.Role;
 import dev.phasterinc.tripdat.model.TripdatUser;
+import dev.phasterinc.tripdat.model.TripdatUserPrincipal;
 import dev.phasterinc.tripdat.model.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.stream.Collectors;
 
 @Service
@@ -47,9 +47,16 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
         }
 
 
-        return new org.springframework.security.core.userdetails.User(user.getUserLogin(),
-                user.getUserPassword(),
-                mapRolesToAuthorities(user.getRoles()));
+        return new TripdatUserPrincipal(user);
+    }
+
+    public UserDetails loadUserByUserId(final Long id) throws UsernameNotFoundException {
+        TripdatUser user = tripdatUserService.findOne(id);
+
+        if(user == null) {
+            throw new UsernameNotFoundException("Invalid userId");
+        }
+        return new TripdatUserPrincipal(user);
     }
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
