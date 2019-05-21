@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -71,8 +73,25 @@ public class TripdatTripServiceImpl implements TripdatTripService{
     }
 
     @Override
-    public List<TripdatTrip> get3TripsByUserIdOrderByDateAsc(final Long userId) {
-        return dao.get3TripsByUserIdOrderByDateAsc(userId);
+    public List<TripdatTrip> get3UpcomingTripsByUserIdOrderByDateAsc(final Long userId) {
+        return dao.get3UpcomingTripsByUserIdOrderByDateAsc(userId);
     }
 
+    @Override
+    public Set<TripdatTrip> getTripsByUserId(Long id) {
+        return dao.getTripsByUserId(id);
+    }
+
+    @Override
+    public void createUpcomingAndPastTripsCollections(Set<TripdatTrip> trips, Set<TripdatTrip> upcoming, Set<TripdatTrip> past) {
+        // for each trip if the endDat is before today add to past trips collections, else add to upcoming
+        trips.forEach((trip)->{
+            if(trip.getTripEndDate().isBefore(LocalDate.now())) {
+                past.add(trip);
+            } else {
+                upcoming.add(trip);
+            }
+
+        });
+    }
 }

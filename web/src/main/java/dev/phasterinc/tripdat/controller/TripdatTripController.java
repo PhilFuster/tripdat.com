@@ -18,10 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -54,7 +51,7 @@ public class TripdatTripController {
     @GetMapping(Mappings.USER_INDEX)
     public String userIndexPage(Model model) {
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.get3TripsByUserIdOrderByDateAsc(user.getUserId());
+        List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.get3UpcomingTripsByUserIdOrderByDateAsc(user.getUserId());
         List<String> formattedDateStrings = tripItemWrapperService.getFormattedDateStrings(tripsInAscendingOrder);
         List<String> durationOfTrips = tripItemWrapperService.getDurationOfTrips(tripsInAscendingOrder);
 
@@ -83,6 +80,16 @@ public class TripdatTripController {
      */
     @GetMapping(Mappings.USER_TRIPS)
     public String tripsPage(Model model) {
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // query DB for a user's Trips
+        Set<TripdatTrip> trips = tripdatTripService.getTripsByUserId(user.getUserId());
+        // Declare upcoming and past Sets that will store the upcoming and past trips
+        Set<TripdatTrip> upcoming = new HashSet<>();
+        Set<TripdatTrip> past = new HashSet<>();
+        // populate the upcoming and past trip collections with the trips from trips Collection
+        tripdatTripService.createUpcomingAndPastTripsCollections(trips, upcoming, past);
+        model.addAttribute("upcomingTrips", upcoming);
+        model.addAttribute("pastTrips", past);
 
         return ViewNames.USER_TRIPS;
     }
@@ -96,8 +103,8 @@ public class TripdatTripController {
      * @param tripId - The trip to be queried
      * @return The details page view
      */
-    @GetMapping(value = Mappings.TRIP_DETAILS, params = {"segmentId", "tripId"})
-    public String tripDetailsPage(Model model, @RequestParam("segmentId") String segmentId, @RequestParam("tripId") String tripId) {
+    @GetMapping(value = Mappings.TRIP_DETAILS, params = {"tripId"})
+    public String tripDetailsPage(Model model, @RequestParam("tripId") String tripId) {
         log.info("TripDetails tripId passed:" + tripId);
         // fin the trip to display with the tripId passed with the url
        TripdatTrip trip = tripdatTripService.findOne(Long.parseLong(tripId));
@@ -111,10 +118,7 @@ public class TripdatTripController {
         HashMap<LocalDate, List<TripItemWrapper>> itemsMap = tripItemWrapperService.getWrappersInMapByDate(wrappers, trip.getTripStartDate(), trip.getTripEndDate());
         // putting in a TreeMap to order the Map by key
         Map<LocalDate, List<TripItemWrapper>> orderedByKeyMap = new TreeMap<LocalDate, List<TripItemWrapper>>(itemsMap);
-        /*orderedByKeyMap.forEach((k,v)->{
-            log.info("Day: " + k.toString());
-            v.forEach((item)->log.info("   Time: " + item.getStartTime().toString()));
-        } );*/
+
         model.addAttribute("itemsMap", orderedByKeyMap);
         return ViewNames.TRIP_DETAILS;
     }

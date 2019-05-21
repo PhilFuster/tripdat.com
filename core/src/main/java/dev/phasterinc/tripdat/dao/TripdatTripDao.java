@@ -20,7 +20,7 @@ import java.util.Set;
 public interface TripdatTripDao extends IGenericDao<TripdatTrip> {
 
     TripdatTrip getTripByTripId(final Long id);
-    List<TripdatTrip> get3TripsByUserIdOrderByDateAsc(final Long userId);
-    Set<TripdatTrip> getTripsByUserId();
+    List<TripdatTrip> get3UpcomingTripsByUserIdOrderByDateAsc(final Long userId);
+    Set<TripdatTrip> getTripsByUserId(final Long id);
 
 }

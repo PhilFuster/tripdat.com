@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -41,15 +42,15 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
     }
 
     /**
-     * name: get3TripsByUserIdOrderByDateAsc
-     * Purpose: Query the DB for the 3 most recent Trips and order by ascending date
+     * name: get3UpcomingTripsByUserIdOrderByDateAsc
+     * Purpose: Query the DB for the 3 most recent Trips that have not ended and order by ascending date
      * @return - List of TripdatTrip objects
      */
     @Override
-    public List<TripdatTrip> get3TripsByUserIdOrderByDateAsc(final Long userId) {
+    public List<TripdatTrip> get3UpcomingTripsByUserIdOrderByDateAsc(final Long userId) {
         Query query = getCurrentSession().createQuery(
                 "from TripdatTrip trip " +
-                        "where trip.user.userId = :id " +
+                        "where trip.user.userId = :id and trip.tripEndDate > current_date " +
                         "order by trip.tripStartDate asc"
 
         );
@@ -68,7 +69,14 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
      * @return
      */
     @Override
-    public Set<TripdatTrip> getTripsByUserId() {
-        return null;
+    public Set<TripdatTrip> getTripsByUserId(final Long userId) {
+        Query query = getCurrentSession().createQuery(
+                "from TripdatTrip trip " +
+                        "where trip.user.userId = :id "
+
+        );
+        query.setParameter("id", userId);
+        Set<TripdatTrip> set = new HashSet<TripdatTrip>(query.list());
+        return set;
     }
 }
