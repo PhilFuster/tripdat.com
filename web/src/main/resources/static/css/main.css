@@ -869,3 +869,15 @@ div.trips-filter-bar ul li {
     font-size: 20px;
     font-weight: 600;
 }
+
+div.trip-tab-view {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-items: flex-start;
+    align-items: center;
+    padding: 5px;
+    margin: 0;
+}
+div.trip-tab-view * {
+    padding: 5px;
+}

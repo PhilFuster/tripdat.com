@@ -17,7 +17,7 @@
             <div th:class="|tab-pane fade show active|" th:id="|nav-upcomingTrips|" role="tabpanel" aria-labelledby="nav-upcomingTrips-tab">
                 <div th:class="|upcoming-trips-tabView|">
                     <th:block th:each="trip, iter: ${upcomingTrips}">
-                        <div th:class="trip-tab-view">
+                        <div th:class="|trip-tab-view grey-border|">
                             <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trip.tripId})}" th:text="${trip.tripName}">Trip Name</a>
                             <div th:class="|trip-tab-details|">
                                 <p th:text="|${trip.destinationCity}|">Destination</p>
@@ -29,18 +29,15 @@
             <div class="tab-pane fade" th:id="|nav-pastTrips|" role="tabpanel" aria-labelledby="nav-pastTrips-tab">
                 <div th:class="|past-trips-tabView|">
                     <th:block th:each="trip, iter: ${pastTrips}">
-                        <div th:class="trip-tab-view">
+                        <div th:class="|trip-tab-view grey-border|">
                             <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trip.tripId})}" th:text="${trip.tripName}">Trip Name</a>
                             <div th:class="|trip-tab-details|">
                                 <p th:text="|${trip.destinationCity}|">Destination</p>
                             </div>
                         </div>
-
                     </th:block>
-
                 </div>
             </div>
-
         </div>
     </div>
 </body>
