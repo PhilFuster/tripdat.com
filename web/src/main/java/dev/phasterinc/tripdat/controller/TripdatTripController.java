@@ -85,6 +85,8 @@ public class TripdatTripController {
         Set<TripdatTrip> trips = tripdatTripService.getTripsByUserId(user.getUserId());
         // Declare upcoming and past Sets that will store the upcoming and past trips
 
+
+
         TreeSet<TripdatTrip> upcoming = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
 
         TreeSet<TripdatTrip> past = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
@@ -92,6 +94,17 @@ public class TripdatTripController {
         tripdatTripService.createUpcomingAndPastTripsCollections(trips, upcoming, past);
         model.addAttribute("upcomingTrips", upcoming);
         model.addAttribute("pastTrips", past);
+
+        List<TripdatTrip> upcomingTripsList = new ArrayList<>(upcoming);
+        List<TripdatTrip> pastTripsList = new ArrayList<>(past);
+        List<String> formattedUpcomingDateStrings = tripItemWrapperService.getFormattedDateStrings(upcomingTripsList);
+        List<String> formattedPastDateStrings = tripItemWrapperService.getFormattedDateStrings(pastTripsList);
+        List<String> durationOfTripsUpcoming = tripItemWrapperService.getDurationOfTrips(upcomingTripsList);
+        List<String> durationOfTripsPast = tripItemWrapperService.getDurationOfTrips(pastTripsList);
+        model.addAttribute("formattedDateStringsUpcoming", formattedUpcomingDateStrings);
+        model.addAttribute("formattedDateStringsPast", formattedPastDateStrings);
+        model.addAttribute("durationOfTripsUpcoming", durationOfTripsUpcoming);
+        model.addAttribute("durationOfTripsPast", durationOfTripsPast);
 
         return ViewNames.USER_TRIPS;
     }

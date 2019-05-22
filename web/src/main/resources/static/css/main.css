@@ -881,3 +881,14 @@ div.trip-tab-view {
 div.trip-tab-view * {
     padding: 5px;
 }
+div.trip-tab-details {
+    display: flex;
+    flex-direction: column;
+
+}
+div.trip-tab-details p {
+    padding: 0;
+    margin:0;
+    margin-bottom: 2px;
+}
+

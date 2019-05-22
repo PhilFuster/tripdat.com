@@ -21,6 +21,8 @@
                             <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trip.tripId})}" th:text="${trip.tripName}">Trip Name</a>
                             <div th:class="|trip-tab-details|">
                                 <p th:text="|${trip.destinationCity}|">Destination</p>
+                                <p th:text="|${formattedDateStringsUpcoming.get(iter.index)}|"></p>
+                                <p th:text="|${durationOfTripsUpcoming.get(iter.index)}|"></p>
                             </div>
                         </div>
                     </th:block>
@@ -33,6 +35,8 @@
                             <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trip.tripId})}" th:text="${trip.tripName}">Trip Name</a>
                             <div th:class="|trip-tab-details|">
                                 <p th:text="|${trip.destinationCity}|">Destination</p>
+                                <p th:text="|${formattedDateStringsPast.get(iter.index)}|"></p>
+                                <p th:text="|${durationOfTripsPast.get(iter.index)}|"></p>
                             </div>
                         </div>
                     </th:block>
