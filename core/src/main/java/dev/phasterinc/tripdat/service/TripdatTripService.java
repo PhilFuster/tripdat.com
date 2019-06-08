@@ -1,6 +1,8 @@
 package dev.phasterinc.tripdat.service;
 
+import dev.phasterinc.tripdat.model.TripItemWrapper;
 import dev.phasterinc.tripdat.model.TripdatTrip;
+import dev.phasterinc.tripdat.model.dto.TripDto;
 
 import java.util.List;
 import java.util.Set;
@@ -27,6 +29,6 @@ public interface TripdatTripService {
     List<TripdatTrip> get3UpcomingTripsByUserIdOrderByDateAsc(final Long userId);
     Set<TripdatTrip> getTripsByUserId(final Long id);
     void createUpcomingAndPastTripsCollections(Set<TripdatTrip> trips, Set<TripdatTrip> upcoming, Set<TripdatTrip> past);
-
-
+    boolean checkForTripDateConflict(TripDto tripDto, Long userId);
+    boolean checkForTripItemConflictWithNewDateRange(TripDto tripDto, List<TripItemWrapper> items);
 }

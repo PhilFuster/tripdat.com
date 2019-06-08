@@ -4,125 +4,75 @@ package dev.phasterinc.tripdat.controller;
 import dev.phasterinc.tripdat.model.TripItemWrapper;
 import dev.phasterinc.tripdat.model.TripdatTrip;
 import dev.phasterinc.tripdat.model.TripdatUserPrincipal;
+import dev.phasterinc.tripdat.model.dto.TripDto;
 import dev.phasterinc.tripdat.service.TripItemWrapperService;
 import dev.phasterinc.tripdat.service.TripdatTripItemService;
 import dev.phasterinc.tripdat.service.TripdatTripService;
 import dev.phasterinc.tripdat.util.Mappings;
 import dev.phasterinc.tripdat.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
 
+@SessionAttributes("trip")
 @Slf4j
 @Controller
 public class TripdatTripController {
 
-
-
-    private TripdatTripService tripdatTripService;
-
+    // == fields ==
+    private TripdatTripService tripService;
     private TripdatTripItemService tripdatTripItemService;
-
     private TripItemWrapperService tripItemWrapperService;
+    private ModelMapper modelMapper;
 
     // == constructors ==
     @Autowired
-    public TripdatTripController(TripdatTripService tripdatTripService, TripdatTripItemService tripdatTripItemService, TripItemWrapperService tripItemWrapperService ){
-        this.tripdatTripService = tripdatTripService;
+    public TripdatTripController(TripdatTripService tripdatTripService, TripdatTripItemService tripdatTripItemService,
+                                 TripItemWrapperService tripItemWrapperService, ModelMapper modelMapper ){
+        this.tripService = tripdatTripService;
         this.tripdatTripItemService = tripdatTripItemService;
         this.tripItemWrapperService = tripItemWrapperService;
+        this.modelMapper = modelMapper;
     }
 
 
-    /**
-     * Name: userIndexPage
-     * Purpose: creates model for the view. The model will contain the trips and items
-     * needed to display a max of 4 user's next trips and the next 4 trip items for the upcoming trip.
-     * @param model
-     * @return - user index view name
-     */
-    @GetMapping(Mappings.USER_INDEX)
-    public String userIndexPage(Model model) {
-        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.get3UpcomingTripsByUserIdOrderByDateAsc(user.getUserId());
-        List<String> formattedDateStrings = tripItemWrapperService.getFormattedDateStrings(tripsInAscendingOrder);
-        List<String> durationOfTrips = tripItemWrapperService.getDurationOfTrips(tripsInAscendingOrder);
+    // == handler methods ==
 
-        model.addAttribute("trips", tripsInAscendingOrder);
-        model.addAttribute("formattedDateStrings", formattedDateStrings);
-        model.addAttribute("durationOfTrips", durationOfTrips);
-        // TODO: What happens when Trip has no trip items yet? Must handle this null exception
-        TripdatTrip nextTrip = tripsInAscendingOrder.get(0);
-
-        List<TripItemWrapper> nextUpItems = tripItemWrapperService.getNextUpItemsInItemWrapper(nextTrip);
-        tripItemWrapperService.orderItemWrappersByAscDateAndTime(nextUpItems);
-
-        model.addAttribute("nextUpItems", nextUpItems);
-
-        return ViewNames.USER_INDEX;
-
-    }
-
-    /**
-     * name: tripsPage
-     * Purpose: Controller for the mapping /user/trip/show/trips
-     *          Displays the users past trips and upcoming trips.
-     *          Gives them options to edit or delete trips and to add a new trip
-     * @param model
-     * @return - trips view name
-     */
-    @GetMapping(Mappings.USER_TRIPS)
-    public String tripsPage(Model model) {
-        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // query DB for a user's Trips
-        Set<TripdatTrip> trips = tripdatTripService.getTripsByUserId(user.getUserId());
-        // Declare upcoming and past Sets that will store the upcoming and past trips
-
-
-
-        TreeSet<TripdatTrip> upcoming = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
-
-        TreeSet<TripdatTrip> past = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
-        // populate the upcoming and past trip collections with the trips from trips Collection
-        tripdatTripService.createUpcomingAndPastTripsCollections(trips, upcoming, past);
-        model.addAttribute("upcomingTrips", upcoming);
-        model.addAttribute("pastTrips", past);
-
-        List<TripdatTrip> upcomingTripsList = new ArrayList<>(upcoming);
-        List<TripdatTrip> pastTripsList = new ArrayList<>(past);
-        List<String> formattedUpcomingDateStrings = tripItemWrapperService.getFormattedDateStrings(upcomingTripsList);
-        List<String> formattedPastDateStrings = tripItemWrapperService.getFormattedDateStrings(pastTripsList);
-        List<String> durationOfTripsUpcoming = tripItemWrapperService.getDurationOfTrips(upcomingTripsList);
-        List<String> durationOfTripsPast = tripItemWrapperService.getDurationOfTrips(pastTripsList);
-        model.addAttribute("formattedDateStringsUpcoming", formattedUpcomingDateStrings);
-        model.addAttribute("formattedDateStringsPast", formattedPastDateStrings);
-        model.addAttribute("durationOfTripsUpcoming", durationOfTripsUpcoming);
-        model.addAttribute("durationOfTripsPast", durationOfTripsPast);
-
-        return ViewNames.USER_TRIPS;
-    }
 
     /**
      * name: tripDetailsPage
-     * purpose: Controller for the tripDetailsPage. The page contains the details of the whole Trip.
+     * purpose: Controller for the tripDetailsPage. The page contains the details of the entire Trip.
      *          This Controller prepares the TripItemWrappers to be used in the View.
      * @param model - Model object to be passed to tbe view
      * @param segmentId - The id of the segment that was clicked on to view the trip
      * @param tripId - The trip to be queried
      * @return The details page view
+     * Algorithm:
+     *              1. Find the trip to display.
+     *              2. Add the trip to the model
+     *              3. Add the Trip formatted date to the model
+     *              4. Create a list of ItemWrappers filled with the items for the Trip
+     *              5. order the ItemsWrappers by Date and Time
+     *              6. Put the itemWrappers into a HashMap
+     *              7. Convert Hashmap into TreeMap, which orders by key
+     *              8. add itemsMap to the model
+     *              9. return the
+     * http://localhost:8080/user/trip/show/details?tripId=3
      */
     @GetMapping(value = Mappings.TRIP_DETAILS, params = {"tripId"})
     public String tripDetailsPage(Model model, @RequestParam("tripId") String tripId) {
         log.info("TripDetails tripId passed:" + tripId);
-        // fin the trip to display with the tripId passed with the url
-       TripdatTrip trip = tripdatTripService.findOne(Long.parseLong(tripId));
+        // find the trip to display with the tripId passed with the url
+       TripdatTrip trip = tripService.findOne(Long.parseLong(tripId));
         model.addAttribute("trip", trip);
         model.addAttribute("tripFormattedDate", tripItemWrapperService.getFormattedDate(trip.getTripStartDate(), trip.getTripEndDate()));
         // Get a list of TripItemWrapper with the items from the trip
@@ -132,11 +82,214 @@ public class TripdatTripController {
         // put the itemWrappers in a map
         HashMap<LocalDate, List<TripItemWrapper>> itemsMap = tripItemWrapperService.getWrappersInMapByDate(wrappers, trip.getTripStartDate(), trip.getTripEndDate());
         // putting in a TreeMap to order the Map by key
-        Map<LocalDate, List<TripItemWrapper>> orderedByKeyMap = new TreeMap<LocalDate, List<TripItemWrapper>>(itemsMap);
-
+        Map<LocalDate, List<TripItemWrapper>> orderedByKeyMap = new TreeMap<>(itemsMap);
+        // add items map the model
         model.addAttribute("itemsMap", orderedByKeyMap);
         return ViewNames.TRIP_DETAILS;
     }
+
+
+
+    /**
+     * name: tripsPage
+     * Purpose: Handler Method for the mapping /user/trip/show/trips
+     *          Displays the users past and upcoming trips.
+     *          Gives them options to edit or delete trips and to add a new trip
+     * @param model - The model for the view
+     * @return - trips view name
+     * http://localhost:8080/user/trip/show/trips
+     * Algorithm:
+     *               1. Get logged in user's information
+     *               2. Query db for users Trips
+     *               3. Declare local variables upcoming, and past, which store a users upcoming
+     *                  and past trips accordingly
+     *               4. Call method createUpcomingAndPastTripsCollections to populate collections upcoming and past
+     *               5. Add collections upcoming and past to model
+     *               6. Declare Lists upcomingTripsList and pastTripsList
+     *               7. Declare and populate formattedDateString collections for upcoming and past trips
+     *               8. Declare and populate durationOfTrips for upcoming and past trips
+     *               9. Add all collections to model
+     */
+    @GetMapping(Mappings.USER_TRIPS)
+    public String tripsPage(Model model) {
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // query DB for a user's Trips
+        Set<TripdatTrip> trips = tripService.getTripsByUserId(user.getUserId());
+        // Declare upcoming and past Sets that will store the upcoming and past trips
+
+        TreeSet<TripdatTrip> upcoming = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
+
+        TreeSet<TripdatTrip> past = new TreeSet<>(Comparator.nullsLast(Comparator.comparing(TripdatTrip::getTripStartDate)));
+        // populate the upcoming and past trip collections with the trips from trips Collection
+        tripService.createUpcomingAndPastTripsCollections(trips, upcoming, past);
+        model.addAttribute("upcomingTrips", upcoming);
+        model.addAttribute("pastTrips", past);
+        // Declare and initialize upcomingTripsList and pastTripsList in order to
+        // use the methods getFormattedDateStrips and getDurationOfTrips
+        List<TripdatTrip> upcomingTripsList = new ArrayList<>(upcoming);
+        List<TripdatTrip> pastTripsList = new ArrayList<>(past);
+        // call the getDurationOfTrips methods and getFormattedDateStrings for
+        // upcoming and past trip collections.
+        List<String> formattedUpcomingDateStrings = tripItemWrapperService.getFormattedDateStrings(upcomingTripsList);
+        List<String> formattedPastDateStrings = tripItemWrapperService.getFormattedDateStrings(pastTripsList);
+        List<String> durationOfTripsUpcoming = tripItemWrapperService.getDurationOfTrips(upcomingTripsList);
+        List<String> durationOfTripsPast = tripItemWrapperService.getDurationOfTrips(pastTripsList);
+        // Add the collections to the model to be used front end
+        model.addAttribute("formattedDateStringsUpcoming", formattedUpcomingDateStrings);
+        model.addAttribute("formattedDateStringsPast", formattedPastDateStrings);
+        model.addAttribute("durationOfTripsUpcoming", durationOfTripsUpcoming);
+        model.addAttribute("durationOfTripsPast", durationOfTripsPast);
+
+        return ViewNames.USER_TRIPS;
+    }
+
+    /**
+     * Name: showTripForm
+     * Purpose: Handler for displaying the form to the user.
+     * @param model - model to be referenced in the view
+     * @param tripId - id of the trip to edit
+     * @return trip form view
+     * Algorithm:
+     *              1. declare the local variable trip
+     *              2. query db for the trip by id
+     *              3. declare tripDto
+     *              4. IF requestParam tripId EQ -1
+     *              5.    Initialize tripDto with a tripId of 0, denoting new trip to
+     *                    be created and initialize startDate and endDate to today's date
+     *              6. ELSE
+     *              7.    build tripDto with the queried trip's data
+     *              8. Add tripDto to model
+     *              9. return EDIT_TRIP view name
+     */
+    @GetMapping(value = Mappings.EDIT_TRIP)
+    public String showTripForm(@RequestParam(required = false, defaultValue = "-1") Long tripId,
+                               Model model ) {
+        // == local variables ==
+        TripdatTrip trip = tripService.findOne(tripId);
+        TripDto tripDto;
+
+        log.info("editing id = {}", tripId);
+        if(tripId == -1) {
+            // No trip found.
+            // Declare and initialize TripdatTrip object
+            // Set start & end dates to LocalDate
+            tripDto = TripDto.builder().tripId(Long.valueOf(0))
+                             .tripStartDate(LocalDate.now())
+                             .tripEndDate(LocalDate.now()).build();
+        } else {
+            tripDto = TripDto.builder().tripId(trip.getTripId())
+                             .tripStartDate(trip.getTripStartDate())
+                             .tripEndDate(trip.getTripEndDate())
+                             .tripDescription(trip.getTripDescription())
+                             .tripName(trip.getTripName())
+                             .destinationCity(trip.getDestinationCity())
+                             .isUserTraveler(trip.getIsUserTraveler()).build();
+
+        }
+        // Add trip to model & return the trip form
+        model.addAttribute("trip", tripDto);
+        return ViewNames.EDIT_TRIP;
+    }
+
+
+    /**
+     * Name: processTrip
+     * Purpose: To process a TripdatTrip form.
+     * @param tripId - id of trip to query for
+     * @param tripDto - Dto with trip fields
+     * @param result - results to display if there are errors
+     * @return - redirect to show trips if the POST was successful
+     * Algorithm:
+     *               1. Check the dto for date conflicts with the new start and end date.
+     *               2. If there are conflicts, stop processing and return to edit form with errors.
+     *               3. If no Trip date range conflicts, and editing an existing trip. Check to make sure
+     *                  no existing trip item falls out of the new date range.
+     *               4. If any do, return to form with that error.
+     *               5. If no conflicts, update Trip.
+     *               6. When creating new Trip, only check for Trip date range conflicts
+     */
+
+    @RequestMapping(value = Mappings.EDIT_TRIP, method = RequestMethod.POST, params = {"tripId"})
+    public String processTrip(
+                              @RequestParam(required = false, defaultValue = "-1") Long tripId,
+                              @ModelAttribute("trip") @Valid TripDto tripDto, BindingResult result) {
+
+        log.info("TripdatTrip from form = {}", tripDto);
+        // Get logged in user's information
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        TripdatTrip trip = tripService.getTripByTripId(tripDto.getTripId());
+        // Passes the userId to query the db for user's trips.
+        // Proceeds to verify if the user is creating a new trip or editing an existing
+        // trip. If the user is editing an existing trip checkForTripDateConflict will
+        // remove the existing trip from the check to avoid an unnecessary conflict
+        boolean isTripDateConflict = tripService.checkForTripDateConflict(tripDto, user.getUserId());
+        // set error if there is a trip date conflict
+        if(isTripDateConflict) {
+            result.rejectValue("tripStartDate", null,
+                    "This date range conflicts with other trips coming up. ");
+            result.rejectValue("tripEndDate", null,
+                    "This date range conflicts with other trips coming up. ");
+        }
+        // true if a tripItem's start or end date is not within the new date range
+        boolean isTripItemConflict;
+        // if tripId from the Dto is greater than 0 it corresponds to a trip in db
+        // get all items for this trip from the db
+        if (tripDto.getTripId() > 0)
+        {
+            // get all Trip items and the items's segments into a list of TripItemWrapper
+            List<TripItemWrapper> items = tripItemWrapperService.getItemsInItemWrapper(trip);
+            // Call checkForTripItemConflictWithNewDate and pass the tripDto that has the new date range
+            // and a collection of itemWrappers from this trip to check against.
+            isTripItemConflict = tripService.checkForTripItemConflictWithNewDateRange(tripDto, items);
+            // if item conflicts add the result bindings
+            if(isTripItemConflict) {
+                result.rejectValue("tripStartDate", null,
+                        "There are trip items that do not fall within this date range.");
+                result.rejectValue("tripEndDate", null,
+                        "There are trip items that do not fall within this date range.");
+
+            }
+
+        }
+
+
+        // if there are errors return to edit trip
+        if (result.hasErrors()) {
+            return ViewNames.EDIT_TRIP;
+        }
+
+        /*if( trip != null) {
+            // Check if there is a date conflict
+            trip.setTripName(tripDto.getTripName());
+            trip.setTripStartDate(tripDto.getTripStartDate());
+            trip.setTripEndDate(tripDto.getTripEndDate());
+            trip.setTripDescription(tripDto.getTripDescription());
+            trip.setDestinationCity(tripDto.getDestinationCity());
+            trip.setIsUserTraveler(tripDto.getIsUserTraveler());
+
+            // update the trip
+            tripService.update(trip);
+
+        }*/
+        return "redirect:/user/trip/show/trips";
+    }
+
+    // == private methods ==
+    private TripDto convertToDto(TripdatTrip trip) {
+        TripDto tripDto = modelMapper.map(trip, TripDto.class);
+        return tripDto;
+    }
+
+    private TripdatTrip convertToEntity(TripDto tripDto) {
+        TripdatTrip trip = modelMapper.map(tripDto, TripdatTrip.class);
+
+        if (tripDto.getTripId() != null) {
+            TripdatTrip oldTrip = tripService.getTripByTripId(tripDto.getTripId());
+        }
+        return trip;
+    }
+
 
 
 

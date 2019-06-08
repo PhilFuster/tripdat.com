@@ -5,6 +5,9 @@ dependencies {
     implementation('org.springframework.boot:spring-boot-starter-thymeleaf')
     implementation('org.springframework.boot:spring-boot-starter-web')
     runtimeOnly 'org.springframework.boot:spring-boot-devtools'
-    
-    
+    // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+    compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.4'
+
+
+
 }

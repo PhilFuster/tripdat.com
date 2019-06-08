@@ -2,6 +2,7 @@ package dev.phasterinc.tripdat.config;
 
 import dev.phasterinc.tripdat.util.ViewNames;
 import nz.net.ultraq.thymeleaf.LayoutDialect;
+import org.modelmapper.ModelMapper;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -66,6 +67,11 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public Java8TimeDialect java8TimeDialect() {
         return new Java8TimeDialect();
+    }
+
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
 
 

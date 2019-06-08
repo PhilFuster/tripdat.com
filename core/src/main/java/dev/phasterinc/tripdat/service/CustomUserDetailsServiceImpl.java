@@ -3,7 +3,7 @@ package dev.phasterinc.tripdat.service;
 import dev.phasterinc.tripdat.model.Role;
 import dev.phasterinc.tripdat.model.TripdatUser;
 import dev.phasterinc.tripdat.model.TripdatUserPrincipal;
-import dev.phasterinc.tripdat.model.UserRegistrationDto;
+import dev.phasterinc.tripdat.model.dto.UserRegistrationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -86,7 +86,6 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
         user.setUserPassword(passwordEncoder.encode( registrationDto.getPassword()));
         user.setUserLogin(registrationDto.getLogin());
         Role role = roleService.findByName("ROLE_USER");
-        System.out.println(role.toString());
         user.addRole(role);
         tripdatUserService.create(user);
         return user;

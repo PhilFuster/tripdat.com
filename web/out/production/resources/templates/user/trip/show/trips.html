@@ -23,6 +23,11 @@
                                 <p th:text="|${trip.destinationCity}|">Destination</p>
                                 <p th:text="|${formattedDateStringsUpcoming.get(iter.index)}|"></p>
                                 <p th:text="|${durationOfTripsUpcoming.get(iter.index)}|"></p>
+                                <div th:class="|trip-actions|">
+                                    <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}" th:text="Edit" >Edit</a>
+                                    <span class="separator"></span>
+                                    <a href="/trip/print" th:text="Delete">Delete</a>
+                                </div>
                             </div>
                         </div>
                     </th:block>
@@ -37,6 +42,11 @@
                                 <p th:text="|${trip.destinationCity}|">Destination</p>
                                 <p th:text="|${formattedDateStringsPast.get(iter.index)}|"></p>
                                 <p th:text="|${durationOfTripsPast.get(iter.index)}|"></p>
+                                <div th:class="|trip-actions|">
+                                    <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}" th:text="Edit" >Edit</a>
+                                    <span class="separator"></span>
+                                    <a href="/trip/print" th:text="Delete">Delete</a>
+                                </div>
                             </div>
                         </div>
                     </th:block>

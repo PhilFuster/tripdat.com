@@ -1,5 +1,6 @@
-package dev.phasterinc.tripdat.model;
+package dev.phasterinc.tripdat.model.dto;
 
+import dev.phasterinc.tripdat.model.FieldMatch;
 import lombok.Data;
 
 import javax.validation.constraints.AssertTrue;

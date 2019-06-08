@@ -11,6 +11,8 @@ public final class Mappings {
     public static final String USER_TRIPS = "/user/trip/show/trips";
     public static final String TRIP_DETAILS = "/user/trip/show/details";
     public static final String REGISTRATION = "/registration";
-    // == constructors ==
+    public static final String EDIT_TRIP = "/user/trip/edit/edit-trip";
+
+
     private Mappings() {}
 }
