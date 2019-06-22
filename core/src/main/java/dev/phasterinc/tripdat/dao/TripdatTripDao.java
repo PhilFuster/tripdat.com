@@ -2,6 +2,7 @@ package dev.phasterinc.tripdat.dao;
 
 import dev.phasterinc.tripdat.model.TripdatTrip;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -22,5 +23,6 @@ public interface TripdatTripDao extends IGenericDao<TripdatTrip> {
     TripdatTrip getTripByTripId(final Long id);
     List<TripdatTrip> get3UpcomingTripsByUserIdOrderByDateAsc(final Long userId);
     Set<TripdatTrip> getTripsByUserId(final Long id);
+    Boolean isTripDateConflict(LocalDate startDate, LocalDate endDate, final Long userId, final Long tripId);
 
 }

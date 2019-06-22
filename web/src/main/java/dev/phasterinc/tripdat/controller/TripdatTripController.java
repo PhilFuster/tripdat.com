@@ -214,23 +214,35 @@ public class TripdatTripController {
                               @RequestParam(required = false, defaultValue = "-1") Long tripId,
                               @ModelAttribute("trip") @Valid TripDto tripDto, BindingResult result) {
 
+        // Verify that start date is after end date
+        if (tripDto.getTripStartDate().isAfter(tripDto.getTripEndDate())) {
+            result.rejectValue("tripStartDate", null,
+                    "Start date must be before end date.");
+            result.rejectValue("tripEndDate", null,
+                    "End date must be after start date.");
+            return ViewNames.EDIT_TRIP;
+        }
         log.info("TripdatTrip from form = {}", tripDto);
         // Get logged in user's information
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         TripdatTrip trip = tripService.getTripByTripId(tripDto.getTripId());
-        // Passes the userId to query the db for user's trips.
-        // Proceeds to verify if the user is creating a new trip or editing an existing
-        // trip. If the user is editing an existing trip checkForTripDateConflict will
-        // remove the existing trip from the check to avoid an unnecessary conflict
+        // Passes the userId as a constraint for the query.
+        // checkForTripDateConflict queries the DB for Trips that overlap the new date Range
+        // If the list has trips in it than there are conflicts.
         boolean isTripDateConflict = tripService.checkForTripDateConflict(tripDto, user.getUserId());
         // set error if there is a trip date conflict
         if(isTripDateConflict) {
             result.rejectValue("tripStartDate", null,
-                    "This date range conflicts with other trips coming up. ");
+                    "This date range conflicts with other trips coming up.");
             result.rejectValue("tripEndDate", null,
-                    "This date range conflicts with other trips coming up. ");
+                    "This date range conflicts with other trips coming up.");
         }
+
+        // Cannot query the db to check for conflicts because items' segments must be
+        // unpacked from their Trip Item and it would be some 20 odd joins to make sure
+        // all item date ranges are included.
+        //
         // true if a tripItem's start or end date is not within the new date range
         boolean isTripItemConflict;
         // if tripId from the Dto is greater than 0 it corresponds to a trip in db
@@ -241,7 +253,7 @@ public class TripdatTripController {
             List<TripItemWrapper> items = tripItemWrapperService.getItemsInItemWrapper(trip);
             // Call checkForTripItemConflictWithNewDate and pass the tripDto that has the new date range
             // and a collection of itemWrappers from this trip to check against.
-            isTripItemConflict = tripService.checkForTripItemConflictWithNewDateRange(tripDto, items);
+            isTripItemConflict = tripService.isTripItemsOutOfNewTripDateRange(tripDto, items);
             // if item conflicts add the result bindings
             if(isTripItemConflict) {
                 result.rejectValue("tripStartDate", null,
@@ -257,6 +269,14 @@ public class TripdatTripController {
         // if there are errors return to edit trip
         if (result.hasErrors()) {
             return ViewNames.EDIT_TRIP;
+        } else {
+            trip.setTripStartDate(tripDto.getTripStartDate());
+            trip.setTripEndDate(tripDto.getTripEndDate());
+            trip.setDestinationCity(tripDto.getDestinationCity());
+            trip.setTripName(tripDto.getTripName());
+            trip.setTripDescription(tripDto.getTripDescription());
+            tripService.update(trip);
+
         }
 
         /*if( trip != null) {

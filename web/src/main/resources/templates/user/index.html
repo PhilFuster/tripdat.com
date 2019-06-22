@@ -29,7 +29,7 @@
                                     <span class="duration-of-trip" th:text="${durationOfTrips[iter.index]}">Duration Of Trip</span>
                                 </p>
                                 <div class="trip-actions">
-                                    <a href="/trip/edit" th:text="Edit" >Edit</a>
+                                    <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__}" th:text="Edit" >Edit</a>
                                     <span class="separator"></span>
                                     <a href="/trip/print" th:text="Print">Print</a>
                                 </div>

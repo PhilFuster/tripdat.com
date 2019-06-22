@@ -30,5 +30,5 @@ public interface TripdatTripService {
     Set<TripdatTrip> getTripsByUserId(final Long id);
     void createUpcomingAndPastTripsCollections(Set<TripdatTrip> trips, Set<TripdatTrip> upcoming, Set<TripdatTrip> past);
     boolean checkForTripDateConflict(TripDto tripDto, Long userId);
-    boolean checkForTripItemConflictWithNewDateRange(TripDto tripDto, List<TripItemWrapper> items);
+    boolean isTripItemsOutOfNewTripDateRange(TripDto tripDto, List<TripItemWrapper> items);
 }

@@ -5,6 +5,7 @@ import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -78,5 +79,40 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
         query.setParameter("id", userId);
         Set<TripdatTrip> set = new HashSet<TripdatTrip>(query.list());
         return set;
+    }
+
+    /**
+     * Name: isTripDateConflict
+     * Purpose: Takes a start & end date, and a userId
+     *          Queries the DB for a user's Trips using userId
+     *          Checks for overlapping conflicts during the date range of newStart to newEnd passed
+     *          and all the trips the user has.
+     * @param startDate - LocalDate, startDate used to compare with user's trips
+     * @param endDate - LocalDate, endDate used to compare with user's trips
+     * @param userId - Long, a user's Id used to query for user's trips.
+     * @param tripId - Long, a Trip's id. Used to query against DB. If the tripId exists
+     *                 in the DB I do not want it to be in the result set so that it does not cause
+     *                 a false positive date conflict.
+     * @return - Boolean, true if there is a date conflict. False if there is none.
+     */
+    @Override
+    public Boolean isTripDateConflict(LocalDate startDate, LocalDate endDate, Long userId, Long tripId) {
+        Query query = getCurrentSession().createQuery(
+                        "select tripStartDate, tripEndDate " +
+                                "from TripdatTrip trip " +
+                                "where user.userId = :userId and " +
+                                "tripEndDate >= :startDate and " +
+                                ":endDate >= tripStartDate and " +
+                                "trip.tripId != :tripId"
+        );
+        //
+        query.setParameter("startDate", startDate)
+             .setParameter("endDate", endDate)
+             .setParameter("userId", userId)
+             .setParameter("tripId", tripId);
+        return !query.list().isEmpty();
+
+
+
     }
 }

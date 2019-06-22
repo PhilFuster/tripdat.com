@@ -8,6 +8,7 @@ import dev.phasterinc.tripdat.service.TripdatTripService;
 import dev.phasterinc.tripdat.util.Mappings;
 import dev.phasterinc.tripdat.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,6 +25,7 @@ public class HomeController {
     // == fields ==
     private final TripdatTripService tripdatTripService;
     private final TripItemWrapperService tripItemWrapperService;
+    @Autowired
     public HomeController(TripdatTripService tripService, TripItemWrapperService tripItemWrapperService) {
 
         this.tripdatTripService = tripService;
