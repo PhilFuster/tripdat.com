@@ -1,6 +1,7 @@
 package dev.phasterinc.tripdat.dao;
 
 import dev.phasterinc.tripdat.model.TripdatTrip;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,6 +23,7 @@ import java.util.Set;
  *
  */
 @Repository
+@Slf4j
 @Transactional
 public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implements TripdatTripDao {
 
@@ -87,8 +89,8 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
      *          Queries the DB for a user's Trips using userId
      *          Checks for overlapping conflicts during the date range of newStart to newEnd passed
      *          and all the trips the user has.
-     * @param startDate - LocalDate, startDate used to compare with user's trips
-     * @param endDate - LocalDate, endDate used to compare with user's trips
+     * @param newStartDate - LocalDate, newStartDate used to compare with user's trips
+     * @param newEndDate - LocalDate, newEndDate used to compare with user's trips
      * @param userId - Long, a user's Id used to query for user's trips.
      * @param tripId - Long, a Trip's id. Used to query against DB. If the tripId exists
      *                 in the DB I do not want it to be in the result set so that it does not cause
@@ -96,23 +98,34 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
      * @return - Boolean, true if there is a date conflict. False if there is none.
      */
     @Override
-    public Boolean isTripDateConflict(LocalDate startDate, LocalDate endDate, Long userId, Long tripId) {
+    public Boolean isTripDateConflict(LocalDate newStartDate, LocalDate newEndDate, Long userId, Long tripId) {
         Query query = getCurrentSession().createQuery(
-                        "select tripStartDate, tripEndDate " +
-                                "from TripdatTrip trip " +
+                        "from TripdatTrip trip " +
                                 "where user.userId = :userId and " +
-                                "tripEndDate >= :startDate and " +
-                                ":endDate >= tripStartDate and " +
-                                "trip.tripId != :tripId"
+                                "trip.tripId != :tripId and " +
+                                /*"((:newStartDate >= tripStartDate and :newStartDate <= tripEndDate) or " +
+                                "(:newEndDate >= tripStartDate and :newEndDate <= tripEndDate))"*/
+                                "(:newStartDate < tripEndDate and tripStartDate < :newEndDate)"
+
         );
         //
-        query.setParameter("startDate", startDate)
-             .setParameter("endDate", endDate)
+        query.setParameter("newStartDate", newStartDate)
+             .setParameter("newEndDate", newEndDate)
              .setParameter("userId", userId)
              .setParameter("tripId", tripId);
-        return !query.list().isEmpty();
+        log.info("newStartDate: " + newStartDate + "  newEndDate: " + newEndDate);
+        TripdatTrip conflictingTrip;
+        boolean isExistingConflict;
+        try {
+            conflictingTrip = (TripdatTrip) query.getSingleResult();
+            isExistingConflict = true;
+            log.info("isTripDateConflict single result: " + "tripName: " + conflictingTrip.getTripName()
+                    + " tripStartDate: " + conflictingTrip.getTripStartDate() + " tripEndDate: " + conflictingTrip.getTripEndDate());
 
-
-
+        } catch (Exception e) {
+            log.info("isTripDateConflict: No conflict found.");
+            isExistingConflict = false;
+        }
+        return isExistingConflict;
     }
 }
