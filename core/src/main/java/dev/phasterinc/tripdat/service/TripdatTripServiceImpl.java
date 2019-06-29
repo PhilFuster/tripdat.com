@@ -142,110 +142,15 @@ public class TripdatTripServiceImpl implements TripdatTripService{
      */
     @Override
     public boolean checkForTripDateConflict(TripDto tripDto, Long userId) {
-        tripDto.setTripStartDate(LocalDate.of(2020,7,23));
-        tripDto.setTripEndDate(LocalDate.of(2020,8,14));
-        TripDto testDto = TripDto.builder().tripStartDate(LocalDate.of(2020,7,24))
-                                           .tripEndDate(LocalDate.of(2020,7,24))
-                                           .tripId(tripDto.getTripId())
-                                           .build();
-        testIsTripDateConflict(testDto, userId);
+
+
         Boolean isTripDateConflict = dao.isTripDateConflict(tripDto.getTripStartDate(), tripDto.getTripEndDate(), userId, tripDto.getTripId());
         if (isTripDateConflict) {
             log.info("TripDateConflict: " + tripDto.getTripStartDate().toString() + " - " + tripDto.getTripEndDate().toString());
         }
-        /*// tripDto id is greater than 0, a trip is being edited. Remove the trip from the collection
-        // so a false conflict does not occur
-        if(tripDto.getTripId() > 0) {
-            // remove a tripId if found
-            trips.removeIf((TripdatTrip trip)-> trip.getTripId().equals(tripDto.getTripId()));
-        }
-        // if the trips do not not overlap return true. There is a date conflict
-        for (TripdatTrip trip : trips) {
-            // If not( newEnd <= curEnd OR newStart >= curEnd) ->
-            // There is a date conflict
-            boolean isTripDateConflict =  !(tripDto.getTripEndDate().compareTo(trip.getTripStartDate()) <= 0) ||
-                    (tripDto.getTripStartDate().compareTo(trip.getTripEndDate()) >= 0);
-            //
-            boolean isTripDateConflict =  !(tripDto.getTripEndDate().compareTo(trip.getTripStartDate()) <= 0) ||
-                    (tripDto.getTripStartDate().compareTo(trip.getTripEndDate()) >= 0);
-
-            log.info("newDateRange: " + tripDto.getTripStartDate().toString() + " - " + tripDto.getTripEndDate().toString());
-            log.info("conflicting date range: " + trip.getTripStartDate().toString() + " - " + trip.getTripEndDate().toString()); // code for testing this function
-            if (isTripDateConflict) {
-                log.info("===============CONFLICT================");
-                log.info("newDateRange: " + tripDto.getTripStartDate().toString() + " - " + tripDto.getTripEndDate().toString());
-                log.info("conflicting date range: " + trip.getTripStartDate().toString() + " - " + trip.getTripEndDate().toString()); // code for testing this function
-                return true;
-            }
-
-        }*/
         // no conflicts, return false
         return isTripDateConflict;
     }
-
-    /**
-     * Name: testIsTripDateConflict
-     * Purpose: Tests different possible Date conflicts to test durability of the function.
-     * Notes: Will be manipulating trips date as to avoid having to alter the db for the test.
-     * Will be referencing the DB for a User's trips to test against. Trips will be viewed
-     * on the database console to check for validity.
-     * @param tripDto - TripDto, contains tripStartDate and tripEndDate to test against
-     *                  the user's id
-     * @param userId  - the user to query.
-     * Tests:
-     *               1. tripDate is on the same day as an item
-     */
-    private void testIsTripDateConflict(TripDto tripDto, Long userId) {
-        LocalDate tripStartDate = tripDto.getTripStartDate();
-        LocalDate tripEndDate = tripDto.getTripEndDate();
-        //
-        boolean isTripDateConflict = dao.isTripDateConflict(tripStartDate, tripEndDate,userId, tripDto.getTripId());
-        if (isTripDateConflict) {
-            log.info("TripDateConflict: " + tripStartDate.toString() + " - " + tripEndDate.toString());
-        }
-        log.info("Test is TripDate conflict");
-        log.info("tripStartDate              tripEndDate              expected result              result");
-        // Test when trip begins and ends on same day as existing trip.
-        // expected result: false
-        tripDto.setTripStartDate(LocalDate.of(2019, 5, 10));
-        tripDto.setTripEndDate(LocalDate.of(2019, 5, 20));
-        testDateConflict(tripDto, userId, "true");
-        //
-        // Test when trip start date matches other trips start date
-        // expected result: true
-        tripDto.setTripStartDate(LocalDate.of(2020, 9, 3));
-        tripDto.setTripEndDate(LocalDate.of(2020, 10, 26));
-        testDateConflict(tripDto, userId, "true");
-        //
-        // Test when trip end date is on same day existing trips start date
-        // expected result: true
-        tripDto.setTripStartDate(LocalDate.of(2019, 5, 1));
-        tripDto.setTripEndDate(LocalDate.of(2019, 5, 11));
-        testDateConflict(tripDto, userId, "true");
-        //
-        // Test when there is no conflict
-        // expected result: true
-        tripDto.setTripStartDate(LocalDate.of(2021, 1, 5));
-        tripDto.setTripEndDate(LocalDate.of(2021, 2, 11));
-        testDateConflict(tripDto, userId, "false");
-
-    }
-
-    /**
-     * Name: testDateConflict
-     * Purpose: helper function to perform a isTripDateConflict test and log it
-     * @param tripDto - TripDto, holds trip's start and end date
-     * @param userId - Long, userId whose trips to query from db
-     * @param expectedResult - String, the expected result when running a test case.
-     */
-    private void testDateConflict(TripDto tripDto, Long userId, String expectedResult) {
-        LocalDate tripStartDate = tripDto.getTripStartDate();
-        LocalDate tripEndDate = tripDto.getTripEndDate();
-        Long tripId = tripDto.getTripId();
-        boolean isTripDateConflict = dao.isTripDateConflict(tripStartDate, tripEndDate,userId, tripId);
-        log.info(tripStartDate.toString() + "    " + tripEndDate.toString() + "             " + expectedResult + "        " + isTripDateConflict);
-    }
-
 
     /**
      * Name: isTripItemsOutOfNewTripDateRange

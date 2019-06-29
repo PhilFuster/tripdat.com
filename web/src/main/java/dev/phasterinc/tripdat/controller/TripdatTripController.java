@@ -278,20 +278,6 @@ public class TripdatTripController {
             tripService.update(trip);
 
         }
-
-        /*if( trip != null) {
-            // Check if there is a date conflict
-            trip.setTripName(tripDto.getTripName());
-            trip.setTripStartDate(tripDto.getTripStartDate());
-            trip.setTripEndDate(tripDto.getTripEndDate());
-            trip.setTripDescription(tripDto.getTripDescription());
-            trip.setDestinationCity(tripDto.getDestinationCity());
-            trip.setIsUserTraveler(tripDto.getIsUserTraveler());
-
-            // update the trip
-            tripService.update(trip);
-
-        }*/
         return "redirect:/user/trip/show/trips";
     }
 

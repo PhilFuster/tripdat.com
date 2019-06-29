@@ -103,8 +103,6 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
                         "from TripdatTrip trip " +
                                 "where user.userId = :userId and " +
                                 "trip.tripId != :tripId and " +
-                                /*"((:newStartDate >= tripStartDate and :newStartDate <= tripEndDate) or " +
-                                "(:newEndDate >= tripStartDate and :newEndDate <= tripEndDate))"*/
                                 "(:newStartDate < tripEndDate and tripStartDate < :newEndDate)"
 
         );
@@ -119,11 +117,8 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
         try {
             conflictingTrip = (TripdatTrip) query.getSingleResult();
             isExistingConflict = true;
-            log.info("isTripDateConflict single result: " + "tripName: " + conflictingTrip.getTripName()
-                    + " tripStartDate: " + conflictingTrip.getTripStartDate() + " tripEndDate: " + conflictingTrip.getTripEndDate());
 
         } catch (Exception e) {
-            log.info("isTripDateConflict: No conflict found.");
             isExistingConflict = false;
         }
         return isExistingConflict;
