@@ -4,17 +4,17 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <meta charset="UTF-8">
-    <title>Edit Trip</title>
+    <title>Create Trip</title>
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
-    <div th:class="|edit-trip-header|">
-        <div th:insert="~{fragments/date-header::date-header('Edit a Trip')}" ></div>
-        <p th:text="|Here you can update your trip title, and other trip details|"></p>
+    <div th:class="|create-trip-header|">
+        <div th:insert="~{fragments/date-header::date-header('Create a Trip')}" ></div>
+        <p th:text="|Here you can create a trip title, and other trip details|"></p>
     </div>
 
-    <main th:class="edit-trip-main">
-        <form action="#" th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}" th:object="${trip}" method="post">
+    <main th:class="create-trip-main">
+        <form action="#" th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" th:object="${trip}" method="post">
             <p class="error-message alert alert-danger"
                th:if="${#fields.hasGlobalErrors()}"
                th:each="error : ${#fields.errors('global')}"

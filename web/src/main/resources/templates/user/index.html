@@ -37,9 +37,9 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <a href="/createtrip" class="card-link" th:text="'Add a trip'" >Trip</a>
+                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__}" class="card-link" th:text="'Add a trip'" >Trip</a>
                         <span class="separator"></span>
-                        <a href="/trip" class="card-link" th:text="'See all trips'">See all trips</a>
+                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_TRIPS}__}" class="card-link" th:text="'See all trips'">See all trips</a>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,13 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" class="card-link" th:text="'Add a Plan'" >Trip</a>
+                        <span class="separator"></span>
+                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trips.get(0).getTripId()})}" class="card-link" th:text="'See Full Trip'">See all trips</a>
+                    </div>
                 </div>
+
             </div>
 
 

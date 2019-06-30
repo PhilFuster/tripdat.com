@@ -157,7 +157,7 @@ public class TripdatTripController {
      *              8. Add tripDto to model
      *              9. return EDIT_TRIP view name
      */
-    @GetMapping(value = Mappings.EDIT_TRIP)
+    @GetMapping(value = {Mappings.EDIT_TRIP, Mappings.CREATE_TRIP})
     public String showTripForm(@RequestParam(required = false, defaultValue = "-1") Long tripId,
                                Model model ) {
         // == local variables ==
@@ -184,7 +184,7 @@ public class TripdatTripController {
         }
         // Add trip to model & return the trip form
         model.addAttribute("trip", tripDto);
-        return ViewNames.EDIT_TRIP;
+        return tripId != -1 ? ViewNames.EDIT_TRIP : ViewNames.CREATE_TRIP;
     }
 
 
@@ -204,25 +204,31 @@ public class TripdatTripController {
      *               5. If no conflicts, update Trip.
      *               6. When creating new Trip, only check for Trip date range conflicts
      */
-    @RequestMapping(value = Mappings.EDIT_TRIP, method = RequestMethod.POST, params = {"tripId"})
+    @RequestMapping(value = {Mappings.EDIT_TRIP, Mappings.CREATE_TRIP}, method = RequestMethod.POST, params = {"tripId"})
     public String processTrip(
                               @RequestParam(required = false, defaultValue = "-1") Long tripId,
                               @ModelAttribute("trip") @Valid TripDto tripDto, BindingResult result) {
-
-
         // Verify that start date is after end date
+        // before anything else.
         if (tripDto.getTripStartDate().isAfter(tripDto.getTripEndDate())) {
             result.rejectValue("tripStartDate", null,
                     "Start date must be before end date.");
             result.rejectValue("tripEndDate", null,
                     "End date must be after start date.");
-            return ViewNames.EDIT_TRIP;
+            return tripId != -1 ? ViewNames.EDIT_TRIP : ViewNames.CREATE_TRIP;
         }
         log.info("TripdatTrip from form = {}", tripDto);
         // Get logged in user's information
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TripdatTrip trip;
+        // If Creating a new Trip initialize new trip
+        if(tripId == -1) {
+            trip = new TripdatTrip();
+        } else {
+            // editing a Trip, so find it by id.
+            trip = tripService.getTripByTripId(tripDto.getTripId());
+        }
 
-        TripdatTrip trip = tripService.getTripByTripId(tripDto.getTripId());
         // Passes the userId as a constraint for the query.
         // checkForTripDateConflict queries the DB for Trips that overlap the new date Range
         // If the list has trips in it than there are conflicts.
@@ -255,29 +261,43 @@ public class TripdatTripController {
                         "There are trip items that do not fall within this date range.");
                 result.rejectValue("tripEndDate", null,
                         "There are trip items that do not fall within this date range.");
-
             }
-
         }
-        // if there are errors return to edit trip
+        // if there are errors return to edit trip or create trip.
         if (result.hasErrors()) {
-            return ViewNames.EDIT_TRIP;
-        } else {
-            trip.setTripStartDate(tripDto.getTripStartDate());
-            trip.setTripEndDate(tripDto.getTripEndDate());
-            trip.setDestinationCity(tripDto.getDestinationCity());
-            trip.setTripName(tripDto.getTripName());
-            trip.setTripDescription(tripDto.getTripDescription());
+            return tripId != -1 ? ViewNames.EDIT_TRIP : ViewNames.CREATE_TRIP;
+        }
+        // Trip has no errors. Update the entity
+        trip.setTripStartDate(tripDto.getTripStartDate());
+        trip.setTripEndDate(tripDto.getTripEndDate());
+        trip.setDestinationCity(tripDto.getDestinationCity());
+        trip.setTripName(tripDto.getTripName());
+        trip.setTripDescription(tripDto.getTripDescription());
+        // If tripId is not -1 then update this Trip
+        if(tripId != -1){
             tripService.update(trip);
 
+        } else {
+            // Set the trip's user
+            trip.setUser(user.getTripdatUser());
+            // Creating a new Trip
+            tripService.create(trip);
         }
-        return "redirect:/user/trip/show/trips";
+        return "redirect:" + ViewNames.USER_TRIPS;
     }
 
+    /**
+     * Name: cancelEditTrip
+     * Purpose: To cancel edits to a Trip and return to USER_TRIPS view
+     * @param request - the request parameters
+     * @return - redirect to USER_TRIPS view
+     */
     @PostMapping(value = Mappings.EDIT_TRIP, params = "cancel=cancel")
     public String cancelEditTrip(HttpServletRequest request) {
         return "redirect:" + ViewNames.USER_TRIPS;
     }
+
+
 
     // == private methods ==
     private TripDto convertToDto(TripdatTrip trip) {

@@ -174,13 +174,11 @@ public class TripdatTripServiceImpl implements TripdatTripService{
         LocalDate tripEndDate = tripDto.getTripEndDate();
         log.info("tripStartDate: {}",tripStartDate);
         log.info("tripEndDate: {}",tripEndDate);
-
         // for each item check if its date range falls within the new date range.
         // If not( newEnd <= curEnd OR newStart >= curEnd)
         // there is a date conflict
         //
         // if there are no items for this trip, then there are no conflicts ...
-
         for(TripItemWrapper item: items) {
             LocalDate itemStartDate = item.getStartDate();
             LocalDate itemEndDate = item.getEndDate();
