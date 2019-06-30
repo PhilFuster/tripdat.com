@@ -80,18 +80,14 @@
                        th:each="error: ${#fields.errors('tripDescription')}"
                        th:text="${error}">Validation error</p>
                 </div>
-
                 <div th:class="|form-group|">
                     <label th:for="${#ids.next('isUserTraveler')}" th:text="|I'm a traveler on this trip|">I'm a traveler on this trip</label>
                     <input type="checkbox" th:field="*{isUserTraveler}"/>
                 </div>
-
                 <div th:class="|form-group|">
                     <button th:type="|submit|" th:class="|btn btn-success btn-sub|">Save</button>
-                    <button th:type="|cancel|" th:class="|btn btn-danger btn-cancel|">Cancel</button>
+                    <button th:name="|cancel|" th:value="cancel" th:type="|cancel|" th:class="|btn btn-danger btn-cancel|">Cancel</button>
                 </div>
-
-
             </div>
         </form>
     </main>

@@ -151,7 +151,6 @@ public class TripdatTripServiceImpl implements TripdatTripService{
         // no conflicts, return false
         return isTripDateConflict;
     }
-
     /**
      * Name: isTripItemsOutOfNewTripDateRange
      * Purpose: When editing a Trip's start and end date, must check to make sure there
@@ -198,7 +197,6 @@ public class TripdatTripServiceImpl implements TripdatTripService{
         }
         return false;
     }
-
     /**
      *  Name: isTripItemOutOfTripDateRange
      *  Purpose: To abstract the conditional that is a little hard to read

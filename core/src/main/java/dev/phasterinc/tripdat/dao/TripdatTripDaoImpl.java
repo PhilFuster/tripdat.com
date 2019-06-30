@@ -117,7 +117,6 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
         try {
             conflictingTrip = (TripdatTrip) query.getSingleResult();
             isExistingConflict = true;
-
         } catch (Exception e) {
             isExistingConflict = false;
         }

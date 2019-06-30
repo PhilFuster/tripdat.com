@@ -19,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
@@ -43,17 +44,12 @@ public class TripdatTripController {
         this.tripItemWrapperService = tripItemWrapperService;
         this.modelMapper = modelMapper;
     }
-
-
     // == handler methods ==
-
-
     /**
      * name: tripDetailsPage
      * purpose: Controller for the tripDetailsPage. The page contains the details of the entire Trip.
      *          This Controller prepares the TripItemWrappers to be used in the View.
      * @param model - Model object to be passed to tbe view
-     * @param segmentId - The id of the segment that was clicked on to view the trip
      * @param tripId - The trip to be queried
      * @return The details page view
      * Algorithm:
@@ -208,11 +204,11 @@ public class TripdatTripController {
      *               5. If no conflicts, update Trip.
      *               6. When creating new Trip, only check for Trip date range conflicts
      */
-
     @RequestMapping(value = Mappings.EDIT_TRIP, method = RequestMethod.POST, params = {"tripId"})
     public String processTrip(
                               @RequestParam(required = false, defaultValue = "-1") Long tripId,
                               @ModelAttribute("trip") @Valid TripDto tripDto, BindingResult result) {
+
 
         // Verify that start date is after end date
         if (tripDto.getTripStartDate().isAfter(tripDto.getTripEndDate())) {
@@ -238,7 +234,6 @@ public class TripdatTripController {
             result.rejectValue("tripEndDate", null,
                     "This date range conflicts with other trips coming up.");
         }
-
         // Cannot query the db to check for conflicts because items' segments must be
         // unpacked from their Trip Item and it would be some 20 odd joins to make sure
         // all item date ranges are included.
@@ -264,8 +259,6 @@ public class TripdatTripController {
             }
 
         }
-
-
         // if there are errors return to edit trip
         if (result.hasErrors()) {
             return ViewNames.EDIT_TRIP;
@@ -279,6 +272,11 @@ public class TripdatTripController {
 
         }
         return "redirect:/user/trip/show/trips";
+    }
+
+    @PostMapping(value = Mappings.EDIT_TRIP, params = "cancel=cancel")
+    public String cancelEditTrip(HttpServletRequest request) {
+        return "redirect:" + ViewNames.USER_TRIPS;
     }
 
     // == private methods ==
@@ -295,9 +293,4 @@ public class TripdatTripController {
         }
         return trip;
     }
-
-
-
-
-
 }
