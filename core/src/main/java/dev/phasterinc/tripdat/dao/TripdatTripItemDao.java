@@ -17,6 +17,7 @@ import java.util.HashSet;
 public interface TripdatTripItemDao extends IGenericDao<TripdatTripItem> {
     HashSet<TripdatTripItem> findByTripId(final long Id);
     HashSet<TripdatTripItem> findMax4ByTripId(final long id);
+    TripdatTripItem findByItemId(final long id);
 
 
 }

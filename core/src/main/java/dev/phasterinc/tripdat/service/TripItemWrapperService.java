@@ -10,10 +10,12 @@ package dev.phasterinc.tripdat.service;
 
 import dev.phasterinc.tripdat.model.TripItemWrapper;
 import dev.phasterinc.tripdat.model.TripdatTrip;
+import dev.phasterinc.tripdat.model.TripdatTripItem;
 
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * TripItemWrapperService - TripItemWrapperService will perform all the logic for preparing
@@ -31,10 +33,15 @@ public interface TripItemWrapperService {
 
     List<TripItemWrapper> getNextUpItemsInItemWrapper(TripdatTrip nextTrip);
 
+    List<TripItemWrapper> unwrapTripItemsIntoWrappers(Set<TripdatTripItem> items);
+
     void orderItemWrappersByAscDateAndTime(List<TripItemWrapper>  wrappers);
 
     List<TripItemWrapper> getItemsInItemWrapper(TripdatTrip trip);
     HashMap<LocalDate, List<TripItemWrapper>> getWrappersInMapByDate(List<TripItemWrapper> wrappers, LocalDate startDate, LocalDate endDate);
+    TripItemWrapper getOneItemById(Long tripItemId);
+
+
 
 
 

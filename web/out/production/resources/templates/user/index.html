@@ -6,68 +6,62 @@
     <title>Secured</title>
 </head>
 <body>
-<div layout:fragment="content" th:remove="tag">
-
-    <div id="home-index-main-content" class="wrapper" data-selectors="#upcomging-trip-module, #next-up-module">
-        <div class="content">
-            <div class="upcoming-trips">
-                <div  class="card">
-                    <div class="card-header">
-                        <p id="upcoming-trip" th:text="|Upcoming Trips|">Upcoming Trips</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush">
-                            <div class="trip"  th:each="trip, iter: ${trips}" >
-                                <p>
-                                    <a class="trip-title" href="" th:text="${trip.tripName}">
-                                        Trip Name
-                                    </a>
-                                </p>
-                                <p th:text="${trip.destinationCity}">Destination City</p>
-                                <p th:inline="text">
-                                    [[${formattedDateStrings[iter.index]}]]
-                                    <span class="duration-of-trip" th:text="${durationOfTrips[iter.index]}">Duration Of Trip</span>
-                                </p>
-                                <div class="trip-actions">
-                                    <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__}" th:text="Edit" >Edit</a>
-                                    <span class="separator"></span>
-                                    <a href="/trip/print" th:text="Print">Print</a>
+    <div layout:fragment="content" th:remove="tag">
+        <div id="home-index-main-content" class="wrapper" data-selectors="#upcomging-trip-module, #next-up-module">
+            <div class="content">
+                <div class="upcoming-trips">
+                    <div  class="card">
+                        <div class="card-header">
+                            <p id="upcoming-trip" th:text="|Upcoming Trips|">Upcoming Trips</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <div class="trip"  th:each="trip, iter: ${trips}" >
+                                    <p>
+                                        <a class="trip-title" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trip.tripId})}" th:text="${trip.tripName}">
+                                            Trip Name
+                                        </a>
+                                    </p>
+                                    <p th:text="${trip.destinationCity}">Destination City</p>
+                                    <p th:inline="text">
+                                        [[${formattedDateStrings[iter.index]}]]
+                                        <span class="duration-of-trip" th:text="${durationOfTrips[iter.index]}">Duration Of Trip</span>
+                                    </p>
+                                    <div class="trip-actions">
+                                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}" th:text="Edit" >Edit</a>
+                                        <span class="separator"></span>
+                                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).DELETE_TRIP}__(tripId=${trip.tripId})}" th:text="Delete" >Edit</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__}" class="card-link" th:text="'Add a trip'" >Trip</a>
-                        <span class="separator"></span>
-                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_TRIPS}__}" class="card-link" th:text="'See all trips'">See all trips</a>
-                    </div>
-                </div>
-            </div>
-            <div class="next-up">
-                <div class="card">
-                    <div class="card-header container-dark">
-                        <p th:text="${'next up: ' +trips.get(0).getTripName()}">Next up: </p>
-                    </div>
-                    <div class="card-body">
-                        <div class="list-group list-group-flush">
-                            <div th:include="~{fragments/next-up::next-up}" th:with="nextUpItems=${nextUpItems}, tripId=${trips.get(0).getTripId()}" class="trip-items-list">
-                            </div>
+                        <div class="card-footer trip-footer-action">
+                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__}" class="card-link" th:text="'Add a trip'" >Trip</a>
+                            <span class="separator"></span>
+                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_TRIPS}__}" class="card-link" th:text="'See all trips'">See all trips</a>
                         </div>
                     </div>
-                    <div class="card-footer">
-                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" class="card-link" th:text="'Add a Plan'" >Trip</a>
-                        <span class="separator"></span>
-                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trips.get(0).getTripId()})}" class="card-link" th:text="'See Full Trip'">See all trips</a>
+                </div>
+                <div class="next-up">
+                    <div class="card">
+                        <div class="card-header container-dark">
+                            <p th:text="${'next up: ' +trips.get(0).getTripName()}">Next up: </p>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <div th:include="~{fragments/next-up::next-up}" th:with="nextUpItems=${nextUpItems}, tripId=${trips.get(0).getTripId()}" class="trip-items-list">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer trip-footer-action">
+                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" class="card-link" th:text="'Add a Plan'" >Trip</a>
+                            <span class="separator"></span>
+                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trips.get(0).getTripId()})}" class="card-link" th:text="'See Full Trip'">See all trips</a>
+                        </div>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
     </div>
-
-
-</div>
 </body>
 </html>

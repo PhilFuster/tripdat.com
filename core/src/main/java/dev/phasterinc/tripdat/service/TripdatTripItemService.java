@@ -26,4 +26,5 @@ public interface TripdatTripItemService {
     void deleteById(final long entityId);
     HashSet<TripdatTripItem> getItemsByTripId(final long  id);
     HashSet<TripdatTripItem> getMax4ItemsById(final long id);
+    TripdatTripItem findByItemId(final long id);
 }

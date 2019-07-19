@@ -61,19 +61,19 @@ public class TripdatTripItemServiceImpl implements TripdatTripItemService {
     @Override
     public void deleteById(long entityId) {
         dao.deleteById(entityId);
-
     }
 
     @Override
     public HashSet<TripdatTripItem> getItemsByTripId(long id) {
-
-
         return dao.findByTripId(id);
-
     }
 
     @Override
     public HashSet<TripdatTripItem> getMax4ItemsById(long id) {
         return dao.findMax4ByTripId(id);
     }
+
+    @Override
+    public TripdatTripItem findByItemId(long id) {
+        return dao.findByItemId(id);    }
 }

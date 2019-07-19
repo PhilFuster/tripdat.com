@@ -159,7 +159,10 @@ div.content {
 .next-up {
     grid-column-start: 2;
     grid-column-end: 3;
-
+}
+.trip-footer-action {
+    display: flex;
+    justify-content: flex-end;
 }
 
 .upcoming-trips {
@@ -929,6 +932,14 @@ div.other-trip-details {
 }
 .btn-sub {
     background-color: dodgerblue;
+}
+
+/*
+    == flightItem Style ==
+ */
+.airline-info {
+    display:flex;
+    justify-content: space-between;
 }
 
 

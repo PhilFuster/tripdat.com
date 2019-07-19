@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <th:block th:fragment="flight-fragment(item)">
+    <th:block th:fragment="flight-fragment(itemId)">
         <div th:id="'trip-item-' + ${item.id}">
             <div th:class="|trip-item-object|">
                 <div th:class="|trip-item-row|">
                     <div th:class="|trip-item-icon|">
                         <span class="flight-trip-item-icon-m"></span>
                     </div>
+                    <!-- Summary of Flight -->
                     <div th:class="|trip-item-object-pane|">
                         <div th:class="|trip-item-header|">
                             <div th:class="date" th:text="${#temporals.format(item.startDate, 'MM/dd/yyyy')}"></div>
@@ -37,11 +38,11 @@
                                 </span>
                             </span>
                         </div>
+                        <!-- Departure Details -->
                         <div th:class="|trip-item-object-pane|">
                             <div th:class="|checkpoint|">
                                 <h3 th:class="|checkpoint-type|" th:text="|Depart|">Depart</h3>
                                 <h2 th:class="|airport-name|" th:text="${item.tripItem.flightDepartureAirport}"></h2>
-
                                 <div th:class="gate-location">
                                     <span th:class="terminal-section">
                                         Terminal:
@@ -53,7 +54,6 @@
                                     </span>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div th:class="|trip-item-row|">
@@ -68,6 +68,7 @@
                                         </span>
                                 </span>
                         </div>
+                        <!-- Arrival Details -->
                         <div th:class="|trip-item-object-pane|">
                             <div th:class="|checkpoint|">
                                 <h3 th:class="|checkpoint-type|" th:text="|Arrival|">Arrival</h3>
@@ -86,11 +87,12 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Actions to perform on a Trip -->
                     <div th:class="|trip-item-row|">
                         <div th:class="|object-actions|">
                             <ul>
                                 <li>
-                                    <a th:text="|Edit|" th:class="|edit-trip-item|" th:href="@{/edit/id/}">
+                                    <a th:text="|Edit|" th:h th:class="|edit-trip-item|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_FLIGHT}__(tripItemId=${item.id})}">
                                         Edit
                                         <span th:class="|icon edit-icon|"></span>
                                     </a>
@@ -129,6 +131,7 @@
                                         <span th:class="|seats|" th:text="${item.tripItem.flightSeat?:'-'}"></span>
                                     </div>
                                 </div>
+                                <!-- Traveler Information -->
                                 <th:block th:replace="~{fragments/other-item-details::traveler-info-fragment(${item.attendees})}">
                                 </th:block>
                                 <details th:class="|aircraft-service-info grey-border|" th:object="${item.tripItem}">
@@ -147,6 +150,7 @@
                                         </ul>
                                     </div>
                                 </details>
+                                <!-- Travel Agency, Supplier, Booking Details -->
                                 <th:block th:replace="~{fragments/other-item-details::other-details(${item.travelAgency}, ${item.Supplier}, ${item.BookingDetail}, ${item.notes})}">
                                 </th:block>
                             </div>

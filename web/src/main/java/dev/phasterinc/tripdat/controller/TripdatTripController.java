@@ -24,6 +24,13 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.*;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
 @SessionAttributes("trip")
 @Slf4j
 @Controller
@@ -184,9 +191,12 @@ public class TripdatTripController {
         }
         // Add trip to model & return the trip form
         model.addAttribute("trip", tripDto);
+        // No Trip deleted from show method but when a trip is deleted
+        // a successful deletion message is displayed based off of isDeleted model
+        // Attribute
+        model.addAttribute("isDeleted", false);
         return tripId != -1 ? ViewNames.EDIT_TRIP : ViewNames.CREATE_TRIP;
     }
-
 
     /**
      * Name: processTrip
@@ -294,23 +304,23 @@ public class TripdatTripController {
      */
     @PostMapping(value = Mappings.EDIT_TRIP, params = "cancel=cancel")
     public String cancelEditTrip(HttpServletRequest request) {
+
         return "redirect:" + ViewNames.USER_TRIPS;
     }
 
 
-
-    // == private methods ==
-    private TripDto convertToDto(TripdatTrip trip) {
-        TripDto tripDto = modelMapper.map(trip, TripDto.class);
-        return tripDto;
-    }
-
-    private TripdatTrip convertToEntity(TripDto tripDto) {
-        TripdatTrip trip = modelMapper.map(tripDto, TripdatTrip.class);
-
-        if (tripDto.getTripId() != null) {
-            TripdatTrip oldTrip = tripService.getTripByTripId(tripDto.getTripId());
-        }
-        return trip;
+    /**
+     * Name: deleteTrip
+     * Purpose: To delete a user's Trip.
+     *          If the User has items, ask if they are ok with deleting all its items.
+     *          User has option of saving their items to the un-filed section.
+     */
+    @GetMapping(value = Mappings.DELETE_TRIP)
+    public String deleteTrip(@RequestParam Long tripId, Model model) {
+        // Check to see if the user is Ok with deleting all items associated with this trip.
+        // If so delete the trip in its entirety or allow them to move the items to the
+        // un-filed sections
+        tripService.deleteById(tripId);
+        return "redirect:" + ViewNames.USER_TRIPS;
     }
 }

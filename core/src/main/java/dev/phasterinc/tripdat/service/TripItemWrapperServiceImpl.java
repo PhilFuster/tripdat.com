@@ -136,17 +136,15 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
      */
     @Override
     public List<TripItemWrapper> getNextUpItemsInItemWrapper(TripdatTrip nextTrip) {
-        System.out.println("Next Trip: " + nextTrip);
         Set<TripdatTripItem> items = tripItemService.getMax4ItemsById(nextTrip.getTripId());
-
-
         return unwrapTripItemsIntoWrappers(items);
     }
 
     @Override
     public List<TripItemWrapper> getItemsInItemWrapper(TripdatTrip trip) {
         Set<TripdatTripItem> items = tripItemService.getItemsByTripId(trip.getTripId());
-        return unwrapTripItemsIntoWrappers(items);
+        List<TripItemWrapper> wrappers = unwrapTripItemsIntoWrappers(items);
+        return wrappers;
     }
 
     /**
@@ -169,11 +167,11 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
      *      Step 9:            Create TripItemWrapper
      *      Step 10:           insert tripItemWrapper to the items collection
      */
+    @Override
     public List<TripItemWrapper> unwrapTripItemsIntoWrappers(Set<TripdatTripItem> items) {
-
         List<TripItemWrapper> itemWrappers = new ArrayList<>();
         if(CollectionUtils.isEmpty(items)) {
-            log.info("NextUpItemsWrapper","No items in trip.");
+            log.info("In unwrapTripItemsIntoWrappers: No items in trip passed.");
             return itemWrappers;
         }
         for(TripdatTripItem item : items) {
@@ -206,9 +204,6 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                                                                  .endTime(segment.getFlightArrivalTime())
                                                                  .attendees(flightInfo.getAttendees()).build();
 
-
-
-                        System.out.println(segment.getFlightAircraftType());
                         itemWrappers.add(wrapper);
                     }
 
@@ -256,18 +251,18 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
         return itemWrappers;
     }
 
+    /**
+     * Name: orderItemWrappersByAscDateAndTime
+     * Purpose: To order the passed collection of TripItemWrappers by Ascending Date and Time
+     * @param wrappers - List of TripItemWrapper, user's items in wrappers
+     *
+     */
     @Override
     public void orderItemWrappersByAscDateAndTime(List<TripItemWrapper> wrappers) {
         //wrappers.sort((TripItemWrapper item1, TripItemWrapper item2)->item1.getStartDate().compareTo(item2.getStartDate()));
         Collections.sort(wrappers, Comparator.nullsLast(Comparator.comparing(TripItemWrapper::getStartDate).thenComparing(TripItemWrapper::getStartTime)));
-
-
-
-        wrappers.forEach((item)->System.out.println("Start Date: " +
+        wrappers.forEach((item)->log.debug("Start Date: " +
                 item.getStartDate() + " Start Time: " + item.getStartTime() ));
-
-
-
     }
 
     /**
@@ -276,10 +271,10 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
      *          is an ArrayList<TripItemWrapper>. This HashMap will be used in the view. A template will iterate over
      *          the HashMap and get each ArrayList for each day and print the items in that list. The items are already
      *          ordered by Date and time.
-     * @param wrappers
-     * @param startDate
-     * @param endDate
-     * @return
+     * @param wrappers - List TripItemWrapper, contains User's items in wrappers
+     * @param startDate - LocaDate, startDate of trip
+     * @param endDate - LocalDate, endDate of trip
+     * @return HashMap<LocalDate, List<TripItemWrapper>>, HashMap with key of a Day during the trip
      */
     @Override
     public HashMap<LocalDate, List<TripItemWrapper>> getWrappersInMapByDate(List<TripItemWrapper> wrappers, LocalDate startDate, LocalDate endDate) {
@@ -287,15 +282,14 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
         LocalDate currDate = startDate;
         HashMap<LocalDate, List<TripItemWrapper>> itemsMap = new HashMap<>();
         // initialize map
-        log.info("--------------Beginning creation of itemsMap------------");
         for(int i = 0; i < durationOfTrip; ++i) {
-            log.info("Adding date: " + currDate.toString());
+            log.debug("Adding date: " + currDate.toString());
             itemsMap.put( currDate, new ArrayList<TripItemWrapper>() );
             currDate = currDate.plus(1, ChronoUnit.DAYS);
-            log.info("Date Incremented to: " + currDate.toString());
+            log.debug("Date Incremented to: " + currDate.toString());
         }
 
-        // for each itemWrapper get the ArrayList from itemsMap with key item.startDate, add item to that ArrayList
+
 
         /*for(TripItemWrapper item : wrappers) {
             log.info("startDate to search for in map: " + item.getStartDate());
@@ -303,7 +297,8 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
             itemsMap.get(item.getStart())
         }*/
 
-
+        // for each itemWrapper get the ArrayList from itemsMap with key item.startDate, add item to that ArrayList
+        // if that date hasn't been added to the map yet create an arrayList for tripItems scheduled for that day
         wrappers.forEach((item)-> {
             List<TripItemWrapper> items = itemsMap.getOrDefault(item.getStartDate(), new ArrayList<>());
             items.add(item);
@@ -312,5 +307,10 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
 
 
         return itemsMap;
+    }
+
+    @Override
+    public TripItemWrapper getOneItemById(Long tripItemId) {
+        return null;
     }
 }

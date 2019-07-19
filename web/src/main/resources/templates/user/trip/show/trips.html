@@ -7,6 +7,9 @@
 </head>
 <body>
     <div layout:fragment="content" th:remove="tag">
+
+        <h3 th:if="${isDeleted}" th:text="|Trip Deleted Successfully|"></h3>
+
         <nav>
             <div th:class="|trips-filter-bar nav nav-tabs|" th:id="|nav-tab|" role="tablist">
                 <a th:class="|nav-item nav-link|" th:id="|nav-pastTrips-tab|" data-toggle="tab" th:href="|#nav-pastTrips|" role="tab" aria-controls="nav-pastTrips" aria-selected="false" th:text="|Past Trips|">Past Trips</a>
@@ -26,7 +29,7 @@
                                 <div th:class="|trip-actions|">
                                     <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}" th:text="Edit" >Edit</a>
                                     <span class="separator"></span>
-                                    <a href="/trip/print" th:text="Delete">Delete</a>
+                                    <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).DELETE_TRIP}__(tripId=${trip.tripId})}" th:text="Delete">Delete</a>
                                 </div>
                             </div>
                         </div>
@@ -45,7 +48,7 @@
                                 <div th:class="|trip-actions|">
                                     <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}" th:text="Edit" >Edit</a>
                                     <span class="separator"></span>
-                                    <a href="/trip/print" th:text="Delete">Delete</a>
+                                    <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).DELETE_TRIP}__(tripId=${trip.tripId})}" th:text="Delete">Delete</a>
                                 </div>
                             </div>
                         </div>

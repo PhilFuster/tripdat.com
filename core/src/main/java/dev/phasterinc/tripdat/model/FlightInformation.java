@@ -44,10 +44,7 @@ public class FlightInformation extends TripdatTripItem implements Serializable {
 
     @PostConstruct
     public void initTripItemType() {
-        System.out.println("Initialized tripItemType for flightInformation object");
         super.setTripItemType("F");
-
-
     }
 
     @Override
@@ -59,7 +56,6 @@ public class FlightInformation extends TripdatTripItem implements Serializable {
     }
 
     public FlightInformation(){
-        System.out.println("Flight Information Item type set");
         super.setTripItemType("F");
     }
 

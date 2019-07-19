@@ -46,7 +46,8 @@ public abstract class AbstractHibernateDao< T extends Serializable> implements I
      * @return - the row found from the query. If there is one.
      */
     public T findOne( final long id ) {
-        return (T) getCurrentSession().get(clazz, id );
+        //return (T) getCurrentSession().get(clazz, id );
+        return (T) getCurrentSession().get(clazz, id);
     }
 
     /**

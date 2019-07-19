@@ -139,7 +139,7 @@ public class FlightSegment implements Serializable {
                 ", flightArrivalTerminal='" + flightArrivalTerminal + '\'' +
                 ", flightArrivalGate='" + flightArrivalGate + '\'' +
                 ", flightFareClass='" + flightFareClass + '\'' +
-                ", flightMeal='" + flightMeal + '\'' +
+                ", meal='" + flightMeal + '\'' +
                 ", flightBaggageClaim='" + flightBaggageClaim + '\'' +
                 ", flightEntertainment='" + flightEntertainment + '\'' +
                 ", flightOnTimePercentage='" + flightOnTimePercentage + '\'' +

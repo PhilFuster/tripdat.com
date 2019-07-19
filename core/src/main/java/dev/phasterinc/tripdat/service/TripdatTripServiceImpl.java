@@ -39,7 +39,7 @@ public class TripdatTripServiceImpl implements TripdatTripService{
 
     @Override
     public List<TripdatTrip> findAll() {
-        System.out.println("Looking for all trips...");
+        log.debug("Looking for all trips...");
         return dao.findAll();
     }
 
@@ -172,8 +172,8 @@ public class TripdatTripServiceImpl implements TripdatTripService{
         // proposed new start and end dates for this trip
         LocalDate tripStartDate = tripDto.getTripStartDate();
         LocalDate tripEndDate = tripDto.getTripEndDate();
-        log.info("tripStartDate: {}",tripStartDate);
-        log.info("tripEndDate: {}",tripEndDate);
+        log.debug("tripStartDate: {}",tripStartDate);
+        log.debug("tripEndDate: {}",tripEndDate);
         // for each item check if its date range falls within the new date range.
         // If not( newEnd <= curEnd OR newStart >= curEnd)
         // there is a date conflict
@@ -182,14 +182,14 @@ public class TripdatTripServiceImpl implements TripdatTripService{
         for(TripItemWrapper item: items) {
             LocalDate itemStartDate = item.getStartDate();
             LocalDate itemEndDate = item.getEndDate();
-            log.info("itemStartDate: {}", itemStartDate);
-            log.info("itemEndDate: {}", itemEndDate);
+            log.debug("itemStartDate: {}", itemStartDate);
+            log.debug("itemEndDate: {}", itemEndDate);
             // Check if an item's start date or end date falls outside of the passed
             // trip date range by calling helper function isTripOutOfDateRange
             if(isTripItemOutOfTripDateRange(item, tripDto) ) {
-                log.info("=============== Trip Item CONFLICT with trip date range ================");
-                log.info("new Trip Date Range: " + tripStartDate.toString() + " - " + tripEndDate.toString());
-                log.info("conflicting item date range: " + itemStartDate + " - " + itemEndDate);
+                log.debug("new Trip Date Range: " + tripStartDate.toString() + " - " + tripEndDate.toString());
+                log.debug("conflicting item date range: " + itemStartDate + " - " + itemEndDate);
+                log.debug("=============== Trip Item CONFLICT with trip date range ================");
                 return true;
             }
         }

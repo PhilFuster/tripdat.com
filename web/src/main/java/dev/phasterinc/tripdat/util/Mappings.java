@@ -13,7 +13,9 @@ public final class Mappings {
     public static final String REGISTRATION = "/registration";
     public static final String EDIT_TRIP = "/user/trip/edit/edit-trip";
     public static final String CREATE_TRIP = "/user/trip/create/create-trip";
-
-
+    public static final String DELETE_TRIP = "/user/trip/delete";
+    public static final String EDIT_FLIGHT = "/user/trip-item/flight/edit";
+    public static final String CREATE_FLIGHT = "/user/trip-item/flight/create";
+    // == private constructors ==
     private Mappings() {}
 }

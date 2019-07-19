@@ -12,7 +12,7 @@ public final class ViewNames {
     public static final String TRIP_DETAILS = "/user/trip/show/details";
     public static final String EDIT_TRIP = "/user/trip/edit/edit-trip";
     public static final String CREATE_TRIP = "/user/trip/create/create-trip";
-
+    public static final String EDIT_FLIGHT = "/user/trip-item/edit/edit-flight";
     // == constructors ==
     private ViewNames() {}
 }
