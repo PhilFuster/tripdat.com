@@ -103,7 +103,7 @@ public class FlightItemController {
                                                                     .duration(segment.getFlightDuration())
                                                                     .distance(segment.getFlightDistance())
                                                                     .segmentNotes(segment.getFlightSegmentNotes())
-                                                                    .seat(segment.getFlightSeat()).build();
+                                                                    .seat(segment.getFlightSeats()).build();
                 segmentsDto.add(flightSegmentDto);
             }
             flightItemDto = FlightItemDto.builder().itemNote(flight.getTripItemNote())

@@ -197,8 +197,8 @@ public class TripItemWrapper {
     public String getSeat() {
         if(tripItemTypeCode == "F") {
             FlightSegment segment = (FlightSegment) tripItem;
-            if(segment.getFlightSeat() != null && !segment.getFlightSeat().isEmpty()) {
-                return segment.getFlightSeat();
+            if(segment.getFlightSeats() != null && !segment.getFlightSeats().isEmpty()) {
+                return segment.getFlightSeats();
             }
         }
         return "-";

@@ -32,6 +32,7 @@ public class Supplier implements Serializable {
 
     @Column(name = "supplier_name", columnDefinition = "TEXT")
     private String supplierName;
+
     @Column(name = "supplier_contact_name", columnDefinition = "TEXT")
     private String supplierContactName;
 

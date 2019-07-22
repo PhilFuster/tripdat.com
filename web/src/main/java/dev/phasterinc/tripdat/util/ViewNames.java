@@ -9,7 +9,7 @@ public final class ViewNames {
     public static final String LOGIN = "/login";
     public static final String ACCESS_DENIED = "/error/access-denied";
     public static final String USER_TRIPS = "/user/trip/show/trips";
-    public static final String TRIP_DETAILS = "/user/trip/show/details";
+    public static final String TRIP_DETAILS = "/user/trip/show/trip-details";
     public static final String EDIT_TRIP = "/user/trip/edit/edit-trip";
     public static final String CREATE_TRIP = "/user/trip/create/create-trip";
     public static final String EDIT_FLIGHT = "/user/trip-item/edit/edit-flight";

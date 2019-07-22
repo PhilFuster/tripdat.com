@@ -66,7 +66,7 @@ public abstract class AbstractHibernateDao< T extends Serializable> implements I
      * @param entity - the entity to persist.
      */
     public void create( final T entity ){
-       getCurrentSession().persist( entity );
+        getCurrentSession().persist( entity );
     }
 
     /**

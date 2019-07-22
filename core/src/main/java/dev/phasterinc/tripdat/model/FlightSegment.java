@@ -97,8 +97,8 @@ public class FlightSegment implements Serializable {
     @Column(name = "flight_segment_notes", columnDefinition = "TEXT")
     private String flightSegmentNotes;
 
-    @Column(name = "flight_seat", columnDefinition = "TEXT")
-    private String flightSeat;
+    @Column(name = "flight_seats", columnDefinition = "TEXT")
+    private String flightSeats;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
@@ -150,7 +150,7 @@ public class FlightSegment implements Serializable {
                 ", flightDuration='" + flightDuration + '\'' +
                 ", flightDistance='" + flightDistance + '\'' +
                 ", flightSegmentNotes='" + flightSegmentNotes + '\'' +
-                ", flightSeat='" + flightSeat + '\'' +
+                ", flightSeats='" + flightSeats + '\'' +
                 '}';
     }
 }

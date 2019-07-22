@@ -2,7 +2,7 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 
 <body>
-    <div th:fragment="next-up" class="nextUp-items-list">
+    <div th:fragment="next-up-items" class="nextUp-items-list">
         <div class="nextUp-trip-item" th:each="item, iter : ${nextUpItems}">
             <details class="trip-item-details">
                 <summary class="details-small">

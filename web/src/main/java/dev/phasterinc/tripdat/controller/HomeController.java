@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -73,16 +74,17 @@ public class HomeController {
         List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.get3UpcomingTripsByUserIdOrderByDateAsc(user.getUserId());
         List<String> formattedDateStrings = tripItemWrapperService.getFormattedDateStrings(tripsInAscendingOrder);
         List<String> durationOfTrips = tripItemWrapperService.getDurationOfTrips(tripsInAscendingOrder);
-
+        // TODO: What happens when Trip has no trip items yet? Must handle this null exception
+        TripdatTrip nextTrip;
+        List<TripItemWrapper> nextUpItems = new ArrayList<>();
+        if(!tripsInAscendingOrder.isEmpty()) {
+            nextTrip = tripsInAscendingOrder.get(0);
+            nextUpItems = tripItemWrapperService.getNextUpItemsInItemWrapper(nextTrip);
+            tripItemWrapperService.orderItemWrappersByAscDateAndTime(nextUpItems);
+        }
         model.addAttribute("trips", tripsInAscendingOrder);
         model.addAttribute("formattedDateStrings", formattedDateStrings);
         model.addAttribute("durationOfTrips", durationOfTrips);
-        // TODO: What happens when Trip has no trip items yet? Must handle this null exception
-        TripdatTrip nextTrip = tripsInAscendingOrder.get(0);
-
-        List<TripItemWrapper> nextUpItems = tripItemWrapperService.getNextUpItemsInItemWrapper(nextTrip);
-        tripItemWrapperService.orderItemWrappersByAscDateAndTime(nextUpItems);
-
         model.addAttribute("nextUpItems", nextUpItems);
 
         return ViewNames.USER_INDEX;

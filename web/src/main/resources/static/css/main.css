@@ -145,7 +145,6 @@ div.container {
     grid-template-columns: 75%;
 }
 
-
 .card-group {
     display: inline;
 }
@@ -156,9 +155,13 @@ div.content {
     grid-column-gap: 25px;
 }
 
-.next-up {
+.next-up-items {
     grid-column-start: 2;
     grid-column-end: 3;
+}
+.no-trips {
+    margin-left: auto;
+    margin-right: auto;
 }
 .trip-footer-action {
     display: flex;
@@ -545,8 +548,6 @@ details.trip-settings summary.gear-summary {
     margin-left: 5px;
     background-size: 100% 100%;
 
-
-
 }
 details.trip-settings > div.trip-settings-modal {
 
@@ -586,12 +587,50 @@ div.trip-settings-modal::before {
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
     border-bottom: 15px solid black;
-
-
 }
 div.trip-settings-modal p {
     margin: 0;
     padding: 0;
+}
+
+details.add-plan-details summary.add-plan-summary {
+    border-radius: 5px;
+    margin-left: 5px;
+    background-size: 100% 100%;
+}
+details.add-plan-details > div.add-plan-modal {
+    max-height: 500vh;
+    max-width: 500vw;
+    position: absolute;
+    margin-top: 12px;
+    right:50%;
+    left:.5%;
+    height: 100%;
+    width: 100%;
+    z-index: 999;
+    animation-name: fadein;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+    background-color: #d1d5da;
+    border-radius: 3px;
+    font-size: 2em;
+    font-weight: bold;
+    font-family: Arial;
+    box-shadow: 5px 5px 5px rgba(1,1,1,1);
+    border: 1px solid black;
+}
+
+div.add-plan-modal p {
+    margin: 0;
+    padding: 0;
+}
+
+summary.add-plan-summary{
+    font-size: 1rem;
+    font-weight: 400;
+    color: dodgerblue;
+    display:flex;
+    text-align: left;
 }
 
 a.trip-settings-link {

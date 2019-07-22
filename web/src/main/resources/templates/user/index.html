@@ -42,22 +42,34 @@
                         </div>
                     </div>
                 </div>
-                <div class="next-up">
+                <div class="next-up-items" th:object="${trips}">
                     <div class="card">
                         <div class="card-header container-dark">
-                            <p th:text="${'next up: ' +trips.get(0).getTripName()}">Next up: </p>
+                            <p th:if="*{!isEmpty()}" th:text="*{'next up: ' + get(0).tripName}">Next up: </p>
+                            <p th:class="no-trips" th:if="*{isEmpty()}" th:text="${'No Trips Planned!'}"></p>
                         </div>
                         <div class="card-body">
                             <div class="list-group list-group-flush">
-                                <div th:include="~{fragments/next-up::next-up}" th:with="nextUpItems=${nextUpItems}, tripId=${trips.get(0).getTripId()}" class="trip-items-list">
+                                <div th:if="${!trips.isEmpty() && !nextUpItems.isEmpty()}" th:include="~{fragments/next-up-items::next-up-items}" th:with="nextUpItems=${nextUpItems}, tripId=*{get(0).tripId}" class="trip-items-list">
                                 </div>
                             </div>
                         </div>
                         <div class="card-footer trip-footer-action">
-                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" class="card-link" th:text="'Add a Plan'" >Trip</a>
-                            <span class="separator"></span>
-                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${trips.get(0).getTripId()})}" class="card-link" th:text="'See Full Trip'">See all trips</a>
-                        </div>
+                            <!-- Add a Plan Modal -->
+                            <div th:id="add-plan-container">
+                                <div th:id="add-plan">
+                                    <details class="add-plan-details">
+                                        <summary th:class="add-plan-summary" th:text="${'Add a Plan'}"></summary>
+                                        <div class="add-plan-modal">
+                                            <div th:class="add-plan-header" th:text="${'Add a plan'}">
+                                            </div>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                            <a th:if="*{isEmpty()}" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" class="card-link" th:text="'Create a Trip'">Trip</a>
+                            <span th:if="*{!isEmpty()}" class="separator"></span>
+                            <a th:if="*{!isEmpty()}" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=*{get(0).tripId})}" class="card-link" th:text="'See Full Trip'">See Full Trip</a>
                     </div>
                 </div>
             </div>
