@@ -1,6 +1,7 @@
 package dev.phasterinc.tripdat.model.dto;
 
 
+import dev.phasterinc.tripdat.model.FlightSegment;
 import lombok.Builder;
 import lombok.Data;
 
@@ -65,5 +66,36 @@ public class FlightSegmentDto {
 
     private String seat;
 
+    public static FlightSegmentDto buildDto(FlightSegment flightSegment) {
+
+        return FlightSegmentDto.builder()
+                .id(flightSegment.getFlightSegmentId())
+                .airlineName(flightSegment.getAirlineName())
+                .flightNumber(flightSegment.getFlightNumber())
+                .ticketNumber(flightSegment.getFlightTicketNumber())
+                .departureAirport(flightSegment.getFlightDepartureAirport())
+                .departureDate(flightSegment.getFlightDepartureDate())
+                .departureTime(flightSegment.getFlightDepartureTime())
+                .departureTerminal(flightSegment.getFlightDepartureTerminal())
+                .departureGate(flightSegment.getFlightDepartureGate())
+                .arrivalAirport(flightSegment.getFlightArrivalAirport())
+                .arrivalDate(flightSegment.getFlightArrivalDate())
+                .arrivalTime(flightSegment.getFlightArrivalTime())
+                .arrivalTerminal(flightSegment.getFlightArrivalTerminal())
+                .arrivalGate(flightSegment.getFlightArrivalGate())
+                .fareClass(flightSegment.getFlightFareClass())
+                .meal(flightSegment.getFlightMeal())
+                .baggageClaim(flightSegment.getFlightBaggageClaim())
+                .entertainment(flightSegment.getFlightEntertainment())
+                .onTimePercentage(flightSegment.getFlightOnTimePercentage())
+                .aircraftType(flightSegment.getFlightAircraftType())
+                .operatingFlightNumber(flightSegment.getOperatingFlightNumber())
+                .operatedBy(flightSegment.getFlightOperatedBy())
+                .stops(flightSegment.getFlightStops())
+                .duration(flightSegment.getFlightDuration())
+                .distance(flightSegment.getFlightDistance())
+                .segmentNotes(flightSegment.getFlightSegmentNotes())
+                .seat(flightSegment.getFlightSeats()).build();
+    }
 
 }

@@ -593,45 +593,6 @@ div.trip-settings-modal p {
     padding: 0;
 }
 
-details.add-plan-details summary.add-plan-summary {
-    border-radius: 5px;
-    margin-left: 5px;
-    background-size: 100% 100%;
-}
-details.add-plan-details > div.add-plan-modal {
-    max-height: 500vh;
-    max-width: 500vw;
-    position: absolute;
-    margin-top: 12px;
-    right:50%;
-    left:.5%;
-    height: 100%;
-    width: 100%;
-    z-index: 999;
-    animation-name: fadein;
-    animation-duration: 300ms;
-    animation-timing-function: ease-in-out;
-    background-color: #d1d5da;
-    border-radius: 3px;
-    font-size: 2em;
-    font-weight: bold;
-    font-family: Arial;
-    box-shadow: 5px 5px 5px rgba(1,1,1,1);
-    border: 1px solid black;
-}
-
-div.add-plan-modal p {
-    margin: 0;
-    padding: 0;
-}
-
-summary.add-plan-summary{
-    font-size: 1rem;
-    font-weight: 400;
-    color: dodgerblue;
-    display:flex;
-    text-align: left;
-}
 
 a.trip-settings-link {
     font-size: 14px;
@@ -661,8 +622,8 @@ a.trip-settings-link {
 
 }
 
-/*
-    Styling for the trip-content of the details page
+/*trip-content-details
+    Styling for the trip-content of the trip details page
 */
 #trip-item-list {
 
@@ -979,6 +940,76 @@ div.other-trip-details {
 .airline-info {
     display:flex;
     justify-content: space-between;
+}
+/*
+    add-plan-modal
+    Add Plan to Trip Modal styles
+*/
+
+.add-plan-modal-header {
+    padding: 10px 0 10px 10px;
+    border-bottom-color: #F5F4F4;
+    border-bottom: 1px solid;
+    justify-content: center;
+}
+details.add-plan-modal-details summary.add-plan-modal-summary {
+    border-radius: 5px;
+    margin-left: 5px;
+    background-size: 100% 100%;
+}
+details.add-plan-modal-details > div.add-plan-modal {
+    max-height: 500vh;
+    max-width: 500vw;
+    position: fixed;
+    margin-top: 12px;
+    right:50%;
+    left:40%;
+    height: 30%;
+    width: 30%;
+    z-index: 999;
+    animation-name: fadein;
+    animation-duration: 300ms;
+    animation-timing-function: ease-in-out;
+    background-color: #F5F4F4;
+    border-radius: 3px;
+    font-size: 2em;
+    font-weight: bold;
+    font-family: Arial;
+    box-shadow: 5px 5px 5px rgba(1,1,1,1);
+    border: 1px solid black;
+}
+
+div.add-plan-modal p {
+    margin: 0;
+    padding: 0;
+}
+
+summary.add-plan-modal-summary{
+    font-size: 1rem;
+    font-weight: 400;
+    color: dodgerblue;
+    display:flex;
+    text-align: left;
+}
+/*
+    items-table styles
+    Styles for the items-table in add-plan-modal
+ */
+.items-table {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+.transportation-items {
+    display:flex;
+    flex-direction: column;
+}
+.table-item {
+    font-size:12px;
+}
+.activity-items {
+    display: flex;
+    flex-direction: column;
 }
 
 

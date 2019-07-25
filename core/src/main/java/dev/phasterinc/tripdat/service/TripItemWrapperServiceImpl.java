@@ -158,7 +158,7 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
      * Algorithm:
       *      Step 1: declare and initialize items, a List of type TripdatTripItems and itemWrappers, a List of TripItemWrapper
      *      Step 2: for each TripItem item in items
-     *      Step 3:    if item.itemTypeCode is of CruiseInformation, FlightInformation, Rail or GeneralTransportation
+     *      Step 3:    if item.itemTypeCode is of CruiseInformation, Flight, Rail or GeneralTransportation
      *      Step 4:       if item has any segments.
      *      Step 6:                create a TripItemWrapper
      *      Step 5:            for each segment
@@ -180,7 +180,7 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                 // flightInformation
                 case "F":
                     // Do Stuff for flight
-                    FlightInformation flightInfo = (FlightInformation) item;
+                    Flight flightInfo = (Flight) item;
 
                     // for each segment in flightInfo.flightSegments
                     for(FlightSegment segment : flightInfo.getFlightSegments()) {

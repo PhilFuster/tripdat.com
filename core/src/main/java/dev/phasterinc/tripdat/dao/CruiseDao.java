@@ -1,6 +1,6 @@
 package dev.phasterinc.tripdat.dao;
 
-import dev.phasterinc.tripdat.model.CruiseInformation;
+import dev.phasterinc.tripdat.model.Cruise;
 
 /************************************************************
  * Name:  Philip Fuster                                     *
@@ -10,9 +10,9 @@ import dev.phasterinc.tripdat.model.CruiseInformation;
  ************************************************************/
 
 /**
- * Name: CruiseInformationDao - Dao object for cruise_information table in db
+ * Name: CruiseDao - Dao object for cruise_information table in db
  *
  */
-public interface CruiseInformationDao extends IGenericDao<CruiseInformation> {
+public interface CruiseDao extends IGenericDao<Cruise> {
 
 }

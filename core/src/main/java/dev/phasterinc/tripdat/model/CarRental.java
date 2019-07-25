@@ -81,7 +81,7 @@ public class CarRental extends TripdatTripItem implements Serializable {
 
     public CarRental() {
         System.out.println("CarRental Item type set");
-        super.setTripItemType("A");
+        super.setTripItemType("CR");
     }
 
 

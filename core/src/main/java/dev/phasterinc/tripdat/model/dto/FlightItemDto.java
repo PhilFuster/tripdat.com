@@ -42,5 +42,25 @@ public class FlightItemDto {
 
     private List<FlightSegmentDto> segmentDtos;
 
+    public static FlightItemDto buildDto(Flight flight, List<FlightSegmentDto> segmentsDto ) {
+        FlightItemDto flightItemDto;
+        List<FlightSegment>  flightSegments= flight.getFlightSegments();
+
+
+
+        flightItemDto = FlightItemDto.builder().itemNote(flight.getTripItemNote())
+                .itemPhotoLink(flight.getTripItemPhotoLink())
+                .attendees(flight.getAttendees())
+                .travelAgency(flight.getTravelAgency())
+                .supplier(flight.getSupplier())
+                .bookingDetail(flight.getBookingDetail())
+                .tripItemType(flight.getTripItemType())
+                .confirmationNumber(flight.getFlightConfirmationNumber())
+                .segmentDtos(segmentsDto)
+                .itemId(flight.getTripItemId())
+                .build();
+        return flightItemDto;
+    }
+
 
 }

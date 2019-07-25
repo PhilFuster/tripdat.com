@@ -1,5 +1,8 @@
 package dev.phasterinc.tripdat.model;
 
+import dev.phasterinc.tripdat.model.dto.FlightItemDto;
+import dev.phasterinc.tripdat.model.dto.FlightSegmentDto;
+import lombok.Builder;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import java.time.LocalTime;
 
 @Entity(name = "FlightSegment")
 @Table(name = "flight_segment")
+@Builder
 @Data
 public class FlightSegment implements Serializable {
 
@@ -102,7 +106,7 @@ public class FlightSegment implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
-    private FlightInformation flightInformation;
+    private Flight flight;
 
     @Override
     public boolean equals(Object o) {

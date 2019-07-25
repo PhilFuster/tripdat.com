@@ -18,14 +18,14 @@ import java.util.List;
  ************************************************************/
 
 /**
- * Name: CruiseInformation - model cruise_information table in db. Extends TripdatTripItem and implements Serializable
+ * Name: Cruise - model cruise_information table in db. Extends TripdatTripItem and implements Serializable
  *
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Entity(name = "CruiseInformation")
-@Table(name = "cruise_information")
-public class CruiseInformation extends TripdatTripItem implements Serializable {
+@Entity(name = "Cruise")
+@Table(name = "cruise")
+public class Cruise extends TripdatTripItem implements Serializable {
     // == fields ==
     @Column(name = "cruise_line_name", columnDefinition = "TEXT")
     private String cruiseLineName;
@@ -76,7 +76,7 @@ public class CruiseInformation extends TripdatTripItem implements Serializable {
     private String cruiseDiningInformation;
 
     @OneToMany(
-            mappedBy = "cruiseInformation",
+            mappedBy = "cruise",
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
@@ -86,11 +86,11 @@ public class CruiseInformation extends TripdatTripItem implements Serializable {
     // == public methods ==
     public void addStop(CruiseStop stop) {
         cruiseStops.add(stop);
-        stop.setCruiseInformation(this);
+        stop.setCruise(this);
     }
 
     public void removeStop(CruiseStop stop) {
         cruiseStops.remove(stop);
-        stop.setCruiseInformation(null);
+        stop.setCruise(null);
     }
 }

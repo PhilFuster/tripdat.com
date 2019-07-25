@@ -1,5 +1,6 @@
 package dev.phasterinc.tripdat.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.LazyCollection;
@@ -18,22 +19,23 @@ import java.util.List;
  ************************************************************/
 
 /**
- * Name: FlightInformation - model flight_information table in db
+ * Name: Flight - model flight_information table in db
  *
  *
  */
+@Builder
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Entity(name = "FlightInformation")
-@Table(name = "flight_information")
-public class FlightInformation extends TripdatTripItem implements Serializable {
+@Entity(name = "Flight")
+@Table(name = "flight")
+public class Flight extends TripdatTripItem implements Serializable {
 
     // == fields ==
     @Column(name = "flight_confirmation_number", columnDefinition = "TEXT")
     private String flightConfirmationNumber;
 
     @OneToMany(
-     mappedBy = "flightInformation",
+     mappedBy = "flight",
      cascade = CascadeType.ALL,
      orphanRemoval = true
     )
@@ -49,14 +51,14 @@ public class FlightInformation extends TripdatTripItem implements Serializable {
 
     @Override
     public String toString() {
-        return "FlightInformation{" +
+        return "Flight{" +
                 "flightConfirmationNumber='" + flightConfirmationNumber + '\'' +
                 ", flightSegments=" + flightSegments +
                 '}';
     }
 
-    public FlightInformation(){
+    /*public Flight(){
         super.setTripItemType("F");
-    }
+    }*/
 
 }

@@ -41,7 +41,7 @@ public class CruiseStop implements Serializable {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
-    private CruiseInformation cruiseInformation;
+    private Cruise cruise;
 
     @Override
     public boolean equals(Object o) {

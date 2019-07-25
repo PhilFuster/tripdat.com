@@ -56,17 +56,26 @@
                         </div>
                         <div class="card-footer trip-footer-action">
                             <!-- Add a Plan Modal -->
-                            <div th:id="add-plan-container">
-                                <div th:id="add-plan">
-                                    <details class="add-plan-details">
-                                        <summary th:class="add-plan-summary" th:text="${'Add a Plan'}"></summary>
-                                        <div class="add-plan-modal">
-                                            <div th:class="add-plan-header" th:text="${'Add a plan'}">
-                                            </div>
+
+                            <details class="add-plan-modal-details">
+                                <summary th:class="add-plan-modal-summary" th:text="*{'Add a Plan'}"></summary>
+                                <div class="add-plan-modal">
+                                    <h4 th:class="add-plan-modal-header" th:text="*{'Add a plan to ' + get(0).tripName}">
+                                    </h4>
+                                    <div th:class="items-table">
+                                        <h3 th:class="transportation-header" th:text="${'Transportation'}"></h3>
+                                        <h3 th:class="activities-header" th:text="${'Activities'}"></h3>
+                                        <div th:class="transportation-items">
+                                            <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="Flight"></a>
+                                            <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Car Rental'}"></a>
                                         </div>
-                                    </details>
+                                        <div th:class="activity-items">
+                                            <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Lodging'}"></a>
+                                            <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Restaurant'}"></a>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                            </details>
                             <a th:if="*{isEmpty()}" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" class="card-link" th:text="'Create a Trip'">Trip</a>
                             <span th:if="*{!isEmpty()}" class="separator"></span>
                             <a th:if="*{!isEmpty()}" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=*{get(0).tripId})}" class="card-link" th:text="'See Full Trip'">See Full Trip</a>
