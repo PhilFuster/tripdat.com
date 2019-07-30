@@ -24,7 +24,7 @@
                     <details class="trip-settings">
                         <summary class="gear-summary"></summary>
                         <div class="trip-settings-modal">
-                            <a th:class="|trip-settings-link|" th:text="|Edit Trip|" th:href="@{/trip/edit(trip.tripId)}">Edit Trip</a>
+                            <a th:class="|trip-settings-link|" th:text="|Edit Trip|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}">Edit Trip</a>
                             <p><a th:class="|trip-settings-link|" th:text="|Delete Trip|" th:href="@{/trip/delete(trip.tripId)}">Delete Trip</a></p>
                         </div>
                     </details>

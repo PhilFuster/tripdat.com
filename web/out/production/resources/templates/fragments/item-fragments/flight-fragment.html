@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <th:block th:fragment="flight-fragment(itemId)">
+    <th:block th:fragment="flight-fragment(itemId, tripId)">
         <div th:id="'trip-item-' + ${item.id}">
             <div th:class="|trip-item-object|">
                 <div th:class="|trip-item-row|">
@@ -92,7 +92,7 @@
                         <div th:class="|object-actions|">
                             <ul>
                                 <li>
-                                    <a th:text="|Edit|" th:h th:class="|edit-trip-item|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_FLIGHT}__(tripItemId=${item.id})}">
+                                    <a th:text="|Edit|" th:h th:class="|edit-trip-item|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_FLIGHT}__(tripItemId=${item.id}, tripId=${tripId})}">
                                         Edit
                                         <span th:class="|icon edit-icon|"></span>
                                     </a>

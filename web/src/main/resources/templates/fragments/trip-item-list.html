@@ -14,7 +14,7 @@
                         <!--Switch statement for determining which fragment to insert based on the tripItemTypeCode -->
                         <th:block th:switch="${item.tripItemTypeCode}">
                             <th:block th:case="F">
-                                <th:block th:include="~{fragments/item-fragments/flight-fragment::flight-fragment(${item.id})}">
+                                <th:block th:include="~{fragments/item-fragments/flight-fragment::flight-fragment(itemId=${item.id},tripId=${tripId})}">
                                 </th:block>
                             </th:block>
                         </th:block>

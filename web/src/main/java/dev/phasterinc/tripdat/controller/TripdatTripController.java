@@ -220,7 +220,7 @@ public class TripdatTripController {
                               @ModelAttribute("trip") @Valid TripDto tripDto, BindingResult result) {
         // Verify that start date is after end date
         // before anything else.
-        if (tripDto.getTripStartDate().isAfter(tripDto.getTripEndDate())) {
+        if (tripDto.getTripStartDate().isAfter(tripDto.getTripEndDate())  ) {
             result.rejectValue("tripStartDate", null,
                     "Start date must be before end date.");
             result.rejectValue("tripEndDate", null,
