@@ -332,16 +332,17 @@
                 <div th:class="other-item-details">
                     <h2 th:text="${'Who is going?'}"></h2>
                     <th:block th:each="attendee, iter : *{attendees}">
-                        <h1 th:style="|display:inline|" th:text="${'Passenger ' + (iter.index+1)}"></h1>
+                        <legend th:style="|display:inline|" th:text="${'Passenger ' + (iter.index+1)}"></legend>
                         <div th:class="Passenger">
+                            <button type="submit" name="removeAttendee" th:value="${iter.index}" th:text="|Delete|">Delete</button>
                             <div th:class="|form-group|"
                                  th:id="|attendeeName|">
                                 <label th:for="|attendeeName|" th:class="|control-label|">Full Name</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
-                                       th:field="*{attendees[__${iter.index}__].attendeeName}"/>
+                                       th:field="*{attendees[__${iter.index}__].name}"/>
                                 <p class="error-message alert alert-danger"
-                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].attendeeName')}"
+                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].name')}"
                                    th:text="${error}">Validation error</p>
                             </div>
                             <div th:class="|form-group|"
@@ -349,9 +350,9 @@
                                 <label th:for="|attendeeLoyaltyProgramNumber|" th:class="|control-label|">Frequent Flyer #</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
-                                       th:field="*{attendees[__${iter.index}__].attendeeLoyaltyProgramNumber}"/>
+                                       th:field="*{attendees[__${iter.index}__].loyaltyProgramNumber}"/>
                                 <p class="error-message alert alert-danger"
-                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].attendeeLoyaltyProgramNumber')}"
+                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].loyaltyProgramNumber')}"
                                    th:text="${error}">Validation error</p>
                             </div>
                             <div th:class="|form-group|"
@@ -359,13 +360,14 @@
                                 <label th:for="|attendeeTicketNumber|" th:class="|control-label|">Ticket #</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
-                                       th:field="*{attendees[__${iter.index}__].attendeeTicketNumber}"/>
+                                       th:field="*{attendees[__${iter.index}__].ticketNumber}"/>
                                 <p class="error-message alert alert-danger"
-                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].attendeeTicketNumber')}"
+                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].ticketNumber')}"
                                    th:text="${error}">Validation error</p>
                             </div>
                         </div>
                     </th:block>
+                    <a type="submit"  th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_FLIGHT}__(addAttendee=${flight.itemId})}" th:text="|Add|">Add</a>
                 </div>
                 <div th:class="|form-group|">
                     <button th:type="|submit|" th:class="|btn btn-success btn-sub|">Save</button>

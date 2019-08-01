@@ -22,13 +22,14 @@ import java.util.List;
 @Data
 public class FlightItemDto {
 
+
     private Long itemId;
 
     private String itemNote;
 
     private String itemPhotoLink;
 
-    private List<Attendee> attendees;
+    private List<AttendeeDto> attendees;
 
     private TravelAgency travelAgency;
 
@@ -42,21 +43,18 @@ public class FlightItemDto {
 
     private List<FlightSegmentDto> segmentDtos;
 
-    public static FlightItemDto buildDto(Flight flight, List<FlightSegmentDto> segmentsDto ) {
+    public static FlightItemDto buildDto(Flight flight, List<FlightSegmentDto> segmentDtos, List<AttendeeDto> attendeeDtos ) {
         FlightItemDto flightItemDto;
-        List<FlightSegment>  flightSegments= flight.getFlightSegments();
-
-
-
-        flightItemDto = FlightItemDto.builder().itemNote(flight.getTripItemNote())
+        flightItemDto = FlightItemDto.builder()
+                .itemNote(flight.getTripItemNote())
                 .itemPhotoLink(flight.getTripItemPhotoLink())
-                .attendees(flight.getAttendees())
+                .attendees(attendeeDtos)
                 .travelAgency(flight.getTravelAgency())
                 .supplier(flight.getSupplier())
                 .bookingDetail(flight.getBookingDetail())
                 .tripItemType(flight.getTripItemType())
                 .confirmationNumber(flight.getFlightConfirmationNumber())
-                .segmentDtos(segmentsDto)
+                .segmentDtos(segmentDtos)
                 .itemId(flight.getTripItemId())
                 .build();
         return flightItemDto;

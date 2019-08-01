@@ -6,6 +6,7 @@ import dev.phasterinc.tripdat.model.Attendee;
 import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.FlightSegment;
 import dev.phasterinc.tripdat.model.TripdatTripItem;
+import dev.phasterinc.tripdat.model.dto.AttendeeDto;
 import dev.phasterinc.tripdat.model.dto.FlightItemDto;
 import dev.phasterinc.tripdat.model.dto.FlightSegmentDto;
 import dev.phasterinc.tripdat.service.TripItemWrapperService;
@@ -59,6 +60,37 @@ public class FlightItemController {
 
 
     // == model attributes ==
+
+    /**
+     * Name: flightItemDto
+     * Purpose: Creates a flightItemDto to be used when editing/creating a Flight
+     * @param model - model to send to the frontend
+     * @param tripItemId - Id of the tripItem if editing an existing trip
+     * @param tripId - Id of the Trip used to get back to the trip Details when done
+     *               editing/creating an item
+     * Algorithm:
+     *               1. Declare variables being used
+     *               2. Initialize Dto lists
+     *               3. If creating a trip
+     *               4.   Initialize the flightItemDto
+     *               5. else editing a trip
+     *               6.   Find the Entity being edited
+     *               7.   get the flightSegments
+     *               8.   If flightSegments is empty
+     *               9.     add two segmentDtos to list segmentDtos
+     *               10.  else flightSegments not empty
+     *               11.    for each segment in flightSegments
+     *               12.      create a flightSegmentDto
+     *               13.      insert dto into list segmentDtos
+     *               14.  get list of Attendees from flight
+     *               15.  if attendees is empty
+     *               16.    add an AttendeeDto to list attendeeDtos
+     *               17.  else attendees not empty
+     *               18.    call AttendeeDto's static function buildDtoList
+     *               19.  set flightItemDto by calling FlightItemDto's static function buildDto
+     *               20. add tripId Attribute to model
+     *               21. add flightItemDto to model
+     */
     @ModelAttribute
     public void flightItemDto(Model model, @RequestParam(defaultValue = "-1", required = false) Long tripItemId,
                               @RequestParam(defaultValue = "-1", required = false) Long tripId) {
@@ -66,24 +98,28 @@ public class FlightItemController {
         List<FlightSegment> flightSegments;
         TripdatTripItem tripItem;
         Flight flight;
-        List<FlightSegmentDto> segmentDtos = new ArrayList<>();
         FlightSegmentDto segmentDto1;
         FlightSegmentDto segmentDto2;
+        List<Attendee> attendees;
+        List<FlightSegmentDto> segmentDtos = new ArrayList<>();
+        List<AttendeeDto> attendeeDtos = new ArrayList<>();
         // Creating a trip
         if(tripItemId < 0) {
-            flightItemDto = FlightItemDto.builder().attendees(new ArrayList<Attendee>()).build();
+            flightItemDto = FlightItemDto.builder().attendees(new ArrayList<AttendeeDto>()).build();
             segmentDto1 = FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build();
             segmentDto2 = FlightSegmentDto.builder().build();
             segmentDtos.add(segmentDto1);
             segmentDtos.add(segmentDto2);
             flightItemDto.setSegmentDtos(segmentDtos);
-            flightItemDto.getAttendees().add(new Attendee());
-            // TODO: edit when deicision is made about attendeeDto
+            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
         } else {
+            // editing a trip
+            //
             // find tripItem
             tripItem = tripItemService.findByItemId(tripItemId);
             flight = (Flight) tripItem;
             flightSegments = flight.getFlightSegments();
+            // No Flight segments for this trip? Add two.
             if(flightSegments.isEmpty()) {
                 segmentDto1 = FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build();
                 segmentDto2 = FlightSegmentDto.builder().build();
@@ -95,8 +131,13 @@ public class FlightItemController {
                     segmentDtos.add(flightSegmentDto);
                 }
             }
-            // TODO: add an attendee if none. Will revisit when decision about attendeeDto is made..
-            flightItemDto = FlightItemDto.buildDto(flight, segmentDtos);
+            attendees = flight.getAttendees();
+            if (attendees.isEmpty()) {
+                attendeeDtos.add(AttendeeDto.builder().build());
+            } else {
+                attendeeDtos = AttendeeDto.buildDtoList(attendees);
+            }
+            flightItemDto = FlightItemDto.buildDto(flight, segmentDtos, attendeeDtos);
         }
         log.info("FlightDto: {}", flightItemDto);
         model.addAttribute("tripId", tripId);
@@ -110,7 +151,6 @@ public class FlightItemController {
     public String showFlightItemForm(Model model, @RequestParam(required = false, defaultValue = "-1") Long tripItemId) {
         // == local variables ==
         // the Trip
-
         String title;
         String pageDescription;
         String header;
@@ -160,27 +200,38 @@ public class FlightItemController {
                 return itemId != -1 ? ViewNames.EDIT_TRIP : ViewNames.CREATE_TRIP;
             }
         }
-        return "redirect:" + ViewNames.TRIP_DETAILS;
+
+        return "redirect:" + ViewNames.TRIP_DETAILS + "/" + tripId.toString();
     }
 
 
     /**
-     * addAttendee
-     * @param flightItemDto
-     * @param bindingResult
-     * @return
+     * name: addAttendee
+     * Purpose: Add an attendee to the FlightItemDto and
+     * @param flightItemDto - flight being edited
+     * @param bindingResult - results
+     * @return returns User to the editFlight view
      */
     @RequestMapping(value = {Mappings.EDIT_FLIGHT}, params = {"addAttendee"})
-    public String addAttendee(final FlightItemDto flightItemDto,  final BindingResult bindingResult) {
-       flightItemDto.getAttendees().add(new Attendee()) ;
+    public String addAttendee(@ModelAttribute("flight") @Valid FlightItemDto flightDto,  final BindingResult bindingResult,@RequestParam(required = false, defaultValue = "-1") Long addAttendee) {
+       flightDto.getAttendees().add(AttendeeDto.builder().build());
        return ViewNames.EDIT_FLIGHT;
     }
 
-
+    /**
+     * name: removeAttendee
+     * purpose: Function will remove the attendee from the DTO list
+     * @param flightItemDto - flightItemDto, used to remove the Attendee from the list of attendees it has
+     * @param bindingResult
+     * @param req
+     * @return
+     */
     @RequestMapping(value = {Mappings.EDIT_FLIGHT}, params = {"removeAttendee"})
-    public String removeAttendee(final FlightItemDto flightItemDto,  final BindingResult bindingResult, final HttpServletRequest req) {
-        final Long attendeeId = Long.valueOf(req.getParameter("removeAttendee"));
-
+    public String removeAttendee(@ModelAttribute("flight") @Valid FlightItemDto flightDto,  final BindingResult bindingResult, @RequestParam(required = false, defaultValue = "-1") Long itemId,
+                                 @RequestParam(required = false, defaultValue = "-1") Long removeAttendee, final HttpServletRequest req) {
+        final Long rowId = Long.valueOf(req.getParameter("removeAttendee"));
+        List<AttendeeDto> dtos = flightDto.getAttendees();
+        dtos.remove(rowId.intValue());
         return ViewNames.EDIT_FLIGHT;
     }
 
