@@ -6,9 +6,7 @@ import dev.phasterinc.tripdat.model.Attendee;
 import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.FlightSegment;
 import dev.phasterinc.tripdat.model.TripdatTripItem;
-import dev.phasterinc.tripdat.model.dto.AttendeeDto;
-import dev.phasterinc.tripdat.model.dto.FlightItemDto;
-import dev.phasterinc.tripdat.model.dto.FlightSegmentDto;
+import dev.phasterinc.tripdat.model.dto.*;
 import dev.phasterinc.tripdat.service.TripItemWrapperService;
 import dev.phasterinc.tripdat.service.TripdatTripItemService;
 import dev.phasterinc.tripdat.service.TripdatTripService;
@@ -98,20 +96,24 @@ public class FlightItemController {
         List<FlightSegment> flightSegments;
         TripdatTripItem tripItem;
         Flight flight;
-        FlightSegmentDto segmentDto1;
-        FlightSegmentDto segmentDto2;
         List<Attendee> attendees;
         List<FlightSegmentDto> segmentDtos = new ArrayList<>();
         List<AttendeeDto> attendeeDtos = new ArrayList<>();
         // Creating a trip
         if(tripItemId < 0) {
             flightItemDto = FlightItemDto.builder().attendees(new ArrayList<AttendeeDto>()).build();
-            segmentDto1 = FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build();
-            segmentDto2 = FlightSegmentDto.builder().build();
-            segmentDtos.add(segmentDto1);
-            segmentDtos.add(segmentDto2);
+            segmentDtos.add(FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build());
+            segmentDtos.add(FlightSegmentDto.builder().build());
+            segmentDtos.add(FlightSegmentDto.builder().build());
+            segmentDtos.add(FlightSegmentDto.builder().build());
             flightItemDto.setSegmentDtos(segmentDtos);
             flightItemDto.getAttendees().add(AttendeeDto.builder().build());
+            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
+            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
+            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
+            model.addAttribute("travelAgency", TravelAgencyDto.builder().build());
+            model.addAttribute("supplier", SupplierDto.builder().build());
+            model.addAttribute("bookingDetail", BookingDetailDto.builder().build());
         } else {
             // editing a trip
             //
@@ -121,23 +123,31 @@ public class FlightItemController {
             flightSegments = flight.getFlightSegments();
             // No Flight segments for this trip? Add two.
             if(flightSegments.isEmpty()) {
-                segmentDto1 = FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build();
-                segmentDto2 = FlightSegmentDto.builder().build();
-                segmentDtos.add(segmentDto1);
-                segmentDtos.add(segmentDto2);
+                segmentDtos.add(FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build());
+                segmentDtos.add(FlightSegmentDto.builder().build());
+                segmentDtos.add(FlightSegmentDto.builder().build());
+                segmentDtos.add(FlightSegmentDto.builder().build());
             } else {
                 for(FlightSegment segment: flightSegments) {
                     FlightSegmentDto flightSegmentDto = FlightSegmentDto.buildDto(segment);
                     segmentDtos.add(flightSegmentDto);
                 }
+                segmentDtos.add(FlightSegmentDto.builder().build());
+                segmentDtos.add(FlightSegmentDto.builder().build());
             }
             attendees = flight.getAttendees();
             if (attendees.isEmpty()) {
                 attendeeDtos.add(AttendeeDto.builder().build());
+                attendeeDtos.add(AttendeeDto.builder().build());
             } else {
                 attendeeDtos = AttendeeDto.buildDtoList(attendees);
+                attendeeDtos.add(AttendeeDto.builder().build());
+                attendeeDtos.add(AttendeeDto.builder().build());
             }
             flightItemDto = FlightItemDto.buildDto(flight, segmentDtos, attendeeDtos);
+            model.addAttribute("travelAgency", TravelAgencyDto.buildDto(flight.getTravelAgency()));
+            model.addAttribute("supplier", SupplierDto.buildDto(flight.getSupplier()));
+            model.addAttribute("bookingDetail", BookingDetailDto.buildDto(flight.getBookingDetail()));
         }
         log.info("FlightDto: {}", flightItemDto);
         model.addAttribute("tripId", tripId);
@@ -205,34 +215,5 @@ public class FlightItemController {
     }
 
 
-    /**
-     * name: addAttendee
-     * Purpose: Add an attendee to the FlightItemDto and
-     * @param flightItemDto - flight being edited
-     * @param bindingResult - results
-     * @return returns User to the editFlight view
-     */
-    @RequestMapping(value = {Mappings.EDIT_FLIGHT}, params = {"addAttendee"})
-    public String addAttendee(@ModelAttribute("flight") @Valid FlightItemDto flightDto,  final BindingResult bindingResult,@RequestParam(required = false, defaultValue = "-1") Long addAttendee) {
-       flightDto.getAttendees().add(AttendeeDto.builder().build());
-       return ViewNames.EDIT_FLIGHT;
-    }
-
-    /**
-     * name: removeAttendee
-     * purpose: Function will remove the attendee from the DTO list
-     * @param flightItemDto - flightItemDto, used to remove the Attendee from the list of attendees it has
-     * @param bindingResult
-     * @param req
-     * @return
-     */
-    @RequestMapping(value = {Mappings.EDIT_FLIGHT}, params = {"removeAttendee"})
-    public String removeAttendee(@ModelAttribute("flight") @Valid FlightItemDto flightDto,  final BindingResult bindingResult, @RequestParam(required = false, defaultValue = "-1") Long itemId,
-                                 @RequestParam(required = false, defaultValue = "-1") Long removeAttendee, final HttpServletRequest req) {
-        final Long rowId = Long.valueOf(req.getParameter("removeAttendee"));
-        List<AttendeeDto> dtos = flightDto.getAttendees();
-        dtos.remove(rowId.intValue());
-        return ViewNames.EDIT_FLIGHT;
-    }
 
 }

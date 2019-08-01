@@ -24,8 +24,7 @@ public class BookingDetail implements Serializable {
 
     // == field ==
     @Id
-    @Column(name = "trip_item_id")
-    private Long tripItemId;
+    private Long id;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
@@ -59,7 +58,7 @@ public class BookingDetail implements Serializable {
     @Override
     public String toString() {
         return "BookingDetail{" +
-                "tripItemId=" + tripItemId +
+                "id=" + id +
                 ", bookingSiteName='" + bookingSiteName + '\'' +
                 ", bookingSiteUrl='" + bookingSiteUrl + '\'' +
                 ", bookingDate=" + bookingDate +

@@ -31,11 +31,6 @@ public class FlightItemDto {
 
     private List<AttendeeDto> attendees;
 
-    private TravelAgency travelAgency;
-
-    private Supplier supplier;
-
-    private BookingDetail bookingDetail;
 
     private String tripItemType;
 
@@ -49,9 +44,6 @@ public class FlightItemDto {
                 .itemNote(flight.getTripItemNote())
                 .itemPhotoLink(flight.getTripItemPhotoLink())
                 .attendees(attendeeDtos)
-                .travelAgency(flight.getTravelAgency())
-                .supplier(flight.getSupplier())
-                .bookingDetail(flight.getBookingDetail())
                 .tripItemType(flight.getTripItemType())
                 .confirmationNumber(flight.getFlightConfirmationNumber())
                 .segmentDtos(segmentDtos)

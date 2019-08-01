@@ -31,7 +31,7 @@
                 </div>
                 <!-- Segments -->
                 <th:block th:each="segment, iter : *{segmentDtos}">
-                    <details th:open="true">
+                    <details th:open="${iter.index == 0?true:false}">
                         <summary><h1 th:style="|display:inline|" th:text="${'flight ' + (iter.index+1)}"></h1></summary>
                         <div th:class="${'segment' + segment.id}">
                             <div th:class="${'airline-info'}">
@@ -58,7 +58,7 @@
                                 <div th:class="|form-group|"
                                      th:id="|departureDate|">
                                     <label th:for="|departureDate|" th:class="|control-label|"th:text="|Departure Date|" >Departure Date</label>
-                                    <input th:type="text"
+                                    <input th:type="date"
                                            th:class="|form-control|"
                                            th:field="*{segmentDtos[__${iter.index}__].departureDate}"/>
                                     <p class="error-message alert alert-danger"
@@ -67,7 +67,7 @@
                                 </div>
                                 <div th:class="|form-group|"
                                      th:id="|seat|">
-                                    <label th:for="|departureDate|" th:class="|control-label|" th:text="|Seats|">Seats</label>
+                                    <label th:for="|seat|" th:class="|control-label|" th:text="|Seats|">Seats</label>
                                     <input th:type="text"
                                            th:class="|form-control|"
                                            th:field="*{segmentDtos[__${iter.index}__].seat}"/>
@@ -159,7 +159,7 @@
                                     <div th:class="|form-group|"
                                          th:id="|arrivalDate|">
                                         <label th:for="|arrivalDate|" th:class="|control-label|" th:text="|Arrival Date|">Arrival Time</label>
-                                        <input th:type="text"
+                                        <input th:type="date"
                                                th:class="|form-control|"
                                                th:field="*{segmentDtos[__${iter.index}__].arrivalDate}"/>
                                         <p class="error-message alert alert-danger"
@@ -330,44 +330,196 @@
                 </th:block>
                 <!-- Other Item Details -->
                 <div th:class="other-item-details">
+                    <!-- Attendees -->
                     <h2 th:text="${'Who is going?'}"></h2>
                     <th:block th:each="attendee, iter : *{attendees}">
-                        <legend th:style="|display:inline|" th:text="${'Passenger ' + (iter.index+1)}"></legend>
-                        <div th:class="Passenger">
-                            <button type="submit" name="removeAttendee" th:value="${iter.index}" th:text="|Delete|">Delete</button>
+                        <details th:open="${iter.index == 0?true:false}">
+                            <summary><h1 th:style="|display:inline|" th:text="${'Passenger ' + (iter.index+1)}"></h1></summary>
+                            <div th:class="passenger">
+                                <div th:class="|form-group|"
+                                     th:id="|attendeeName|">
+                                    <label th:for="|attendeeName|" th:class="|control-label|">Full Name</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{attendees[__${iter.index}__].name}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('attendees[__${iter.index}__].name')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|attendeeLoyaltyProgramNumber|">
+                                    <label th:for="|attendeeLoyaltyProgramNumber|" th:class="|control-label|">Frequent Flyer #</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{attendees[__${iter.index}__].loyaltyProgramNumber}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('attendees[__${iter.index}__].loyaltyProgramNumber')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|attendeeTicketNumber|">
+                                    <label th:for="|attendeeTicketNumber|" th:class="|control-label|">Ticket #</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{attendees[__${iter.index}__].ticketNumber}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('attendees[__${iter.index}__].ticketNumber')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                        </details>
+                    </th:block>
+                    <!-- Reservation Details -->
+                    <div th:class="reservation-details-form">
+                        <h1 th:text="|Who is your travel agent?|">Who is your travel agent?</h1>
+                        <div th:class="travel-agency-form">
                             <div th:class="|form-group|"
-                                 th:id="|attendeeName|">
-                                <label th:for="|attendeeName|" th:class="|control-label|">Full Name</label>
+                                 th:id="|agencyName|">
+                                <label th:for="|agencyName|" th:class="|control-label|">Travel Agency Name</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
-                                       th:field="*{attendees[__${iter.index}__].name}"/>
-                                <p class="error-message alert alert-danger"
-                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].name')}"
-                                   th:text="${error}">Validation error</p>
+                                       th:field="${travelAgency.agencyName}"/>
                             </div>
                             <div th:class="|form-group|"
-                                 th:id="|attendeeLoyaltyProgramNumber|">
-                                <label th:for="|attendeeLoyaltyProgramNumber|" th:class="|control-label|">Frequent Flyer #</label>
+                                 th:id="|url|">
+                                <label th:for="|url|" th:class="|control-label|">Travel Agency URL</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
-                                       th:field="*{attendees[__${iter.index}__].loyaltyProgramNumber}"/>
-                                <p class="error-message alert alert-danger"
-                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].loyaltyProgramNumber')}"
-                                   th:text="${error}">Validation error</p>
+                                       th:field="${travelAgency.url}"/>
                             </div>
                             <div th:class="|form-group|"
-                                 th:id="|attendeeTicketNumber|">
-                                <label th:for="|attendeeTicketNumber|" th:class="|control-label|">Ticket #</label>
+                                 th:id="|confirmationNumber|">
+                                <label th:for="|confirmationNumber|" th:class="|control-label|">Travel Agency Confirmation #</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
-                                       th:field="*{attendees[__${iter.index}__].ticketNumber}"/>
-                                <p class="error-message alert alert-danger"
-                                   th:each="error: *{#fields.errors('attendees[__${iter.index}__].ticketNumber')}"
-                                   th:text="${error}">Validation error</p>
+                                       th:field="${travelAgency.confirmationNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|contactName|">
+                                <label th:for="|contactName|" th:class="|control-label|">Travel Agency Contact</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${travelAgency.contactName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|phoneNumber|">
+                                <label th:for="|phoneNumber|" th:class="|control-label|">Travel Agency Phone</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${travelAgency.phoneNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|email|">
+                                <label th:for="|email|" th:class="|control-label|">Agency Email</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${travelAgency.email}"/>
                             </div>
                         </div>
-                    </th:block>
-                    <a type="submit"  th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_FLIGHT}__(addAttendee=${flight.itemId})}" th:text="|Add|">Add</a>
+                        <!-- Supplier Info -->
+                        <h1 th:text="|How can you contact the supplier?|">How can you contact the supplier?</h1>
+                        <div th:class="supplier-form">
+                            <div th:class="|form-group|"
+                                 th:id="|supplierName|">
+                                <label th:for="|supplierName|" th:class="|control-label|">Supplier Name</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${supplier.supplierName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierUrl|">
+                                <label th:for="|supplierUrl|" th:class="|control-label|">Supplier URL</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${supplier.url}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierConfirmationNumber|">
+                                <label th:for="|supplierConfirmationNumber|" th:class="|control-label|">Supplier Confirmation #</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${supplier.confirmationNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierContactName|">
+                                <label th:for="|supplierContactName|" th:class="|control-label|">Supplier Contact</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${supplier.contactName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierPhoneNumber|">
+                                <label th:for="|supplierPhoneNumber|" th:class="|control-label|">Supplier Phone</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${supplier.phoneNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierEmail|">
+                                <label th:for="|supplierEmail|" th:class="|control-label|">Supplier Email</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${supplier.email}"/>
+                            </div>
+                        </div>
+                        <!-- BookingDetail Info -->
+                        <h1 th:text="|Where did you reserve it?|">Where did you reserve it?</h1>
+                        <div th:class="booking-detail-form">
+                            <div th:class="|form-group|"
+                                 th:id="|siteName|">
+                                <label th:for="|siteName|" th:class="|control-label|">Booking Site Name</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.siteName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingUrl|">
+                                <label th:for="|bookingUrl|" th:class="|control-label|">Booking Site URL</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.url}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|referenceNumber|">
+                                <label th:for="|referenceNumber|" th:class="|control-label|">Booking Reference #</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.referenceNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingSiteEmail|">
+                                <label th:for="|bookingSiteEmail|" th:class="|control-label|">Booking Site Email</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.email}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingSitePhoneNumber|">
+                                <label th:for="|bookingSitePhoneNumber|" th:class="|control-label|">Booking Site Phone</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.phoneNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingDate|">
+                                <label th:for="|bookingDate|" th:class="|control-label|">Booking Date</label>
+                                <input th:type="date"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.bookingDate}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|totalCost|">
+                                <label th:for="|totalCost|" th:class="|control-label|">Total Cost</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="${bookingDetail.totalCost}"/>
+                            </div>
+                            <div th:class="|form-group|">
+                                <label th:for="${#ids.next('isPurchased')}" th:text="|Reservation is Purchased|">Reservation is Purchased</label>
+                                <input type="checkbox" th:field="${bookingDetail.isPurchased}"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div th:class="|form-group|">
                     <button th:type="|submit|" th:class="|btn btn-success btn-sub|">Save</button>
