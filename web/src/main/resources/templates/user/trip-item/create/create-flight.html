@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <div th:class="|edit-item-header|">
+            <div th:insert="~{fragments/date-header::date-header(${header})}" ></div>
+            <p th:text="${pageDescription}"></p>
+        </div>
+        <main th:class="edit-item-main">
+            <h2 th:class="|section-header|" th:text="|How are you traveling?|"></h2>
+            <form action="#" th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_FLIGHT}__(itemId=${flight.itemId}, tripId=${flight.tripId})}" th:object="${flight}"   method="post">
+                <p class="error-message alert alert-danger"
+                   th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}"
+                   th:text="${error}">Validation error</p>
+                <div th:class="|form-group|"
+                     th:id="|confirmation-number|">
+                    <label th:for="|confirmationNumber|" th:class="|control-label|">Confirmation #</label>
+                    <input th:type="text"
+                           th:class="|form-control|"
+                           th:field="*{confirmationNumber}"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error: *{#fields.errors('confirmationNumber')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <!-- Segments -->
+                <th:block th:each="segment, iter : *{segmentDtos}">
+                    <details th:open="${iter.index == 0?true:false}">
+                        <summary th:class="|inline-summary|">
+                            <h1 th:style="|display:inline|" th:text="'Flight ' + ${iter.index + 1}"></h1>
+                            <div th:class="|form-group inline-checkbox|"
+                                 th:id="'isToBeDeleted' + ${iter.index}">
+                                <label th:style="|display:inline|" th:for="${#ids.next('isToBeDeleted')}" th:class="|control-label|">Delete?</label>
+                                <input th:type="checkbox"
+                                       th:class="|form-control inline-input|"
+                                       th:style="|display:inline|"
+                                       th:field="*{segmentDtos[__${iter.index}__].isToBeDeleted}"/>
+                            </div>
+                        </summary>
+                        <div th:class="'segmentDtos' + ${iter.index}">
+                            <div th:class="${'airline-info'}">
+                                <div th:class="|form-group|"
+                                     th:id="|airlineName|">
+                                    <label th:for="|airlineName|" th:class="|control-label|">Airline</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{segmentDtos[__${iter.index}__].airlineName}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].airlineName')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|flightNumber|">
+                                    <label th:for="|flightNumber|" th:class="|control-label|" th:text="|Flight #|">Flight #</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{segmentDtos[__${iter.index}__].flightNumber}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].flightNumber')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|departureDate|">
+                                    <label th:for="|departureDate|" th:class="|control-label|"th:text="|Departure Date|" >Departure Date</label>
+                                    <input th:type="date"
+                                           th:class="|form-control|"
+                                           th:field="*{segmentDtos[__${iter.index}__].departureDate}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].departureDate')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|seat|">
+                                    <label th:for="|seat|" th:class="|control-label|" th:text="|Seats|">Seats</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{segmentDtos[__${iter.index}__].seat}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].seat')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                            <!-- Departure Details -->
+                            <details>
+                                <summary><h2 th:style="|display:inline|" th:text="|Departure|"></h2></summary>
+                                <div th:class="${'departure-details'}">
+                                    <div th:class="|form-group|"
+                                         th:id="|departureAirport|">
+                                        <label th:for="|departureAirport|" th:class="|control-label|" th:text="|From (city or airport)|">departure airport</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].departureAirport}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].departureAirport')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|departureTerminal|">
+                                        <label th:for="|departureTerminal|" th:class="|control-label|" th:text="|Terminal|">Terminal</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].departureTerminal}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].departureTerminal')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|departureGate|">
+                                        <label th:for="|departureGate|" th:class="|control-label|" th:text="|Gate|">Gate</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].departureGate}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].departureGate')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|departureTime|">
+                                        <label th:for="|departureTime|" th:class="|control-label|" th:text="|Departure Time|">Departure Time</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].departureTime}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].departureTime')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                </div>
+                            </details>
+                            <!-- Arrival Details -->
+                            <details>
+                                <summary><h2 th:style="|display:inline|" th:text="|Arrival|"></h2></summary>
+                                <div th:class="${'arrival-details'}">
+                                    <div th:class="|form-group|"
+                                         th:id="|arrivalAirport|">
+                                        <label th:for="|arrivalAirport|" th:class="|control-label|" th:text="|To (city or airport)|">arrival airport</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].arrivalAirport}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].arrivalAirport')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|arrivalTerminal|">
+                                        <label th:for="|arrivalTerminal|" th:class="|control-label|" th:text="|Terminal|">Terminal</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].arrivalTerminal}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].arrivalTerminal')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|arrivalGate|">
+                                        <label th:for="|arrivalGate|" th:class="|control-label|" th:text="|Gate|">Gate</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].arrivalGate}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].arrivalGate')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|arrivalDate|">
+                                        <label th:for="|arrivalDate|" th:class="|control-label|" th:text="|Arrival Date|">Arrival Time</label>
+                                        <input th:type="date"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].arrivalDate}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].arrivalDate')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                    <div th:class="|form-group|"
+                                         th:id="|arrivalTime|">
+                                        <label th:for="|arrivalTime|" th:class="|control-label|" th:text="|Arrival Time|">Arrival Time</label>
+                                        <input th:type="text"
+                                               th:class="|form-control|"
+                                               th:field="*{segmentDtos[__${iter.index}__].arrivalTime}"/>
+                                        <p class="error-message alert alert-danger"
+                                           th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].arrivalTime')}"
+                                           th:text="${error}">Validation error</p>
+                                    </div>
+                                </div>
+                            </details>
+
+                            <!-- Other segment details -->
+
+                            <div th:class="|other-flight-details|">
+                                <details>
+                                    <summary><h2 th:style="|display:inline|" th:text="|Service|"></h2></summary>
+                                    <div th:class="|service-details|">
+                                        <div th:class="|form-group|"
+                                             th:id="|fareClass|">
+                                            <label th:for="|fareClass|" th:class="|control-label|" th:text="|Fare class|">Fare class</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].fareClass}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].fareClass')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|meal|">
+                                            <label th:for="|flightMeal|" th:class="|control-label|" th:text="|Meal|">Meal</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].meal}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].meal')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|baggageClaim|">
+                                            <label th:for="|baggageClaim|" th:class="|control-label|" th:text="|Baggage claim|">Baggage claim</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].baggageClaim}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].baggageClaim')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|entertainment|">
+                                            <label th:for="|entertainment|" th:class="|control-label|" th:text="|Entertainment|">Entertainment</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].entertainment}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].entertainment')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|onTimePercentage|">
+                                            <label th:for="|onTimePercentage|" th:class="|control-label|" th:text="|On-time %|">On-time %</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].onTimePercentage}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].onTimePercentage')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                    </div>
+                                </details>
+                                <details>
+                                    <summary><h2 th:style="|display:inline|" th:text="|Aircraft|"></h2></summary>
+                                    <div th:class="|aircraft-details|">
+                                        <div th:class="|form-group|"
+                                             th:id="|aircraftType|">
+                                            <label th:for="|aircraftType|" th:class="|control-label|" th:text="|Aircraft|">Aircraft</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].aircraftType}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].aircraftType')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|aircraftType|">
+                                            <label th:for="|operatingFlightNumber|" th:class="|control-label|" th:text="|Operating Flight #|">Operating Flight Number</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].operatingFlightNumber}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].operatingFlightNumber')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|operatedBy|">
+                                            <label th:for="|operatedBy|" th:class="|control-label|" th:text="|Operated By|">Operated By</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].operatedBy}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].operatedBy')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                    </div>
+                                </details>
+                                <!-- Time and Distance -->
+                                <details>
+                                    <summary><h2 th:style="|display:inline|" th:text="|Time and distance|">Time and distance</h2></summary>
+                                    <div th:class="|time-and-distance|">
+                                        <div th:class="|form-group|"
+                                             th:id="|stops|">
+                                            <label th:for="|stops|" th:class="|control-label|" th:text="|Stops|">Stops</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].stops}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].stops')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|duration|">
+                                            <label th:for="|duration|" th:class="|control-label|" th:text="|Duration|">duration</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].duration}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].duration')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                        <div th:class="|form-group|"
+                                             th:id="|distance|">
+                                            <label th:for="|distance|" th:class="|control-label|" th:text="|Distance|">distance</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].distance}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].distance')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                    </div>
+                                </details>
+                                <!-- Segment Notes -->
+                                <details>
+                                    <summary><h2 th:style="|display:inline|" th:text="|Segment Notes|">segment Notes</h2></summary>
+                                    <div th:class="|segmentNotes|">
+                                        <div th:class="|form-group|"
+                                             th:id="|segmentNotes|">
+                                            <label th:for="|distance|" th:class="|control-label|" th:text="|Segment Notes|">segment Notes</label>
+                                            <input th:type="text"
+                                                   th:class="|form-control|"
+                                                   th:field="*{segmentDtos[__${iter.index}__].segmentNotes}"/>
+                                            <p class="error-message alert alert-danger"
+                                               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].segmentNotes')}"
+                                               th:text="${error}">Validation error</p>
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </details>
+                </th:block>
+                <!-- Other Item Details -->
+                <div th:class="other-item-details">
+                    <!-- Attendees -->
+                    <h2 th:class="|section-header|" th:text="${'Who is going?'}"></h2>
+                    <th:block th:each="attendee, iter : *{attendees}">
+                        <details th:open="${iter.index == 0?true:false}">
+                            <summary th:class="|inline-summary|">
+                                <h1 th:style="|display:inline|" th:text="'Passenger ' + ${iter.index + 1}"></h1>
+                                <div th:class="|form-group inline-checkbox|"
+                                     th:id="'isAttendeeToBeDeleted' + ${iter.index}">
+                                    <label th:style="|display:inline|"  th:for="'isAttendeeToBeDeleted' + ${iter.index}" th:class="|control-label|">Delete?</label>
+                                    <input th:type="checkbox"
+                                           th:class="|form-control inline-input|"
+                                           th:field="*{attendees[__${iter.index}__].isAttendeeToBeDeleted}"/>
+                                </div>
+                            </summary>
+                            <div th:class="passenger">
+                                <div th:class="|form-group|"
+                                     th:id="|attendeeName|">
+                                    <label th:for="|attendeeName|" th:class="|control-label|">Full Name</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{attendees[__${iter.index}__].name}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('attendees[__${iter.index}__].name')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|attendeeLoyaltyProgramNumber|">
+                                    <label th:for="|attendeeLoyaltyProgramNumber|" th:class="|control-label|">Frequent Flyer #</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{attendees[__${iter.index}__].loyaltyProgramNumber}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('attendees[__${iter.index}__].loyaltyProgramNumber')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                                <div th:class="|form-group|"
+                                     th:id="|attendeeTicketNumber|">
+                                    <label th:for="|attendeeTicketNumber|" th:class="|control-label|">Ticket #</label>
+                                    <input th:type="text"
+                                           th:class="|form-control|"
+                                           th:field="*{attendees[__${iter.index}__].ticketNumber}"/>
+                                    <p class="error-message alert alert-danger"
+                                       th:each="error: *{#fields.errors('attendees[__${iter.index}__].ticketNumber')}"
+                                       th:text="${error}">Validation error</p>
+                                </div>
+                            </div>
+                        </details>
+                    </th:block>
+                    <!-- Reservation Details -->
+                    <div th:class="reservation-details-form">
+                        <h1 th:text="|Who is your travel agent?|">Who is your travel agent?</h1>
+                        <div th:class="travel-agency-form">
+                            <div th:class="|form-group|"
+                                 th:id="|agencyName|">
+                                <label th:for="|agencyName|" th:class="|control-label|">Travel Agency Name</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{travelAgencyDto.agencyName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|url|">
+                                <label th:for="|url|" th:class="|control-label|">Travel Agency URL</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{travelAgencyDto.url}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|confirmationNumber|">
+                                <label th:for="|confirmationNumber|" th:class="|control-label|">Travel Agency Confirmation #</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{travelAgencyDto.confirmationNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|contactName|">
+                                <label th:for="|contactName|" th:class="|control-label|">Travel Agency Contact</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{travelAgencyDto.contactName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|phoneNumber|">
+                                <label th:for="|phoneNumber|" th:class="|control-label|">Travel Agency Phone</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{travelAgencyDto.phoneNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|email|">
+                                <label th:for="|email|" th:class="|control-label|">Agency Email</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{travelAgencyDto.email}"/>
+                            </div>
+                        </div>
+                        <!-- Supplier Info -->
+                        <h1 th:text="|How can you contact the supplier?|">How can you contact the supplier?</h1>
+                        <div th:class="supplier-form">
+                            <div th:class="|form-group|"
+                                 th:id="|supplierName|">
+                                <label th:for="|supplierName|" th:class="|control-label|">Supplier Name</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{supplierDto.supplierName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierUrl|">
+                                <label th:for="|supplierUrl|" th:class="|control-label|">Supplier URL</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{supplierDto.url}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierConfirmationNumber|">
+                                <label th:for="|supplierConfirmationNumber|" th:class="|control-label|">Supplier Confirmation #</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{supplierDto.confirmationNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierContactName|">
+                                <label th:for="|supplierContactName|" th:class="|control-label|">Supplier Contact</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{supplierDto.contactName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierPhoneNumber|">
+                                <label th:for="|supplierPhoneNumber|" th:class="|control-label|">Supplier Phone</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{supplierDto.phoneNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|supplierEmail|">
+                                <label th:for="|supplierEmail|" th:class="|control-label|">Supplier Email</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{supplierDto.email}"/>
+                            </div>
+                        </div>
+                        <!-- BookingDetail Info -->
+                        <h1 th:text="|Where did you reserve it?|">Where did you reserve it?</h1>
+                        <div th:class="booking-detail-form">
+                            <div th:class="|form-group|"
+                                 th:id="|siteName|">
+                                <label th:for="|siteName|" th:class="|control-label|">Booking Site Name</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.siteName}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingUrl|">
+                                <label th:for="|bookingUrl|" th:class="|control-label|">Booking Site URL</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.url}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|referenceNumber|">
+                                <label th:for="|referenceNumber|" th:class="|control-label|">Booking Reference #</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.referenceNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingSiteEmail|">
+                                <label th:for="|bookingSiteEmail|" th:class="|control-label|">Booking Site Email</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.email}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingSitePhoneNumber|">
+                                <label th:for="|bookingSitePhoneNumber|" th:class="|control-label|">Booking Site Phone</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.phoneNumber}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|bookingDate|">
+                                <label th:for="|bookingDate|" th:class="|control-label|">Booking Date</label>
+                                <input th:type="date"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.bookingDate}"/>
+                            </div>
+                            <div th:class="|form-group|"
+                                 th:id="|totalCost|">
+                                <label th:for="|totalCost|" th:class="|control-label|">Total Cost</label>
+                                <input th:type="text"
+                                       th:class="|form-control|"
+                                       th:field="*{bookingDetailDto.totalCost}"/>
+                            </div>
+                            <div th:class="|form-group|">
+                                <label th:for="${#ids.next('isPurchased')}" th:text="|Reservation is Purchased|">Reservation is Purchased</label>
+                                <input type="checkbox" th:field="*{bookingDetailDto.isPurchased}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div th:class="|form-group|">
+                    <button th:type="|submit|" th:class="|btn btn-success btn-sub|">Save</button>
+                    <button th:name="|cancel|" th:value="|cancel|" th:type="|cancel|" th:class="|btn btn-danger btn-cancel|">Cancel</button>
+                </div>
+            </form>
+        </main>
+
+    </div>
+
+</body>
+</html>
