@@ -195,6 +195,29 @@ public class TripdatTripServiceImpl implements TripdatTripService{
         }
         return false;
     }
+
+    /**
+     * name: isNewItemDateRangeConflictingWithPreExistingItems
+     * Purpose: Check new item's date range does not conflict with pre-existing items in Trip.
+     * @param items - List of TripItemWrapper, items of a Trip
+     * @param startDate - startDate of new Item
+     * @param endDate - endDate of new Item
+     * @return boolean - true if conflict, false if not
+     *  Algorithm:
+     *              1.
+     */
+    @Override
+    public boolean isNewItemDateRangeConflictingWithPreExistingItems(List<TripItemWrapper> items, LocalDate startDate, LocalDate endDate, Long itemId) {
+        // Remeber you have functionality for creating a Map of ordered TripItemWrappers.
+        // It is ordered down to the day and time. One possible way to check for overlap is to
+        // get the list of items on the newStartDate.Iterate through and see if there is an item scheduled for that time.
+        // if that is the case then there is overlap.
+        for(TripItemWrapper item : items) {
+            if(item.getId() == itemId) continue;
+        }
+        return false;
+    }
+
     /**
      *  Name: isTripItemOutOfTripDateRange
      *  Purpose: To abstract the conditional that is a little hard to read

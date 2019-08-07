@@ -4,6 +4,7 @@ import dev.phasterinc.tripdat.model.TripItemWrapper;
 import dev.phasterinc.tripdat.model.TripdatTrip;
 import dev.phasterinc.tripdat.model.dto.TripDto;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
 
@@ -31,4 +32,5 @@ public interface TripdatTripService {
     void createUpcomingAndPastTripsCollections(Set<TripdatTrip> trips, Set<TripdatTrip> upcoming, Set<TripdatTrip> past);
     boolean checkForTripDateConflict(TripDto tripDto, Long userId);
     boolean isTripItemsOutOfNewTripDateRange(TripDto tripDto, List<TripItemWrapper> items);
+    boolean isNewItemDateRangeConflictingWithPreExistingItems(List<TripItemWrapper> items, LocalDate startDate, LocalDate endDate, Long itemId);
 }

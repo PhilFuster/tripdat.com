@@ -1,11 +1,9 @@
 package dev.phasterinc.tripdat.controller;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
+import com.sun.rowset.internal.Row;
 import dev.phasterinc.tripdat.factory.TripdatTripItemFactory;
-import dev.phasterinc.tripdat.model.Attendee;
-import dev.phasterinc.tripdat.model.Flight;
-import dev.phasterinc.tripdat.model.FlightSegment;
-import dev.phasterinc.tripdat.model.TripdatTripItem;
+import dev.phasterinc.tripdat.model.*;
 import dev.phasterinc.tripdat.model.dto.*;
 import dev.phasterinc.tripdat.service.TripItemWrapperService;
 import dev.phasterinc.tripdat.service.TripdatTripItemService;
@@ -41,6 +39,7 @@ import java.util.List;
 @Slf4j
 @Controller
 @ControllerAdvice
+@SessionAttributes({"flight","tripId"})
 public class FlightItemController {
     // == fields ==
     private TripdatTripService tripService;
@@ -62,7 +61,6 @@ public class FlightItemController {
     /**
      * Name: flightItemDto
      * Purpose: Creates a flightItemDto to be used when editing/creating a Flight
-     * @param model - model to send to the frontend
      * @param tripItemId - Id of the tripItem if editing an existing trip
      * @param tripId - Id of the Trip used to get back to the trip Details when done
      *               editing/creating an item
@@ -89,9 +87,12 @@ public class FlightItemController {
      *               20. add tripId Attribute to model
      *               21. add flightItemDto to model
      */
-    @ModelAttribute
-    public void flightItemDto(Model model, @RequestParam(defaultValue = "-1", required = false) Long tripItemId,
+    @ModelAttribute("flight")
+    public FlightItemDto flightItemDto(@RequestParam(defaultValue = "-1", required = false) Long tripItemId,
                               @RequestParam(defaultValue = "-1", required = false) Long tripId) {
+        if(tripId == -1) {
+            log.info("No TripId Passed to flightItemController");
+        }
         FlightItemDto flightItemDto;
         List<FlightSegment> flightSegments;
         TripdatTripItem tripItem;
@@ -100,9 +101,16 @@ public class FlightItemController {
         List<FlightSegmentDto> segmentDtos = new ArrayList<>();
         List<AttendeeDto> attendeeDtos = new ArrayList<>();
         // Creating a trip
-        if(tripItemId < 0) {
-            flightItemDto = FlightItemDto.builder().attendees(new ArrayList<AttendeeDto>()).build();
-            segmentDtos.add(FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build());
+        boolean creatingTrip = tripItemId < 0;
+        if(creatingTrip) {
+            flightItemDto = FlightItemDto.builder()
+                    .itemId((long) -1)
+                    .attendees(new ArrayList<AttendeeDto>())
+                    .travelAgencyDto(TravelAgencyDto.builder().build())
+                    .supplierDto(SupplierDto.builder().build())
+                    .bookingDetailDto(BookingDetailDto.builder().build())
+                    .build();
+            segmentDtos.add(FlightSegmentDto.builder().build());
             segmentDtos.add(FlightSegmentDto.builder().build());
             segmentDtos.add(FlightSegmentDto.builder().build());
             segmentDtos.add(FlightSegmentDto.builder().build());
@@ -111,9 +119,7 @@ public class FlightItemController {
             flightItemDto.getAttendees().add(AttendeeDto.builder().build());
             flightItemDto.getAttendees().add(AttendeeDto.builder().build());
             flightItemDto.getAttendees().add(AttendeeDto.builder().build());
-            model.addAttribute("travelAgency", TravelAgencyDto.builder().build());
-            model.addAttribute("supplier", SupplierDto.builder().build());
-            model.addAttribute("bookingDetail", BookingDetailDto.builder().build());
+            flightItemDto.setTripId(tripId);
         } else {
             // editing a trip
             //
@@ -132,53 +138,37 @@ public class FlightItemController {
                     FlightSegmentDto flightSegmentDto = FlightSegmentDto.buildDto(segment);
                     segmentDtos.add(flightSegmentDto);
                 }
+                // adding two more FlightSegmentDtos so user can add if they want
                 segmentDtos.add(FlightSegmentDto.builder().build());
                 segmentDtos.add(FlightSegmentDto.builder().build());
             }
             attendees = flight.getAttendees();
+            // populate attendees if empty
             if (attendees.isEmpty()) {
                 attendeeDtos.add(AttendeeDto.builder().build());
                 attendeeDtos.add(AttendeeDto.builder().build());
             } else {
+                // Build AttendeeDtos list with attendees from Flight
                 attendeeDtos = AttendeeDto.buildDtoList(attendees);
+                // Add two more for user's use.
                 attendeeDtos.add(AttendeeDto.builder().build());
                 attendeeDtos.add(AttendeeDto.builder().build());
             }
             flightItemDto = FlightItemDto.buildDto(flight, segmentDtos, attendeeDtos);
-            model.addAttribute("travelAgency", TravelAgencyDto.buildDto(flight.getTravelAgency()));
-            model.addAttribute("supplier", SupplierDto.buildDto(flight.getSupplier()));
-            model.addAttribute("bookingDetail", BookingDetailDto.buildDto(flight.getBookingDetail()));
         }
         log.info("FlightDto: {}", flightItemDto);
-        model.addAttribute("tripId", tripId);
-        model.addAttribute("flight", flightItemDto);
+        return flightItemDto;
     }
     /**
      * Name: showFlightItemForm
      * Purpose: Display a form for a Flight trip Item to the user to edit or create a new Flight
      */
     @GetMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT})
-    public String showFlightItemForm(Model model, @RequestParam(required = false, defaultValue = "-1") Long tripItemId) {
+    public String showFlightItemForm(Model model,
+                                     @RequestParam(required = false, defaultValue = "-1") Long tripItemId,
+                                     @ModelAttribute("flight") FlightItemDto flight) {
         // == local variables ==
-        // the Trip
-        String title;
-        String pageDescription;
-        String header;
-        // if not creating a new item
-        // find it in DB and create a wrapper from the wrapper list
-        if(tripItemId == -1) {
-            title = "Create Flight";
-            header = "Create a Flight";
-            pageDescription = "Here you can enter your flight details";
-        } else {
-            title = "Edit Flight";
-            pageDescription = "Here you can edit flight details";
-            header = "Edit a Flight";
-        }
-        model.addAttribute("header", header);
-        model.addAttribute("title", title);
-        model.addAttribute("pageDescription", pageDescription);
-        return ViewNames.EDIT_FLIGHT;
+        return tripItemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
     }
 
     /**
@@ -195,25 +185,42 @@ public class FlightItemController {
      *               5. If no conflicts, update/create item.
      */
     @RequestMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT}, method = RequestMethod.POST, params = {"itemId"})
-    public String processFlight(@ModelAttribute("flight") @Valid FlightItemDto flightDto,
+    public String processFlight(@ModelAttribute("flight") FlightItemDto flightDto,
                                 @RequestParam(required = false, defaultValue = "-1") Long itemId,
                                 @RequestParam Long tripId, BindingResult result) {
         log.info("TripId passed to processFlight: {}", tripId.toString());
+        log.info("flightDto: {} ", flightDto);
+        TripdatTrip trip = tripService.findOne(tripId);
+        LocalDate tripStartDate = trip.getTripStartDate();
+        LocalDate tripEndDate = trip.getTripEndDate();
         // Verify that each segment's start date is not after the item's end date
-        for(FlightSegmentDto segmentDto: flightDto.getSegmentDtos()) {
-            // DepartureDate cannot be after arrival Date
-            if(segmentDto.getDepartureDate() != null && segmentDto.getDepartureDate().isAfter(segmentDto.getArrivalDate())) {
-                result.rejectValue("departureDate", null,
-                        "Start date must be before end date.");
-                result.rejectValue("tripEndDate", null,
-                        "End date must be after start date.");
-                return itemId != -1 ? ViewNames.EDIT_TRIP : ViewNames.CREATE_TRIP;
+        for(int i = 0; i < flightDto.getSegmentDtos().size();++i) {
+            FlightSegmentDto segmentDto = flightDto.getSegmentDtos().get(i);
+
+            boolean isDateRangeNull = (segmentDto.getDepartureDate() == null || segmentDto.getArrivalDate() == null);
+            if (!isDateRangeNull) {
+                //
+                // DepartureDate cannot be after arrival Date
+                if( segmentDto.getDepartureDate().isAfter(segmentDto.getArrivalDate())) {
+                    result.rejectValue("segmentDtos[" + i + "].departureDate", null,
+                            "Start date must be before end date.");
+                    result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
+                            "End date must be after start date.");
+                }
+                // Segment must be within Trips date range
+                if(segmentDto.getDepartureDate().isAfter(tripStartDate) || segmentDto.getArrivalDate().isAfter(tripEndDate)) {
+                    result.rejectValue("segmentDtos[" + i + "].departureDate", null,
+                            "Date does not fall within Trip date range.");
+                    result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
+                            "Date does not fall within Trip date range.");
+                }
+                // Segment cannot have conflicting date with other trip Items
+
+            }
+            if (result.hasErrors()) {
+                return  itemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
             }
         }
-
         return "redirect:" + ViewNames.TRIP_DETAILS + "/" + tripId.toString();
     }
-
-
-
 }

@@ -30,6 +30,8 @@ public class AttendeeDto {
 
     private String ticketNumber;
 
+    private Boolean isAttendeeToBeDeleted;
+
     public static List<AttendeeDto> buildDtoList(List<Attendee>attendees) {
         List<AttendeeDto> attendeeDtos = new ArrayList<>();
         // build list of AttendeeDto with attendees from passed list of attendees
@@ -39,6 +41,7 @@ public class AttendeeDto {
                     .name(attendee.getAttendeeName())
                     .loyaltyProgramNumber(attendee.getAttendeeLoyaltyProgramNumber())
                     .ticketNumber(attendee.getAttendeeTicketNumber())
+                    .isAttendeeToBeDeleted(false)
                     .build();
             attendeeDtos.add(dto);
         }));

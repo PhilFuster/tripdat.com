@@ -4,6 +4,7 @@ package dev.phasterinc.tripdat.model.dto;
 import dev.phasterinc.tripdat.model.FlightSegment;
 import lombok.Builder;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -22,6 +23,7 @@ public class FlightSegmentDto {
 
     private String departureAirport;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
 
     private LocalTime departureTime;
@@ -32,6 +34,7 @@ public class FlightSegmentDto {
 
     private String arrivalAirport;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate arrivalDate;
 
     private LocalTime arrivalTime;
@@ -66,6 +69,8 @@ public class FlightSegmentDto {
 
     private String seat;
 
+    private Boolean isToBeDeleted;
+
     public static FlightSegmentDto buildDto(FlightSegment flightSegment) {
 
         return FlightSegmentDto.builder()
@@ -95,6 +100,7 @@ public class FlightSegmentDto {
                 .duration(flightSegment.getFlightDuration())
                 .distance(flightSegment.getFlightDistance())
                 .segmentNotes(flightSegment.getFlightSegmentNotes())
+                .isToBeDeleted(false)
                 .seat(flightSegment.getFlightSeats()).build();
     }
 

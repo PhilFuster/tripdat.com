@@ -25,18 +25,26 @@ public class FlightItemDto {
 
     private Long itemId;
 
+    private Long tripId;
+
     private String itemNote;
 
     private String itemPhotoLink;
 
     private List<AttendeeDto> attendees;
 
-
     private String tripItemType;
 
     private String confirmationNumber;
 
     private List<FlightSegmentDto> segmentDtos;
+
+    private TravelAgencyDto travelAgencyDto;
+
+    private SupplierDto supplierDto;
+
+    private BookingDetailDto bookingDetailDto;
+
 
     public static FlightItemDto buildDto(Flight flight, List<FlightSegmentDto> segmentDtos, List<AttendeeDto> attendeeDtos ) {
         FlightItemDto flightItemDto;
@@ -48,6 +56,10 @@ public class FlightItemDto {
                 .confirmationNumber(flight.getFlightConfirmationNumber())
                 .segmentDtos(segmentDtos)
                 .itemId(flight.getTripItemId())
+                .tripId(flight.getTripdatTrip().getTripId())
+                .travelAgencyDto(TravelAgencyDto.buildDto(flight.getTravelAgency()))
+                .supplierDto(SupplierDto.buildDto(flight.getSupplier()))
+                .bookingDetailDto(BookingDetailDto.buildDto(flight.getBookingDetail()))
                 .build();
         return flightItemDto;
     }

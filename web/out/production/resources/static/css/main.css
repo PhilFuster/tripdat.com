@@ -1018,7 +1018,30 @@ summary.add-plan-modal-summary{
 .passenger {
     display:flex;
     justify-content: space-between;
+}
 
+/*
+    Display Inline Checkbox
+*/
+.inline-checkbox {
+    display:flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.inline-input {
+    display:flex;
+    align-items: center;
+    width: auto !important;
+    margin-left: 5px;
+}
+
+.inline-summary {
+    display:flex;
+    justify-content: space-between;
+}
+
+.section-header {
+    margin-left: 20px;
 }
 
 
