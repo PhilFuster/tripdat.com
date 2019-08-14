@@ -43,6 +43,9 @@ public class CarRental extends TripdatTripItem implements Serializable {
     @Column(name = "car_rental_confirmation_number", columnDefinition = "TEXT")
     private String carRentalConfirmationNumber;
 
+    @Column(name = "car_rental_type", columnDefinition = "TEXT")
+    private String carRentalType;
+
     @Column(name = "car_rental_pick_up_date", columnDefinition = "DATE")
     private LocalDate carRentalPickUpDate;
 

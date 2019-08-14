@@ -110,10 +110,10 @@ public class FlightItemDto {
                 if(segmentDto.getIsToBeDeleted()) {
                     flight.removeSegment(segment);
                     flightDto.getSegmentDtos().remove(segmentDto);
+                } else {
+                    // Not removing segment, update segment
+                    FlightSegmentDto.updateEntity(segment,segmentDto);
                 }
-                // update segment
-                FlightSegmentDto.updateEntity(segment,segmentDto);
-                continue;
             } else {
                 /*
                  segment is not empty, and it is not a segment already in the
@@ -161,4 +161,40 @@ public class FlightItemDto {
         }
     }
 
+    public static Flight buildEntity(TripdatTrip trip, FlightItemDto flightDto) {
+        Flight flight =  Flight.builder()
+                .flightSegments(new ArrayList<>())
+                .build();
+        flight.setAttendees(new ArrayList<>());
+        flight.setTripdatTrip(trip);
+        // build other details
+        flight.setTravelAgency(TravelAgencyDto.buildEntity(flightDto.getTravelAgencyDto(), flight));
+        flight.setSupplier(SupplierDto.buildEntity(flightDto.getSupplierDto(),flight));
+        flight.setBookingDetail(BookingDetailDto.buildEntity(flightDto.getBookingDetailDto(),flight));
+        // build FlightSegments
+        for(FlightSegmentDto segmentDto:flightDto.getSegmentDtos()) {
+            if( segmentDto.isEmpty()) {
+                continue;
+            }
+
+            FlightSegment segment = FlightSegmentDto.buildEntity(segmentDto, (Flight) flight);
+            ((Flight) flight).getFlightSegments().add(segment);
+        }
+        // Build Attendees list
+        for(AttendeeDto attendeeDto: flightDto.getAttendees()) {
+            if(attendeeDto.isEmpty()) {
+                continue;
+            }
+            Attendee attendee = Attendee.builder()
+                    .tripItem(flight)
+                    .attendeeName(attendeeDto.getName())
+                    .attendeeLoyaltyProgramNumber(attendeeDto.getLoyaltyProgramNumber())
+                    .attendeeTicketNumber(attendeeDto.getTicketNumber())
+                    .build();
+            flight.getAttendees().add(attendee);
+        }
+
+        return flight;
+
+    }
 }

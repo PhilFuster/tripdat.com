@@ -10,6 +10,7 @@ import dev.phasterinc.tripdat.util.Mappings;
 import dev.phasterinc.tripdat.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -193,6 +194,7 @@ public class FlightItemController {
                                 @RequestParam Long tripId, BindingResult result) {
         log.info("TripId passed to processFlight: {}", tripId.toString());
         log.info("flightDto segmentId: {} ", flightDto.getSegmentDtos().get(0).getSegmentId());
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatTrip trip = tripService.findOne(tripId);
         LocalDate tripStartDate = trip.getTripStartDate();
         LocalDate tripEndDate = trip.getTripEndDate();
@@ -301,37 +303,8 @@ public class FlightItemController {
         // Create an entity from the flightItemDto
         TripdatTripItem flight;
         if(itemId == -1) {
-            flight = Flight.builder()
-                    .flightSegments(new ArrayList<>())
-                    .build();
-            flight.setAttendees(new ArrayList<>());
-            flight.setTripdatTrip(trip);
-            // build other details
-            flight.setTravelAgency(TravelAgencyDto.buildEntity(flightDto.getTravelAgencyDto(), flight));
-            flight.setSupplier(SupplierDto.buildEntity(flightDto.getSupplierDto(),flight));
-            flight.setBookingDetail(BookingDetailDto.buildEntity(flightDto.getBookingDetailDto(),flight));
-            // build FlightSegments
-            for(FlightSegmentDto segmentDto:flightDto.getSegmentDtos()) {
-                if( segmentDto.isEmpty()) {
-                    continue;
-                }
-
-                FlightSegment segment = FlightSegmentDto.buildEntity(segmentDto, (Flight) flight);
-                ((Flight) flight).getFlightSegments().add(segment);
-            }
-            // Build Attendees list
-            for(AttendeeDto attendeeDto: flightDto.getAttendees()) {
-                if(attendeeDto.isEmpty()) {
-                    continue;
-                }
-                Attendee attendee = Attendee.builder()
-                        .tripItem(flight)
-                        .attendeeName(attendeeDto.getName())
-                        .attendeeLoyaltyProgramNumber(attendeeDto.getLoyaltyProgramNumber())
-                        .attendeeTicketNumber(attendeeDto.getTicketNumber())
-                        .build();
-                flight.getAttendees().add(attendee);
-            }
+            flight = FlightItemDto.buildEntity(trip,flightDto);
+            flight.setUser(user.getTripdatUser());
             // create the flight
             tripItemService.create(flight);
         } else {

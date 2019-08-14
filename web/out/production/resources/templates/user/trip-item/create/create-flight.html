@@ -123,7 +123,7 @@
                                     <div th:class="|form-group|"
                                          th:id="|departureTime|">
                                         <label th:for="|departureTime|" th:class="|control-label|" th:text="|Departure Time|">Departure Time</label>
-                                        <input th:type="text"
+                                        <input th:type="time"
                                                th:class="|form-control|"
                                                th:field="*{segmentDtos[__${iter.index}__].departureTime}"/>
                                         <p class="error-message alert alert-danger"
@@ -168,7 +168,7 @@
                                     </div>
                                     <div th:class="|form-group|"
                                          th:id="|arrivalDate|">
-                                        <label th:for="|arrivalDate|" th:class="|control-label|" th:text="|Arrival Date|">Arrival Time</label>
+                                        <label th:for="|arrivalDate|" th:class="|control-label|" th:text="|Arrival Date|">Arrival Date</label>
                                         <input th:type="date"
                                                th:class="|form-control|"
                                                th:field="*{segmentDtos[__${iter.index}__].arrivalDate}"/>
@@ -179,7 +179,7 @@
                                     <div th:class="|form-group|"
                                          th:id="|arrivalTime|">
                                         <label th:for="|arrivalTime|" th:class="|control-label|" th:text="|Arrival Time|">Arrival Time</label>
-                                        <input th:type="text"
+                                        <input th:type="time"
                                                th:class="|form-control|"
                                                th:field="*{segmentDtos[__${iter.index}__].arrivalTime}"/>
                                         <p class="error-message alert alert-danger"

@@ -235,6 +235,24 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                 // Car Rental
                 case "CR" :
                     // do stuff for carRental
+                    CarRental rental = (CarRental) item;
+                    TripItemWrapper wrapper = TripItemWrapper.builder()
+                            .tripItemTypeCode(item.getType())
+                            .tripItem(CarRentalDto.buildDto(rental,AttendeeDto.buildDtoList(rental.getAttendees())))
+                            .startDate(rental.getCarRentalPickUpDate())
+                            .startTime(rental.getCarRentalPickUpTime())
+                            .confirmationNumber(rental.getCarRentalConfirmationNumber())
+                            .supplier(SupplierDto.buildDto(rental.getSupplier()))
+                            .travelAgency(TravelAgencyDto.buildDto(rental.getTravelAgency()))
+                            .bookingDetail(BookingDetailDto.buildDto(rental.getBookingDetail()))
+                            .id(item.getTripItemId())
+                            .notes(item.getTripItemNote())
+                            .endDate(rental.getCarRentalDropOffDate())
+                            .endTime(rental.getCarRentalDropOffTime())
+                            .attendees(AttendeeDto.buildDtoList(rental.getAttendees()))
+                            .build();
+
+                    itemWrappers.add(wrapper);
                     break;
                 // Lodging
                 case "L" :

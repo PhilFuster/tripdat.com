@@ -8,6 +8,7 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
+
 import dev.phasterinc.tripdat.model.dto.*;
 import lombok.*;
 
@@ -113,25 +114,43 @@ public class TripItemWrapper {
 
     public String getMainTitle() {
         StringBuilder builder = new StringBuilder();
-        if(tripItemTypeCode != null && tripItemTypeCode.equals("F")) {
-            FlightSegmentDto segment = (FlightSegmentDto) tripItem;
-            if(segment.getDepartureAirport() != null && segment.getArrivalAirport() !=  null) {
-                builder.append(segment.getDepartureAirport()).append(" to ").append("\n").append(segment.getArrivalAirport());
-            }
+
+        switch (tripItemTypeCode) {
+            case "F":
+                FlightSegmentDto segment = (FlightSegmentDto) tripItem;
+                if(segment.getDepartureAirport() != null && segment.getArrivalAirport() !=  null) {
+                    builder.append(segment.getDepartureAirport()).append(" to ").append("\n").append(segment.getArrivalAirport());
+                }
+                break;
+            case "CR":
+                CarRentalDto rental = (CarRentalDto) tripItem;
+                if(rental.getSupplierDto().getSupplierName() != null) {
+                    builder.append(rental.getSupplierDto().getSupplierName());
+                }
+                break;
         }
         return builder.toString();
     }
 
     public String getSubTitle() {
         StringBuilder builder = new StringBuilder();
-        if(tripItemTypeCode != null && tripItemTypeCode.equals("F")) {
-            FlightSegmentDto segment = (FlightSegmentDto) tripItem;
-            if(segment.getAirlineName()!= null) {
-                builder.append(segment.getAirlineName()).append(" ");
-            }
-            if(segment.getFlightNumber() != null) {
-                builder.append(segment.getFlightNumber());
-            }
+        switch (tripItemTypeCode) {
+            case "F":
+                FlightSegmentDto segment = (FlightSegmentDto) tripItem;
+                if(segment.getAirlineName()!= null) {
+                    builder.append(segment.getAirlineName()).append(" ");
+                }
+                if(segment.getFlightNumber() != null) {
+                    builder.append(segment.getFlightNumber());
+                }
+                break;
+            case "CR":
+                CarRentalDto rental = (CarRentalDto) tripItem;
+                if(rental.getPickUpLocationName() != null) {
+                    builder.append(rental.getPickUpLocationName());
+                }
+                break;
+
         }
         return builder.toString();
 
@@ -162,7 +181,7 @@ public class TripItemWrapper {
             // get minutes between starTime and endTime
             LocalTime startMins = LocalTime.of(0,startTime.getMinute());
             LocalTime endMins = LocalTime.of(0, endTime.getMinute());
-            String minutes = Long.toString( Duration.between(startMins, endMins).toMinutes());
+            String minutes = Long.toString(Math.abs(Duration.between(startMins, endMins).toMinutes()));
 
             // LocalTime localTime = LocalTime.of(Integer.parseInt(Long.toString(hours)), Integer.parseInt(Long.toString(minutes)));
             if(!hours.equals("0")) {

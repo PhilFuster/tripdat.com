@@ -13,30 +13,9 @@
                         <div th:class="|trip-item-header|">
                             <div th:class="item-bar">
                                 <div th:class="date" th:text="${#temporals.format(item.tripItem.departureDate, 'MM/dd/yyyy')}"></div>
-                                <!--<details th:if="" class="add-plan-modal-details">
-                                    <summary th:class="add-plan-modal-summary" th:text="${'Add a Plan'}"></summary>
-                                    <div class="add-plan-modal">
-                                        <h4 th:class="add-plan-modal-header" th:text="${'Add a plan '}">
-                                        </h4>
-                                        <div th:class="items-table">
-                                            <h3 th:class="transportation-header" th:text="${'Transportation'}"></h3>
-                                            <h3 th:class="activities-header" th:text="${'Activities'}"></h3>
-                                            <div th:class="transportation-items">
-                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__(tripId=${tripId})}" th:text="Flight"></a>
-                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Car Rental'}"></a>
-                                            </div>
-                                            <div th:class="activity-items">
-                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Lodging'}"></a>
-                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Restaurant'}"></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </details>-->
                             </div>
                             <div th:class="main-info">
-
                                 <span th:text="${item.tripItem.departureAirport + ' to ' + item.tripItem.arrivalAirport}"></span>
-
                                 <span th:class="|more-info|" th:utext="${ '<br/>' + item.tripItem.airlineName + ' ' + item.tripItem.flightNumber}"></span>
                             </div>
                             <div th:class="other-info">

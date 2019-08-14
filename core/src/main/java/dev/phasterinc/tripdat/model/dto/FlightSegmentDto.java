@@ -36,7 +36,7 @@ public class FlightSegmentDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
 
-    @DateTimeFormat(pattern = "HH:mma")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime departureTime;
 
     private String departureTerminal;
@@ -48,7 +48,7 @@ public class FlightSegmentDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate arrivalDate;
 
-    @DateTimeFormat(pattern = "HH:mma")
+    @DateTimeFormat(pattern = "HH:mm")
     private LocalTime arrivalTime;
 
     private String arrivalTerminal;
@@ -87,6 +87,7 @@ public class FlightSegmentDto {
 
     public boolean isEmpty() {
         boolean allEmpty = true;
+        if (this.segmentId != null) allEmpty=false;
         if ( this.airlineName != null && !this.airlineName.isEmpty()) allEmpty=false;
         if (this.flightNumber != null && !this.flightNumber.isEmpty()) allEmpty=false;
         if (this.ticketNumber != null && !this.ticketNumber.isEmpty()) allEmpty=false;
@@ -113,7 +114,6 @@ public class FlightSegmentDto {
         if (this.distance != null && !this.distance.isEmpty()) allEmpty=false;
         if (this.segmentNotes != null && !this.segmentNotes.isEmpty()) allEmpty=false;
         if (this.seat != null && !this.seat.isEmpty()) allEmpty=false;
-        if (this.segmentId != null) allEmpty=false;
         return allEmpty;
     }
 
