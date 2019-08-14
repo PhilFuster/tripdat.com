@@ -1,5 +1,6 @@
 package dev.phasterinc.tripdat.model;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -92,5 +93,10 @@ public class Cruise extends TripdatTripItem implements Serializable {
     public void removeStop(CruiseStop stop) {
         cruiseStops.remove(stop);
         stop.setCruise(null);
+    }
+
+    @Override
+    public String getType() {
+        return "C";
     }
 }

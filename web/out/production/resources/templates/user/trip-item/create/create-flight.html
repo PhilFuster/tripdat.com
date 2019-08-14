@@ -34,14 +34,14 @@
                     <details th:open="${iter.index == 0?true:false}">
                         <summary th:class="|inline-summary|">
                             <h1 th:style="|display:inline|" th:text="'Flight ' + ${iter.index + 1}"></h1>
-                            <div th:class="|form-group inline-checkbox|"
+                            <!--<div th:class="|form-group inline-checkbox|"
                                  th:id="'isToBeDeleted' + ${iter.index}">
                                 <label th:style="|display:inline|" th:for="${#ids.next('isToBeDeleted')}" th:class="|control-label|">Delete?</label>
                                 <input th:type="checkbox"
                                        th:class="|form-control inline-input|"
                                        th:style="|display:inline|"
                                        th:field="*{segmentDtos[__${iter.index}__].isToBeDeleted}"/>
-                            </div>
+                            </div>-->
                         </summary>
                         <div th:class="'segmentDtos' + ${iter.index}">
                             <div th:class="${'airline-info'}">
@@ -346,13 +346,13 @@
                         <details th:open="${iter.index == 0?true:false}">
                             <summary th:class="|inline-summary|">
                                 <h1 th:style="|display:inline|" th:text="'Passenger ' + ${iter.index + 1}"></h1>
-                                <div th:class="|form-group inline-checkbox|"
+                                <!--<div th:class="|form-group inline-checkbox|"
                                      th:id="'isAttendeeToBeDeleted' + ${iter.index}">
                                     <label th:style="|display:inline|"  th:for="'isAttendeeToBeDeleted' + ${iter.index}" th:class="|control-label|">Delete?</label>
                                     <input th:type="checkbox"
                                            th:class="|form-control inline-input|"
                                            th:field="*{attendees[__${iter.index}__].isAttendeeToBeDeleted}"/>
-                                </div>
+                                </div>-->
                             </summary>
                             <div th:class="passenger">
                                 <div th:class="|form-group|"
@@ -451,13 +451,6 @@
                                 <input th:type="text"
                                        th:class="|form-control|"
                                        th:field="*{supplierDto.url}"/>
-                            </div>
-                            <div th:class="|form-group|"
-                                 th:id="|supplierConfirmationNumber|">
-                                <label th:for="|supplierConfirmationNumber|" th:class="|control-label|">Supplier Confirmation #</label>
-                                <input th:type="text"
-                                       th:class="|form-control|"
-                                       th:field="*{supplierDto.confirmationNumber}"/>
                             </div>
                             <div th:class="|form-group|"
                                  th:id="|supplierContactName|">

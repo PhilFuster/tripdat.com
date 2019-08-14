@@ -1,6 +1,6 @@
 package dev.phasterinc.tripdat.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +16,11 @@ import java.io.Serializable;
  * Purpose: To model the travel_agency table in db
  */
 
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 //@EqualsAndHashCode(of = "travelAgencyId") // I believe it will now be of="tripItemId") but not sure
 @Entity(name = "TravelAgency")
 @Table(name = "travel_agency")

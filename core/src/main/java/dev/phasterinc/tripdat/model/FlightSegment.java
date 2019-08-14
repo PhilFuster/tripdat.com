@@ -2,8 +2,7 @@ package dev.phasterinc.tripdat.model;
 
 import dev.phasterinc.tripdat.model.dto.FlightItemDto;
 import dev.phasterinc.tripdat.model.dto.FlightSegmentDto;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,8 +11,11 @@ import java.time.LocalTime;
 
 @Entity(name = "FlightSegment")
 @Table(name = "flight_segment")
-@Builder
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor()
+@NoArgsConstructor()
+@Setter
+@Getter
 public class FlightSegment implements Serializable {
 
     // == fields ==

@@ -11,11 +11,32 @@
                     <!-- Summary of Flight -->
                     <div th:class="|trip-item-object-pane|">
                         <div th:class="|trip-item-header|">
-                            <div th:class="date" th:text="${#temporals.format(item.startDate, 'MM/dd/yyyy')}"></div>
+                            <div th:class="item-bar">
+                                <div th:class="date" th:text="${#temporals.format(item.tripItem.departureDate, 'MM/dd/yyyy')}"></div>
+                                <!--<details th:if="" class="add-plan-modal-details">
+                                    <summary th:class="add-plan-modal-summary" th:text="${'Add a Plan'}"></summary>
+                                    <div class="add-plan-modal">
+                                        <h4 th:class="add-plan-modal-header" th:text="${'Add a plan '}">
+                                        </h4>
+                                        <div th:class="items-table">
+                                            <h3 th:class="transportation-header" th:text="${'Transportation'}"></h3>
+                                            <h3 th:class="activities-header" th:text="${'Activities'}"></h3>
+                                            <div th:class="transportation-items">
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__(tripId=${tripId})}" th:text="Flight"></a>
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Car Rental'}"></a>
+                                            </div>
+                                            <div th:class="activity-items">
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Lodging'}"></a>
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Restaurant'}"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </details>-->
+                            </div>
                             <div th:class="main-info">
 
-                                <span th:text="${item.tripItem.flightDepartureAirport + ' to ' + item.tripItem.flightArrivalAirport}"></span>
-                                <span th:class="|separator|"></span>
+                                <span th:text="${item.tripItem.departureAirport + ' to ' + item.tripItem.arrivalAirport}"></span>
+
                                 <span th:class="|more-info|" th:utext="${ '<br/>' + item.tripItem.airlineName + ' ' + item.tripItem.flightNumber}"></span>
                             </div>
                             <div th:class="other-info">
@@ -42,15 +63,15 @@
                         <div th:class="|trip-item-object-pane|">
                             <div th:class="|checkpoint|">
                                 <h3 th:class="|checkpoint-type|" th:text="|Depart|">Depart</h3>
-                                <h2 th:class="|airport-name|" th:text="${item.tripItem.flightDepartureAirport}"></h2>
+                                <h2 th:class="|airport-name|" th:text="${item.tripItem.departureAirport}"></h2>
                                 <div th:class="gate-location">
                                     <span th:class="terminal-section">
                                         Terminal:
-                                        <span th:class="terminal" th:text="${item.tripItem.flightDepartureTerminal}"></span>
+                                        <span th:class="terminal" th:text="${item.tripItem.departureTerminal}"></span>
                                     </span>
                                     <span th:class="gate-section">
                                         Gate:
-                                        <span th:class="gate" th:text="${item.tripItem.flightDepartureGate}"></span>
+                                        <span th:class="gate" th:text="${item.tripItem.departureGate}"></span>
                                     </span>
                                 </div>
                             </div>
@@ -72,16 +93,16 @@
                         <div th:class="|trip-item-object-pane|">
                             <div th:class="|checkpoint|">
                                 <h3 th:class="|checkpoint-type|" th:text="|Arrival|">Arrival</h3>
-                                <h2 th:class="airport-name" th:text="${item.tripItem.flightArrivalAirport}"></h2>
+                                <h2 th:class="airport-name" th:text="${item.tripItem.arrivalAirport}"></h2>
 
                                 <div th:class="gate-location">
                                     <span th:class="terminal-section">
                                         Terminal:
-                                        <span th:class="terminal" th:text="${item.tripItem.flightArrivalTerminal}"></span>
+                                        <span th:class="terminal" th:text="${item.tripItem.arrivalTerminal}"></span>
                                     </span>
                                     <span th:class="gate-section">
                                         Gate:
-                                        <span th:class="gate" th:text="${item.tripItem.flightArrivalGate}"></span>
+                                        <span th:class="gate" th:text="${item.tripItem.arrivalGate}"></span>
                                     </span>
                                 </div>
                             </div>
@@ -110,7 +131,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a th:text="|Delete|" th:class="|delete-trip-item|" th:href="@{/delete/id/}">
+                                    <a th:text="|Delete|" th:class="|delete-trip-item|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).DELETE_FLIGHT}__(itemId=${item.id}, tripId=${tripId})}">
                                         Delete
                                         <span th:class="|icon delete-icon|"></span>
                                     </a>
@@ -128,7 +149,7 @@
                                     </div>
                                     <div th:class="|seats-section|">
                                         Seat(s):
-                                        <span th:class="|seats|" th:text="${item.tripItem.flightSeat?:'-'}"></span>
+                                        <span th:class="|seats|" th:text="${item.tripItem.seat?:'-'}"></span>
                                     </div>
                                 </div>
                                 <!-- Traveler Information -->
@@ -138,20 +159,20 @@
                                     <summary th:text="|Aircraft and Service Details|">Aircraft and Service Details</summary>
                                     <div th:class="|aircraft-service-details|">
                                         <ul>
-                                            <li th:text="|Baggage Claim:  *{flightBaggageClaim?:'-'}|"></li>
-                                            <li th:text="|Flight Entertainment:  *{flightEntertainment?:'-'}|"></li>
-                                            <li th:text="|Meal: *{flightMeal?: '-'}|"></li>
-                                            <li th:text="|On-time %: *{flightOnTimePercentage?: '-'}|"></li>
-                                            <li th:text="|Aircraft Type: *{flightAircraftType?: '-'}|"></li>
-                                            <li th:text="|Fare Class: *{flightFareClass?: '-'}|"></li>
-                                            <li th:text="|Stops: *{flightStops?: '-'}|"></li>
-                                            <li th:text="|Distance: *{flightDistance?: '-'}|"></li>
-                                            <li th:text="|Segment Notes: *{flightSegmentNotes?: '-'}|"></li>
+                                            <li th:text="|Baggage Claim:  *{baggageClaim?:'-'}|"></li>
+                                            <li th:text="|Flight Entertainment:  *{entertainment?:'-'}|"></li>
+                                            <li th:text="|Meal: *{meal?: '-'}|"></li>
+                                            <li th:text="|On-time %: *{onTimePercentage?: '-'}|"></li>
+                                            <li th:text="|Aircraft Type: *{aircraftType?: '-'}|"></li>
+                                            <li th:text="|Fare Class: *{fareClass?: '-'}|"></li>
+                                            <li th:text="|Stops: *{stops?: '-'}|"></li>
+                                            <li th:text="|Distance: *{distance?: '-'}|"></li>
+                                            <li th:text="|Segment Notes: *{segmentNotes?: '-'}|"></li>
                                         </ul>
                                     </div>
                                 </details>
                                 <!-- Travel Agency, Supplier, Booking Details -->
-                                <th:block th:replace="~{fragments/other-item-details::other-details(${item.travelAgency}, ${item.Supplier}, ${item.BookingDetail}, ${item.notes})}">
+                                <th:block th:replace="~{fragments/other-item-details::other-details(${item.travelAgency}, ${item.supplier}, ${item.bookingDetail}, ${item.notes})}">
                                 </th:block>
                             </div>
                         </div>

@@ -8,8 +8,7 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +21,11 @@ import java.time.LocalTime;
  * Name: CarRental
  * Purpose: Derived class from TripdatTripItemDao. Models a CarRental tripItem
  */
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "CarRental")
 @Table(name = "car_rental")
@@ -79,9 +82,9 @@ public class CarRental extends TripdatTripItem implements Serializable {
     @Column(name = "car_rental_drop_off_phone_number", columnDefinition = "TEXT")
     private String carRentalDropOffPhoneNumber;
 
-    public CarRental() {
-        System.out.println("CarRental Item type set");
-        super.setTripItemType("CR");
+    @Override
+    public String getType() {
+        return "CR";
     }
 
 

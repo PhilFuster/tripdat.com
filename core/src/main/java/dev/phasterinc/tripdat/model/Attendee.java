@@ -1,22 +1,21 @@
 package dev.phasterinc.tripdat.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 /**
  * Name: Attendee
  * Purpose: To model the attendees for a trip item.
  */
-@Data
+
 //TODO @EqualsAndHashCode(of="tripItem.id") //Might have to just override manually
+@Builder(toBuilder = true)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Setter
+@Getter
 @Entity(name = "Attendee")
 @Table(name="attendee")
 public class Attendee implements Serializable {
@@ -56,3 +55,9 @@ public class Attendee implements Serializable {
         return 31;
     }
 }
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/

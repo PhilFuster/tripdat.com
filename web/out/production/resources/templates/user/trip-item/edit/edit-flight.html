@@ -36,13 +36,14 @@
                             <h1 th:style="|display:inline|" th:text="'Flight ' + ${iter.index + 1}"></h1>
                             <div th:class="|form-group inline-checkbox|"
                                  th:id="'isToBeDeleted' + ${iter.index}">
-                                <label th:style="|display:inline|" th:for="${#ids.next('isToBeDeleted')}" th:class="|control-label|">Delete?</label>
+                                <label th:style="|display:inline|" th:for="'isToBeDeleted' + ${iter.index}" th:class="|control-label|">Delete?</label>
                                 <input th:type="checkbox"
                                        th:class="|form-control inline-input|"
                                        th:style="|display:inline|"
                                        th:field="*{segmentDtos[__${iter.index}__].isToBeDeleted}"/>
                             </div>
                         </summary>
+                        <input th:id="segmentId" th:field="*{segmentDtos[__${iter.index}__].segmentId}" type="hidden"/>
                         <div th:class="'segmentDtos' + ${iter.index}">
                             <div th:class="${'airline-info'}">
                                 <div th:class="|form-group|"
@@ -451,13 +452,6 @@
                                 <input th:type="text"
                                        th:class="|form-control|"
                                        th:field="*{supplierDto.url}"/>
-                            </div>
-                            <div th:class="|form-group|"
-                                 th:id="|supplierConfirmationNumber|">
-                                <label th:for="|supplierConfirmationNumber|" th:class="|control-label|">Supplier Confirmation #</label>
-                                <input th:type="text"
-                                       th:class="|form-control|"
-                                       th:field="*{supplierDto.confirmationNumber}"/>
                             </div>
                             <div th:class="|form-group|"
                                  th:id="|supplierContactName|">

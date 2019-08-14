@@ -5,14 +5,14 @@
             <!--For each element in itemsMap-->
             <div th:remove="tag" th:each="element : ${itemsMap}">
                 <!--For each element.value in itemsMap print a header-->
-                <div th:replace="~{fragments/date-header::date-header(${T(dev.phasterinc.tripdat.util.DateFormatter).formatDate(element.key)})}" >
+                <div th:replace="~{fragments/date-header::date-header(date=${T(dev.phasterinc.tripdat.util.DateFormatter).formatDate(element.key)})}" >
                 </div>
                 <!--For each ArrayList of itemWrappers-->
                 <th:block th:each="list, iter: ${element.value}">
                     <!--For each item in the ArrayLists-->
                     <th:block th:each="item, iter : ${list}">
                         <!--Switch statement for determining which fragment to insert based on the tripItemTypeCode -->
-                        <th:block th:switch="${item.tripItemTypeCode}">
+                        <th:block th:switch="${item.tripItem.typeCode}">
                             <th:block th:case="F">
                                 <th:block th:include="~{fragments/item-fragments/flight-fragment::flight-fragment(itemId=${item.id},tripId=${tripId})}">
                                 </th:block>

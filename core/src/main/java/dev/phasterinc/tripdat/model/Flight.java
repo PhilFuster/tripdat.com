@@ -1,8 +1,6 @@
 package dev.phasterinc.tripdat.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -23,10 +21,13 @@ import java.util.List;
  *
  *
  */
-@Builder
-@Data
+@Builder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "Flight")
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Table(name = "flight")
 public class Flight extends TripdatTripItem implements Serializable {
 
@@ -44,9 +45,9 @@ public class Flight extends TripdatTripItem implements Serializable {
     private List<FlightSegment> flightSegments = new ArrayList<>();
 
 
-    @PostConstruct
-    public void initTripItemType() {
-        super.setTripItemType("F");
+    @Override
+    public String getType() {
+        return "F";
     }
 
     @Override
@@ -57,8 +58,14 @@ public class Flight extends TripdatTripItem implements Serializable {
                 '}';
     }
 
-    /*public Flight(){
-        super.setTripItemType("F");
-    }*/
+    public void addSegment(FlightSegment segment) {
+        flightSegments.add(segment);
+        segment.setFlight(this);
+    }
+
+    public void removeSegment(FlightSegment segment) {
+        flightSegments.remove(segment);
+        segment.setFlight(null);
+    }
 
 }

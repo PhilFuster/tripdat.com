@@ -6,7 +6,7 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,7 +16,11 @@ import java.time.LocalDate;
  * Name: BookingDetail
  * Purpose: Store the booking details for a trip Item
  */
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 //@EqualsAndHashCode(of = "bookingDetailId")// unsure after removing bookingDetail ref TravelAgency.java for final decision
 @Entity(name = "BookingDetail")
 @Table(name = "booking_detail")

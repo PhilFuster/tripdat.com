@@ -16,6 +16,8 @@ public final class Mappings {
     public static final String DELETE_TRIP = "/user/trip/delete";
     public static final String EDIT_FLIGHT = "/user/trip-item/flight/edit";
     public static final String CREATE_FLIGHT = "/user/trip-item/flight/create";
+    public static final String DELETE_FLIGHT = "/user/trip-item/flight/delete";
+
     // == private constructors ==
     private Mappings() {}
 }

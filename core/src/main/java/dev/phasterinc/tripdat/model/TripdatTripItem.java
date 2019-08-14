@@ -25,7 +25,7 @@ import java.util.List;
 @Entity(name = "TripdatTripItem")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name="tripdat_trip_item")
-public class TripdatTripItem implements Serializable {
+public abstract class TripdatTripItem implements Serializable {
 
     // == fields ==
     @Id
@@ -92,6 +92,8 @@ public class TripdatTripItem implements Serializable {
         attendee.setTripItem(null);
 
     }
+
+    public abstract String getType();
 
     @Override
     public String toString() {

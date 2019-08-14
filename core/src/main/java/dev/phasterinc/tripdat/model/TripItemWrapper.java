@@ -8,9 +8,8 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import dev.phasterinc.tripdat.model.dto.*;
+import lombok.*;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -29,9 +28,11 @@ import java.util.List;
  *         This will make it possible to render in the view.
  *
  */
-@Data
-@AllArgsConstructor
-@Builder
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@Setter
+@Getter
+@Builder(toBuilder = false)
 public class TripItemWrapper {
     // == fields ==
 
@@ -46,16 +47,14 @@ public class TripItemWrapper {
     private LocalDate startDate;
     private LocalTime startTime;
 
-
-
     // Segments do not carry the confirmation number therefore it must be stored
     // somewhere for access
     private String confirmationNumber;
 
     // Segments will need the Supplier, TravelAgency, and BookingDetails
-    private Supplier supplier;
-    private TravelAgency travelAgency;
-    private BookingDetail bookingDetail;
+    private SupplierDto supplier;
+    private TravelAgencyDto travelAgency;
+    private BookingDetailDto bookingDetail;
 
     // the tripItem id itself.
     // If the item is a segment, the object item will have the segmentId
@@ -68,7 +67,7 @@ public class TripItemWrapper {
     private LocalDate endDate;
     private LocalTime endTime;
 
-    private List<Attendee> attendees = new ArrayList<>();
+    private List<AttendeeDto> attendees = new ArrayList<>();
 
     private String notes;
 
@@ -99,19 +98,26 @@ public class TripItemWrapper {
     }
 
     public String getDepartTimeFormatted() {
+        if(startTime==null) {
+            return "";
+        }
         return startTime.format(DateTimeFormatter.ofPattern("h:mma"));
     }
 
     public String getArriveTimeFormatted() {
+        if(endTime==null) {
+            return "";
+        }
         return endTime.format(DateTimeFormatter.ofPattern("h:mma"));
     }
 
     public String getMainTitle() {
         StringBuilder builder = new StringBuilder();
         if(tripItemTypeCode != null && tripItemTypeCode.equals("F")) {
-            FlightSegment segment = (FlightSegment) tripItem;
-            builder.append(segment.getFlightDepartureAirport()).append(" to ").append(segment.getFlightArrivalAirport());
-
+            FlightSegmentDto segment = (FlightSegmentDto) tripItem;
+            if(segment.getDepartureAirport() != null && segment.getArrivalAirport() !=  null) {
+                builder.append(segment.getDepartureAirport()).append(" to ").append("\n").append(segment.getArrivalAirport());
+            }
         }
         return builder.toString();
     }
@@ -119,9 +125,13 @@ public class TripItemWrapper {
     public String getSubTitle() {
         StringBuilder builder = new StringBuilder();
         if(tripItemTypeCode != null && tripItemTypeCode.equals("F")) {
-            FlightSegment segment = (FlightSegment) tripItem;
-            builder.append(segment.getAirlineName()).append(" ").append(segment.getFlightNumber());
-
+            FlightSegmentDto segment = (FlightSegmentDto) tripItem;
+            if(segment.getAirlineName()!= null) {
+                builder.append(segment.getAirlineName()).append(" ");
+            }
+            if(segment.getFlightNumber() != null) {
+                builder.append(segment.getFlightNumber());
+            }
         }
         return builder.toString();
 
@@ -154,7 +164,7 @@ public class TripItemWrapper {
             LocalTime endMins = LocalTime.of(0, endTime.getMinute());
             String minutes = Long.toString( Duration.between(startMins, endMins).toMinutes());
 
-            //LocalTime localTime = LocalTime.of(Integer.parseInt(Long.toString(hours)), Integer.parseInt(Long.toString(minutes)));
+            // LocalTime localTime = LocalTime.of(Integer.parseInt(Long.toString(hours)), Integer.parseInt(Long.toString(minutes)));
             if(!hours.equals("0")) {
                 builder.append(hours.toString()).append("h");
             }
@@ -180,14 +190,14 @@ public class TripItemWrapper {
      * @return
      */
     public String getDepartureTerminalAndGate() {
-        FlightSegment segment = (FlightSegment) tripItem;
+        FlightSegmentDto segment = (FlightSegmentDto) tripItem;
         StringBuilder build = new StringBuilder();
-        if(!segment.getFlightDepartureTerminal().isEmpty()) {
-            build.append(segment.getFlightDepartureTerminal());
+        if(segment.getDepartureTerminal() != null) {
+            build.append(segment.getDepartureTerminal());
         }
         build.append("/");
-        if(!segment.getFlightDepartureGate().isEmpty()) {
-            build   .append(segment.getFlightDepartureGate());
+        if(segment.getDepartureGate()!=null) {
+            build.append(segment.getDepartureGate());
         }
 
         return build.toString();
@@ -196,9 +206,9 @@ public class TripItemWrapper {
 
     public String getSeat() {
         if(tripItemTypeCode == "F") {
-            FlightSegment segment = (FlightSegment) tripItem;
-            if(segment.getFlightSeats() != null && !segment.getFlightSeats().isEmpty()) {
-                return segment.getFlightSeats();
+            FlightSegmentDto segment = (FlightSegmentDto) tripItem;
+            if(segment.getSeat() != null && !segment.getSeat().isEmpty()) {
+                return segment.getSeat();
             }
         }
         return "-";

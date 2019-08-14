@@ -26,6 +26,25 @@
                         <div class="trip-settings-modal">
                             <a th:class="|trip-settings-link|" th:text="|Edit Trip|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_TRIP}__(tripId=${trip.tripId})}">Edit Trip</a>
                             <p><a th:class="|trip-settings-link|" th:text="|Delete Trip|" th:href="@{/trip/delete(trip.tripId)}">Delete Trip</a></p>
+                            <details  class="add-plan-modal-details">
+                                    <summary th:class="add-plan-modal-summary" th:text="${'Add a Plan'}"></summary>
+                                    <div class="add-plan-modal">
+                                        <h4 th:class="add-plan-modal-header" th:text="${'Add a plan '}">
+                                        </h4>
+                                        <div th:class="items-table">
+                                            <h3 th:class="transportation-header" th:text="${'Transportation'}"></h3>
+                                            <h3 th:class="activities-header" th:text="${'Activities'}"></h3>
+                                            <div th:class="transportation-items">
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__(tripId=${tripId})}" th:text="Flight"></a>
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Car Rental'}"></a>
+                                            </div>
+                                            <div th:class="activity-items">
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Lodging'}"></a>
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Restaurant'}"></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </details>
                         </div>
                     </details>
                     <span><a id="print" title="Print" class="trip-navigation trip-navigation-options" href="#">

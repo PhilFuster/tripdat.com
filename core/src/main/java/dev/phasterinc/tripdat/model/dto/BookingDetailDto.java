@@ -9,8 +9,8 @@ package dev.phasterinc.tripdat.model.dto;
  ************************************************************/
 
 import dev.phasterinc.tripdat.model.BookingDetail;
-import lombok.Builder;
-import lombok.Data;
+import dev.phasterinc.tripdat.model.TripdatTripItem;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -20,8 +20,11 @@ import java.time.LocalDate;
  *
  *
  */
-@Builder
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class BookingDetailDto {
     // == fields ==
     private Long id;
@@ -47,5 +50,30 @@ public class BookingDetailDto {
                 .isPurchased(bookingDetail.getBookingIsPurchased())
                 .build();
         return dto;
+    }
+
+    public static BookingDetail buildEntity(BookingDetailDto bookingDetailDto, TripdatTripItem item) {
+        return BookingDetail.builder()
+                .tripItem(item)
+                .bookingSiteName(bookingDetailDto.siteName)
+                .bookingSiteUrl(bookingDetailDto.url)
+                .bookingDate(bookingDetailDto.bookingDate)
+                .bookingReferenceNumber(bookingDetailDto.referenceNumber)
+                .bookingTotalCost(bookingDetailDto.totalCost)
+                .bookingIsPurchased(bookingDetailDto.isPurchased)
+                .bookingSitePhoneNumber(bookingDetailDto.phoneNumber)
+                .bookingSiteEmail(bookingDetailDto.email)
+                .build();
+    }
+
+    public static void updateEntity(BookingDetail bookingDetail, BookingDetailDto bookingDetailDto) {
+        bookingDetail.setBookingSiteName(bookingDetailDto.siteName);
+        bookingDetail.setBookingSiteUrl(bookingDetailDto.url);
+        bookingDetail.setBookingDate(bookingDetailDto.bookingDate);
+        bookingDetail.setBookingReferenceNumber(bookingDetailDto.referenceNumber);
+        bookingDetail.setBookingTotalCost(bookingDetailDto.totalCost);
+        bookingDetail.setBookingIsPurchased(bookingDetailDto.isPurchased);
+        bookingDetail.setBookingSitePhoneNumber(bookingDetailDto.phoneNumber);
+        bookingDetail.setBookingSiteEmail(bookingDetailDto.email);
     }
 }

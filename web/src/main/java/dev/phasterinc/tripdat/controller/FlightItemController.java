@@ -1,8 +1,6 @@
 package dev.phasterinc.tripdat.controller;
 
-import com.sun.org.apache.bcel.internal.generic.RETURN;
-import com.sun.rowset.internal.Row;
-import dev.phasterinc.tripdat.factory.TripdatTripItemFactory;
+
 import dev.phasterinc.tripdat.model.*;
 import dev.phasterinc.tripdat.model.dto.*;
 import dev.phasterinc.tripdat.service.TripItemWrapperService;
@@ -18,9 +16,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.*;
+import javax.swing.text.Segment;
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /************************************************************
@@ -39,7 +42,6 @@ import java.util.List;
 @Slf4j
 @Controller
 @ControllerAdvice
-@SessionAttributes({"flight","tripId"})
 public class FlightItemController {
     // == fields ==
     private TripdatTripService tripService;
@@ -87,9 +89,8 @@ public class FlightItemController {
      *               20. add tripId Attribute to model
      *               21. add flightItemDto to model
      */
-    @ModelAttribute("flight")
-    public FlightItemDto flightItemDto(@RequestParam(defaultValue = "-1", required = false) Long tripItemId,
-                              @RequestParam(defaultValue = "-1", required = false) Long tripId) {
+
+    public FlightItemDto flightItemDto(Long tripItemId,Long tripId) {
         if(tripId == -1) {
             log.info("No TripId Passed to flightItemController");
         }
@@ -134,6 +135,7 @@ public class FlightItemController {
                 segmentDtos.add(FlightSegmentDto.builder().build());
                 segmentDtos.add(FlightSegmentDto.builder().build());
             } else {
+                Collections.sort(flightSegments, Comparator.nullsLast(Comparator.comparing(FlightSegment::getFlightDepartureDate, Comparator.nullsLast(LocalDate::compareTo)).thenComparing(FlightSegment::getFlightDepartureTime, Comparator.nullsLast(LocalTime::compareTo))));
                 for(FlightSegment segment: flightSegments) {
                     FlightSegmentDto flightSegmentDto = FlightSegmentDto.buildDto(segment);
                     segmentDtos.add(flightSegmentDto);
@@ -156,7 +158,7 @@ public class FlightItemController {
             }
             flightItemDto = FlightItemDto.buildDto(flight, segmentDtos, attendeeDtos);
         }
-        log.info("FlightDto: {}", flightItemDto);
+
         return flightItemDto;
     }
     /**
@@ -166,7 +168,8 @@ public class FlightItemController {
     @GetMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT})
     public String showFlightItemForm(Model model,
                                      @RequestParam(required = false, defaultValue = "-1") Long tripItemId,
-                                     @ModelAttribute("flight") FlightItemDto flight) {
+                                     @RequestParam(defaultValue = "-1", required = false) Long tripId) {
+        model.addAttribute("flight", flightItemDto(tripItemId,tripId));
         // == local variables ==
         return tripItemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
     }
@@ -184,43 +187,169 @@ public class FlightItemController {
      *               4. If any do, return to form with that error.
      *               5. If no conflicts, update/create item.
      */
-    @RequestMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT}, method = RequestMethod.POST, params = {"itemId"})
+    @RequestMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT}, method = RequestMethod.POST, params = {"itemId","tripId"})
     public String processFlight(@ModelAttribute("flight") FlightItemDto flightDto,
                                 @RequestParam(required = false, defaultValue = "-1") Long itemId,
                                 @RequestParam Long tripId, BindingResult result) {
         log.info("TripId passed to processFlight: {}", tripId.toString());
-        log.info("flightDto: {} ", flightDto);
+        log.info("flightDto segmentId: {} ", flightDto.getSegmentDtos().get(0).getSegmentId());
         TripdatTrip trip = tripService.findOne(tripId);
         LocalDate tripStartDate = trip.getTripStartDate();
         LocalDate tripEndDate = trip.getTripEndDate();
+        List<TripItemWrapper> wrappers = tripItemWrapperService.getItemsInItemWrapper(trip);
+        tripItemWrapperService.orderItemWrappersByAscDateAndTime(wrappers);
         // Verify that each segment's start date is not after the item's end date
         for(int i = 0; i < flightDto.getSegmentDtos().size();++i) {
-            FlightSegmentDto segmentDto = flightDto.getSegmentDtos().get(i);
-
-            boolean isDateRangeNull = (segmentDto.getDepartureDate() == null || segmentDto.getArrivalDate() == null);
+            FlightSegmentDto newSegmentDto = flightDto.getSegmentDtos().get(i);
+            boolean isDateRangeNull = (newSegmentDto.getDepartureDate() == null || newSegmentDto.getArrivalDate() == null);
+            boolean isTimeRangeNull = newSegmentDto.getDepartureTime() == null || newSegmentDto.getArrivalTime() == null;
             if (!isDateRangeNull) {
                 //
                 // DepartureDate cannot be after arrival Date
-                if( segmentDto.getDepartureDate().isAfter(segmentDto.getArrivalDate())) {
+                if( newSegmentDto.getDepartureDate().isAfter(newSegmentDto.getArrivalDate())) {
                     result.rejectValue("segmentDtos[" + i + "].departureDate", null,
-                            "Start date must be before end date.");
+                            "Departure date must be before arrival date.");
                     result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
-                            "End date must be after start date.");
+                            "Arrival date must be after departure date.");
                 }
-                // Segment must be within Trips date range
-                if(segmentDto.getDepartureDate().isAfter(tripStartDate) || segmentDto.getArrivalDate().isAfter(tripEndDate)) {
+                // TripItem must be within Trips date range
+                if(newSegmentDto.getDepartureDate().isBefore(tripStartDate) || newSegmentDto.getArrivalDate().isAfter(tripEndDate)) {
                     result.rejectValue("segmentDtos[" + i + "].departureDate", null,
-                            "Date does not fall within Trip date range.");
+                            "Date range does not fall within Trip's date range.");
                     result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
-                            "Date does not fall within Trip date range.");
+                            "Date range does not fall within Trip's date range.");
                 }
-                // Segment cannot have conflicting date with other trip Items
+                //
+                // Validate newItem duration does not overlap any items within trip
+                for(int j = 0; j < wrappers.size();++j) {
+                    TripItemWrapper currentItem = wrappers.get(j);
+                    FlightSegmentDto segment = (FlightSegmentDto) currentItem.getTripItem();
+                    //  if flightSegment.ID is equal to the newSegmentDto.segmentId being edited
+                    // Do not cause false positive. ignore item.
+                    log.info("dbSegment.segmentId: {}", segment.getSegmentId());
+                    log.info("fromFormSegment.segmentId: {}", newSegmentDto.getSegmentId());
+                    if( segment.getSegmentId().equals(newSegmentDto.getSegmentId())) {
+                        continue;
+                    }
+                    // Continue if currentItem's date range is null
+                    if(currentItem.getStartDate() == null || currentItem.getEndDate() == null) {
+                        continue;
+                    }
+                    // If newItem and currentItem start on same day, and the currentItem starts and ends on same day, and
+                    if(newSegmentDto.getDepartureDate().isEqual(currentItem.getStartDate())
+                        && currentItem.getStartDate().isEqual(currentItem.getEndDate())) {
+                        // if newItem starts and ends on same day
+                        if(newSegmentDto.getDepartureDate().isEqual(newSegmentDto.getArrivalDate())) {
+                            // newItem begins and ends on same day. It is possible for newItem
+                            // and currentItem to not conflict as long as newItem starts after
+                            // currentItem ends or ends before currentItem starts
+                            /*if((newSegmentDto.getDepartureTime().isBefore(currentItem.getEndTime())
+                                    && newSegmentDto.getArrivalTime().isAfter(currentItem.getStartTime()))
+                                    || newSegmentDto.getArrivalTime().isAfter(currentItem.getStartTime())) {
+                                result.rejectValue("segmentDtos[" + i + "].departureTime", null,
+                                        "Conflict with other item in trip");
+                                result.rejectValue("segmentDtos[" + i + "].arrivalTime", null,
+                                        "Conflict with other item in trip");
+                            }*/
+                            if(!isTimeRangeNull && (currentItem.getStartTime() != null && currentItem.getEndTime() != null)) {
+                                if(newSegmentDto.getArrivalTime().isAfter(currentItem.getStartTime())
+                                        || newSegmentDto.getDepartureTime().isBefore(currentItem.getEndTime())) {
+                                    result.rejectValue("segmentDtos[" + i + "].departureTime", null,
+                                            "Time Conflict with other item in trip");
+                                    result.rejectValue("segmentDtos[" + i + "].arrivalTime", null,
+                                            "Time Conflict with other item in trip");
+                                }
+                            }
+                        }
+                               // newItem and currentItem start on same day
+                    } else if(newSegmentDto.getDepartureDate().isEqual(currentItem.getStartDate())
+                                // currentItem does not start and end on same day
+                                && !currentItem.getStartDate().isEqual(currentItem.getEndDate())
+                                // newItem starts and ends on same day
+                                && newSegmentDto.getDepartureDate().isEqual(newSegmentDto.getArrivalDate())) {
+                        // newItem must end before currentItem starts.
+                        // if newItem endTime is not before currentItem's end time report error
+                        if((newSegmentDto.getArrivalTime() != null && currentItem.getStartTime() != null) && !newSegmentDto.getArrivalTime().isBefore(currentItem.getStartTime())) {
+                            result.rejectValue("segmentDtos[" + i + "].departureTime", null,
+                                    "Time Conflict with other item in trip");
+                            result.rejectValue("segmentDtos[" + i + "].arrivalTime", null,
+                                    "Time Conflict with other item in trip");
 
+                        }
+                    }
+                    // newItem does not start on same day as currentItem
+                    // if newItem's arrivaleDate is not before the currentItem's startDate
+                    // OR newItem's departureDate is not after currentItems endDate there is overlap
+                    if( (currentItem.getStartDate() != null && currentItem.getEndDate() != null) && !(newSegmentDto.getArrivalDate().isBefore(currentItem.getStartDate())
+                            || newSegmentDto.getDepartureDate().isAfter(currentItem.getEndDate()))) {
+                        result.rejectValue("segmentDtos[" + i + "].departureDate", null,
+                                "Date Conflict with other item in trip");
+                        result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
+                                "Date Conflict with other item in trip");
+
+                    }
+                }
             }
+            //
+            // If there are validation errors return to create or edit pages
             if (result.hasErrors()) {
                 return  itemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
             }
         }
-        return "redirect:" + ViewNames.TRIP_DETAILS + "/" + tripId.toString();
+
+        // FlightItemDto has made it through the validation process
+        // Create an entity from the flightItemDto
+        TripdatTripItem flight;
+        if(itemId == -1) {
+            flight = Flight.builder()
+                    .flightSegments(new ArrayList<>())
+                    .build();
+            flight.setAttendees(new ArrayList<>());
+            flight.setTripdatTrip(trip);
+            // build other details
+            flight.setTravelAgency(TravelAgencyDto.buildEntity(flightDto.getTravelAgencyDto(), flight));
+            flight.setSupplier(SupplierDto.buildEntity(flightDto.getSupplierDto(),flight));
+            flight.setBookingDetail(BookingDetailDto.buildEntity(flightDto.getBookingDetailDto(),flight));
+            // build FlightSegments
+            for(FlightSegmentDto segmentDto:flightDto.getSegmentDtos()) {
+                if( segmentDto.isEmpty()) {
+                    continue;
+                }
+
+                FlightSegment segment = FlightSegmentDto.buildEntity(segmentDto, (Flight) flight);
+                ((Flight) flight).getFlightSegments().add(segment);
+            }
+            // Build Attendees list
+            for(AttendeeDto attendeeDto: flightDto.getAttendees()) {
+                if(attendeeDto.isEmpty()) {
+                    continue;
+                }
+                Attendee attendee = Attendee.builder()
+                        .tripItem(flight)
+                        .attendeeName(attendeeDto.getName())
+                        .attendeeLoyaltyProgramNumber(attendeeDto.getLoyaltyProgramNumber())
+                        .attendeeTicketNumber(attendeeDto.getTicketNumber())
+                        .build();
+                flight.getAttendees().add(attendee);
+            }
+            // create the flight
+            tripItemService.create(flight);
+        } else {
+            // updating a flight
+            flight = tripItemService.findByItemId(itemId);
+            FlightItemDto.updateEntity((Flight)flight,flightDto);
+            tripItemService.update(flight);
+        }
+
+        return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }
+
+    @RequestMapping(value = {Mappings.DELETE_FLIGHT}, params = {"itemId","tripId"})
+    public String deleteFlightItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
+                                   @RequestParam Long tripId) {
+        Flight flight = (Flight) tripItemService.findByItemId(itemId);
+        tripItemService.delete(flight);
+        return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
+    }
+
 }

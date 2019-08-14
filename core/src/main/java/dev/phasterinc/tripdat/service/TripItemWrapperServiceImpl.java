@@ -1,12 +1,14 @@
 package dev.phasterinc.tripdat.service;
 
 import dev.phasterinc.tripdat.model.*;
+import dev.phasterinc.tripdat.model.dto.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
@@ -171,11 +173,13 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
     public List<TripItemWrapper> unwrapTripItemsIntoWrappers(Set<TripdatTripItem> items) {
         List<TripItemWrapper> itemWrappers = new ArrayList<>();
         if(CollectionUtils.isEmpty(items)) {
-            log.info("In unwrapTripItemsIntoWrappers: No items in trip passed.");
+            log.info("TripItemWrapperServiceImpl:unwrapTripItemsIntoWrappers - No items in the trip passed.");
             return itemWrappers;
         }
         for(TripdatTripItem item : items) {
-            switch (item.getTripItemType())
+            log.info("item: {}",item);
+
+            switch (item.getType())
             {
                 // flightInformation
                 case "F":
@@ -184,25 +188,21 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
 
                     // for each segment in flightInfo.flightSegments
                     for(FlightSegment segment : flightInfo.getFlightSegments()) {
-                        /*TripItemWrapper wrapper = new TripItemWrapper(item.getTripItemType(),
-                                segment, segment.getFlightDepartureDate(), segment.getFlightDepartureTime(),
-                                flightInfo.getFlightConfirmationNumber(), flightInfo.getSupplier(),
-                                flightInfo.getTravelAgency(), flightInfo.getBookingDetail(), flightInfo.getTripItemId(),
-                                segment.getFlightArrivalDate(), segment.getFlightArrivalTime());*/
-
-                        TripItemWrapper wrapper = TripItemWrapper.builder().tripItemTypeCode(item.getTripItemType())
-                                                                 .tripItem(segment)
-                                                                 .startDate(segment.getFlightDepartureDate())
-                                                                 .startTime(segment.getFlightDepartureTime())
-                                                                 .confirmationNumber(flightInfo.getFlightConfirmationNumber())
-                                                                 .supplier(flightInfo.getSupplier())
-                                                                 .travelAgency(flightInfo.getTravelAgency())
-                                                                 .bookingDetail(flightInfo.getBookingDetail())
-                                                                 .id(item.getTripItemId())
-                                                                 .notes(item.getTripItemNote())
-                                                                 .endDate(segment.getFlightArrivalDate())
-                                                                 .endTime(segment.getFlightArrivalTime())
-                                                                 .attendees(flightInfo.getAttendees()).build();
+                        TripItemWrapper wrapper = TripItemWrapper.builder()
+                                .tripItemTypeCode(item.getType())
+                                .tripItem(FlightSegmentDto.buildDto(segment))
+                                .startDate(segment.getFlightDepartureDate())
+                                .startTime(segment.getFlightDepartureTime())
+                                .confirmationNumber(flightInfo.getFlightConfirmationNumber())
+                                .supplier(SupplierDto.buildDto(flightInfo.getSupplier()))
+                                .travelAgency(TravelAgencyDto.buildDto(flightInfo.getTravelAgency()))
+                                .bookingDetail(BookingDetailDto.buildDto(flightInfo.getBookingDetail()))
+                                .id(item.getTripItemId())
+                                .notes(item.getTripItemNote())
+                                .endDate(segment.getFlightArrivalDate())
+                                .endTime(segment.getFlightArrivalTime())
+                                .attendees(AttendeeDto.buildDtoList(flightInfo.getAttendees()))
+                                .build();
 
                         itemWrappers.add(wrapper);
                     }
@@ -217,7 +217,7 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                     // Do stuff for general trans
                     break;
                 // RailInformation
-                case "T" :
+                case "RA" :
                     // do stuff for Rail
                     break;
                 // Restaurant
@@ -233,7 +233,7 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                     // do stuff for parking
                     break;
                 // Car Rental
-                case "A" :
+                case "CR" :
                     // do stuff for carRental
                     break;
                 // Lodging
@@ -260,7 +260,8 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
     @Override
     public void orderItemWrappersByAscDateAndTime(List<TripItemWrapper> wrappers) {
         //wrappers.sort((TripItemWrapper item1, TripItemWrapper item2)->item1.getStartDate().compareTo(item2.getStartDate()));
-        Collections.sort(wrappers, Comparator.nullsLast(Comparator.comparing(TripItemWrapper::getStartDate).thenComparing(TripItemWrapper::getStartTime)));
+        log.info("Wrappers passed to orderItemWrappersByAscnDateAndTime{}",wrappers.size());
+        Collections.sort(wrappers, Comparator.nullsLast(Comparator.comparing(TripItemWrapper::getStartDate, Comparator.nullsLast(LocalDate::compareTo)).thenComparing(TripItemWrapper::getStartTime ,Comparator.nullsLast(LocalTime::compareTo))));
         wrappers.forEach((item)->log.debug("Start Date: " +
                 item.getStartDate() + " Start Time: " + item.getStartTime() ));
     }
@@ -289,6 +290,8 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
             log.debug("Date Incremented to: " + currDate.toString());
         }
 
+        // putting an arrayList in itemsMap for items with null start Dates
+        itemsMap.put(LocalDate.of(9999,12,31), new ArrayList<TripItemWrapper>());
 
 
         /*for(TripItemWrapper item : wrappers) {
@@ -296,13 +299,21 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
             System.out.println( itemsMap.get(item.getStartDate()) );
             itemsMap.get(item.getStart())
         }*/
-
         // for each itemWrapper get the ArrayList from itemsMap with key item.startDate, add item to that ArrayList
         // if that date hasn't been added to the map yet create an arrayList for tripItems scheduled for that day
         wrappers.forEach((item)-> {
-            List<TripItemWrapper> items = itemsMap.getOrDefault(item.getStartDate(), new ArrayList<>());
+            List<TripItemWrapper> items;
+            if(item.getStartDate() == null) {
+               items = itemsMap.getOrDefault(LocalDate.of(9999,12,31), new ArrayList<>());
+            }else {
+                items = itemsMap.getOrDefault(item.getStartDate(), new ArrayList<>());
+            }
+            log.info("Items from getWrappersInMap {}",items.toString());
             items.add(item);
+
         } );
+
+
 
 
 

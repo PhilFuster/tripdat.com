@@ -14,6 +14,7 @@ public class FlightFactory  extends TripdatTripItemFactory{
 
     @Override
     public TripdatTripItem getItemType(String itemType) {
+
         return Flight.builder().build();
     }
 

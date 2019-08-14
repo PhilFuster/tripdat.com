@@ -9,8 +9,8 @@ package dev.phasterinc.tripdat.model.dto;
  ************************************************************/
 
 import dev.phasterinc.tripdat.model.TravelAgency;
-import lombok.Builder;
-import lombok.Data;
+import dev.phasterinc.tripdat.model.TripdatTripItem;
+import lombok.*;
 
 /**
  * ClassName: TravelAgencyDto
@@ -18,8 +18,11 @@ import lombok.Data;
  *
  *
  */
-@Builder
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class TravelAgencyDto {
     // == fields ==
     private Long id;
@@ -41,5 +44,28 @@ public class TravelAgencyDto {
                 .email(agency.getTravelAgencyEmail())
                 .build();
         return dto;
+    }
+
+    public static TravelAgency buildEntity(TravelAgencyDto agencyDto, TripdatTripItem item) {
+        TravelAgency agency = TravelAgency.builder()
+                .tripItem(item)
+                .travelAgencyConfirmationNumber(agencyDto.getConfirmationNumber())
+                .travelAgencyContactName(agencyDto.getContactName())
+                .travelAgencyEmail(agencyDto.getEmail())
+                .travelAgencyName(agencyDto.getAgencyName())
+                .travelAgencyUrl(agencyDto.getUrl())
+                .travelAgencyPhoneNumber(agencyDto.getPhoneNumber())
+                .build();
+        return agency;
+    }
+
+    public static void updateEntity(TravelAgency agency, TravelAgencyDto agencyDto) {
+        agency.setTravelAgencyName(agencyDto.agencyName);
+        agency.setTravelAgencyUrl(agencyDto.url);
+        agency.setTravelAgencyConfirmationNumber(agencyDto.confirmationNumber);
+        agency.setTravelAgencyContactName(agencyDto.contactName);
+        agency.setTravelAgencyPhoneNumber(agencyDto.phoneNumber);
+        agency.setTravelAgencyEmail(agencyDto.email);
+
     }
 }

@@ -6,12 +6,12 @@
             <summary th:text="|Travel Agency|">Travel Agency</summary>
             <div th:class="|travel-agency-details|">
                 <ul>
-                    <li th:text="|Travel Agency Name: *{travelAgencyName?:'-'}|">Travel Agency Name</li>
-                    <li th:text="|Travel Agency Confirmation#: *{travelAgencyConfirmationNumber?:'-'} |">Travel Agency Confirmation #</li>
-                    <li th:text="|Travel Agency URL: *{travelAgencyUrl?:'-'} |">Travel Agency URL</li>
-                    <li th:text="|Travel Agency Phone: *{travelAgencyPhoneNumber?:'-'}|">Travel Agency Phone #</li>
-                    <li th:text="|Travel Agency Email: *{travelAgencyEmail?:'-'}|">Travel Agency Email</li>
-                    <li th:text="|Travel Agency Contact: *{travelAgencyContactName?:'-'}|"></li>
+                    <li th:text="|Travel Agency Name: *{agencyName?:'-'}|">Travel Agency Name</li>
+                    <li th:text="|Travel Agency Confirmation#: *{confirmationNumber?:'-'} |">Travel Agency Confirmation #</li>
+                    <li th:text="|Travel Agency URL: *{url?:'-'} |">Travel Agency URL</li>
+                    <li th:text="|Travel Agency Phone: *{phoneNumber?:'-'}|">Travel Agency Phone #</li>
+                    <li th:text="|Travel Agency Email: *{email?:'-'}|">Travel Agency Email</li>
+                    <li th:text="|Travel Agency Contact: *{contactName?:'-'}|"></li>
                 </ul>
             </div>
         </details>
@@ -20,10 +20,10 @@
             <div th:class="|supplier-details|">
                 <ul>
                     <li th:text="|Supplier Name: *{supplierName?:'-'}|">Supplier Name</li>
-                    <li th:text="|Supplier Url: *{supplierUrl?:'-'}|">Supplier Url</li>
-                    <li th:text="|Supplier Email: *{supplierEmail?:'-'}|">Supplier Email</li>
-                    <li th:text="|Suppler Phone #: *{supplierPhoneNumber?:'-'}|">Supplier Phone #</li>
-                    <li th:text="|Supplier Contact: *{supplierContactName?:'-'}|">Supplier Contact Name</li>
+                    <li th:text="|Supplier Url: *{url?:'-'}|">Supplier Url</li>
+                    <li th:text="|Supplier Email: *{email?:'-'}|">Supplier Email</li>
+                    <li th:text="|Suppler Phone #: *{phoneNumber?:'-'}|">Supplier Phone #</li>
+                    <li th:text="|Supplier Contact: *{contactName?:'-'}|">Supplier Contact Name</li>
                 </ul>
             </div>
         </details>
@@ -31,14 +31,14 @@
             <summary th:text="|Booking Site|"></summary>
             <div th:class="|booking-details|">
                 <ul>
-                    <li th:text="|Booking Reference #: *{bookingReferenceNumber?:'-'} |">Booking Reference #</li>
-                    <li th:text="|Booking Site: *{bookingSiteName?:'-'}|"></li>
-                    <li th:text="|Booking Date: *{#temporals.format(bookingDate, 'MM/dd/yyyy')}|">Booking Date</li>
-                    <li th:text="|Booking Site URL: *{bookingSiteUrl?:'-'}|">Booking Site Url</li>
-                    <li th:text="|Booking Site Phone: *{bookingSitePhoneNumber?:'-'}|">Booking Site Phone #</li>
-                    <li th:text="|Booking Site Email: *{bookingSiteEmail?:'-'}|">Booking Site Email</li>
-                    <li th:text="|Total Cost: *{bookingTotalCost?:'-'}|"></li>
-                    <li th:text="|Reservation Purchased: *{bookingIsPurchased?:'-'}|"></li>
+                    <li th:text="|Booking Reference #: *{referenceNumber?:'-'} |">Booking Reference #</li>
+                    <li th:text="|Booking Site: *{siteName?:'-'}|"></li>
+                    <li th:text="'Booking Date:' + *{#temporals.format(bookingDate, 'MM/dd/yyyy')?:' -'}">Booking Date</li>
+                    <li th:text="|Booking Site URL: *{url?:'-'}|">Booking Site Url</li>
+                    <li th:text="|Booking Site Phone: *{phoneNumber?:'-'}|">Booking Site Phone #</li>
+                    <li th:text="|Booking Site Email: *{email?:'-'}|">Booking Site Email</li>
+                    <li th:text="|Total Cost: *{totalCost?:'-'}|"></li>
+                    <li th:text="|Reservation Purchased: *{isPurchased?:'-'}|"></li>
                 </ul>
             </div>
         </details>
@@ -54,9 +54,9 @@
             <summary th:text="|Traveler Info|"></summary>
             <th:block th:each="attendee, iter : ${travelers}">
                 <div th:class="|traveler-details|">
-                    <span th:class="|traveler-name|" th:text="${attendee.attendeeName}">Name</span>
-                    <span th:class="|other-traverler-details|" th:text="|Frequent Flyer#: ${attendee.attendeeLoyaltyProgramNumber}|">Frequent Flyer #: </span>
-                    <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.attendeeTicketNumber}|"></span>
+                    <span th:class="|traveler-name|" th:text="${attendee.name?:''}">Name</span>
+                    <span th:class="|other-traverler-details|" th:text="'Frequent Flyer#:' + ${attendee.loyaltyProgramNumber?:''}">Frequent Flyer #: </span>
+                    <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.ticketNumber?:''}|"></span>
                 </div>
             </th:block>
         </details>

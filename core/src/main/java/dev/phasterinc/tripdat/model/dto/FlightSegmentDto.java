@@ -1,19 +1,29 @@
 package dev.phasterinc.tripdat.model.dto;
 
 
+import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.FlightSegment;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.thymeleaf.expression.Strings;
 
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
-@Builder
-@Data
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 public class FlightSegmentDto {
 
-    private Long id;
+    private Long itemId;
+
+    private Long segmentId;
 
     private String airlineName;
 
@@ -26,6 +36,7 @@ public class FlightSegmentDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate departureDate;
 
+    @DateTimeFormat(pattern = "HH:mma")
     private LocalTime departureTime;
 
     private String departureTerminal;
@@ -37,6 +48,7 @@ public class FlightSegmentDto {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate arrivalDate;
 
+    @DateTimeFormat(pattern = "HH:mma")
     private LocalTime arrivalTime;
 
     private String arrivalTerminal;
@@ -69,12 +81,46 @@ public class FlightSegmentDto {
 
     private String seat;
 
+    private String typeCode;
+
     private Boolean isToBeDeleted;
+
+    public boolean isEmpty() {
+        boolean allEmpty = true;
+        if ( this.airlineName != null && !this.airlineName.isEmpty()) allEmpty=false;
+        if (this.flightNumber != null && !this.flightNumber.isEmpty()) allEmpty=false;
+        if (this.ticketNumber != null && !this.ticketNumber.isEmpty()) allEmpty=false;
+        if (this.departureAirport != null && !this.departureAirport.isEmpty()) allEmpty=false;
+        if (this.departureDate != null) allEmpty=false;
+        if (this.departureTime != null) allEmpty=false;
+        if (this.departureTerminal != null && !this.departureTerminal.isEmpty()) allEmpty=false;
+        if (this.departureGate != null && !this.departureGate.isEmpty()) allEmpty=false;
+        if (this.arrivalAirport != null && !this.arrivalAirport.isEmpty()) allEmpty=false;
+        if (this.arrivalDate != null) allEmpty=false;
+        if (this.arrivalTime != null) allEmpty=false;
+        if (this.arrivalTerminal != null && !this.arrivalTerminal.isEmpty()) allEmpty=false;
+        if (this.arrivalGate != null && !this.arrivalGate.isEmpty()) allEmpty=false;
+        if (this.fareClass != null && !this.fareClass.isEmpty()) allEmpty=false;
+        if (this.meal != null && !this.meal.isEmpty()) allEmpty=false;
+        if (this.baggageClaim != null && !this.baggageClaim.isEmpty()) allEmpty=false;
+        if (this.entertainment != null && !this.entertainment.isEmpty()) allEmpty=false;
+        if (this.onTimePercentage != null && !this.onTimePercentage.isEmpty()) allEmpty=false;
+        if (this.aircraftType != null && !this.aircraftType.isEmpty()) allEmpty=false;
+        if (this.operatingFlightNumber != null && !this.operatingFlightNumber.isEmpty()) allEmpty=false;
+        if (this.operatedBy != null && !this.operatedBy.isEmpty()) allEmpty=false;
+        if (this.stops != null && !this.stops.isEmpty()) allEmpty=false;
+        if (this.duration != null && !this.duration.isEmpty()) allEmpty=false;
+        if (this.distance != null && !this.distance.isEmpty()) allEmpty=false;
+        if (this.segmentNotes != null && !this.segmentNotes.isEmpty()) allEmpty=false;
+        if (this.seat != null && !this.seat.isEmpty()) allEmpty=false;
+        if (this.segmentId != null) allEmpty=false;
+        return allEmpty;
+    }
 
     public static FlightSegmentDto buildDto(FlightSegment flightSegment) {
 
         return FlightSegmentDto.builder()
-                .id(flightSegment.getFlightSegmentId())
+                .segmentId(flightSegment.getFlightSegmentId())
                 .airlineName(flightSegment.getAirlineName())
                 .flightNumber(flightSegment.getFlightNumber())
                 .ticketNumber(flightSegment.getFlightTicketNumber())
@@ -101,7 +147,72 @@ public class FlightSegmentDto {
                 .distance(flightSegment.getFlightDistance())
                 .segmentNotes(flightSegment.getFlightSegmentNotes())
                 .isToBeDeleted(false)
+                .typeCode("F")
                 .seat(flightSegment.getFlightSeats()).build();
     }
+
+    public static FlightSegment buildEntity(FlightSegmentDto segmentDto, Flight flight) {
+
+        return FlightSegment.builder()
+                .flight(flight)
+                .airlineName(segmentDto.getAirlineName())
+                .flightNumber(segmentDto.getFlightNumber())
+                .flightTicketNumber(segmentDto.getTicketNumber())
+                .flightDepartureAirport(segmentDto.getDepartureAirport())
+                .flightDepartureDate(segmentDto.getDepartureDate())
+                .flightDepartureTime(segmentDto.getDepartureTime())
+                .flightDepartureTerminal(segmentDto.getDepartureTerminal())
+                .flightDepartureGate(segmentDto.getDepartureGate())
+                .flightArrivalAirport(segmentDto.getArrivalAirport())
+                .flightArrivalDate(segmentDto.getArrivalDate())
+                .flightArrivalTime(segmentDto.getArrivalTime())
+                .flightArrivalTerminal(segmentDto.getArrivalTerminal())
+                .flightArrivalGate(segmentDto.getArrivalGate())
+                .flightFareClass(segmentDto.getFareClass())
+                .flightMeal(segmentDto.getMeal())
+                .flightBaggageClaim(segmentDto.getBaggageClaim())
+                .flightEntertainment(segmentDto.getEntertainment())
+                .flightOnTimePercentage(segmentDto.getOnTimePercentage())
+                .flightAircraftType(segmentDto.getAircraftType())
+                .operatingFlightNumber(segmentDto.getOperatingFlightNumber())
+                .flightOperatedBy(segmentDto.getOperatedBy())
+                .flightStops(segmentDto.getStops())
+                .flightDuration(segmentDto.getDuration())
+                .flightDistance(segmentDto.getDistance())
+                .flightSegmentNotes(segmentDto.getSegmentNotes())
+                .flightSeats(segmentDto.getSeat())
+                .build();
+
+    }
+
+    public static void updateEntity(FlightSegment segment, FlightSegmentDto segmentDto){
+        segment.setAirlineName(segmentDto.airlineName);
+        segment.setFlightNumber(segmentDto.flightNumber);
+        segment.setFlightTicketNumber(segmentDto.ticketNumber);
+        segment.setFlightDepartureAirport(segmentDto.departureAirport);
+        segment.setFlightDepartureDate(segmentDto.departureDate);
+        segment.setFlightDepartureTime(segmentDto.departureTime);
+        segment.setFlightDepartureTerminal(segmentDto.departureTerminal);
+        segment.setFlightDepartureGate(segmentDto.departureGate);
+        segment.setFlightArrivalAirport(segmentDto.arrivalAirport);
+        segment.setFlightArrivalDate(segmentDto.arrivalDate);
+        segment.setFlightArrivalTime(segmentDto.arrivalTime);
+        segment.setFlightArrivalTerminal(segmentDto.arrivalTerminal);
+        segment.setFlightArrivalGate(segmentDto.arrivalGate);
+        segment.setFlightFareClass(segmentDto.fareClass);
+        segment.setFlightMeal(segmentDto.meal);
+        segment.setFlightBaggageClaim(segmentDto.baggageClaim);
+        segment.setFlightEntertainment(segmentDto.entertainment);
+        segment.setFlightOnTimePercentage(segmentDto.onTimePercentage);
+        segment.setFlightAircraftType(segmentDto.aircraftType);
+        segment.setOperatingFlightNumber(segmentDto.operatingFlightNumber);
+        segment.setFlightOperatedBy(segmentDto.operatedBy);
+        segment.setFlightStops(segmentDto.stops);
+        segment.setFlightDuration(segmentDto.duration);
+        segment.setFlightDistance(segmentDto.distance);
+        segment.setFlightSegmentNotes(segmentDto.segmentNotes);
+        segment.setFlightSeats(segmentDto.seat);
+    }
+
 
 }

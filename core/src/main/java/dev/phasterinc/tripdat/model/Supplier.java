@@ -7,7 +7,7 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -16,9 +16,13 @@ import java.io.Serializable;
  * Name: Supplier
  * Purpose: Model the table supplier in the db. Stores information of the supplier of a trip item
  */
-@Data
 // @EqualsAndHashCode(of = "supplierId")// unsure after removing supplierId ref TravelAgency.java
 @Entity(name = "Supplier")
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Table(name = "supplier")
 public class Supplier implements Serializable {
     // == fields ==

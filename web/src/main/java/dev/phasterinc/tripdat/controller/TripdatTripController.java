@@ -77,6 +77,7 @@ public class TripdatTripController {
         // find the trip to display with the tripId passed with the url
        TripdatTrip trip = tripService.findOne(Long.parseLong(tripId));
         model.addAttribute("trip", trip);
+        model.addAttribute("tripId",tripId);
         model.addAttribute("tripFormattedDate", tripItemWrapperService.getFormattedDate(trip.getTripStartDate(), trip.getTripEndDate()));
         // Get a list of TripItemWrapper with the items from the trip
         List<TripItemWrapper> wrappers = tripItemWrapperService.getItemsInItemWrapper(trip);
