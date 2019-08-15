@@ -62,10 +62,13 @@
                                     <span th:class="|time-display|" th:text="${#temporals.format(item.endTime, 'h:mm a')}">
                                         <span th:class="|crosshairs|"></span>
                                     </span>
-                                        <span th:class="time-display-details">
-                                            <span th:class="|am-pm|"></span>
-                                            <span th:class="|time-zone|"></span>
-                                        </span>
+                                    <!--<span th:class="time-display-details">
+                                        <span th:class="|am-pm|"></span>
+                                        <span th:class="|time-zone|"></span>
+                                    </span>-->
+                                    <span th:if="${item.endDate != item.startDate}" th:class="end-date-details">
+                                        <span th:text="${#temporals.format(item.endDate, 'MM/dd/yyyy')}"></span>
+                                    </span>
                                 </span>
                         </div>
                         <!-- Arrival Details -->

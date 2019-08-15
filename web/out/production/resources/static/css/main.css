@@ -930,6 +930,9 @@ div.edit-trip-header {
 div.edit-trip-background p {
     padding: 5px;
 }
+.end-date-details {
+    justify-self: flex-end;
+}
 
 div.trip-description, div.other-trip-details {
     display: flex;

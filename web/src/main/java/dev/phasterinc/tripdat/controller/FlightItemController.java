@@ -225,6 +225,7 @@ public class FlightItemController {
                 // Validate newItem duration does not overlap any items within trip
                 for(int j = 0; j < wrappers.size();++j) {
                     TripItemWrapper currentItem = wrappers.get(j);
+                    if(currentItem.getTripItemTypeCode() != "F") continue;
                     FlightSegmentDto segment = (FlightSegmentDto) currentItem.getTripItem();
                     //  if flightSegment.ID is equal to the newSegmentDto.segmentId being edited
                     // Do not cause false positive. ignore item.
