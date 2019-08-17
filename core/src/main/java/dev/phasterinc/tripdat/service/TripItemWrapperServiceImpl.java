@@ -252,7 +252,6 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                             .endTime(rental.getCarRentalDropOffTime())
                             .attendees(AttendeeDto.buildDtoList(rental.getAttendees()))
                             .build();
-
                     itemWrappers.add(wrapper);
                     break;
                 // Lodging

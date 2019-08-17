@@ -1021,6 +1021,18 @@ div.other-trip-details {
 }
 
 /*
+    Car Item Styles
+ */
+.car-description-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.heavy-font {
+    font-weight: 800;
+}
+/*
     Other-item-details form grid styles
 */
 .travel-agency-form {

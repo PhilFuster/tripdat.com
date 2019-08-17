@@ -49,13 +49,13 @@
             </div>
         </details>
     </th:block>
-    <th:block th:fragment="traveler-info-fragment(travelers)">
+    <th:block th:fragment="traveler-info-fragment(travelers,description)">
         <details th:class="|traveler-info-details grey-border|">
             <summary th:text="|Traveler Info|"></summary>
             <th:block th:each="attendee, iter : ${travelers}">
                 <div th:class="|traveler-details|">
                     <span th:class="|traveler-name|" th:text="${attendee.name?:''}">Name</span>
-                    <span th:class="|other-traverler-details|" th:text="'Frequent Flyer#:' + ${attendee.loyaltyProgramNumber?:''}">Frequent Flyer #: </span>
+                    <span th:class="|other-traverler-details|" th:text="'Frequent' + ${description} + ' #' + ${attendee.loyaltyProgramNumber?:''}">Frequent Flyer #: </span>
                     <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.ticketNumber?:''}|"></span>
                 </div>
             </th:block>

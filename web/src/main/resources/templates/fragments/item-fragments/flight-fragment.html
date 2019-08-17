@@ -135,7 +135,7 @@
                                     </div>
                                 </div>
                                 <!-- Traveler Information -->
-                                <th:block th:replace="~{fragments/other-item-details::traveler-info-fragment(${item.attendees})}">
+                                <th:block th:replace="~{fragments/other-item-details::traveler-info-fragment(travelers=${item.attendees},description=${'Flyer'})}">
                                 </th:block>
                                 <details th:class="|aircraft-service-info grey-border|" th:object="${item.tripItem}">
                                     <summary th:text="|Aircraft and Service Details|">Aircraft and Service Details</summary>

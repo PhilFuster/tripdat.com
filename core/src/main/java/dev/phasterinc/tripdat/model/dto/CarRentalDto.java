@@ -55,6 +55,10 @@ public class CarRentalDto {
 
     private String dropOffPhoneNumber;
 
+    private String mileageCharges;
+
+    private String carDetails;
+
     private List<AttendeeDto> attendees;
 
     private String typeCode;
@@ -81,6 +85,8 @@ public class CarRentalDto {
         if(this.dropOffAddress != null && !this.dropOffAddress.isEmpty()) allEmpty = false;
         if(this.dropOffHoursOfOperation != null && !this.dropOffHoursOfOperation.isEmpty()) allEmpty = false;
         if(this.dropOffPhoneNumber != null && !this.dropOffPhoneNumber.isEmpty()) allEmpty = false;
+        if(this.mileageCharges != null && !this.mileageCharges.isEmpty()) allEmpty = false;
+        if(this.carDetails != null && !this.carDetails.isEmpty()) allEmpty = false;
         return allEmpty;
     }
 
@@ -106,6 +112,8 @@ public class CarRentalDto {
                 .dropOffAddress(carRental.getCarRentalDropOffAddress())
                 .dropOffHoursOfOperation(carRental.getCarRentalDropOffHoursOfOperation())
                 .dropOffPhoneNumber(carRental.getCarRentalDropOffPhoneNumber())
+                .mileageCharges(carRental.getCarRentalMileageCharges())
+                .carDetails(carRental.getCarRentalDetails())
                 .build();
        carRentalDto.setAttendees(new ArrayList<>());
        carRentalDto.getAttendees().addAll(attendeeDtos);
@@ -129,6 +137,8 @@ public class CarRentalDto {
                 .carRentalPickUpHoursOfOperation(carRentalDto.pickUpHoursOfOperation)
                 .carRentalPickUpLocationName(carRentalDto.pickUpLocationName)
                 .carRentalPickUpTime(carRentalDto.pickUpTime)
+                .carRentalDetails(carRentalDto.carDetails)
+                .carRentalMileageCharges(carRentalDto.mileageCharges)
                 .build();
         rental.setAttendees(new ArrayList<>());
         rental.setTripdatTrip(trip);
@@ -177,6 +187,8 @@ public class CarRentalDto {
         rental.setCarRentalPickUpHoursOfOperation(rentalDto.pickUpHoursOfOperation);
         rental.setCarRentalPickUpLocationName(rentalDto.pickUpLocationName);
         rental.setCarRentalPickUpTime(rentalDto.pickUpTime);
+        rental.setCarRentalMileageCharges(rentalDto.mileageCharges);
+        rental.setCarRentalDetails(rentalDto.carDetails);
         // update attendees
         for(int i = 0; i < rentalDto.getAttendees().size();++i) {
             AttendeeDto attendeeDto = rentalDto.getAttendees().get(i);

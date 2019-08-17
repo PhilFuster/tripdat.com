@@ -85,6 +85,12 @@ public class CarRental extends TripdatTripItem implements Serializable {
     @Column(name = "car_rental_drop_off_phone_number", columnDefinition = "TEXT")
     private String carRentalDropOffPhoneNumber;
 
+    @Column(name = "car_rental_mileage_charges", columnDefinition = "TEXT")
+    private String carRentalMileageCharges;
+
+    @Column(name = "car_rental_details", columnDefinition = "TEXT")
+    private String carRentalDetails;
+
     @Override
     public String getType() {
         return "CR";

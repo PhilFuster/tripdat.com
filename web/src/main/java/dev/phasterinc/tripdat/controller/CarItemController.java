@@ -17,10 +17,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 /************************************************************
@@ -31,15 +28,15 @@ import java.util.List;
  ************************************************************/
 
 /**
- * ClassName: FlightItemController
- * Purpose: Controller for Flight Item Mappings.
+ * ClassName: CarItemController
+ * Purpose: Controller for Car Item Mappings.
  *          Has functionality for Item CRUD pages such as EDIT, CREATE, DELETE items.
  */
 
 @Slf4j
 @Controller
 @ControllerAdvice
-public class FlightItemController {
+public class CarItemController {
     // == fields ==
     private TripdatTripService tripService;
     private TripdatTripItemService tripItemService;
@@ -47,8 +44,8 @@ public class FlightItemController {
 
     // == constructors ==
     @Autowired
-    public FlightItemController(TripdatTripService tripdatTripService, TripdatTripItemService tripItemService,
-                                TripItemWrapperService tripItemWrapperService) {
+    public CarItemController(TripdatTripService tripdatTripService, TripdatTripItemService tripItemService,
+                             TripItemWrapperService tripItemWrapperService) {
         this.tripService = tripdatTripService;
         this.tripItemService = tripItemService;
         this.tripItemWrapperService = tripItemWrapperService;
@@ -58,8 +55,8 @@ public class FlightItemController {
     // == model attributes ==
 
     /**
-     * Name: flightItemDto
-     * Purpose: Creates a flightItemDto to be used when editing/creating a Flight
+     * Name: carItemDto
+     * Purpose: Creates a carItemDto to be used when editing/creating a Car Rental
      * @param tripItemId - Id of the tripItem if editing an existing trip
      * @param tripId - Id of the Trip used to get back to the trip Details when done
      *               editing/creating an item
@@ -67,10 +64,10 @@ public class FlightItemController {
      *               1. Declare variables being used
      *               2. Initialize Dto lists
      *               3. If creating a trip
-     *               4.   Initialize the flightItemDto
+     *               4.   Initialize the carItemDto
      *               5. else editing a trip
      *               6.   Find the Entity being edited
-     *               7.   get the flightSegments
+     *               7.   get the car
      *               8.   If flightSegments is empty
      *               9.     add two segmentDtos to list segmentDtos
      *               10.  else flightSegments not empty
@@ -87,61 +84,37 @@ public class FlightItemController {
      *               21. add flightItemDto to model
      */
 
-    public FlightItemDto flightItemDto(Long tripItemId,Long tripId) {
+    public CarRentalDto carRentalDto(Long tripItemId, Long tripId) {
         if(tripId == -1) {
-            log.info("No TripId Passed to flightItemController");
+            log.info("No TripId Passed to carItemController");
         }
-        FlightItemDto flightItemDto;
-        List<FlightSegment> flightSegments;
+        CarRentalDto carItemDto;
         TripdatTripItem tripItem;
-        Flight flight;
+        CarRental carRental;
         List<Attendee> attendees;
-        List<FlightSegmentDto> segmentDtos = new ArrayList<>();
         List<AttendeeDto> attendeeDtos = new ArrayList<>();
         // Creating a trip
         boolean creatingTrip = tripItemId < 0;
         if(creatingTrip) {
-            flightItemDto = FlightItemDto.builder()
+            carItemDto = CarRentalDto.builder()
                     .itemId((long) -1)
                     .attendees(new ArrayList<AttendeeDto>())
                     .travelAgencyDto(TravelAgencyDto.builder().build())
                     .supplierDto(SupplierDto.builder().build())
                     .bookingDetailDto(BookingDetailDto.builder().build())
                     .build();
-            segmentDtos.add(FlightSegmentDto.builder().build());
-            segmentDtos.add(FlightSegmentDto.builder().build());
-            segmentDtos.add(FlightSegmentDto.builder().build());
-            segmentDtos.add(FlightSegmentDto.builder().build());
-            flightItemDto.setSegmentDtos(segmentDtos);
-            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
-            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
-            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
-            flightItemDto.getAttendees().add(AttendeeDto.builder().build());
-            flightItemDto.setTripId(tripId);
+            carItemDto.getAttendees().add(AttendeeDto.builder().build());
+            carItemDto.getAttendees().add(AttendeeDto.builder().build());
+            carItemDto.getAttendees().add(AttendeeDto.builder().build());
+            carItemDto.getAttendees().add(AttendeeDto.builder().build());
+            carItemDto.setTripId(tripId);
         } else {
-            // editing a trip
+            // editing a Car Item
             //
             // find tripItem
             tripItem = tripItemService.findByItemId(tripItemId);
-            flight = (Flight) tripItem;
-            flightSegments = flight.getFlightSegments();
-            // No Flight segments for this trip? Add two.
-            if(flightSegments.isEmpty()) {
-                segmentDtos.add(FlightSegmentDto.builder().departureDate(LocalDate.now()).arrivalDate(LocalDate.now()).build());
-                segmentDtos.add(FlightSegmentDto.builder().build());
-                segmentDtos.add(FlightSegmentDto.builder().build());
-                segmentDtos.add(FlightSegmentDto.builder().build());
-            } else {
-                Collections.sort(flightSegments, Comparator.nullsLast(Comparator.comparing(FlightSegment::getFlightDepartureDate, Comparator.nullsLast(LocalDate::compareTo)).thenComparing(FlightSegment::getFlightDepartureTime, Comparator.nullsLast(LocalTime::compareTo))));
-                for(FlightSegment segment: flightSegments) {
-                    FlightSegmentDto flightSegmentDto = FlightSegmentDto.buildDto(segment);
-                    segmentDtos.add(flightSegmentDto);
-                }
-                // adding two more FlightSegmentDtos so user can add if they want
-                segmentDtos.add(FlightSegmentDto.builder().build());
-                segmentDtos.add(FlightSegmentDto.builder().build());
-            }
-            attendees = flight.getAttendees();
+            carRental = (CarRental) tripItem;
+            attendees = carRental.getAttendees();
             // populate attendees if empty
             if (attendees.isEmpty()) {
                 attendeeDtos.add(AttendeeDto.builder().build());
@@ -153,20 +126,20 @@ public class FlightItemController {
                 attendeeDtos.add(AttendeeDto.builder().build());
                 attendeeDtos.add(AttendeeDto.builder().build());
             }
-            flightItemDto = FlightItemDto.buildDto(flight, segmentDtos, attendeeDtos);
+            carItemDto = CarRentalDto.buildDto(carRental, attendeeDtos);
         }
 
-        return flightItemDto;
+        return carItemDto;
     }
     /**
-     * Name: showFlightItemForm
-     * Purpose: Display a form for a Flight trip Item to the user to edit or create a new Flight
+     * Name: showCarRentalForm
+     * Purpose: Display a form for a Car Rental trip Item to the user to edit or create a new Car Rental
      */
-    @GetMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT})
-    public String showFlightItemForm(Model model,
+    @GetMapping(value = {Mappings.EDIT_CAR_RENTAL, Mappings.CREATE_CAR_RENTAL})
+    public String showCarRentalForm(Model model,
                                      @RequestParam(required = false, defaultValue = "-1") Long tripItemId,
                                      @RequestParam(defaultValue = "-1", required = false) Long tripId) {
-        model.addAttribute("flight", flightItemDto(tripItemId,tripId));
+        model.addAttribute("car", carRentalDto(tripItemId,tripId));
         // == local variables ==
         return tripItemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
     }
