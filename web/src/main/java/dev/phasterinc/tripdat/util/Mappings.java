@@ -8,6 +8,7 @@ public final class Mappings {
     public static final String USER_INDEX = "/user/index";
     public static final String LOGIN = "/login";
     public static final String ACCESS_DENIED = "/access-denied";
+    public static final String HTTP_404 ="/404";
     public static final String USER_TRIPS = "/user/trip/show/trips";
     public static final String TRIP_DETAILS = "/user/trip/show/trip-details";
     public static final String REGISTRATION = "/registration";

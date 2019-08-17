@@ -74,7 +74,6 @@ public class HomeController {
         List<TripdatTrip> tripsInAscendingOrder = tripdatTripService.get3UpcomingTripsByUserIdOrderByDateAsc(user.getUserId());
         List<String> formattedDateStrings = tripItemWrapperService.getFormattedDateStrings(tripsInAscendingOrder);
         List<String> durationOfTrips = tripItemWrapperService.getDurationOfTrips(tripsInAscendingOrder);
-        // TODO: What happens when Trip has no trip items yet? Must handle this null exception
         TripdatTrip nextTrip;
         List<TripItemWrapper> nextUpItems = new ArrayList<>();
         if(!tripsInAscendingOrder.isEmpty()) {
@@ -82,10 +81,17 @@ public class HomeController {
             nextUpItems = tripItemWrapperService.getNextUpItemsInItemWrapper(nextTrip);
             tripItemWrapperService.orderItemWrappersByAscDateAndTime(nextUpItems);
         }
+
         model.addAttribute("trips", tripsInAscendingOrder);
         model.addAttribute("formattedDateStrings", formattedDateStrings);
         model.addAttribute("durationOfTrips", durationOfTrips);
-        model.addAttribute("nextUpItems", nextUpItems);
+        if(nextUpItems.size() > 4) {
+            model.addAttribute("nextUpItems", nextUpItems.subList(0,4));
+        } else {
+            model.addAttribute("nextUpItems", nextUpItems);
+        }
+
+
 
         return ViewNames.USER_INDEX;
 

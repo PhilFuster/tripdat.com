@@ -139,6 +139,7 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
     @Override
     public List<TripItemWrapper> getNextUpItemsInItemWrapper(TripdatTrip nextTrip) {
         Set<TripdatTripItem> items = tripItemService.getMax4ItemsById(nextTrip.getTripId());
+
         return unwrapTripItemsIntoWrappers(items);
     }
 
