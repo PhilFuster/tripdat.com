@@ -22,6 +22,12 @@ allprojects {
 jar {
 	baseName='app'
 	version='0.0.1'
+	manifest {
+		attributes(
+				'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
+				'Main-Class': 'main.TripdatApplication'
+		)
+	}
 }
 
 subprojects {
