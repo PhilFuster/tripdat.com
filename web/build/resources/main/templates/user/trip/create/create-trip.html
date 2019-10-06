@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Trip</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div th:class="|create-trip-header|">
+        <div th:insert="~{fragments/date-header::date-header('Create a Trip')}" ></div>
+        <p th:text="|Here you can create a trip title, and other trip details|"></p>
+    </div>
+
+    <main th:class="create-trip-main">
+        <form action="#" th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_TRIP}__(tripId=-1)}" th:object="${trip}" method="post">
+            <p class="error-message alert alert-danger"
+               th:if="${#fields.hasGlobalErrors()}"
+               th:each="error : ${#fields.errors('global')}"
+               th:text="${error}">Validation error</p>
+            <div th:class="|trip-description|">
+                <div th:class="|form-group|"
+                     th:id="|trip-destination|"
+                     th:classappend="${#fields.hasErrors('destinationCity')}? 'has-error':''">
+                    <label th:for="|tripDestination|" th:class="|control-label|">Trip Destination*</label>
+                    <input th:type="text"
+                           th:class="|form-control|"
+                           th:field="*{destinationCity}"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error: ${#fields.errors('destinationCity')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+
+                <div th:class="|form-group|"
+                     th:classappend="${#fields.hasErrors('tripName')}? 'has-error':''">
+                    <label th:for="|tripName|" th:class="|control-label|">Trip Name*</label>
+                    <input th:type="text"
+                           th:class="|form-control|"
+                           th:field="*{tripName}"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error: ${#fields.errors('tripName')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+            </div>
+
+            <div th:class="|other-trip-details|">
+                <div th:class="|form-group|"
+                     th:classappend="${#fields.hasErrors('tripStartDate')}? 'has-error':''">
+                    <label th:for="|tripStartDate|" th:class="|control-label|">Trip Start Date*</label>
+                    <input th:type="date"
+                           th:class="|form-control|"
+                           th:id="tripStartDate"
+                           th:name="tripStartDate"
+                           th:value="*{tripStartDate}" />
+                           <!--th:value="*{#temporals.format(tripStartDate, 'yyyy-MM-dd' )}" />-->
+                    <p class="error-message alert alert-danger"
+                       th:each="error: ${#fields.errors('tripStartDate')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div th:class="|form-group|"
+                     th:classappend="${#fields.hasErrors('tripEndDate')}? 'has-error':''">
+                    <label th:for="|tripEndDate|" th:class="|control-label|">Trip End Date*</label>
+                    <input th:type="date"
+                           th:class="|form-control|"
+                           th:id="tripEndDate"
+                           th:name="tripEndDate"
+                           th:value="*{tripEndDate}" />
+                    <p class="error-message alert alert-danger"
+                       th:each="error: ${#fields.errors('tripEndDate')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div th:class="|form-group|"
+                     th:classappend="${#fields.hasErrors('tripDescription')}? 'has-error':''">
+                    <label th:for="|tripDescription|" th:class="|control-label|">Trip Description*</label>
+                    <textarea
+                           th:class="|form-control|"
+                           th:field="*{tripDescription}"></textarea>
+                    <p class="error-message alert alert-danger"
+                       th:each="error: ${#fields.errors('tripDescription')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div th:class="|form-group|">
+                    <label th:for="${#ids.next('isUserTraveler')}" th:text="|I'm a traveler on this trip|">I'm a traveler on this trip</label>
+                    <input type="checkbox" th:field="*{isUserTraveler}"/>
+                </div>
+                <div th:class="|form-group|">
+                    <button th:type="|submit|" th:class="|btn btn-success btn-sub|">Save</button>
+                    <button th:name="|cancel|" th:value="|cancel|" th:type="|cancel|" th:class="|btn btn-danger btn-cancel|">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </main>
+</div>
+
+
+
+</body>
+</html>

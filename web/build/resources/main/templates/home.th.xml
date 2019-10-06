@@ -1,0 +1,6 @@
+<thlogic>
+    <attr sel="#signin-anchor"
+          th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).SIGN_IN}__}"
+          th:text="#{application.sign-in}"
+    />
+</thlogic>

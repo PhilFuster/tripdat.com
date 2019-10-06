@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+
+<body>
+    <div th:fragment="next-up-items" class="nextUp-items-list">
+        <div class="nextUp-trip-item" th:each="item, iter : ${nextUpItems}">
+            <th:block th:switch="${item.tripItem.typeCode}">
+                <th:block th:case="F">
+                    <th:block th:include="~{fragments/item-fragments/flight-nextup-fragment::flight-nextup-fragment(item=${item},tripId=${tripId})}">
+                    </th:block>
+                </th:block>
+                <th:block th:case="CR">
+                    <th:block th:include="~{fragments/item-fragments/car-nextup-fragment::car-nextup-fragment(item=${item},tripId=${tripId})}">
+                    </th:block>
+                </th:block>
+            </th:block>
+
+        </div>
+    </div>
+</body>
+
+</html>

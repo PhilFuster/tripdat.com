@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Tripdat Travel Itinerary - log in</title>
+</head>
+<body>
+    <div layout:fragment="content" th:remove="tag">
+        <h1>Welcome to Philip Fuster's Senior Project - Tripdat Travel Itinerary Application</h1>
+        <h2>Tripdat is meant to store all your travel information in one easy to access location.</h2>
+        <ul>
+            <th:block th:if="${!#authorization.expression('isAuthenticated()')}">
+                <li><a href="/user" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">login</a></li>
+                <li><a href ="/user" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).REGISTRATION}__}">Create an account</a></li>
+            </th:block>
+            <th:block th:if="${#authorization.expression('isAuthenticated()')}">
+                <li><a href="/user" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">home</a></li>
+
+            </th:block>
+
+        </ul>
+    </div>
+</body>
+</html>

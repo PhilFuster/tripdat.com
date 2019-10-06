@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <th:block th:remove="tag" th:fragment="text-input(attributeName)">
+        <div th:class="|form-group|"
+             th:id="|confirmation-number|"
+             th:classappend="${#fields.hasErrors(attributeName)}? 'has-error':''">
+            <label th:for="|confirmationNumber|" th:class="|control-label|">Confirmation #</label>
+            <input th:type="text"
+                   th:class="|form-control|"
+                   th:field="*{attributeName}"/>
+            <p class="error-message alert alert-danger"
+               th:each="error: *{#fields.errors('segmentDtos[__${iter.index}__].departureGate')}"
+               th:text="${error}">Validation error</p>
+        </div>
+    </th:block>
+</body>
+</html>
