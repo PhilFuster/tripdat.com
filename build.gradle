@@ -17,11 +17,7 @@ allprojects {
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
 	apply plugin: 'io.spring.dependency-management'
-	
 }
-
-
-
 
 subprojects {
 	sourceCompatibility = '1.8'
@@ -50,6 +46,7 @@ subprojects {
 		// https://mvnrepository.com/artifact/org.passay/passay
 		compile group: 'org.passay', name: 'passay', version: '1.5.0'
 		compile group: 'com.google.guava', name: 'guava', version: '28.1-jre'
+		compile group: 'org.apache.maven.plugins', name: 'maven-jar-plugin', version: '3.1.2'
 	}
 	dependencyManagement {
 		imports {
