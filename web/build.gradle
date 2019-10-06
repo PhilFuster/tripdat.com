@@ -8,6 +8,8 @@ dependencies {
     // https://mvnrepository.com/artifact/org.modelmapper/modelmapper
     compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.4'
 
+}
 
-
+bootJar {
+    mainClassName='dev.phasterinc.tripdat.TripdatApplication'
 }
