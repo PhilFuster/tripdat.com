@@ -19,16 +19,6 @@ allprojects {
 	apply plugin: 'io.spring.dependency-management'
 	
 }
-jar {
-	baseName='app'
-	version='0.0.1'
-	manifest {
-		attributes(
-				'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-				'Main-Class': 'tripdat.TripdatApplication'
-		)
-	}
-}
 
 subprojects {
 	sourceCompatibility = '1.8'
