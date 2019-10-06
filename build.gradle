@@ -25,7 +25,7 @@ jar {
 	manifest {
 		attributes(
 				'Class-Path': configurations.compile.collect { it.getName() }.join(' '),
-				'Main-Class': 'tripdat.TripdatApplication'
+				'Main-Class': 'web.src.man.java.dev.phasterinc.tripdat.tripdat.TripdatApplication'
 		)
 	}
 }
