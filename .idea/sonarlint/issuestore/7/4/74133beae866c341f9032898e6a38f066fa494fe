@@ -1,0 +1,13 @@
+
+ssquid:S2159½"VRemove this call to "equals"; comparisons between unrelated types always return false.(‹ëƒùÿÿÿÿ
+hsquid:CommentedOutCodeLine¼"<This block of commented-out lines of code should be removed.(£¤¿¿üÿÿÿÿ
+Xsquid:S4973å"9Use the "equals" method if value comparison was intended.(ı·ğğ8ÃÕˆöÇ-
+jsquid:S1301‹"KReplace this "switch" statement by "if" statements to increase readability.(‚È„Œ8˜¢è‡É-
+=squid:S2129§" Remove this "String" constructor(Ñçœ¾úÿÿÿÿ
+ssquid:S2159Á"VRemove this call to "equals"; comparisons between unrelated types always return false.(‹ëƒùÿÿÿÿ
+isquid:S1301x"KReplace this "switch" statement by "if" statements to increase readability.(‚È„Œ8Ñğ¼‡É-
+csquid:CommentedOutCodeLineª"<This block of commented-out lines of code should be removed.(ê¾Ø
+X"squid:SwitchLastCaseIsDefaultCheck‹""Add a default case to this switch.(‚È„Œ8˜¢è‡É-
+W"squid:SwitchLastCaseIsDefaultCheckx""Add a default case to this switch.(‚È„Œ8Ñğ¼‡É-
+Psquid:S3400d"9Remove this method and declare a constant for this value.(´ÏÃ
+Ysquid:S1854§"<Remove this useless assignment to local variable "duration".(Ñçœ¾úÿÿÿÿ

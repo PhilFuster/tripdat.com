@@ -1,0 +1,23 @@
+
+jsquid:CommentedOutCodeLineö"<This block of commented-out lines of code should be removed.(ªŸÇâ8ì•µ³È-
+w
+squid:S135ß"YReduce the total number of break and continue statements in this loop to use at most one.(èí»8ôø¹ÂÈ-
+osquid:S1192Ñ"PDefine a constant instead of duplicating this literal "].departureDate" 3 times.(§İÏ¿8ÂÄœêÇ-
+]squid:S3752½">Add a "method" parameter to this "@RequestMapping" annotation.(ÄÜš8ÒãĞñÈ-
+±squid:S4449“"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(¥ï°8’¯¥ïÈ-
+msquid:S1192Ó"NDefine a constant instead of duplicating this literal "].arrivalDate" 3 times.(»”„Ø8‹æœêÇ-
+±squid:S4449Ñ"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(§İÏ¿8ŸğÖäÇ-
+±squid:S4449Ø"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(§İÏ¿8ŸğÖäÇ-
+nsquid:S4488¼"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(·ıêûÿÿÿÿ8¹íáÃ-
+Šsquid:S1192‚"fDefine a constant instead of duplicating this literal "Time Conflict with other item in trip" 4 times.(ÊÙûÃüÿÿÿÿ8Õ¯¤èÈ-
+msquid:S1192Ñ"NDefine a constant instead of duplicating this literal "segmentDtos[" 10 times.(§İÏ¿8ãÏ†ÙÆ-
+Nsquid:S1066"/Merge this if statement with the enclosing one.(Õ›‚ª8’¯¥ïÈ-
+¶squid:S4449‘"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(±è¨òÿÿÿÿÿ8’¯¥ïÈ-
+Nsquid:S1066ş"/Merge this if statement with the enclosing one.(à°€Õ8¨õºéÇ-
+]squid:S4973á"9Use the "equals" method if value comparison was intended.(¨¿Ôøúÿÿÿÿ8ŸË¥É-
+qsquid:S3776½"RRefactor this method to reduce its Cognitive Complexity from 74 to the 15 allowed.(¤±öÌ8—ä…ÙÆ-
+±squid:S4449Ú"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(»”„Ø8ŸğÖäÇ-
+±squid:S4449Ó"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(»”„Ø8ŸğÖäÇ-
+±squid:S4449Ÿ"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(»”„Ø8’¯¥ïÈ-
+±squid:S4449"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(§İÏ¿8’¯¥ïÈ-
+Ssquid:S1066ÿ"/Merge this if statement with the enclosing one.(¿‚·µşÿÿÿÿ8²“¥ïÈ-

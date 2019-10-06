@@ -1,0 +1,2292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="PostgreSQL - tripdat@localhost">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.15">
+    <root id="1">
+      <ServerVersion>11.4</ServerVersion>
+    </root>
+    <database id="2" parent="1" name="postgres">
+      <ObjectId>13012</ObjectId>
+      <Comment>default administrative connection database</Comment>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>578</IntrospectionStateNumber>
+      <Substituted>1</Substituted>
+    </database>
+    <database id="3" parent="1" name="tripdat">
+      <ObjectId>16393</ObjectId>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>683</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Relations>sequence|table|16682|16684|1
+sequence|table|16695|16697|1
+sequence|table|16881|16883|1
+sequence|table|16907|16909|1
+sequence|table|16941|16943|1
+sequence|table|16721|16723|1
+sequence|table|16737|16739|1
+sequence|table|16797|16799|1
+sequence|table|16839|16841|1
+</Relations>
+      <Visible>1</Visible>
+    </database>
+    <role id="4" parent="1" name="pg_execute_server_program">
+      <ObjectId>4571</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="5" parent="1" name="pg_monitor">
+      <ObjectId>3373</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="6" parent="1" name="pg_read_all_settings">
+      <ObjectId>3374</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="7" parent="1" name="pg_read_all_stats">
+      <ObjectId>3375</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="8" parent="1" name="pg_read_server_files">
+      <ObjectId>4569</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="9" parent="1" name="pg_signal_backend">
+      <ObjectId>4200</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="10" parent="1" name="pg_stat_scan_tables">
+      <ObjectId>3377</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="11" parent="1" name="pg_write_server_files">
+      <ObjectId>4570</ObjectId>
+      <Inherit>1</Inherit>
+      <ConnectionLimit>-1</ConnectionLimit>
+    </role>
+    <role id="12" parent="1" name="postgres">
+      <ObjectId>10</ObjectId>
+      <SuperRole>1</SuperRole>
+      <Inherit>1</Inherit>
+      <CreateRole>1</CreateRole>
+      <CreateDb>1</CreateDb>
+      <CanLogin>1</CanLogin>
+      <ConnectionLimit>-1</ConnectionLimit>
+      <Replication>1</Replication>
+      <BypassRls>1</BypassRls>
+    </role>
+    <schema id="13" parent="2" name="information_schema">
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="14" parent="2" name="pg_catalog">
+      <Comment>system catalog schema</Comment>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="15" parent="3" name="information_schema">
+      <ObjectId>12716</ObjectId>
+      <StateNumber>366</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>584</IntrospectionStateNumber>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="16" parent="3" name="pg_catalog">
+      <ObjectId>11</ObjectId>
+      <Comment>system catalog schema</Comment>
+      <StateNumber>359</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>585</IntrospectionStateNumber>
+      <Substituted>1</Substituted>
+    </schema>
+    <schema id="17" parent="3" name="pg_temp_1">
+      <ObjectId>11804</ObjectId>
+      <StateNumber>121</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>586</IntrospectionStateNumber>
+    </schema>
+    <schema id="18" parent="3" name="pg_toast">
+      <ObjectId>99</ObjectId>
+      <Comment>reserved schema for TOAST tables</Comment>
+      <StateNumber>1</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>587</IntrospectionStateNumber>
+    </schema>
+    <schema id="19" parent="3" name="pg_toast_temp_1">
+      <ObjectId>11805</ObjectId>
+      <StateNumber>121</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>588</IntrospectionStateNumber>
+    </schema>
+    <schema id="20" parent="3" name="public">
+      <ObjectId>2200</ObjectId>
+      <Comment>standard public schema</Comment>
+      <StateNumber>360</StateNumber>
+      <Owner>postgres</Owner>
+      <IntrospectionStateNumber>684</IntrospectionStateNumber>
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <access-method id="21" parent="3" name="btree">
+      <ObjectId>403</ObjectId>
+      <Comment>b-tree index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.bthandler</Handler>
+      <HandlerId>330</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="22" parent="3" name="hash">
+      <ObjectId>405</ObjectId>
+      <Comment>hash index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.hashhandler</Handler>
+      <HandlerId>331</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="23" parent="3" name="gist">
+      <ObjectId>783</ObjectId>
+      <Comment>GiST index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.gisthandler</Handler>
+      <HandlerId>332</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="24" parent="3" name="gin">
+      <ObjectId>2742</ObjectId>
+      <Comment>GIN index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.ginhandler</Handler>
+      <HandlerId>333</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="25" parent="3" name="spgist">
+      <ObjectId>4000</ObjectId>
+      <Comment>SP-GiST index access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.spghandler</Handler>
+      <HandlerId>334</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <access-method id="26" parent="3" name="brin">
+      <ObjectId>3580</ObjectId>
+      <Comment>block range index (BRIN) access method</Comment>
+      <StateNumber>1</StateNumber>
+      <Handler>pg_catalog.brinhandler</Handler>
+      <HandlerId>335</HandlerId>
+      <Type>index</Type>
+    </access-method>
+    <extension id="27" parent="3" name="plpgsql">
+      <ObjectId>12998</ObjectId>
+      <Comment>PL/pgSQL procedural language</Comment>
+      <StateNumber>519</StateNumber>
+      <Version>1.0</Version>
+      <SchemaName>pg_catalog</SchemaName>
+      <SchemaId>11</SchemaId>
+    </extension>
+    <sequence id="28" parent="20" name="attendee_attendee_id_seq">
+      <ObjectId>16797</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="29" parent="20" name="cruise_stop_cruise_stop_id_seq">
+      <ObjectId>16839</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="30" parent="20" name="flight_segment_flight_segment_id_seq">
+      <ObjectId>16881</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="31" parent="20" name="rail_segment_rail_segment_id_seq">
+      <ObjectId>16907</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="32" parent="20" name="role_role_id_seq">
+      <ObjectId>16695</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="33" parent="20" name="segment_information_segment_information_id_seq">
+      <ObjectId>16941</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="34" parent="20" name="tripdat_trip_item_trip_item_id_seq">
+      <ObjectId>16737</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="35" parent="20" name="tripdat_trip_trip_id_seq">
+      <ObjectId>16721</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <sequence id="36" parent="20" name="tripdat_user_user_id_seq">
+      <ObjectId>16682</ObjectId>
+      <StateNumber>573</StateNumber>
+      <Owner>postgres</Owner>
+      <SequenceIdentity>1</SequenceIdentity>
+      <CacheSize>1</CacheSize>
+      <DataType>bigint</DataType>
+    </sequence>
+    <object-type id="37" parent="20" name="transportation_type">
+      <ObjectId>16924</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+      <SubKind>enum</SubKind>
+      <Labels>Transportation
+Ground Transportation
+Ferry</Labels>
+      <SubCategory>enum</SubCategory>
+    </object-type>
+    <object-type id="38" parent="20" name="meeting_type">
+      <ObjectId>16971</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+      <SubKind>enum</SubKind>
+      <Labels>Activity
+Meeting
+Tour
+Concert
+Theatre</Labels>
+      <SubCategory>enum</SubCategory>
+    </object-type>
+    <object-type id="39" parent="20" name="directions_type">
+      <ObjectId>17008</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+      <SubKind>enum</SubKind>
+      <Labels>Bicycling
+Driving
+Transit
+Walking</Labels>
+      <SubCategory>enum</SubCategory>
+    </object-type>
+    <table id="40" parent="20" name="attendee">
+      <ObjectId>16799</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="41" parent="20" name="booking_detail">
+      <ObjectId>16784</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="42" parent="20" name="car_rental">
+      <ObjectId>16813</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>682</StateNumber>
+    </table>
+    <table id="43" parent="20" name="cruise">
+      <ObjectId>16826</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>604</StateNumber>
+    </table>
+    <table id="44" parent="20" name="cruise_stop">
+      <ObjectId>16841</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="45" parent="20" name="directions">
+      <ObjectId>17017</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="46" parent="20" name="flight">
+      <ObjectId>16868</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>607</StateNumber>
+    </table>
+    <table id="47" parent="20" name="flight_segment">
+      <ObjectId>16883</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>577</StateNumber>
+    </table>
+    <table id="48" parent="20" name="general_segment">
+      <ObjectId>16943</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>623</StateNumber>
+    </table>
+    <table id="49" parent="20" name="general_transportation">
+      <ObjectId>16931</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="50" parent="20" name="map_information">
+      <ObjectId>16994</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="51" parent="20" name="meeting">
+      <ObjectId>16981</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>610</StateNumber>
+    </table>
+    <table id="52" parent="20" name="parking">
+      <ObjectId>16855</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>613</StateNumber>
+    </table>
+    <table id="53" parent="20" name="rail">
+      <ObjectId>16897</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>616</StateNumber>
+    </table>
+    <table id="54" parent="20" name="rail_segment">
+      <ObjectId>16909</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="55" parent="20" name="restaurant">
+      <ObjectId>16957</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>620</StateNumber>
+    </table>
+    <table id="56" parent="20" name="role">
+      <ObjectId>16697</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="57" parent="20" name="supplier">
+      <ObjectId>16771</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>597</StateNumber>
+    </table>
+    <table id="58" parent="20" name="travel_agency">
+      <ObjectId>16758</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="59" parent="20" name="tripdat_trip">
+      <ObjectId>16723</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="60" parent="20" name="tripdat_trip_item">
+      <ObjectId>16739</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="61" parent="20" name="tripdat_user">
+      <ObjectId>16684</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <table id="62" parent="20" name="users_roles">
+      <ObjectId>16706</ObjectId>
+      <Owner>postgres</Owner>
+      <StateNumber>573</StateNumber>
+    </table>
+    <column id="63" parent="40" name="attendee_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;attendee_attendee_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="64" parent="40" name="trip_item_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="65" parent="40" name="attendee_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="66" parent="40" name="attendee_loyalty_program_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="67" parent="40" name="attendee_ticket_number">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="68" parent="40" name="attendee_pkey">
+      <ObjectId>16806</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>attendee_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="69" parent="40" name="attendee_pkey">
+      <ObjectId>16807</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>attendee_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>attendee_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="70" parent="40" name="fk_attendee_tripitem">
+      <ObjectId>16808</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="71" parent="41" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="72" parent="41" name="booking_site_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="73" parent="41" name="booking_site_url">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="74" parent="41" name="booking_date">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="75" parent="41" name="booking_reference_number">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="76" parent="41" name="booking_site_phone_number">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="77" parent="41" name="booking_site_email">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="78" parent="41" name="booking_total_cost">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="79" parent="41" name="booking_rate">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="80" parent="41" name="booking_is_purchased">
+      <Position>10</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="81" parent="41" name="booking_detail_pkey">
+      <ObjectId>16790</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="82" parent="41" name="booking_detail_pkey">
+      <ObjectId>16791</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>booking_detail_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="83" parent="41" name="fk_bookingdetail_tripitem">
+      <ObjectId>16792</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="84" parent="42" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="85" parent="42" name="car_rental_confirmation_number">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="86" parent="42" name="car_rental_pick_up_date">
+      <Position>3</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="87" parent="42" name="car_rental_pick_up_time">
+      <Position>4</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="88" parent="42" name="car_rental_drop_off_date">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="89" parent="42" name="car_rental_drop_off_time">
+      <Position>6</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="90" parent="42" name="car_rental_pick_up_location_name">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="91" parent="42" name="car_rental_pick_up_address">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="92" parent="42" name="car_rental_pick_up_hours_of_operation">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="93" parent="42" name="car_rental_phone_number">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="94" parent="42" name="car_rental_is_drop_off_location_same_as_pick_up">
+      <Position>11</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="95" parent="42" name="car_rental_drop_off_location_name">
+      <Position>12</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="96" parent="42" name="car_rental_drop_off_address">
+      <Position>13</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="97" parent="42" name="car_rental_drop_off_hours_of_operation">
+      <Position>14</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="98" parent="42" name="car_rental_drop_off_phone_number">
+      <Position>15</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="99" parent="42" name="car_rental_type">
+      <Position>16</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>665</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="100" parent="42" name="car_rental_mileage_charges">
+      <Position>17</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>679</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="101" parent="42" name="car_rental_details">
+      <Position>18</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>682</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="102" parent="42" name="car_rental_pkey">
+      <ObjectId>16819</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="103" parent="42" name="car_rental_pkey">
+      <ObjectId>16820</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>car_rental_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="104" parent="42" name="fk_carrental_tripitem">
+      <ObjectId>16821</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="105" parent="43" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="106" parent="43" name="cruise_line_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="107" parent="43" name="cruise_ship_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="108" parent="43" name="cruise_confirmation_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="109" parent="43" name="cruise_start_port_name">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="110" parent="43" name="cruise_start_port_address">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="111" parent="43" name="cruise_start_date">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="112" parent="43" name="cruise_start_time">
+      <Position>8</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="113" parent="43" name="cruise_start_time_zone">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="114" parent="43" name="cruise_is_start_location_same_as_end">
+      <Position>10</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <column id="115" parent="43" name="cruise_end_port_name">
+      <Position>11</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="116" parent="43" name="cruise_end_port_address">
+      <Position>12</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="117" parent="43" name="cruise_end_date">
+      <Position>13</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="118" parent="43" name="cruise_end_time">
+      <Position>14</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="119" parent="43" name="cruise_end_time_zone">
+      <Position>15</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="120" parent="43" name="cruise_cabin_number">
+      <Position>16</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="121" parent="43" name="cruise_dining_information">
+      <Position>17</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="122" parent="43" name="cruise_information_pkey">
+      <ObjectId>16832</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="123" parent="43" name="cruise_information_pkey">
+      <ObjectId>16833</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>cruise_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="124" parent="43" name="fk_cruiseinformation_tripitem">
+      <ObjectId>16834</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="125" parent="44" name="cruise_stop_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;cruise_stop_cruise_stop_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="126" parent="44" name="trip_item_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="127" parent="44" name="cruise_stop_port_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="128" parent="44" name="cruise_stop_port_address">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="129" parent="44" name="cruise_stop_arrival_date">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="130" parent="44" name="cruise_stop_arrival_time">
+      <Position>6</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="131" parent="44" name="cruise_stop_arrival_time_zone">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="132" parent="44" name="cruise_stop_departure_date">
+      <Position>8</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="133" parent="44" name="cruise_stop_departure_time">
+      <Position>9</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <index id="134" parent="44" name="cruise_stop_pkey">
+      <ObjectId>16848</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>cruise_stop_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="135" parent="44" name="cruise_stop_pkey">
+      <ObjectId>16849</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>cruise_stop_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>cruise_stop_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="136" parent="44" name="fk_cruisestop_tripitem">
+      <ObjectId>16850</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="137" parent="45" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="138" parent="45" name="directions_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="139" parent="45" name="directions_type">
+      <Position>3</Position>
+      <DataType>directions_type|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>17008</TypeId>
+    </column>
+    <index id="140" parent="45" name="directions_pkey">
+      <ObjectId>17023</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="141" parent="45" name="directions_pkey">
+      <ObjectId>17024</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>directions_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="142" parent="45" name="fk_directions_tripitem">
+      <ObjectId>17025</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="143" parent="46" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="144" parent="46" name="flight_confirmation_number">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="145" parent="46" name="flight_information_pkey">
+      <ObjectId>16874</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="146" parent="46" name="flight_information_pkey">
+      <ObjectId>16875</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>flight_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="147" parent="46" name="fk_flightinformation_tripitem">
+      <ObjectId>16876</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="148" parent="47" name="flight_segment_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;flight_segment_flight_segment_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="149" parent="47" name="trip_item_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="150" parent="47" name="airline_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="151" parent="47" name="flight_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="152" parent="47" name="flight_ticket_number">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="153" parent="47" name="flight_departure_airport">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="154" parent="47" name="flight_departure_date">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="155" parent="47" name="flight_departure_time">
+      <Position>8</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="156" parent="47" name="flight_departure_terminal">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="157" parent="47" name="flight_departure_gate">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="158" parent="47" name="flight_departure_time_zone">
+      <Position>11</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="159" parent="47" name="flight_arrival_airport">
+      <Position>12</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="160" parent="47" name="flight_arrival_date">
+      <Position>13</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="161" parent="47" name="flight_arrival_time">
+      <Position>14</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="162" parent="47" name="flight_arrival_time_zone">
+      <Position>15</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="163" parent="47" name="flight_arrival_terminal">
+      <Position>16</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="164" parent="47" name="flight_arrival_gate">
+      <Position>17</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>592</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="165" parent="47" name="flight_fare_class">
+      <Position>18</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="166" parent="47" name="flight_meal">
+      <Position>19</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="167" parent="47" name="flight_baggage_claim">
+      <Position>20</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="168" parent="47" name="flight_entertainment">
+      <Position>21</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="169" parent="47" name="flight_on_time_percentage">
+      <Position>22</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="170" parent="47" name="flight_aircraft_type">
+      <Position>23</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="171" parent="47" name="operating_flight_number">
+      <Position>24</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="172" parent="47" name="flight_operated_by">
+      <Position>25</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="173" parent="47" name="flight_stops">
+      <Position>26</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="174" parent="47" name="flight_duration">
+      <Position>27</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="175" parent="47" name="flight_distance">
+      <Position>28</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="176" parent="47" name="flight_segment_notes">
+      <Position>29</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="177" parent="47" name="flight_seats">
+      <Position>30</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>577</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="178" parent="47" name="flight_segment_pkey">
+      <ObjectId>16890</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>flight_segment_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="179" parent="47" name="flight_segment_pkey">
+      <ObjectId>16891</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>flight_segment_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>flight_segment_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="180" parent="47" name="fk_flightsegment_tripitem">
+      <ObjectId>16892</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="181" parent="48" name="segment_information_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;segment_information_segment_information_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="182" parent="48" name="trip_item_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="183" parent="48" name="segment_carrier_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="184" parent="48" name="segment_confirmation_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="185" parent="48" name="segment_departure_location_name">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="186" parent="48" name="segment_departure_address">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="187" parent="48" name="segment_arrival_date">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="188" parent="48" name="segment_departure_time">
+      <Position>8</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="189" parent="48" name="segment_departure_time_zone">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="190" parent="48" name="segment_arrival_location_name">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="191" parent="48" name="segment_arrival_address">
+      <Position>11</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="192" parent="48" name="segment_number_of_passengers">
+      <Position>12</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="193" parent="48" name="segment_description">
+      <Position>13</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="194" parent="48" name="segment_information_pkey">
+      <ObjectId>16950</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>segment_information_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="195" parent="48" name="segment_information_pkey">
+      <ObjectId>16951</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>segment_information_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>segment_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="196" parent="48" name="fk_segmentinformation_tripitem">
+      <ObjectId>16952</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="197" parent="49" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="198" parent="49" name="transportation_type">
+      <Position>2</Position>
+      <DataType>transportation_type|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>16924</TypeId>
+    </column>
+    <index id="199" parent="49" name="general_transportation_pkey">
+      <ObjectId>16934</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="200" parent="49" name="general_transportation_pkey">
+      <ObjectId>16935</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>general_transportation_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="201" parent="49" name="fk_generaltransportation_tripitem">
+      <ObjectId>16936</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="202" parent="50" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="203" parent="50" name="map_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="204" parent="50" name="map_address">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="205" parent="50" name="map_date">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="206" parent="50" name="map_time">
+      <Position>5</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="207" parent="50" name="map_time_zone">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="208" parent="50" name="map_information_pkey">
+      <ObjectId>17000</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="209" parent="50" name="map_information_pkey">
+      <ObjectId>17001</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>map_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="210" parent="50" name="fk_mapinformation_tripitem">
+      <ObjectId>17002</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="211" parent="51" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="212" parent="51" name="type_of_meeting">
+      <Position>2</Position>
+      <DataType>meeting_type|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>16971</TypeId>
+    </column>
+    <column id="213" parent="51" name="confirmation_number">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="214" parent="51" name="supplier_name">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="215" parent="51" name="start_time">
+      <Position>5</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="216" parent="51" name="time_zone">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="217" parent="51" name="end_date">
+      <Position>7</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="218" parent="51" name="end_time">
+      <Position>8</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="219" parent="51" name="location_name">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="220" parent="51" name="location_address">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="221" parent="51" name="meeting_information_pkey">
+      <ObjectId>16987</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="222" parent="51" name="meeting_information_pkey">
+      <ObjectId>16988</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>meeting_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="223" parent="51" name="fk_meetinginformation_tripitem">
+      <ObjectId>16989</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="224" parent="52" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="225" parent="52" name="parking_supplier_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="226" parent="52" name="parking_confirmation_number">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="227" parent="52" name="parking_valet_ticket_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="228" parent="52" name="parking_drop_off_location">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="229" parent="52" name="parking_hours_of_operation">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="230" parent="52" name="parking_phone_number">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="231" parent="52" name="parking_pick_up_date">
+      <Position>8</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="232" parent="52" name="parking_pick_up_time">
+      <Position>9</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <index id="233" parent="52" name="parking_information_pkey">
+      <ObjectId>16861</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="234" parent="52" name="parking_information_pkey">
+      <ObjectId>16862</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>parking_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="235" parent="52" name="fk_parkinginformation_tripitem">
+      <ObjectId>16863</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="236" parent="53" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <index id="237" parent="53" name="rail_information_pkey">
+      <ObjectId>16900</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="238" parent="53" name="rail_information_pkey">
+      <ObjectId>16901</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>rail_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="239" parent="53" name="fk_railinformation_tripitem">
+      <ObjectId>16902</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="240" parent="54" name="rail_segment_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;rail_segment_rail_segment_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="241" parent="54" name="trip_item_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="242" parent="54" name="rail_carrier_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="243" parent="54" name="rail_confirmation_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="244" parent="54" name="rail_departure_location_name">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="245" parent="54" name="rail_departure_address">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="246" parent="54" name="rail_departure_time">
+      <Position>7</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="247" parent="54" name="rail_departure_time_zone">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="248" parent="54" name="rail_arrival_location_name">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="249" parent="54" name="rail_arrival_address">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="250" parent="54" name="rail_arrival_date">
+      <Position>11</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="251" parent="54" name="rail_arrival_time">
+      <Position>12</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="252" parent="54" name="rail_arrival_time_zone">
+      <Position>13</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="253" parent="54" name="rail_train_number">
+      <Position>14</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="254" parent="54" name="rail_train_type">
+      <Position>15</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="255" parent="54" name="rail_coach_number">
+      <Position>16</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="256" parent="54" name="rail_class">
+      <Position>17</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="257" parent="54" name="rail_seat_assignment">
+      <Position>18</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="258" parent="54" name="rail_segment_pkey">
+      <ObjectId>16916</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>rail_segment_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="259" parent="54" name="rail_segment_pkey">
+      <ObjectId>16917</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>rail_segment_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>rail_segment_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="260" parent="54" name="fk_railsegment_tripitem">
+      <ObjectId>16918</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="261" parent="55" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="262" parent="55" name="restaurant_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="263" parent="55" name="restaurant_address">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="264" parent="55" name="restaurant_description">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="265" parent="55" name="restaurant_date">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="266" parent="55" name="restaurant_time">
+      <Position>6</Position>
+      <DataType>time|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1083</TypeId>
+    </column>
+    <column id="267" parent="55" name="restaurant_time_zone">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="268" parent="55" name="restaurant_cuisine">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="269" parent="55" name="restaurant_number_in_party">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="270" parent="55" name="restaurant_confirmation_number">
+      <Position>10</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="271" parent="55" name="restaurant_hours_of_operation">
+      <Position>11</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="272" parent="55" name="restaurant_dress_code">
+      <Position>12</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="273" parent="55" name="restaurant_price_range">
+      <Position>13</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="274" parent="55" name="restaurant_information_pkey">
+      <ObjectId>16963</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="275" parent="55" name="restaurant_information_pkey">
+      <ObjectId>16964</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>restaurant_information_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="276" parent="55" name="fk_restaurantinformation_tripitem">
+      <ObjectId>16965</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="277" parent="56" name="role_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;role_role_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="278" parent="56" name="role_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="279" parent="56" name="role_pkey">
+      <ObjectId>16704</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>role_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="280" parent="56" name="role_pkey">
+      <ObjectId>16705</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>role_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>role_pkey</UnderlyingIndexName>
+    </key>
+    <column id="281" parent="57" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="282" parent="57" name="supplier_contact_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="283" parent="57" name="supplier_phone_number">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="284" parent="57" name="supplier_email">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="285" parent="57" name="supplier_url">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="286" parent="57" name="supplier_name">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>597</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="287" parent="57" name="supplier_pkey">
+      <ObjectId>16777</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="288" parent="57" name="supplier_pkey">
+      <ObjectId>16778</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>supplier_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="289" parent="57" name="fk_supplier_tripitem">
+      <ObjectId>16779</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="290" parent="58" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="291" parent="58" name="travel_agency_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="292" parent="58" name="travel_agency_url">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="293" parent="58" name="travel_agency_confirmation_number">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="294" parent="58" name="travel_agency_contact_name">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="295" parent="58" name="travel_agency_phone_number">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="296" parent="58" name="travel_agency_email">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="297" parent="58" name="travel_agency_pkey">
+      <ObjectId>16764</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="298" parent="58" name="travel_agency_pkey">
+      <ObjectId>16765</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>travel_agency_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="299" parent="58" name="fk_travelagency_tripitem">
+      <ObjectId>16766</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <RefTableId>16739</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip_item</RefTableName>
+      <RefKeyName>tripdat_trip_item_pkey</RefKeyName>
+      <RefColNames>trip_item_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="300" parent="59" name="trip_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;tripdat_trip_trip_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="301" parent="59" name="user_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="302" parent="59" name="trip_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="303" parent="59" name="trip_start_date">
+      <Position>4</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="304" parent="59" name="trip_end_date">
+      <Position>5</Position>
+      <DataType>date|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>1082</TypeId>
+    </column>
+    <column id="305" parent="59" name="trip_description">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="306" parent="59" name="trip_image_link">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="307" parent="59" name="trip_destination_city">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="308" parent="59" name="trip_is_user_traveler">
+      <Position>9</Position>
+      <DataType>boolean|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>16</TypeId>
+    </column>
+    <index id="309" parent="59" name="tripdat_trip_pkey">
+      <ObjectId>16730</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="310" parent="59" name="tripdat_trip_pkey">
+      <ObjectId>16731</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>tripdat_trip_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="311" parent="59" name="fk_trip_user">
+      <ObjectId>16732</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16684</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_user</RefTableName>
+      <RefKeyName>tripdat_user_pkey</RefKeyName>
+      <RefColNames>user_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="312" parent="60" name="trip_item_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;tripdat_trip_item_trip_item_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="313" parent="60" name="trip_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="314" parent="60" name="user_id">
+      <Position>3</Position>
+      <DataType>bigint|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="315" parent="60" name="trip_item_note">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="316" parent="60" name="trip_item_photo_link">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="317" parent="60" name="tripdat_trip_item_pkey">
+      <ObjectId>16746</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="318" parent="60" name="tripdat_trip_item_pkey">
+      <ObjectId>16747</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_item_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>tripdat_trip_item_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="319" parent="60" name="fk_tripitem_trip">
+      <ObjectId>16748</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>trip_id</ColNames>
+      <RefTableId>16723</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_trip</RefTableName>
+      <RefKeyName>tripdat_trip_pkey</RefKeyName>
+      <RefColNames>trip_id</RefColNames>
+      <OnDelete>set-null</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <foreign-key id="320" parent="60" name="fk_tripitem_user">
+      <ObjectId>16753</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16684</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_user</RefTableName>
+      <RefKeyName>tripdat_user_pkey</RefKeyName>
+      <RefColNames>user_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <column id="321" parent="61" name="user_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <DefaultExpression>nextval(&apos;tripdat_user_user_id_seq&apos;::regclass)</DefaultExpression>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="322" parent="61" name="user_first_name">
+      <Position>2</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="323" parent="61" name="user_last_name">
+      <Position>3</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="324" parent="61" name="user_city">
+      <Position>4</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="325" parent="61" name="user_email">
+      <Position>5</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="326" parent="61" name="user_home_airport">
+      <Position>6</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="327" parent="61" name="user_login">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="328" parent="61" name="user_password">
+      <Position>8</Position>
+      <DataType>text|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <column id="329" parent="61" name="user_display_name">
+      <Position>9</Position>
+      <DataType>text|0s</DataType>
+      <StateNumber>573</StateNumber>
+      <TypeId>25</TypeId>
+    </column>
+    <index id="330" parent="61" name="tripdat_user_pkey">
+      <ObjectId>16691</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <index id="331" parent="61" name="unique_useremail">
+      <ObjectId>16693</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="332" parent="61" name="tripdat_user_pkey">
+      <ObjectId>16692</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>tripdat_user_pkey</UnderlyingIndexName>
+    </key>
+    <key id="333" parent="61" name="unique_useremail">
+      <ObjectId>16694</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_email</ColNames>
+      <UnderlyingIndexName>unique_useremail</UnderlyingIndexName>
+    </key>
+    <column id="334" parent="62" name="role_id">
+      <Position>1</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <column id="335" parent="62" name="user_id">
+      <Position>2</Position>
+      <DataType>bigint|0s</DataType>
+      <NotNull>1</NotNull>
+      <StateNumber>573</StateNumber>
+      <TypeId>20</TypeId>
+    </column>
+    <index id="336" parent="62" name="users_roles_pkey">
+      <ObjectId>16709</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>role_id
+user_id</ColNames>
+      <Unique>1</Unique>
+      <Primary>1</Primary>
+    </index>
+    <key id="337" parent="62" name="users_roles_pkey">
+      <ObjectId>16710</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>role_id
+user_id</ColNames>
+      <Primary>1</Primary>
+      <UnderlyingIndexName>users_roles_pkey</UnderlyingIndexName>
+    </key>
+    <foreign-key id="338" parent="62" name="users_roles_role_id_fkey">
+      <ObjectId>16711</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>role_id</ColNames>
+      <RefTableId>16697</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>role</RefTableName>
+      <RefKeyName>role_pkey</RefKeyName>
+      <RefColNames>role_id</RefColNames>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+    <foreign-key id="339" parent="62" name="users_roles_user_id_fkey">
+      <ObjectId>16716</ObjectId>
+      <StateNumber>573</StateNumber>
+      <ColNames>user_id</ColNames>
+      <RefTableId>16684</RefTableId>
+      <RefColPositions>1</RefColPositions>
+      <RefTableName>tripdat_user</RefTableName>
+      <RefKeyName>tripdat_user_pkey</RefKeyName>
+      <RefColNames>user_id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+      <OnUpdate>cascade</OnUpdate>
+    </foreign-key>
+  </database-model>
+</dataSource>

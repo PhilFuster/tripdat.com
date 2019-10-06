@@ -1,0 +1,6 @@
+
+ksquid:UselessImportCheck"@Remove this unused import 'dev.phasterinc.tripdat.model.Flight'.(ðÕ¡ö8Û„ØºÂ-
+ƒsquid:S1488"`Immediately return this expression instead of assigning it to the temporary variable "tripItem".(Ò±ö‰øÿÿÿÿ8Û„ØºÂ-
+ksquid:UselessImportCheck"@Remove this unused import 'dev.phasterinc.tripdat.model.Cruise'.(ã›óß8Û„ØºÂ-
+nsquid:UselessImportCheck"CRemove this unused import 'dev.phasterinc.tripdat.model.CarRental'.(ÇÛãš8Û„ØºÂ-
+dsquid:S1610	"FConvert the abstract class "TripdatTripItemFactory" into an interface.(Þ³Ô§8îúÍºÂ-

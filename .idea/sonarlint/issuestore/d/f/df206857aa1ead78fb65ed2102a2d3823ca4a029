@@ -1,0 +1,8 @@
+
+psquid:S3776X"RRefactor this method to reduce its Cognitive Complexity from 49 to the 15 allowed.(ûÄ•8Ó¹”çÈ-
+dsquid:UselessImportCheck"9Remove this unused import 'java.util.function.Predicate'.(ïÍ–¶8É€œçÈ-
+Ysquid:UselessImportCheck".Remove this unused import 'java.util.Objects'.(¼¸õ›8îïéæÈ-
+hsquid:UselessImportCheck"=Remove this unused import 'org.thymeleaf.expression.Strings'.(åî€ò8äãêæÈ-
+_squid:UselessImportCheck
+"4Remove this unused import 'java.lang.reflect.Field'.(„‡Áú8Ùë»È-
+_squid:UselessImportCheck"4Remove this unused import 'java.util.stream.Stream'.(ó÷”8¦›çÈ-

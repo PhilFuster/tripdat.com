@@ -1,0 +1,4 @@
+
+Ä%squid:RedundantThrowsDeclarationCheck*"’Remove the declaration of thrown exception 'org.springframework.security.core.userdetails.UsernameNotFoundException' which is a runtime exception.( èÎå
+_squid:UnusedPrivateMethod>":Remove this unused private "mapRolesToAuthorities" method.(È—‡´
+É%squid:RedundantThrowsDeclarationCheck5"’Remove the declaration of thrown exception 'org.springframework.security.core.userdetails.UsernameNotFoundException' which is a runtime exception.(“ÉÒøþÿÿÿÿ
