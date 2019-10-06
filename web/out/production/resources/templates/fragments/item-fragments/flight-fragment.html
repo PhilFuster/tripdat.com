@@ -44,6 +44,10 @@
                                 <h3 th:class="|checkpoint-type|" th:text="|Depart|">Depart</h3>
                                 <h2 th:class="|airport-name|" th:text="${item.tripItem.departureAirport}"></h2>
                                 <div th:class="gate-location">
+                                    <span th:if="${item.isArrival()}" th:class="|terminal-section start-flex|">
+                                        Date:
+                                        <span th:class="terminal" th:text="${item.tripItem.departureDate}"></span>
+                                    </span>
                                     <span th:class="terminal-section">
                                         Terminal:
                                         <span th:class="terminal" th:text="${item.tripItem.departureTerminal}"></span>
@@ -78,6 +82,10 @@
                                 <h2 th:class="airport-name" th:text="${item.tripItem.arrivalAirport}"></h2>
 
                                 <div th:class="gate-location">
+                                    <span th:if="${!item.isArrival()}" th:class="|terminal-section start-flex|">
+                                        Date:
+                                        <span th:class="terminal" th:text="${item.tripItem.arrivalDate}"></span>
+                                    </span>
                                     <span th:class="terminal-section">
                                         Terminal:
                                         <span th:class="terminal" th:text="${item.tripItem.arrivalTerminal}"></span>
@@ -135,7 +143,7 @@
                                     </div>
                                 </div>
                                 <!-- Traveler Information -->
-                                <th:block th:replace="~{fragments/other-item-details::traveler-info-fragment(${item.attendees})}">
+                                <th:block th:replace="~{fragments/other-item-details::traveler-info-fragment(travelers=${item.attendees},description=${'Flyer'})}">
                                 </th:block>
                                 <details th:class="|aircraft-service-info grey-border|" th:object="${item.tripItem}">
                                     <summary th:text="|Aircraft and Service Details|">Aircraft and Service Details</summary>

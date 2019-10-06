@@ -1,13 +1,10 @@
 package dev.phasterinc.tripdat.model.dto;
 import dev.phasterinc.tripdat.model.Attendee;
-import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.TripdatTripItem;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -37,7 +34,8 @@ public class AttendeeDto {
 
     private String ticketNumber;
 
-    private Boolean isAttendeeToBeDeleted;
+
+    @Builder.Default private Boolean isAttendeeToBeDeleted=false;
 
     public boolean isEmpty() {
         boolean allEmpty = true;

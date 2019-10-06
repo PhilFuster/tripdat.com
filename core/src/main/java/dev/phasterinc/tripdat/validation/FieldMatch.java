@@ -1,4 +1,4 @@
-package dev.phasterinc.tripdat.model;
+package dev.phasterinc.tripdat.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

@@ -207,13 +207,7 @@ div.content {
 }
 
 /*-------------- NextUp Trip Section-----------------*/
-span.flight-trip-item-icon-sm {
-    content:url('../images/plane.png');
-    max-width: 100%;
-    display: inline;
-    align-self: baseline;
-    padding-bottom: 10px;
-}
+
 div.card-header {
     display: flex;
     align-content: center;
@@ -709,6 +703,14 @@ a.trip-settings-link {
     line-height: 11px;
 }
 
+span.flight-trip-item-icon-sm {
+    content:url('../images/plane.png');
+    max-width: 100%;
+    display: inline;
+    align-self: baseline;
+    padding-bottom: 10px;
+}
+
 span.flight-trip-item-icon-m {
     content:url('../images/plane.png');
     width:70px;
@@ -718,8 +720,24 @@ span.flight-trip-item-icon-m {
     border-radius: 5px;
     align-self: self-end;
     justify-self: center;
+}
+span.car-trip-item-icon-sm {
+    content:url('../images/car-front.png');
+    max-width: 100%;
+    display: inline;
+    align-self: baseline;
+    padding-bottom: 10px;
+}
 
-
+span.car-trip-item-icon-m {
+    content:url('../images/car-front.png');
+    width:70px;
+    height:70px;
+    display: inline-block;
+    background-color: dodgerblue;
+    border-radius: 5px;
+    align-self: self-end;
+    justify-self: center;
 }
 .trip-item-object-pane {
     display: grid;
@@ -774,6 +792,9 @@ span.flight-trip-item-icon-m {
 }
 .gate-location {
     line-height: 10px;
+}
+.start-flex {
+     justify-self: flex-start;
 }
 .object-actions {
     display: inline-grid;
@@ -844,7 +865,7 @@ div.object-actions ul li a{
 }
 
 .traveler-info-details, .aircraft-service-info, .travel-agency-information,
-.supplier-information, .booking-detail-information, .item-notes-info {
+.supplier-information, .car-rental-details, .booking-detail-information, .item-notes-info {
     padding: 5px;
 }
 /*
@@ -852,7 +873,7 @@ div.object-actions ul li a{
 */
 details.traveler-info-details summary, details.aircraft-service-info summary,
 details.travel-agency-information summary, details.supplier-information summary, details.booking-detail-information summary,
-details.item-notes-info summary{
+details.item-notes-info summary, details.car-rental-details summary{
     direction: rtl;
 }
 
@@ -877,11 +898,11 @@ div.traveler-details {
     justify-self: flex-end;
 }
 div.aircraft-service-details, div.travel-agency-details, div.supplier-details, div.booking-details,
-div.item-notes-details {
+div.item-notes-details, div.details-list {
     padding: 5px;
 }
 .aircraft-service-details ul, div.travel-agency-details ul, div.supplier-details ul,
-div.booking-details ul {
+div.booking-details ul, div.details-list ul {
     list-style: none;
 }
 
@@ -1027,6 +1048,9 @@ div.other-trip-details {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+.item-fragment-p {
+    margin-bottom: 0;
 }
 
 .heavy-font {

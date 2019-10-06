@@ -14,13 +14,13 @@
                         <!--Switch statement for determining which fragment to insert based on the tripItemTypeCode -->
                         <th:block th:switch="${item.tripItem.typeCode}">
                             <th:block th:case="F">
-                                <th:block th:include="~{fragments/item-fragments/flight-fragment::flight-fragment(itemId=${item.id},tripId=${tripId})}">
+                                <th:block th:include="~{fragments/item-fragments/flight-fragment::flight-fragment(itemId=${itemId},tripId=${tripId})}">
                                 </th:block>
                             </th:block>
-                            <!--<th:block th:case="CR">
+                            <th:block th:case="CR">
                                 <th:block th:include="~{fragments/item-fragments/car-fragment::car-fragment(itemId=${item.id},tripId=${tripId})}">
                                 </th:block>
-                            </th:block>-->
+                            </th:block>
                         </th:block>
                     </th:block>
                 </th:block>

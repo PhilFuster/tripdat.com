@@ -24,8 +24,6 @@ public class TripdatUserServiceImpl implements TripdatUserService {
     @Autowired
     TripdatUserDao dao;
 
-
-
     @Autowired
     public void setDao(TripdatUserDao daoToSet) {
         dao = daoToSet;

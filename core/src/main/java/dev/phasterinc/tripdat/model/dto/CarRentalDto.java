@@ -43,11 +43,11 @@ public class CarRentalDto {
 
     private String pickUpHoursOfOperation;
 
-    private String pickUpphoneNumber;
+    private String pickUpPhoneNumber;
 
     private Boolean isDropOffLocationSameAsPickUp;
 
-    private  String dropOffLocation;
+    private  String dropOffLocationName;
 
     private String dropOffAddress;
 
@@ -80,8 +80,8 @@ public class CarRentalDto {
         if(this.pickUpLocationName != null && !this.pickUpLocationName.isEmpty()) allEmpty = false;
         if(this.pickUpAddress != null && !this.pickUpAddress.isEmpty()) allEmpty = false;
         if(this.pickUpHoursOfOperation != null && !this.pickUpHoursOfOperation.isEmpty()) allEmpty = false;
-        if(this.pickUpphoneNumber != null && !this.pickUpphoneNumber.isEmpty()) allEmpty = false;
-        if(this.dropOffLocation != null && !this.dropOffLocation.isEmpty()) allEmpty = false;
+        if(this.pickUpPhoneNumber != null && !this.pickUpPhoneNumber.isEmpty()) allEmpty = false;
+        if(this.dropOffLocationName != null && !this.dropOffLocationName.isEmpty()) allEmpty = false;
         if(this.dropOffAddress != null && !this.dropOffAddress.isEmpty()) allEmpty = false;
         if(this.dropOffHoursOfOperation != null && !this.dropOffHoursOfOperation.isEmpty()) allEmpty = false;
         if(this.dropOffPhoneNumber != null && !this.dropOffPhoneNumber.isEmpty()) allEmpty = false;
@@ -107,8 +107,8 @@ public class CarRentalDto {
                 .pickUpLocationName(carRental.getCarRentalPickUpLocationName())
                 .pickUpAddress(carRental.getCarRentalPickUpAddress())
                 .pickUpHoursOfOperation(carRental.getCarRentalPickUpHoursOfOperation())
-                .pickUpphoneNumber(carRental.getCarRentalPhoneNumber())
-                .dropOffLocation(carRental.getCarRentalDropOffLocation())
+                .pickUpPhoneNumber(carRental.getCarRentalPhoneNumber())
+                .dropOffLocationName(carRental.getCarRentalDropOffLocation())
                 .dropOffAddress(carRental.getCarRentalDropOffAddress())
                 .dropOffHoursOfOperation(carRental.getCarRentalDropOffHoursOfOperation())
                 .dropOffPhoneNumber(carRental.getCarRentalDropOffPhoneNumber())
@@ -127,11 +127,11 @@ public class CarRentalDto {
                 .carRentalDropOffAddress(carRentalDto.dropOffAddress)
                 .carRentalDropOffDate(carRentalDto.dropOffDate)
                 .carRentalDropOffHoursOfOperation(carRentalDto.dropOffHoursOfOperation)
-                .carRentalDropOffLocation(carRentalDto.dropOffLocation)
+                .carRentalDropOffLocation(carRentalDto.dropOffLocationName)
                 .carRentalDropOffPhoneNumber(carRentalDto.dropOffPhoneNumber)
                 .carRentalDropOffTime(carRentalDto.dropOffTime)
                 .carRentalIsDropOffLocationSameAsPickUp(carRentalDto.isDropOffLocationSameAsPickUp)
-                .carRentalPhoneNumber(carRentalDto.pickUpphoneNumber)
+                .carRentalPhoneNumber(carRentalDto.pickUpPhoneNumber)
                 .carRentalPickUpAddress(carRentalDto.pickUpAddress)
                 .carRentalPickUpDate(carRentalDto.pickUpDate)
                 .carRentalPickUpHoursOfOperation(carRentalDto.pickUpHoursOfOperation)
@@ -177,7 +177,7 @@ public class CarRentalDto {
         rental.setCarRentalDropOffAddress(rentalDto.dropOffAddress);
         rental.setCarRentalDropOffDate(rentalDto.dropOffDate);
         rental.setCarRentalDropOffHoursOfOperation(rentalDto.dropOffHoursOfOperation);
-        rental.setCarRentalDropOffLocation(rentalDto.getDropOffLocation());
+        rental.setCarRentalDropOffLocation(rentalDto.getDropOffLocationName());
         rental.setCarRentalDropOffPhoneNumber(rentalDto.dropOffPhoneNumber);
         rental.setCarRentalDropOffTime(rentalDto.dropOffTime);
         rental.setCarRentalIsDropOffLocationSameAsPickUp(rentalDto.isDropOffLocationSameAsPickUp);
@@ -201,12 +201,12 @@ public class CarRentalDto {
                 // get attendee to be updated
                 attendee = rental.getAttendees().get(i);
                 // if the DTO is marked to be deleted
-                // remove from attendees collection
                 if (attendeeDto.getIsAttendeeToBeDeleted()) {
                     rental.removeAttendee(attendee);
                     rentalDto.getAttendees().remove(attendeeDto);
                     continue;
                 }
+                // remove from attendees collection
                 // update attendee
                 AttendeeDto.updateEntity(attendee, attendeeDto);
             } else {

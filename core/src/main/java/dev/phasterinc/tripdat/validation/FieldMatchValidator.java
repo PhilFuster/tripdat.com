@@ -1,4 +1,4 @@
-package dev.phasterinc.tripdat.model;
+package dev.phasterinc.tripdat.validation;
 
 import org.apache.commons.beanutils.BeanUtils;
 

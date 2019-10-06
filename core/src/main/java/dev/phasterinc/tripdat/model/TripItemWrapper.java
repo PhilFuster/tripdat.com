@@ -72,6 +72,8 @@ public class TripItemWrapper {
 
     private String notes;
 
+    // A flag telling the front end to use the arrival component when displaying an item
+    private boolean isArrival;
 
 
     // == public methods ==

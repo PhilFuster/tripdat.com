@@ -36,7 +36,7 @@
                                             <h3 th:class="activities-header" th:text="${'Activities'}"></h3>
                                             <div th:class="transportation-items">
                                                 <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__(tripId=${tripId})}" th:text="Flight"></a>
-                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Car Rental'}"></a>
+                                                <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_CAR_RENTAL}__(tripId=${tripId})}" th:text="${'Car Rental'}"></a>
                                             </div>
                                             <div th:class="activity-items">
                                                 <a th:class="table-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CREATE_FLIGHT}__}" th:text="${'Lodging'}"></a>

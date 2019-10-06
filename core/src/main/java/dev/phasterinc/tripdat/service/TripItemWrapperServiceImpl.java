@@ -189,21 +189,43 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
 
                     // for each segment in flightInfo.flightSegments
                     for(FlightSegment segment : flightInfo.getFlightSegments()) {
+                        TripItemWrapper arrivalWrapper;
                         TripItemWrapper wrapper = TripItemWrapper.builder()
-                                .tripItemTypeCode(item.getType())
-                                .tripItem(FlightSegmentDto.buildDto(segment))
-                                .startDate(segment.getFlightDepartureDate())
-                                .startTime(segment.getFlightDepartureTime())
-                                .confirmationNumber(flightInfo.getFlightConfirmationNumber())
-                                .supplier(SupplierDto.buildDto(flightInfo.getSupplier()))
-                                .travelAgency(TravelAgencyDto.buildDto(flightInfo.getTravelAgency()))
+                                .attendees(AttendeeDto.buildDtoList(flightInfo.getAttendees()))
                                 .bookingDetail(BookingDetailDto.buildDto(flightInfo.getBookingDetail()))
-                                .id(item.getTripItemId())
-                                .notes(item.getTripItemNote())
+                                .confirmationNumber(flightInfo.getFlightConfirmationNumber())
                                 .endDate(segment.getFlightArrivalDate())
                                 .endTime(segment.getFlightArrivalTime())
-                                .attendees(AttendeeDto.buildDtoList(flightInfo.getAttendees()))
+                                .id(item.getTripItemId())
+                                .isArrival(false)
+                                .notes(item.getTripItemNote())
+                                .startDate(segment.getFlightDepartureDate())
+                                .startTime(segment.getFlightDepartureTime())
+                                .supplier(SupplierDto.buildDto(flightInfo.getSupplier()))
+                                .travelAgency(TravelAgencyDto.buildDto(flightInfo.getTravelAgency()))
+                                .tripItem(FlightSegmentDto.buildDto(segment))
+                                .tripItemTypeCode(item.getType())
                                 .build();
+                        // Add an arrival wrapper
+                        if(wrapper.getStartDate() != wrapper.getEndDate()) {
+                            arrivalWrapper = TripItemWrapper.builder()
+                                    .attendees(AttendeeDto.buildDtoList(flightInfo.getAttendees()))
+                                    .bookingDetail(BookingDetailDto.buildDto(flightInfo.getBookingDetail()))
+                                    .confirmationNumber(flightInfo.getFlightConfirmationNumber())
+                                    .endDate(segment.getFlightArrivalDate())
+                                    .endTime(segment.getFlightArrivalTime())
+                                    .isArrival(true)
+                                    .id(item.getTripItemId())
+                                    .notes(item.getTripItemNote())
+                                    .startDate(segment.getFlightDepartureDate())
+                                    .startTime(segment.getFlightDepartureTime())
+                                    .supplier(SupplierDto.buildDto(flightInfo.getSupplier()))
+                                    .travelAgency(TravelAgencyDto.buildDto(flightInfo.getTravelAgency()))
+                                    .tripItem(FlightSegmentDto.buildDto(segment))
+                                    .tripItemTypeCode(item.getType())
+                                    .build();
+                             itemWrappers.add(arrivalWrapper);
+                        }
 
                         itemWrappers.add(wrapper);
                     }
@@ -238,19 +260,20 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                     // do stuff for carRental
                     CarRental rental = (CarRental) item;
                     TripItemWrapper wrapper = TripItemWrapper.builder()
-                            .tripItemTypeCode(item.getType())
-                            .tripItem(CarRentalDto.buildDto(rental,AttendeeDto.buildDtoList(rental.getAttendees())))
-                            .startDate(rental.getCarRentalPickUpDate())
-                            .startTime(rental.getCarRentalPickUpTime())
-                            .confirmationNumber(rental.getCarRentalConfirmationNumber())
-                            .supplier(SupplierDto.buildDto(rental.getSupplier()))
-                            .travelAgency(TravelAgencyDto.buildDto(rental.getTravelAgency()))
+                            .attendees(AttendeeDto.buildDtoList(rental.getAttendees()))
                             .bookingDetail(BookingDetailDto.buildDto(rental.getBookingDetail()))
-                            .id(item.getTripItemId())
-                            .notes(item.getTripItemNote())
+                            .confirmationNumber(rental.getCarRentalConfirmationNumber())
                             .endDate(rental.getCarRentalDropOffDate())
                             .endTime(rental.getCarRentalDropOffTime())
-                            .attendees(AttendeeDto.buildDtoList(rental.getAttendees()))
+                            .id(item.getTripItemId())
+                            .isArrival(false)
+                            .notes(item.getTripItemNote())
+                            .startDate(rental.getCarRentalPickUpDate())
+                            .startTime(rental.getCarRentalPickUpTime())
+                            .supplier(SupplierDto.buildDto(rental.getSupplier()))
+                            .travelAgency(TravelAgencyDto.buildDto(rental.getTravelAgency()))
+                            .tripItemTypeCode(item.getType())
+                            .tripItem(CarRentalDto.buildDto(rental,AttendeeDto.buildDtoList(rental.getAttendees())))
                             .build();
                     itemWrappers.add(wrapper);
                     break;
@@ -324,6 +347,9 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
             if(item.getStartDate() == null) {
                items = itemsMap.getOrDefault(LocalDate.of(9999,12,31), new ArrayList<>());
             }else {
+                if(item.isArrival()) {
+                    items=itemsMap.getOrDefault(item.getEndDate(), new ArrayList<>());
+                }
                 items = itemsMap.getOrDefault(item.getStartDate(), new ArrayList<>());
             }
             log.info("Items from getWrappersInMap {}",items.toString());

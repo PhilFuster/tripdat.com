@@ -48,7 +48,7 @@ public class UserRegistrationController {
                                       BindingResult result) {
         TripdatUser existing = userService.findByEmail(userDto.getEmail());
         if (existing != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email ");;
+            result.rejectValue("email", null, "There is already an account registered with that email ");
         }
         TripdatUser existing1 = userService.findByLogin(userDto.getLogin());
         if (existing1 != null) {
@@ -57,6 +57,7 @@ public class UserRegistrationController {
         if(result.hasErrors()) {
             return "registration";
         }
+
         userService.save(userDto);
         return "redirect:/registration?success";
 

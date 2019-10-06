@@ -1,6 +1,7 @@
 package dev.phasterinc.tripdat.model.dto;
 
-import dev.phasterinc.tripdat.model.FieldMatch;
+import dev.phasterinc.tripdat.validation.FieldMatch;
+import dev.phasterinc.tripdat.validation.ValidPassword;
 import lombok.Data;
 
 import javax.validation.constraints.AssertTrue;
@@ -20,6 +21,7 @@ public class UserRegistrationDto {
     private String lastName;
 
     @NotEmpty
+    @ValidPassword
     private String password;
 
     @NotEmpty

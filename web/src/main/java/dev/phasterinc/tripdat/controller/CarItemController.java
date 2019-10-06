@@ -93,11 +93,13 @@ public class CarItemController {
         CarRental carRental;
         List<Attendee> attendees;
         List<AttendeeDto> attendeeDtos = new ArrayList<>();
+        TripdatTrip trip = tripService.findOne(tripId);
         // Creating a trip
         boolean creatingTrip = tripItemId < 0;
         if(creatingTrip) {
             carItemDto = CarRentalDto.builder()
                     .itemId((long) -1)
+                    .pickUpDate(trip.getTripStartDate())
                     .attendees(new ArrayList<AttendeeDto>())
                     .travelAgencyDto(TravelAgencyDto.builder().build())
                     .supplierDto(SupplierDto.builder().build())
@@ -128,6 +130,7 @@ public class CarItemController {
             }
             carItemDto = CarRentalDto.buildDto(carRental, attendeeDtos);
         }
+        log.info("carItemDto: {}",carItemDto);
 
         return carItemDto;
     }
@@ -137,15 +140,15 @@ public class CarItemController {
      */
     @GetMapping(value = {Mappings.EDIT_CAR_RENTAL, Mappings.CREATE_CAR_RENTAL})
     public String showCarRentalForm(Model model,
-                                     @RequestParam(required = false, defaultValue = "-1") Long tripItemId,
-                                     @RequestParam(defaultValue = "-1", required = false) Long tripId) {
-        model.addAttribute("car", carRentalDto(tripItemId,tripId));
+                                     @RequestParam(required = false, defaultValue = "-1",name = "itemId") Long tripItemId,
+                                     @RequestParam(defaultValue = "-1", required = false, name = "tripId") Long tripId) {
+        model.addAttribute("carRental", carRentalDto(tripItemId,tripId));
         // == local variables ==
-        return tripItemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
+        return tripItemId == -1 ? ViewNames.CREATE_CAR_RENTAL:ViewNames.EDIT_CAR_RENTAL;
     }
 
     /**
-     * Name: processFlight
+     * Name: processCarRental
      * Purpose: To process a TripdatTrip form.
      * @param itemId - id of item to query for
      * @param result - results to display if there are errors
@@ -157,141 +160,130 @@ public class CarItemController {
      *               4. If any do, return to form with that error.
      *               5. If no conflicts, update/create item.
      */
-    @RequestMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT}, method = RequestMethod.POST, params = {"itemId","tripId"})
-    public String processFlight(@ModelAttribute("flight") FlightItemDto flightDto,
+    @RequestMapping(value = {Mappings.EDIT_CAR_RENTAL, Mappings.CREATE_CAR_RENTAL}, method = RequestMethod.POST, params = {"itemId","tripId"})
+    public String processCarRental(@ModelAttribute("carRental") CarRentalDto rentalDto,
                                 @RequestParam(required = false, defaultValue = "-1") Long itemId,
                                 @RequestParam Long tripId, BindingResult result) {
-        log.info("TripId passed to processFlight: {}", tripId.toString());
-        log.info("flightDto segmentId: {} ", flightDto.getSegmentDtos().get(0).getSegmentId());
+        log.info("TripId passed to processCarRental: {}", tripId.toString());
+        log.info("CarRentalDto itemId: {} ", rentalDto.getItemId());
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatTrip trip = tripService.findOne(tripId);
         LocalDate tripStartDate = trip.getTripStartDate();
         LocalDate tripEndDate = trip.getTripEndDate();
         List<TripItemWrapper> wrappers = tripItemWrapperService.getItemsInItemWrapper(trip);
         tripItemWrapperService.orderItemWrappersByAscDateAndTime(wrappers);
-        // Verify that each segment's start date is not after the item's end date
-        for(int i = 0; i < flightDto.getSegmentDtos().size();++i) {
-            FlightSegmentDto newSegmentDto = flightDto.getSegmentDtos().get(i);
-            boolean isDateRangeNull = (newSegmentDto.getDepartureDate() == null || newSegmentDto.getArrivalDate() == null);
-            boolean isTimeRangeNull = newSegmentDto.getDepartureTime() == null || newSegmentDto.getArrivalTime() == null;
-            if (!isDateRangeNull) {
-                //
-                // DepartureDate cannot be after arrival Date
-                if( newSegmentDto.getDepartureDate().isAfter(newSegmentDto.getArrivalDate())) {
-                    result.rejectValue("segmentDtos[" + i + "].departureDate", null,
-                            "Departure date must be before arrival date.");
-                    result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
-                            "Arrival date must be after departure date.");
-                }
-                // TripItem must be within Trips date range
-                if(newSegmentDto.getDepartureDate().isBefore(tripStartDate) || newSegmentDto.getArrivalDate().isAfter(tripEndDate)) {
-                    result.rejectValue("segmentDtos[" + i + "].departureDate", null,
-                            "Date range does not fall within Trip's date range.");
-                    result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
-                            "Date range does not fall within Trip's date range.");
-                }
-                //
-                // Validate newItem duration does not overlap any items within trip
-                for(int j = 0; j < wrappers.size();++j) {
-                    TripItemWrapper currentItem = wrappers.get(j);
-                    if(currentItem.getTripItemTypeCode() != "F") continue;
-                    FlightSegmentDto segment = (FlightSegmentDto) currentItem.getTripItem();
-                    //  if flightSegment.ID is equal to the newSegmentDto.segmentId being edited
-                    // Do not cause false positive. ignore item.
-                    log.info("dbSegment.segmentId: {}", segment.getSegmentId());
-                    log.info("fromFormSegment.segmentId: {}", newSegmentDto.getSegmentId());
-                    if( segment.getSegmentId().equals(newSegmentDto.getSegmentId())) {
-                        continue;
-                    }
-                    // Continue if currentItem's date range is null
-                    if(currentItem.getStartDate() == null || currentItem.getEndDate() == null) {
-                        continue;
-                    }
-                    // If newItem and currentItem start on same day, and the currentItem starts and ends on same day, and
-                    if(newSegmentDto.getDepartureDate().isEqual(currentItem.getStartDate())
-                        && currentItem.getStartDate().isEqual(currentItem.getEndDate())) {
-                        // if newItem starts and ends on same day
-                        if(newSegmentDto.getDepartureDate().isEqual(newSegmentDto.getArrivalDate())) {
-                            // newItem begins and ends on same day. It is possible for newItem
-                            // and currentItem to not conflict as long as newItem starts after
-                            // currentItem ends or ends before currentItem starts
-                            /*if((newSegmentDto.getDepartureTime().isBefore(currentItem.getEndTime())
-                                    && newSegmentDto.getArrivalTime().isAfter(currentItem.getStartTime()))
-                                    || newSegmentDto.getArrivalTime().isAfter(currentItem.getStartTime())) {
-                                result.rejectValue("segmentDtos[" + i + "].departureTime", null,
-                                        "Conflict with other item in trip");
-                                result.rejectValue("segmentDtos[" + i + "].arrivalTime", null,
-                                        "Conflict with other item in trip");
-                            }*/
-                            if(!isTimeRangeNull && (currentItem.getStartTime() != null && currentItem.getEndTime() != null)) {
-                                if(newSegmentDto.getArrivalTime().isAfter(currentItem.getStartTime())
-                                        || newSegmentDto.getDepartureTime().isBefore(currentItem.getEndTime())) {
-                                    result.rejectValue("segmentDtos[" + i + "].departureTime", null,
-                                            "Time Conflict with other item in trip");
-                                    result.rejectValue("segmentDtos[" + i + "].arrivalTime", null,
-                                            "Time Conflict with other item in trip");
-                                }
-                            }
-                        }
-                               // newItem and currentItem start on same day
-                    } else if(newSegmentDto.getDepartureDate().isEqual(currentItem.getStartDate())
-                                // currentItem does not start and end on same day
-                                && !currentItem.getStartDate().isEqual(currentItem.getEndDate())
-                                // newItem starts and ends on same day
-                                && newSegmentDto.getDepartureDate().isEqual(newSegmentDto.getArrivalDate())) {
-                        // newItem must end before currentItem starts.
-                        // if newItem endTime is not before currentItem's end time report error
-                        if((newSegmentDto.getArrivalTime() != null && currentItem.getStartTime() != null) && !newSegmentDto.getArrivalTime().isBefore(currentItem.getStartTime())) {
-                            result.rejectValue("segmentDtos[" + i + "].departureTime", null,
-                                    "Time Conflict with other item in trip");
-                            result.rejectValue("segmentDtos[" + i + "].arrivalTime", null,
-                                    "Time Conflict with other item in trip");
 
-                        }
-                    }
-                    // newItem does not start on same day as currentItem
-                    // if newItem's arrivaleDate is not before the currentItem's startDate
-                    // OR newItem's departureDate is not after currentItems endDate there is overlap
-                    if( (currentItem.getStartDate() != null && currentItem.getEndDate() != null) && !(newSegmentDto.getArrivalDate().isBefore(currentItem.getStartDate())
-                            || newSegmentDto.getDepartureDate().isAfter(currentItem.getEndDate()))) {
-                        result.rejectValue("segmentDtos[" + i + "].departureDate", null,
-                                "Date Conflict with other item in trip");
-                        result.rejectValue("segmentDtos[" + i + "].arrivalDate", null,
-                                "Date Conflict with other item in trip");
 
-                    }
-                }
+
+        boolean isDateRangeNull = (rentalDto.getPickUpDate() == null || rentalDto.getDropOffDate() == null);
+        boolean isTimeRangeNull = rentalDto.getPickUpTime() == null ||rentalDto.getDropOffTime() == null;
+        if (!isDateRangeNull) {
+            //
+            // pickUp date cannot be after dropOff Date
+            if( rentalDto.getPickUpDate().isAfter(rentalDto.getDropOffDate())) {
+                result.rejectValue("rentalDto.pickUpDate", null,
+                        "Pick up date must be before drop off date.");
+                result.rejectValue("rentalDto.dropOffDate", null,
+                        "Drop off date must be after pick up date.");
+            }
+            // TripItem must be within Trips date range
+            if(rentalDto.getPickUpDate().isBefore(tripStartDate) || rentalDto.getDropOffDate().isAfter(tripEndDate)) {
+                result.rejectValue("rentalDto.pickUpDate", null,
+                        "Date range does not fall within Trip's date range.");
+                result.rejectValue("rentalDto.dropOffDate", null,
+                        "Date range does not fall within Trip's date range.");
             }
             //
-            // If there are validation errors return to create or edit pages
-            if (result.hasErrors()) {
-                return  itemId == -1 ? ViewNames.CREATE_FLIGHT:ViewNames.EDIT_FLIGHT;
+            // Validate newItem duration does not overlap any items within trip
+            for(int j = 0; j < wrappers.size();++j) {
+                TripItemWrapper currentItem = wrappers.get(j);
+                if(currentItem.getTripItemTypeCode() != "CR") continue;
+                //  if flightSegment.ID is equal to the newSegmentDto.segmentId being edited
+                // Do not cause false positive. ignore item.
+                log.info("dbCarRental: {}", rentalDto);
+                log.info("fromFormRentalID: {}", rentalDto.getItemId());
+                if( rentalDto.getItemId().equals(currentItem.getId())) {
+                    continue;
+                }
+                // Continue if currentItem's date range is null
+                if(currentItem.getStartDate() == null || currentItem.getEndDate() == null) {
+                    continue;
+                }
+                // If newItem and currentItem start on same day, and the currentItem starts and ends on same day, and
+                if(rentalDto.getPickUpDate().isEqual(currentItem.getStartDate())
+                        && currentItem.getStartDate().isEqual(currentItem.getEndDate())) {
+                    // if newItem starts and ends on same day
+                    if(rentalDto.getPickUpDate().isEqual(rentalDto.getDropOffDate())) {
+                        // newItem begins and ends on same day. It is possible for newItem
+                        // and currentItem to not conflict as long as newItem starts after
+                        // currentItem ends or ends before currentItem starts
+                        if(!isTimeRangeNull && (currentItem.getStartTime() != null && currentItem.getEndTime() != null)) {
+                            if(rentalDto.getDropOffTime().isAfter(currentItem.getStartTime())
+                                    || rentalDto.getPickUpTime().isBefore(currentItem.getEndTime())) {
+                                result.rejectValue("rentalDto.pickUpTime", null,
+                                        "Time Conflict with other item in trip");
+                                result.rejectValue("rentalDto.pickUpDropOffTime", null,
+                                        "Time Conflict with other item in trip");
+                            }
+                        }
+                    }
+                    // newItem and currentItem start on same day
+                } else if(rentalDto.getPickUpDate().isEqual(currentItem.getStartDate())
+                        // currentItem does not start and end on same day
+                        && !currentItem.getStartDate().isEqual(currentItem.getEndDate())
+                        // newItem starts and ends on same day
+                        && rentalDto.getPickUpDate().isEqual(rentalDto.getDropOffDate())) {
+                    // newItem must end before currentItem starts.
+                    // if newItem endTime is not before currentItem's end time report error
+                    if((rentalDto.getDropOffTime() != null && currentItem.getStartTime() != null) && !rentalDto.getDropOffTime().isBefore(currentItem.getStartTime())) {
+                        result.rejectValue("carRental.pickUpTime", null,
+                                "Time Conflict with other item in trip");
+                        result.rejectValue("carRental.DropOffTime", null,
+                                "Time Conflict with other item in trip");
+
+                    }
+                }
+                // newItem does not start on same day as currentItem
+                // if newItem's arrivaleDate is not before the currentItem's startDate
+                // OR newItem's departureDate is not after currentItems endDate there is overlap
+                if( (currentItem.getStartDate() != null && currentItem.getEndDate() != null) && !(rentalDto.getPickUpDate().isBefore(currentItem.getStartDate())
+                        || rentalDto.getDropOffDate().isAfter(currentItem.getEndDate()))) {
+                    result.rejectValue("carRental.pickUpDate", null,
+                            "Date Conflict with other item in trip");
+                    result.rejectValue("carRental.dropOffDate", null,
+                            "Date Conflict with other item in trip");
+                }
             }
+        }
+        //
+        // If there are validation errors return to create or edit pages
+        if (result.hasErrors()) {
+            return  itemId == -1 ? ViewNames.CREATE_CAR_RENTAL:ViewNames.EDIT_CAR_RENTAL;
         }
 
         // FlightItemDto has made it through the validation process
         // Create an entity from the flightItemDto
-        TripdatTripItem flight;
+        TripdatTripItem carRental;
         if(itemId == -1) {
-            flight = FlightItemDto.buildEntity(trip,flightDto);
-            flight.setUser(user.getTripdatUser());
+            carRental = CarRentalDto.buildEntity(rentalDto,trip);
+            carRental.setUser(user.getTripdatUser());
             // create the flight
-            tripItemService.create(flight);
+            tripItemService.create(carRental);
         } else {
             // updating a flight
-            flight = tripItemService.findByItemId(itemId);
-            FlightItemDto.updateEntity((Flight)flight,flightDto);
-            tripItemService.update(flight);
+            carRental = tripItemService.findByItemId(itemId);
+            CarRentalDto.updateEntity((CarRental)carRental,rentalDto);
+            tripItemService.update(carRental);
         }
         return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }
 
-    @RequestMapping(value = {Mappings.DELETE_FLIGHT}, params = {"itemId","tripId"})
-    public String deleteFlightItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
+    @RequestMapping(value = {Mappings.DELETE_CAR_RENTAL}, params = {"itemId","tripId"})
+    public String deleteCarRentalItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
                                    @RequestParam Long tripId) {
-        Flight flight = (Flight) tripItemService.findByItemId(itemId);
-        tripItemService.delete(flight);
+        CarRental rental = (CarRental) tripItemService.findByItemId(itemId);
+
+        tripItemService.delete(rental);
         return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }
-
 }

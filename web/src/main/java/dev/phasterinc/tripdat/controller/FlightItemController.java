@@ -98,6 +98,7 @@ public class FlightItemController {
         List<Attendee> attendees;
         List<FlightSegmentDto> segmentDtos = new ArrayList<>();
         List<AttendeeDto> attendeeDtos = new ArrayList<>();
+        TripdatTrip trip = tripService.findOne(tripId);
         // Creating a trip
         boolean creatingTrip = tripItemId < 0;
         if(creatingTrip) {
@@ -108,7 +109,7 @@ public class FlightItemController {
                     .supplierDto(SupplierDto.builder().build())
                     .bookingDetailDto(BookingDetailDto.builder().build())
                     .build();
-            segmentDtos.add(FlightSegmentDto.builder().build());
+            segmentDtos.add(FlightSegmentDto.builder().departureDate(trip.getTripStartDate()).build());
             segmentDtos.add(FlightSegmentDto.builder().build());
             segmentDtos.add(FlightSegmentDto.builder().build());
             segmentDtos.add(FlightSegmentDto.builder().build());
