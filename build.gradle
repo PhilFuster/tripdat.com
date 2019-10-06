@@ -10,7 +10,6 @@ buildscript {
 	}
 }
 
-
 allprojects {
 	group = 'dev.phasterinc'
 	version = '1.0.0-SNAPSHOT'
@@ -20,13 +19,14 @@ allprojects {
 	apply plugin: 'io.spring.dependency-management'
 	
 }
+jar {
+	baseName='app'
+	version='0.0.1'
+}
 
 subprojects {
-	
 	sourceCompatibility = '1.8'
 	targetCompatibility = '1.8'
-	
-
 	repositories {
 		mavenCentral()
 	}
@@ -51,9 +51,6 @@ subprojects {
 		// https://mvnrepository.com/artifact/org.passay/passay
 		compile group: 'org.passay', name: 'passay', version: '1.5.0'
 		compile group: 'com.google.guava', name: 'guava', version: '28.1-jre'
-
-
-
 	}
 	dependencyManagement {
 		imports {
