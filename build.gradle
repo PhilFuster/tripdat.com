@@ -10,6 +10,12 @@ buildscript {
 	}
 }
 
+bootJar {
+	archiveFileName = 'tripdat.jar'
+}
+
+
+
 allprojects {
 	group = 'dev.phasterinc'
 	version = '1.0.0-SNAPSHOT'
@@ -60,8 +66,4 @@ subprojects {
 			mavenBom("org.springframework.boot:spring-boot-starter-parent:${springBootVersion}")
 		}
 	}
-}
-
-bootJar {
-	archiveFileName = 'tripdat.jar'
 }
