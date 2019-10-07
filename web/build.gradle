@@ -10,8 +10,9 @@ dependencies {
 
 }
 bootJar {
+    launchScript()
     manifest {
         attributes 'Start-Class': 'dev.phasterinc.tripdat.TripdatApplication'
-        attributes 'Main-Class':'dev.phasterinc.TripdatApplication'
+        attributes 'Main-Class':'dev.phasterinc.tripdat.TripdatApplication'
     }
 }
