@@ -11,8 +11,8 @@ dependencies {
 }
 bootJar {
     manifest {
-        attributes 'Start-Class': 'tripdat.TripdatApplication'
-        attributes 'Main-Class':'tripdat.TripdatApplication'
+        attributes 'Start-Class': 'TripdatApplication'
+        attributes 'Main-Class':'TripdatApplication'
     }
-    mainClassName='tripdat.TripdatApplication'
+    mainClassName='TripdatApplication'
 }
