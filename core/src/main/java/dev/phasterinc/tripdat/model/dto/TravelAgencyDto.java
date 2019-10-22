@@ -1,5 +1,8 @@
 package dev.phasterinc.tripdat.model.dto;
 
+import dev.phasterinc.tripdat.model.TravelAgency;
+import dev.phasterinc.tripdat.model.TripdatTripItem;
+import lombok.*;
 
 /************************************************************
  * Name:  Philip Fuster                                     *
@@ -7,10 +10,6 @@ package dev.phasterinc.tripdat.model.dto;
  * Class : CMPS 450 Senior Project                          *
  * Date : 3/1/2019                                          *
  ************************************************************/
-
-import dev.phasterinc.tripdat.model.TravelAgency;
-import dev.phasterinc.tripdat.model.TripdatTripItem;
-import lombok.*;
 
 /**
  * ClassName: TravelAgencyDto
@@ -33,6 +32,15 @@ public class TravelAgencyDto {
     private String phoneNumber;
     private String email;
 
+    /**
+     * Name: buildDto
+     * Purpose: To build a TravelAgency Data transfer object.
+     * Synopsis: Build's a TravelAgencyDto instance from a TravelAgency entity
+     * <p>
+     *
+     * @param agency The TravelAgency the DTO will be modeling
+     * @return The built TravelAgency Data Transfer Object
+     */
     public static TravelAgencyDto buildDto(TravelAgency agency) {
         TravelAgencyDto dto = TravelAgencyDto.builder()
                 .id(agency.getId())
@@ -46,6 +54,16 @@ public class TravelAgencyDto {
         return dto;
     }
 
+    /**
+     * Name: buildEntity
+     * Purpose: To build a TravelAgency Entity from a TravelAgency Data Transfer Object
+     * Synopsis: Build's a TravelAgency Entity from a TravelAgencyDTO and the Item it belongs to.
+     * <p>
+     *
+     * @param agencyDto TravelAgency Data Transfer Object the Entity will be modeled after.
+     * @param item The TripdatTripItem the TravelAgency belongs to.
+     * @return the built TravelAgency dto.
+     */
     public static TravelAgency buildEntity(TravelAgencyDto agencyDto, TripdatTripItem item) {
         TravelAgency agency = TravelAgency.builder()
                 .tripItem(item)
@@ -59,6 +77,15 @@ public class TravelAgencyDto {
         return agency;
     }
 
+    /**
+     * Name: updateEntity
+     * Purpose: To update a TravelAgency entity
+     * Synopsis: Updates a TravelAgency entity with the information from the DTO.
+     * <p>
+     *
+     * @param agency The TravelAgency entity that will be updated.
+     * @param agencyDto The TravelAgencyDTO where the information is coming from.
+     */
     public static void updateEntity(TravelAgency agency, TravelAgencyDto agencyDto) {
         agency.setTravelAgencyName(agencyDto.agencyName);
         agency.setTravelAgencyUrl(agencyDto.url);

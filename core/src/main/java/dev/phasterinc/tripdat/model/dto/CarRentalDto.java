@@ -10,6 +10,18 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
+
+/**
+ * Name: CarRentalDto
+ * Purpose: Data Transfer Object for the CarRental table
+ */
 @Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
@@ -47,7 +59,7 @@ public class CarRentalDto {
 
     private Boolean isDropOffLocationSameAsPickUp;
 
-    private  String dropOffLocationName;
+    private String dropOffLocationName;
 
     private String dropOffAddress;
 
@@ -69,29 +81,46 @@ public class CarRentalDto {
 
     private BookingDetailDto bookingDetailDto;
 
+    /**
+     * Name: isEmpty
+     * Purpose: Verify if the object is empty
+     * Synopsis: Determines if all the dto's attributes are empty.
+     */
     public boolean isEmpty() {
         boolean allEmpty = true;
-        if(this.confirmationNumber != null && !this.confirmationNumber.isEmpty()) allEmpty = false;
-        if(this.carRentalType != null && !this.carRentalType.isEmpty()) allEmpty = false;
-        if(this.pickUpDate != null) allEmpty = false;
-        if(this.pickUpTime != null) allEmpty = false;
-        if(this.dropOffDate != null) allEmpty = false;
-        if(this.dropOffTime != null) allEmpty = false;
-        if(this.pickUpLocationName != null && !this.pickUpLocationName.isEmpty()) allEmpty = false;
-        if(this.pickUpAddress != null && !this.pickUpAddress.isEmpty()) allEmpty = false;
-        if(this.pickUpHoursOfOperation != null && !this.pickUpHoursOfOperation.isEmpty()) allEmpty = false;
-        if(this.pickUpPhoneNumber != null && !this.pickUpPhoneNumber.isEmpty()) allEmpty = false;
-        if(this.dropOffLocationName != null && !this.dropOffLocationName.isEmpty()) allEmpty = false;
-        if(this.dropOffAddress != null && !this.dropOffAddress.isEmpty()) allEmpty = false;
-        if(this.dropOffHoursOfOperation != null && !this.dropOffHoursOfOperation.isEmpty()) allEmpty = false;
-        if(this.dropOffPhoneNumber != null && !this.dropOffPhoneNumber.isEmpty()) allEmpty = false;
-        if(this.mileageCharges != null && !this.mileageCharges.isEmpty()) allEmpty = false;
-        if(this.carDetails != null && !this.carDetails.isEmpty()) allEmpty = false;
+        if (this.confirmationNumber != null && !this.confirmationNumber.isEmpty()) allEmpty = false;
+        if (this.carRentalType != null && !this.carRentalType.isEmpty()) allEmpty = false;
+        if (this.pickUpDate != null) allEmpty = false;
+        if (this.pickUpTime != null) allEmpty = false;
+        if (this.dropOffDate != null) allEmpty = false;
+        if (this.dropOffTime != null) allEmpty = false;
+        if (this.pickUpLocationName != null && !this.pickUpLocationName.isEmpty()) allEmpty = false;
+        if (this.pickUpAddress != null && !this.pickUpAddress.isEmpty()) allEmpty = false;
+        if (this.pickUpHoursOfOperation != null && !this.pickUpHoursOfOperation.isEmpty()) allEmpty = false;
+        if (this.pickUpPhoneNumber != null && !this.pickUpPhoneNumber.isEmpty()) allEmpty = false;
+        if (this.dropOffLocationName != null && !this.dropOffLocationName.isEmpty()) allEmpty = false;
+        if (this.dropOffAddress != null && !this.dropOffAddress.isEmpty()) allEmpty = false;
+        if (this.dropOffHoursOfOperation != null && !this.dropOffHoursOfOperation.isEmpty()) allEmpty = false;
+        if (this.dropOffPhoneNumber != null && !this.dropOffPhoneNumber.isEmpty()) allEmpty = false;
+        if (this.mileageCharges != null && !this.mileageCharges.isEmpty()) allEmpty = false;
+        if (this.carDetails != null && !this.carDetails.isEmpty()) allEmpty = false;
         return allEmpty;
     }
 
+    /**
+     * Name: buildDto
+     * Purpose: To build a CarRentalDto instance from a CarRental entity
+     * Synopsis: Build's a carRental Data Transfer Object from a CarRental entity and a
+     * list of already created AttendeeDto objects.
+     * <p>
+     *
+     * @param carRental    CarRental entity that the Data Transfer Object will be modeled after.
+     * @param attendeeDtos List of AttendeeDto objects of attendees that will be
+     *                     partaking in the CarRental.
+     * @return CarRentalDto instance modeled after parameters passed in.
+     */
     public static CarRentalDto buildDto(CarRental carRental, List<AttendeeDto> attendeeDtos) {
-       CarRentalDto carRentalDto = CarRentalDto.builder()
+        CarRentalDto carRentalDto = CarRentalDto.builder()
                 .itemId(carRental.getTripItemId())
                 .tripId(carRental.getTripdatTrip().getTripId())
                 .typeCode(carRental.getType())
@@ -115,11 +144,21 @@ public class CarRentalDto {
                 .mileageCharges(carRental.getCarRentalMileageCharges())
                 .carDetails(carRental.getCarRentalDetails())
                 .build();
-       carRentalDto.setAttendees(new ArrayList<>());
-       carRentalDto.getAttendees().addAll(attendeeDtos);
-       return carRentalDto;
+        carRentalDto.setAttendees(new ArrayList<>());
+        carRentalDto.getAttendees().addAll(attendeeDtos);
+        return carRentalDto;
     }
 
+    /**
+     * Name: buildEntity
+     * Purpose: To build a CarRental entity
+     * Synopsis: Build's CarRental entity from a carRentalDto & the Trip it belongs to
+     * <p>
+     *
+     * @param carRentalDto CarRentalDto to model the entity after
+     * @param trip         TripdatTrip the CarRental belongs to.
+     * @return The build CarRental entity
+     */
     public static CarRental buildEntity(CarRentalDto carRentalDto, TripdatTrip trip) {
         CarRental rental = CarRental.builder()
                 .carRentalConfirmationNumber(carRentalDto.confirmationNumber)
@@ -144,11 +183,11 @@ public class CarRentalDto {
         rental.setTripdatTrip(trip);
         // build other details
         rental.setTravelAgency(TravelAgencyDto.buildEntity(carRentalDto.getTravelAgencyDto(), rental));
-        rental.setSupplier(SupplierDto.buildEntity(carRentalDto.getSupplierDto(),rental));
-        rental.setBookingDetail(BookingDetailDto.buildEntity(carRentalDto.getBookingDetailDto(),rental));
+        rental.setSupplier(SupplierDto.buildEntity(carRentalDto.getSupplierDto(), rental));
+        rental.setBookingDetail(BookingDetailDto.buildEntity(carRentalDto.getBookingDetailDto(), rental));
         // Build Attendees list
-        for(AttendeeDto attendeeDto: carRentalDto.getAttendees()) {
-            if(attendeeDto.isEmpty()) {
+        for (AttendeeDto attendeeDto : carRentalDto.getAttendees()) {
+            if (attendeeDto.isEmpty()) {
                 continue;
             }
             Attendee attendee = Attendee.builder()
@@ -162,7 +201,15 @@ public class CarRentalDto {
         return rental;
     }
 
-
+    /**
+     * Name: updateEntity
+     * Purpose: To update a CarRental entity
+     * Synopsis: Updates CarRental entity with what is in a CarRental dto
+     * <p>
+     *
+     * @param rental    CarRental entity to be updated
+     * @param rentalDto CarRental dto that the entity will be updated with
+     */
     public static void updateEntity(CarRental rental, CarRentalDto rentalDto) {
         TravelAgency agency = rental.getTravelAgency();
         Supplier supplier = rental.getSupplier();
@@ -190,7 +237,7 @@ public class CarRentalDto {
         rental.setCarRentalMileageCharges(rentalDto.mileageCharges);
         rental.setCarRentalDetails(rentalDto.carDetails);
         // update attendees
-        for(int i = 0; i < rentalDto.getAttendees().size();++i) {
+        for(int i = 0; i < rentalDto.getAttendees().size(); ++i) {
             AttendeeDto attendeeDto = rentalDto.getAttendees().get(i);
             if (attendeeDto.isEmpty() && attendeeDto.getId() == null) {
                 continue;
@@ -221,6 +268,4 @@ public class CarRentalDto {
             }
         }
     }
-
-
 }

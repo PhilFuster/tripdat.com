@@ -4,7 +4,6 @@ import lombok.*;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
-import javax.annotation.PostConstruct;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,8 +17,6 @@ import java.util.List;
 
 /**
  * Name: Flight - model flight_information table in db
- *
- *
  */
 @Builder(toBuilder = true)
 @EqualsAndHashCode(callSuper = true)
@@ -36,9 +33,9 @@ public class Flight extends TripdatTripItem implements Serializable {
     private String flightConfirmationNumber;
 
     @OneToMany(
-     mappedBy = "flight",
-     cascade = CascadeType.ALL,
-     orphanRemoval = true
+            mappedBy = "flight",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     // helps solve error where hibernate does not let there be more than 1 collections in a entity
     @LazyCollection(LazyCollectionOption.FALSE)

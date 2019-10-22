@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}"
+      lang="en">
+<head>
+    <title>Change Email</title>
+</head>
+<body>
+<div th:class="container" layout:fragment="content" th:remove="tag">
+    <div id="settings-main-content" class="wrapper">
+        <h1 th:text="|Change Email|">Change Email</h1>
+        <div class="content">
+            <!-- User Settings Form -->
+            <form th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).CHANGE_EMAIL}__}" th:object="${emailDto}"
+                  method="post">
+                <p class="error-message alert alert-danger"
+                   th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}"
+                   th:text="${error}">Validation error</p>
+
+                <!-- Email -->
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('currentEmail')}? 'has-error':''">
+                    <label for="currentEmail" class="control-label">Current Email</label>
+                    <input id="currentEmail"
+                           class="form-control"
+                           type="text"
+                           th:field="*{currentEmail}" th:readonly="true"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error : ${#fields.errors('currentEmail')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('newEmail')}? 'has-error':''">
+                    <label for="newEmail" class="control-label">New Email</label>
+                    <input id="newEmail"
+                           class="form-control"
+                           th:field="*{newEmail}"
+                           th:type="text"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error : ${#fields.errors('newEmail')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <!-- Confirm Email -->
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('confirmNewEmail')}? 'has-error':''">
+                    <label for="confirmNewEmail" class="control-label">Confirm New Email</label>
+                    <input id="confirmNewEmail"
+                           class="form-control"
+                           type="Text"
+                           th:field="*{confirmNewEmail}"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error : ${#fields.errors('confirmNewEmail')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+                <div class="form-group">
+                    <a th:text="|Go back to Settings|"
+                       th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).SETTINGS}__}">Go back to Settings</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

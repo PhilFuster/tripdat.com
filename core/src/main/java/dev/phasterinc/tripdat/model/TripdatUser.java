@@ -1,7 +1,6 @@
 package dev.phasterinc.tripdat.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -24,8 +23,11 @@ import java.util.Set;
  * Purpose:
  */
 
-@Data
-@EqualsAndHashCode(of = "userId")
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
 @Entity(name="TripdatUser")
 @Table(name="tripdat_user")
 public class TripdatUser implements Serializable {
@@ -76,8 +78,6 @@ public class TripdatUser implements Serializable {
 
 
     // == constructors ==
-
-    public TripdatUser(){}
 
     public TripdatUser(String userFirstName, String userLastName, String userEmail, String userPassword) {
         this.userFirstName = userFirstName;

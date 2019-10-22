@@ -5,14 +5,21 @@ import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.FlightSegment;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.thymeleaf.expression.Strings;
 
-import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Objects;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
+
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
+/**
+ * Name: FlightSemgentDto
+ * Purpose: FlightSegment's Data Transfer Object.
+ */
 
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -85,38 +92,52 @@ public class FlightSegmentDto {
 
     private Boolean isToBeDeleted;
 
+    /**
+     * Name: isEmpty
+     * Purpose: Verify if the object is empty
+     * Synopsis: Determines if all the dto's attributes are empty.
+     */
     public boolean isEmpty() {
         boolean allEmpty = true;
-        if (this.segmentId != null) allEmpty=false;
-        if ( this.airlineName != null && !this.airlineName.isEmpty()) allEmpty=false;
-        if (this.flightNumber != null && !this.flightNumber.isEmpty()) allEmpty=false;
-        if (this.ticketNumber != null && !this.ticketNumber.isEmpty()) allEmpty=false;
-        if (this.departureAirport != null && !this.departureAirport.isEmpty()) allEmpty=false;
-        if (this.departureDate != null) allEmpty=false;
-        if (this.departureTime != null) allEmpty=false;
-        if (this.departureTerminal != null && !this.departureTerminal.isEmpty()) allEmpty=false;
-        if (this.departureGate != null && !this.departureGate.isEmpty()) allEmpty=false;
-        if (this.arrivalAirport != null && !this.arrivalAirport.isEmpty()) allEmpty=false;
-        if (this.arrivalDate != null) allEmpty=false;
-        if (this.arrivalTime != null) allEmpty=false;
-        if (this.arrivalTerminal != null && !this.arrivalTerminal.isEmpty()) allEmpty=false;
-        if (this.arrivalGate != null && !this.arrivalGate.isEmpty()) allEmpty=false;
-        if (this.fareClass != null && !this.fareClass.isEmpty()) allEmpty=false;
-        if (this.meal != null && !this.meal.isEmpty()) allEmpty=false;
-        if (this.baggageClaim != null && !this.baggageClaim.isEmpty()) allEmpty=false;
-        if (this.entertainment != null && !this.entertainment.isEmpty()) allEmpty=false;
-        if (this.onTimePercentage != null && !this.onTimePercentage.isEmpty()) allEmpty=false;
-        if (this.aircraftType != null && !this.aircraftType.isEmpty()) allEmpty=false;
-        if (this.operatingFlightNumber != null && !this.operatingFlightNumber.isEmpty()) allEmpty=false;
-        if (this.operatedBy != null && !this.operatedBy.isEmpty()) allEmpty=false;
-        if (this.stops != null && !this.stops.isEmpty()) allEmpty=false;
-        if (this.duration != null && !this.duration.isEmpty()) allEmpty=false;
-        if (this.distance != null && !this.distance.isEmpty()) allEmpty=false;
-        if (this.segmentNotes != null && !this.segmentNotes.isEmpty()) allEmpty=false;
-        if (this.seat != null && !this.seat.isEmpty()) allEmpty=false;
+        if (this.segmentId != null) allEmpty = false;
+        if (this.airlineName != null && !this.airlineName.isEmpty()) allEmpty = false;
+        if (this.flightNumber != null && !this.flightNumber.isEmpty()) allEmpty = false;
+        if (this.ticketNumber != null && !this.ticketNumber.isEmpty()) allEmpty = false;
+        if (this.departureAirport != null && !this.departureAirport.isEmpty()) allEmpty = false;
+        if (this.departureDate != null) allEmpty = false;
+        if (this.departureTime != null) allEmpty = false;
+        if (this.departureTerminal != null && !this.departureTerminal.isEmpty()) allEmpty = false;
+        if (this.departureGate != null && !this.departureGate.isEmpty()) allEmpty = false;
+        if (this.arrivalAirport != null && !this.arrivalAirport.isEmpty()) allEmpty = false;
+        if (this.arrivalDate != null) allEmpty = false;
+        if (this.arrivalTime != null) allEmpty = false;
+        if (this.arrivalTerminal != null && !this.arrivalTerminal.isEmpty()) allEmpty = false;
+        if (this.arrivalGate != null && !this.arrivalGate.isEmpty()) allEmpty = false;
+        if (this.fareClass != null && !this.fareClass.isEmpty()) allEmpty = false;
+        if (this.meal != null && !this.meal.isEmpty()) allEmpty = false;
+        if (this.baggageClaim != null && !this.baggageClaim.isEmpty()) allEmpty = false;
+        if (this.entertainment != null && !this.entertainment.isEmpty()) allEmpty = false;
+        if (this.onTimePercentage != null && !this.onTimePercentage.isEmpty()) allEmpty = false;
+        if (this.aircraftType != null && !this.aircraftType.isEmpty()) allEmpty = false;
+        if (this.operatingFlightNumber != null && !this.operatingFlightNumber.isEmpty()) allEmpty = false;
+        if (this.operatedBy != null && !this.operatedBy.isEmpty()) allEmpty = false;
+        if (this.stops != null && !this.stops.isEmpty()) allEmpty = false;
+        if (this.duration != null && !this.duration.isEmpty()) allEmpty = false;
+        if (this.distance != null && !this.distance.isEmpty()) allEmpty = false;
+        if (this.segmentNotes != null && !this.segmentNotes.isEmpty()) allEmpty = false;
+        if (this.seat != null && !this.seat.isEmpty()) allEmpty = false;
         return allEmpty;
     }
 
+    /**
+     * Name: buildDto
+     * Purpose: To build a FlightSegment Data Transfer Object from a FlightSegment entity
+     * Synopsis: Build's a FlightSegment DTO from a FlightSegment entity
+     * <p>
+     *
+     * @param flightSegment FlightSegment Entity the DTO will be populated with
+     * @return The FlightSegmentDto instance built.
+     */
     public static FlightSegmentDto buildDto(FlightSegment flightSegment) {
 
         return FlightSegmentDto.builder()
@@ -151,6 +172,17 @@ public class FlightSegmentDto {
                 .seat(flightSegment.getFlightSeats()).build();
     }
 
+    /**
+     * Name: buildEntity
+     * Purpose:  To build a FlightSegment entity
+     * Synopsis: Build's a FlightSegment entity from a FlightSegment Data Transfer object
+     * & the Flight Item it belongs to
+     * <p>
+     *
+     * @param flight     Flight Entity that will be built.
+     * @param segmentDto FlightSegmentDto the Flight entity is based off of.
+     * @return FlightSegment entity that is built.
+     */
     public static FlightSegment buildEntity(FlightSegmentDto segmentDto, Flight flight) {
 
         return FlightSegment.builder()
@@ -185,7 +217,16 @@ public class FlightSegmentDto {
 
     }
 
-    public static void updateEntity(FlightSegment segment, FlightSegmentDto segmentDto){
+    /**
+     * Name: updateEntity
+     * Purpose: To update a Flight entity
+     * Synopsis: Update's a Flight entity with the information from a FlightSegment Dto.
+     * <p>
+     *
+     * @param segment    FlightSegment Entity that will be updated.
+     * @param segmentDto FlightSegmentDto has the information the entity will be updated with.
+     */
+    public static void updateEntity(FlightSegment segment, FlightSegmentDto segmentDto) {
         segment.setAirlineName(segmentDto.airlineName);
         segment.setFlightNumber(segmentDto.flightNumber);
         segment.setFlightTicketNumber(segmentDto.ticketNumber);
@@ -213,6 +254,4 @@ public class FlightSegmentDto {
         segment.setFlightSegmentNotes(segmentDto.segmentNotes);
         segment.setFlightSeats(segmentDto.seat);
     }
-
-
 }

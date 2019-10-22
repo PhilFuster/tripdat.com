@@ -18,9 +18,7 @@ import javax.persistence.criteria.Root;
 
 /**
  * Name: RoleDaoImpl - Implementation of RoleDao interface
- *
  */
-
 @Repository
 @Transactional
 public class RoleDaoImpl extends AbstractHibernateDao<Role> implements RoleDao {
@@ -31,12 +29,11 @@ public class RoleDaoImpl extends AbstractHibernateDao<Role> implements RoleDao {
         Root<Role> root = query.from(Role.class);
         query.select(root);
         query.where(builder.equal(root.get("name"), name));
-        Query<Role> q=getCurrentSession().createQuery(query);
+        Query<Role> q = getCurrentSession().createQuery(query);
         Role role = q.uniqueResult();
 
         return role;
     }
-
 
 
 }

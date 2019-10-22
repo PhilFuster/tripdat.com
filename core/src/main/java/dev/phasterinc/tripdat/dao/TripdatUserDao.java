@@ -10,12 +10,13 @@ import dev.phasterinc.tripdat.model.TripdatUser;
  ************************************************************/
 
 /**
- * Name: TripdatUserDao - Interface for TripdatUserDao implementation
- *                        Extends IgenericDao interface
+ * Name: TripdatUserDao
+ * Purpose: Interface for TripdatUserDao implementation. Extends IgenericDao interface
  */
 public interface TripdatUserDao extends IGenericDao<TripdatUser> {
 
     TripdatUser findByEmail(String email);
+
     TripdatUser findByLogin(String loginId);
 
 }

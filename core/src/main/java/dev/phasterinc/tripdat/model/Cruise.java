@@ -1,6 +1,5 @@
 package dev.phasterinc.tripdat.model;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,7 +19,6 @@ import java.util.List;
 
 /**
  * Name: Cruise - model cruise_information table in db. Extends TripdatTripItem and implements Serializable
- *
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -85,16 +83,39 @@ public class Cruise extends TripdatTripItem implements Serializable {
 
 
     // == public methods ==
+
+    /**
+     * Name: addStop
+     * Purpose: To add a stop to the CruiseStop collection.
+     * Synopsis: Adds a CruiseStop to the cruiseStop collection.
+     * <p>
+     *
+     * @param stop CruiseStop entity to be added to the cruiseStop collection.
+     */
     public void addStop(CruiseStop stop) {
         cruiseStops.add(stop);
         stop.setCruise(this);
     }
 
+    /**
+     * Name: removeStop
+     * Purpose: to remove a stop from the cruiseStop collection.
+     * Synopsis: Removes the passed in CruiseStop from the cruiseStop collection if found.
+     * <p>
+     */
     public void removeStop(CruiseStop stop) {
         cruiseStops.remove(stop);
         stop.setCruise(null);
     }
 
+    /**
+     * Name: getType
+     * Purpose: To identify this item as a Cruise
+     * Synopsis: Identifies this item as a Cruise
+     * <p>
+     *
+     * @return String, a String that identifies this item as a Cruise.
+     */
     @Override
     public String getType() {
         return "C";

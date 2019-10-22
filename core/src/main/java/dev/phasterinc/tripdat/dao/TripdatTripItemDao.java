@@ -11,12 +11,14 @@ import java.util.HashSet;
  ************************************************************/
 
 /**
- * Name: TripdatTripItemDao - interface for TripItemDao and extends the IgenericDao interface
- *
+ * Name: TripdatTripItemDao
+ * Purpose: interface for TripItemDao and extends the IgenericDao interface
  */
 public interface TripdatTripItemDao extends IGenericDao<TripdatTripItem> {
     HashSet<TripdatTripItem> findByTripId(final long Id);
+
     HashSet<TripdatTripItem> findMax4ByTripId(final long id);
+
     TripdatTripItem findByItemId(final long id);
 
 

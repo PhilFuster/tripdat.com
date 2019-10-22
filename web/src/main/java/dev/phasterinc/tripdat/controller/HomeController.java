@@ -90,11 +90,7 @@ public class HomeController {
         } else {
             model.addAttribute("nextUpItems", nextUpItems);
         }
-
-
-
         return ViewNames.USER_INDEX;
-
     }
 
 }

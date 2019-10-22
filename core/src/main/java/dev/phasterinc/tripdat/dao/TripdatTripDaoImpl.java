@@ -19,8 +19,8 @@ import java.util.Set;
  ************************************************************/
 
 /**
- * Name: TripdatTripDaoImpl- Implementation of TripdatTripDao. extends AbstractHibernateDao
- *
+ * Name: TripdatTripDaoImpl
+ * Purpose: Implementation of TripdatTripDao. extends AbstractHibernateDao
  */
 @Repository
 @Slf4j
@@ -30,6 +30,7 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
     /**
      * name: getTripByTripId
      * Purpose: To retrieve a Trip by its tripid
+     *
      * @param id - id of trip
      * @return - A singular Trip if a trip has that id
      */
@@ -47,6 +48,7 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
     /**
      * name: get3UpcomingTripsByUserIdOrderByDateAsc
      * Purpose: Query the DB for the 3 most recent Trips that have not ended and order by ascending date
+     *
      * @return - List of TripdatTrip objects
      */
     @Override
@@ -69,6 +71,7 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
     /**
      * Name: getTripsByUserid
      * Purpose: query DB for TripdatTrip objects by userId
+     *
      * @return
      */
     @Override
@@ -86,31 +89,32 @@ public class TripdatTripDaoImpl extends AbstractHibernateDao<TripdatTrip> implem
     /**
      * Name: isTripDateConflict
      * Purpose: Takes a start & end date, and a userId
-     *          Queries the DB for a user's Trips using userId
-     *          Checks for overlapping conflicts during the date range of newStart to newEnd passed
-     *          and all the trips the user has.
+     * Queries the DB for a user's Trips using userId
+     * Checks for overlapping conflicts during the date range of newStart to newEnd passed
+     * and all the trips the user has.
+     *
      * @param newStartDate - LocalDate, newStartDate used to compare with user's trips
-     * @param newEndDate - LocalDate, newEndDate used to compare with user's trips
-     * @param userId - Long, a user's Id used to query for user's trips.
-     * @param tripId - Long, a Trip's id. Used to query against DB. If the tripId exists
-     *                 in the DB I do not want it to be in the result set so that it does not cause
-     *                 a false positive date conflict.
+     * @param newEndDate   - LocalDate, newEndDate used to compare with user's trips
+     * @param userId       - Long, a user's Id used to query for user's trips.
+     * @param tripId       - Long, a Trip's id. Used to query against DB. If the tripId exists
+     *                     in the DB I do not want it to be in the result set so that it does not cause
+     *                     a false positive date conflict.
      * @return - Boolean, true if there is a date conflict. False if there is none.
      */
     @Override
     public Boolean isTripDateConflict(LocalDate newStartDate, LocalDate newEndDate, Long userId, Long tripId) {
         Query query = getCurrentSession().createQuery(
-                        "from TripdatTrip trip " +
-                                "where user.userId = :userId and " +
-                                "trip.tripId != :tripId and " +
-                                "(:newStartDate < tripEndDate and tripStartDate < :newEndDate)"
+                "from TripdatTrip trip " +
+                        "where user.userId = :userId and " +
+                        "trip.tripId != :tripId and " +
+                        "(:newStartDate < tripEndDate and tripStartDate < :newEndDate)"
 
         );
         //
         query.setParameter("newStartDate", newStartDate)
-             .setParameter("newEndDate", newEndDate)
-             .setParameter("userId", userId)
-             .setParameter("tripId", tripId);
+                .setParameter("newEndDate", newEndDate)
+                .setParameter("userId", userId)
+                .setParameter("tripId", tripId);
         log.info("newStartDate: " + newStartDate + "  newEndDate: " + newEndDate);
         TripdatTrip conflictingTrip;
         boolean isExistingConflict;

@@ -5,6 +5,13 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
 /**
  * Name: Attendee
  * Purpose: To model the attendees for a trip item.
@@ -17,13 +24,13 @@ import java.io.Serializable;
 @Setter
 @Getter
 @Entity(name = "Attendee")
-@Table(name="attendee")
+@Table(name = "attendee")
 public class Attendee implements Serializable {
 
     // == fields ==
     @Id
     @SequenceGenerator(name = "attendee_generator", sequenceName = "attendee_attendee_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "attendee_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attendee_generator")
     @Column(name = "attendee_id", columnDefinition = "BIGINT")
     private Long attendeeId;
 
@@ -40,24 +47,33 @@ public class Attendee implements Serializable {
     @Column(name = "attendee_ticket_number", columnDefinition = "TEXT")
     private String attendeeTicketNumber;
 
+    /**
+     * Name: equals
+     * Purpose: To override the equals method.
+     * Synopsis: Override's the equals method.
+     * <p>
+     *
+     * @param o Object to verify.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Attendee )) return false;
+        if (!(o instanceof Attendee)) return false;
 
         return attendeeId != null && attendeeId.equals((((Attendee) o).getAttendeeId()));
 
 
     }
 
+    /**
+     * Name: hashCode
+     * Purpose: hashCode Override
+     * Synopsis: Makes it easier to differentiate between Attendee Objects.
+     * <p>
+     *
+     */
     @Override
     public int hashCode() {
         return 31;
     }
 }
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/

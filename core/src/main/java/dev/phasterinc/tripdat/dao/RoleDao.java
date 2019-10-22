@@ -11,10 +11,9 @@ import dev.phasterinc.tripdat.model.Role;
 
 /**
  * Name: RoleDao - dao interface for role table
- *
- *
+ * Purpose: Data Access Object interface for the Role class. Which provides user access
+ *          permissions by means of user roles.
  */
 public interface RoleDao extends IGenericDao<Role> {
     Role findByName(String name);
-
 }

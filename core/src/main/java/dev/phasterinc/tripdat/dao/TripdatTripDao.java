@@ -14,15 +14,17 @@ import java.util.Set;
  ************************************************************/
 
 /**
- * Name: TripdatTripDao - Dao object for tripdat_trip table, extends IGenericDao
- *
- *
+ * Name: TripdatTripDao
+ * Purpose: Dao object for tripdat_trip table, extends IGenericDao
  */
 public interface TripdatTripDao extends IGenericDao<TripdatTrip> {
 
     TripdatTrip getTripByTripId(final Long id);
+
     List<TripdatTrip> get3UpcomingTripsByUserIdOrderByDateAsc(final Long userId);
+
     Set<TripdatTrip> getTripsByUserId(final Long id);
+
     Boolean isTripDateConflict(LocalDate startDate, LocalDate endDate, final Long userId, final Long tripId);
 
 }

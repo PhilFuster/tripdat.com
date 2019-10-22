@@ -26,12 +26,13 @@ import java.util.List;
 @Primary
 @Transactional
 public class GenericHibernateDao<T extends Serializable>
-extends AbstractHibernateDao<T> implements IGenericDao<T>{
+        extends AbstractHibernateDao<T> implements IGenericDao<T> {
 
     @Override
-    public void setClazz(Class< T > clazzToSet) {
+    public void setClazz(Class<T> clazzToSet) {
         super.setClazz(clazzToSet);
     }
+
     @Override
     public T findOne(long id) {
         return super.findOne(id);

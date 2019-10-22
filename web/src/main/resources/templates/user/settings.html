@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}"
+      lang="en">
+<head>
+    <title>Settings</title>
+</head>
+<body>
+<div th:class="container" layout:fragment="content" th:remove="tag">
+    <div id="settings-main-content" class="wrapper">
+        <h1 th:text="|Settings|">Settings</h1>
+        <div class="content">
+            <div th:if="${param.success}">
+                <div class="alert alert-info">
+                    Settings saved!
+                </div>
+            </div>
+            <!-- User Settings Form -->
+            <form th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).SETTINGS}__}" th:object="${user}"
+                  method="post">
+                <p class="error-message alert alert-danger"
+                   th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}"
+                   th:text="${error}">Validation error</p>
+                <!-- Account Settings Section -->
+                <section th:id="account-settings">
+                    <h2 th:text="|Account Settings|">Account Settings</h2>
+                    <!-- login -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('login')}? 'has-error':''">
+                        <label for="login" class="control-label">login</label>
+                        <input id="login"
+                               class="form-control"
+                               th:field="*{login}"
+                               readonly/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error : ${#fields.errors('login')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                    <!-- Change password -->
+                    <div class="form-group">
+                        <a
+                                th:class="|btn btn-primary|"
+                                th:text="|Change Password|"
+                                th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CHANGE_PW}__}"
+                        />
+                    </div>
+                    <!-- Change email -->
+                    <div class="form-group">
+                        <a
+                                th:class="|btn btn-primary|"
+                                th:text="|Change Email|"
+                                th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).CHANGE_EMAIL}__}"
+                        />
+                    </div>
+                </section>
+                <!-- User Settings -->
+                <section th:id="user-settings">
+                    <h2>User Settings</h2>
+                    <!-- First Name -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('firstName')}? 'has-error':''">
+                        <label for="firstName" class="control-label">First name</label>
+                        <input id="firstName"
+                               class="form-control"
+                               th:field="*{firstName}"/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error: ${#fields.errors('firstName')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                    <!-- Last Name -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('lastName')}? 'has-error':''">
+                        <label for="lastName" class="control-label">Last name</label>
+                        <input id="lastName"
+                               class="form-control"
+                               th:field="*{lastName}"/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error : ${#fields.errors('lastName')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                    <!-- display Name -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('displayName')}? 'has-error':''">
+                        <label for="displayName" class="control-label">Display Name</label>
+                        <input id="displayName"
+                               class="form-control"
+                               th:field="*{displayName}"/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error : ${#fields.errors('displayName')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                    <!-- home airport -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('homeAirport')}? 'has-error':''">
+                        <label for="homeAirport" class="control-label">Home Airport</label>
+                        <input id="homeAirport"
+                               class="form-control"
+                               th:field="*{homeAirport}"/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error : ${#fields.errors('homeAirport')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                    <!-- City -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('city')}? 'has-error':''">
+                        <label for="homeAirport" class="control-label">City</label>
+                        <input id="city"
+                               class="form-control"
+                               th:field="*{city}"/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error : ${#fields.errors('city')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                </section>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+                <div class="form-group">
+                    <button type="cancel" class="btn btn-danger">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

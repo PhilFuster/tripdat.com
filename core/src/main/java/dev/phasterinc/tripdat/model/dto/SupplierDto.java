@@ -1,5 +1,8 @@
 package dev.phasterinc.tripdat.model.dto;
 
+import dev.phasterinc.tripdat.model.Supplier;
+import dev.phasterinc.tripdat.model.TripdatTripItem;
+import lombok.*;
 
 /************************************************************
  * Name:  Philip Fuster                                     *
@@ -8,16 +11,9 @@ package dev.phasterinc.tripdat.model.dto;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import dev.phasterinc.tripdat.model.Supplier;
-import dev.phasterinc.tripdat.model.TravelAgency;
-import dev.phasterinc.tripdat.model.TripdatTripItem;
-import lombok.*;
-
 /**
  * ClassName: SupplierDto
  * Purpose: Data Transfer Object for Supplier
- *
- *
  */
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -33,6 +29,15 @@ public class SupplierDto {
     private String phoneNumber;
     private String email;
 
+    /**
+     * Name: buildDto
+     * Purpose: To build a supplier data transfer object from a Supplier entity.
+     * Synopsis: Builds a SupplierDto instance from a Supplier entity.
+     * <p>
+     *
+     * @param supplier Supplier entity the dto will be based off of.
+     * @return SupplierDto object built.
+     */
     public static SupplierDto buildDto(Supplier supplier) {
         SupplierDto dto = SupplierDto.builder()
                 .id(supplier.getId())
@@ -45,6 +50,16 @@ public class SupplierDto {
         return dto;
     }
 
+    /**
+     * Name: buildEntity
+     * Purpose: To build a Supplier entity
+     * Synopsis: Builds a Supplier entity from a SupplierDto.
+     * <p>
+     *
+     * @param supplierDto SupplierDto this entity will be modeled after.
+     * @param item        TripdatTripItem this Supplier belongs to.
+     * @return the Supplier entity built.
+     */
     public static Supplier buildEntity(SupplierDto supplierDto, TripdatTripItem item) {
         Supplier supplier = Supplier.builder()
                 .tripItem(item)
@@ -57,6 +72,15 @@ public class SupplierDto {
         return supplier;
     }
 
+    /**
+     * Name: updateEntity
+     * Purpose: To update a Supplier entity with the information from the SupplierDto
+     * Synopsis: Update's a Supplier entity with information from a SupperlierDto
+     * <p>
+     *
+     * @param supplierDto Supplier data transfer object the entity will be updated with.
+     * @param supplier    The Supplier entity that will be updated
+     */
     public static void updateEntity(Supplier supplier, SupplierDto supplierDto) {
         supplier.setSupplierName(supplierDto.supplierName);
         supplier.setSupplierUrl(supplierDto.url);

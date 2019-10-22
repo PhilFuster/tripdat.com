@@ -1,16 +1,17 @@
 package dev.phasterinc.tripdat.model;
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 /**
  * Name: BookingDetail
@@ -59,6 +60,14 @@ public class BookingDetail implements Serializable {
     @Column(name = "booking_is_purchased", columnDefinition = "BOOLEAN")
     private Boolean bookingIsPurchased;
 
+    /**
+     * Name: toString
+     * Purpose: To override default toString method
+     * Synopsis: Overrides default toString method
+     * <p>
+     *
+     * @return String that represents the BookingDetail entity.
+     */
     @Override
     public String toString() {
         return "BookingDetail{" +

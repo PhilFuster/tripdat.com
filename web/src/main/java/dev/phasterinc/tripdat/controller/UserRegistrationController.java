@@ -3,6 +3,8 @@ package dev.phasterinc.tripdat.controller;
 import dev.phasterinc.tripdat.model.TripdatUser;
 import dev.phasterinc.tripdat.model.dto.UserRegistrationDto;
 import dev.phasterinc.tripdat.service.CustomUserDetailsService;
+import dev.phasterinc.tripdat.util.Mappings;
+import dev.phasterinc.tripdat.util.ViewNames;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 /**
  * Name: UserRegistrationController
@@ -20,20 +28,30 @@ import javax.validation.Valid;
 
 @SessionAttributes("trip")
 @Controller
-@RequestMapping("/registration")
+@RequestMapping(Mappings.REGISTRATION)
 public class UserRegistrationController {
 
     @Autowired
     private CustomUserDetailsService userService;
 
+    /**
+     * Name: userRegistrationDto
+     * Purpose: To create a new instance of a UserRegistrationDto object
+     * Synopsis: Returns a new UserRegistrationDto instance.
+     */
     @ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
         return new UserRegistrationDto();
     }
 
+    /**
+     * Name: showRegistrationForm
+     * Purpose: To display the registration form
+     * Synopsis: Returns the view Name of the registration.html file.
+     */
     @GetMapping
     public String showRegistrationForm(Model model) {
-        return "registration";
+        return ViewNames.REGISTRATION;
     }
 
     /**
@@ -55,11 +73,11 @@ public class UserRegistrationController {
             result.rejectValue("login", null, "There is already an account registered with that login ");
         }
         if(result.hasErrors()) {
-            return "registration";
+            return ViewNames.REGISTRATION;
         }
 
-        userService.save(userDto);
-        return "redirect:/registration?success";
+        userService.createUser(userDto);
+        return "redirect:" + ViewNames.REGISTRATION_SUCCESS;
 
     }
 }

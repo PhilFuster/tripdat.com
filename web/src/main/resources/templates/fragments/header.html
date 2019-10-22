@@ -6,7 +6,7 @@
     <nav class="navbar navbar-dark navbar-static-top navbar-expand-md">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand" th:href="@{/user/index}">
+                <a class="navbar-brand" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">
                     <img th:class="|navbar-img|" th:src="@{/images/globe.png}" alt="globe logo"/>
                 </a>
             </div>
@@ -16,10 +16,10 @@
             <div class="collapse navbar-collapse" id="navbar-list">
                 <ul class="navbar-nav mr-auto main-nav">
                     <li role="presentation" class="active nav-item">
-                        <a class="nav-item" th:href="@{/user/index}">Home</a>
+                        <a class="nav-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">Home</a>
                     </li>
                     <li role="presentation" class="active nav-item">
-                        <a class="nav-item" th:href="@{/user/trip/show/trips}">Trips</a>
+                        <a class="nav-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_TRIPS}__}">Trips</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left user-dropdown">
@@ -29,12 +29,12 @@
                         </a>
                         <div class="dropdown-menu user-dropdown" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" href="#">Settings</a>
-                            <a class="dropdown-item" href="#">Sign Out</a>
+                            <a class="dropdown-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).SETTINGS}__}">Settings</a>
+                            <a class="dropdown-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).LOGOUT}__}">Sign Out</a>
                         </div>
                     </div>
                     <div th:if="${#authorization.expression('!isAuthenticated()')}" >
-                        <a href="/signin" th:href="@{/signin}">
+                        <a href="/signin" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).LOGIN}__}">
                             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
                         </a>
                     </div>

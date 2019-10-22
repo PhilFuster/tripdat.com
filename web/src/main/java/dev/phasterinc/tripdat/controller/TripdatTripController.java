@@ -54,8 +54,9 @@ public class TripdatTripController {
     // == handler methods ==
     /**
      * name: tripDetailsPage
-     * purpose: Controller for the tripDetailsPage. The page contains the details of the entire Trip.
-     *          This Controller prepares the TripItemWrappers to be used in the View.
+     * purpose: Controller for the tripDetailsPage. The page contains the details of a specific Trip.
+     * Synopsis: This Controller prepares the TripItemWrappers to be used in the View.
+     *
      * @param model - Model object to be passed to tbe view
      * @param tripId - The trip to be queried
      * @return The details page view
@@ -98,7 +99,7 @@ public class TripdatTripController {
      * name: tripsPage
      * Purpose: Handler Method for the mapping /user/trip/show/trips
      *          Displays the users past and upcoming trips.
-     *          Gives them options to edit or delete trips and to add a new trip
+     * Synopsis: Gives them options to edit or delete trips and to add a new trip
      * @param model - The model for the view
      * @return - trips view name
      * http://localhost:8080/user/trip/show/trips

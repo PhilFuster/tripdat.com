@@ -11,7 +11,6 @@ import dev.phasterinc.tripdat.model.Cruise;
 
 /**
  * Name: CruiseDao - Dao object for cruise_information table in db
- *
  */
 public interface CruiseDao extends IGenericDao<Cruise> {
 

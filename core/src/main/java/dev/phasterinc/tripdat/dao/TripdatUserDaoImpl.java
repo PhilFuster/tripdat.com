@@ -19,13 +19,20 @@ import javax.persistence.criteria.Root;
  ************************************************************/
 
 /**
- * Name: TripdatUserDaoImpl - Implements TripdatUserDao and extends the AbstractHibernateDao class
- *
+ * Name: TripdatUserDaoImpl
+ * Purpose: Implements TripdatUserDao and extends the AbstractHibernateDao class
  */
 @Repository
 @Transactional
-public class TripdatUserDaoImpl extends AbstractHibernateDao<TripdatUser> implements TripdatUserDao{
+public class TripdatUserDaoImpl extends AbstractHibernateDao<TripdatUser> implements TripdatUserDao {
 
+    /**
+     * Name: findByEmail
+     * Purpose: To find a user by email
+     * Synopsis: Queries the db for a user searching with the email entered in the form
+     *
+     * @param email String, the email to query the database with.
+     */
     @Override
     public TripdatUser findByEmail(String email) {
         Criteria crit = createEntityCriteria();
@@ -34,6 +41,13 @@ public class TripdatUserDaoImpl extends AbstractHibernateDao<TripdatUser> implem
         return (TripdatUser) crit.uniqueResult();
     }
 
+    /**
+     * Name: findByLogin
+     * Purpose: To find a user by the login entered
+     * Synopsis: Build's a query and queries the database for a unique result
+     *
+     * @param login String, login to query the database with
+     */
     @Override
     public TripdatUser findByLogin(String login) {
         CriteriaBuilder builder = getCurrentSession().getCriteriaBuilder();
@@ -41,7 +55,7 @@ public class TripdatUserDaoImpl extends AbstractHibernateDao<TripdatUser> implem
         Root<TripdatUser> root = query.from(TripdatUser.class);
         query.select(root);
         query.where(builder.equal(root.get("userLogin"), login));
-        Query<TripdatUser> q=getCurrentSession().createQuery(query);
+        Query<TripdatUser> q = getCurrentSession().createQuery(query);
         TripdatUser user = q.uniqueResult();
         return user;
 

@@ -101,3 +101,9 @@ z
 Jweb/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java,8\6\86cdd8252474e61520cadad4ed6a512ab162bc03
 {
 Kweb/src/main/resources/templates/fragments/item-fragments/car-fragment.html,1\a\1a09df953b1bc991dfb79a72ebfe30dc00bb1120
+6
+heroku,9\a\9aef5f5af502523064a1ff9b73b0ad4a41c3696d
+
+Oweb/src/main/java/dev/phasterinc/tripdat/controller/UserSettingsController.java,d\d\dde805d2335ba71cd38ec8746bdaf4b9e5836d55
+x
+Hcore/src/main/java/dev/phasterinc/tripdat/model/dto/UserSettingsDto.java,1\e\1e419bc746e5a86e7f16815c63e3c8778285fb34

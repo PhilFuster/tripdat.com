@@ -19,12 +19,20 @@ import java.util.List;
 
 public interface TripdatTripItemService {
     List<TripdatTripItem> findAll();
+
     TripdatTripItem findOne(final long id);
+
     void create(final TripdatTripItem entity);
+
     TripdatTripItem update(final TripdatTripItem entity);
+
     void delete(final TripdatTripItem entity);
+
     void deleteById(final long entityId);
-    HashSet<TripdatTripItem> getItemsByTripId(final long  id);
+
+    HashSet<TripdatTripItem> getItemsByTripId(final long id);
+
     HashSet<TripdatTripItem> getMax4ItemsById(final long id);
+
     TripdatTripItem findByItemId(final long id);
 }

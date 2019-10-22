@@ -16,7 +16,7 @@ import java.util.List;
  * Purpose: Calls the dao methods from GenericHibernateDao
  */
 public interface TripdatUserService {
-    List< TripdatUser > findAll();
+    List<TripdatUser> findAll();
     TripdatUser findOne(final long id);
     void create(final TripdatUser entity);
     TripdatUser update(final TripdatUser entity);

@@ -9,12 +9,24 @@ import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
+/**
+ * Name: TripDto
+ * Purpose: A TripdatTrip Data Transfer Object
+ */
+
 @Builder
 @Data
 public class TripDto {
     // == Constants ==
-    public static final SimpleDateFormat  dateFormat
-        = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat dateFormat
+            = new SimpleDateFormat("yyyy-MM-dd");
     // == fields ==
     @NotEmpty
     private String tripName;

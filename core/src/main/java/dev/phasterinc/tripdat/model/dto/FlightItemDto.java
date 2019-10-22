@@ -16,7 +16,6 @@ import java.util.List;
 /**
  * ClassName: FlightItemDto
  * Purpose: Data Transfer Object for a Flight Trip Item
- *
  */
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -51,12 +50,13 @@ public class FlightItemDto {
     /**
      * name: buildDto
      * purpose: to build a FlightItemDto object.
-     * @param flight - Flight object
-     * @param segmentDtos - List of FlightSegmentDtos
+     *
+     * @param flight       - Flight object
+     * @param segmentDtos  - List of FlightSegmentDtos
      * @param attendeeDtos - List of AttendeeDtos
      * @return FlightItemDto - flightItemDto
      */
-    public static FlightItemDto buildDto(Flight flight, List<FlightSegmentDto> segmentDtos, List<AttendeeDto> attendeeDtos ) {
+    public static FlightItemDto buildDto(Flight flight, List<FlightSegmentDto> segmentDtos, List<AttendeeDto> attendeeDtos) {
         FlightItemDto flightItemDto;
         flightItemDto = FlightItemDto.builder()
                 .itemNote(flight.getTripItemNote())
@@ -79,10 +79,11 @@ public class FlightItemDto {
     /**
      * name: updateEntity
      * purpose: update an Flight entity with updated information from a FlightItemDto
-     * @param flight - Flight flight
+     *
+     * @param flight    - Flight flight
      * @param flightDto - FlightItemDto flightDto
      */
-    public static void updateEntity(Flight flight,FlightItemDto flightDto) {
+    public static void updateEntity(Flight flight, FlightItemDto flightDto) {
         TravelAgency agency = flight.getTravelAgency();
         Supplier supplier = flight.getSupplier();
         BookingDetail bookingDetail = flight.getBookingDetail();
@@ -91,28 +92,28 @@ public class FlightItemDto {
         SupplierDto.updateEntity(supplier, flightDto.getSupplierDto());
         BookingDetailDto.updateEntity(bookingDetail, flightDto.getBookingDetailDto());
         // update Segments
-        for(int i = 0; i < flightDto.getSegmentDtos().size(); ++i) {
+        for (int i = 0; i < flightDto.getSegmentDtos().size(); ++i) {
             FlightSegmentDto segmentDto = flightDto.getSegmentDtos().get(i);
             // if the dto is empty and the ID is null segment is new
             // and not updated with segment details so skip it
-            if(segmentDto.isEmpty() && segmentDto.getSegmentId() == null) {
+            if (segmentDto.isEmpty() && segmentDto.getSegmentId() == null) {
 
                 continue;
             }
 
             FlightSegment segment;
             // if index is still within flightSegment's range
-            if( i < flight.getFlightSegments().size()) {
+            if (i < flight.getFlightSegments().size()) {
                 // get segment to be updated
                 segment = flight.getFlightSegments().get(i);
                 // if the DTO is marked to be deleted
                 // remove from FlightSegments
-                if(segmentDto.getIsToBeDeleted()) {
+                if (segmentDto.getIsToBeDeleted()) {
                     flight.removeSegment(segment);
                     flightDto.getSegmentDtos().remove(segmentDto);
                 } else {
                     // Not removing segment, update segment
-                    FlightSegmentDto.updateEntity(segment,segmentDto);
+                    FlightSegmentDto.updateEntity(segment, segmentDto);
                 }
             } else {
                 /*
@@ -129,30 +130,30 @@ public class FlightItemDto {
 
         }
         // update attendees
-        for(int i = 0; i < flightDto.getAttendees().size();++i) {
+        for (int i = 0; i < flightDto.getAttendees().size(); ++i) {
             AttendeeDto attendeeDto = flightDto.getAttendees().get(i);
-            if(attendeeDto.isEmpty() && attendeeDto.getId() == null) {
+            if (attendeeDto.isEmpty() && attendeeDto.getId() == null) {
                 continue;
             }
             Attendee attendee;
             // if i is still within attendee's range
-            if( i < flight.getAttendees().size()) {
+            if (i < flight.getAttendees().size()) {
                 // get attendee to be updated
                 attendee = flight.getAttendees().get(i);
                 // if the DTO is marked to be deleted
                 // remove from attendees collection
-                if(attendeeDto.getIsAttendeeToBeDeleted()) {
+                if (attendeeDto.getIsAttendeeToBeDeleted()) {
                     flight.removeAttendee(attendee);
                     flightDto.getAttendees().remove(attendeeDto);
                     continue;
                 }
                 // update attendee
-                AttendeeDto.updateEntity(attendee,attendeeDto);
+                AttendeeDto.updateEntity(attendee, attendeeDto);
             } else {
                 // segment is not empty, and it is not a segment already in the
                 // the Flight's segment collection.
                 // Add this segment to the segment's collection
-                if(attendeeDto.isEmpty()) {
+                if (attendeeDto.isEmpty()) {
                     continue;
                 }
                 Attendee newAttendee = AttendeeDto.buildEntity(attendeeDto, flight);
@@ -161,19 +162,29 @@ public class FlightItemDto {
         }
     }
 
+    /**
+     * Name: buildEntity
+     * Purpose: To build a Flight entity.
+     * Synopsis: Builds a flight entity from a FlightItemDto & the Trip it belongs to.
+     * <p>
+     *
+     * @param trip      The TripdatTrip the FlightItem belongs to
+     * @param flightDto FlightDto that contains the information the FlightEntity will be populated with.
+     * @return The Flight entity built.
+     */
     public static Flight buildEntity(TripdatTrip trip, FlightItemDto flightDto) {
-        Flight flight =  Flight.builder()
+        Flight flight = Flight.builder()
                 .flightSegments(new ArrayList<>())
                 .build();
         flight.setAttendees(new ArrayList<>());
         flight.setTripdatTrip(trip);
         // build other details
         flight.setTravelAgency(TravelAgencyDto.buildEntity(flightDto.getTravelAgencyDto(), flight));
-        flight.setSupplier(SupplierDto.buildEntity(flightDto.getSupplierDto(),flight));
-        flight.setBookingDetail(BookingDetailDto.buildEntity(flightDto.getBookingDetailDto(),flight));
+        flight.setSupplier(SupplierDto.buildEntity(flightDto.getSupplierDto(), flight));
+        flight.setBookingDetail(BookingDetailDto.buildEntity(flightDto.getBookingDetailDto(), flight));
         // build FlightSegments
-        for(FlightSegmentDto segmentDto:flightDto.getSegmentDtos()) {
-            if( segmentDto.isEmpty()) {
+        for (FlightSegmentDto segmentDto : flightDto.getSegmentDtos()) {
+            if (segmentDto.isEmpty()) {
                 continue;
             }
 
@@ -181,8 +192,8 @@ public class FlightItemDto {
             ((Flight) flight).getFlightSegments().add(segment);
         }
         // Build Attendees list
-        for(AttendeeDto attendeeDto: flightDto.getAttendees()) {
-            if(attendeeDto.isEmpty()) {
+        for (AttendeeDto attendeeDto : flightDto.getAttendees()) {
+            if (attendeeDto.isEmpty()) {
                 continue;
             }
             Attendee attendee = Attendee.builder()

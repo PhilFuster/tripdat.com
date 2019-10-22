@@ -1,13 +1,5 @@
 package dev.phasterinc.tripdat.model;
 
-
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
-
 import lombok.*;
 
 import javax.persistence.Column;
@@ -16,6 +8,13 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 /**
  * Name: CarRental
@@ -91,12 +90,18 @@ public class CarRental extends TripdatTripItem implements Serializable {
     @Column(name = "car_rental_details", columnDefinition = "TEXT")
     private String carRentalDetails;
 
+    /**
+     * Name: getType
+     * Purpose: Used to identify the CarRental Type of TridatTripItem
+     * Synopsis: Returns the type of TripdatTripItem.
+     * <p>
+     *
+     * @return String represents the CarRental TripdatTripItem type.
+     */
     @Override
     public String getType() {
         return "CR";
     }
-
-
 
 
 }

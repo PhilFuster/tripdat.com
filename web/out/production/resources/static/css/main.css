@@ -1183,7 +1183,12 @@ summary.add-plan-modal-summary{
     margin-left: 20px;
 }
 
-
+/**
+    Settings Styles
+ */
+#change-password-detail summary.change-password-summary::marker {
+    display:none;
+}
 
 
 

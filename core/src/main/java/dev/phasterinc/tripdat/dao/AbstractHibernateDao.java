@@ -17,13 +17,14 @@ import java.util.List;
 /**
  * Name: AbstractHibernateDAO
  * Purpose: An abstract parameterized DAO which supports the common generic operations
- *          and is meant to be extended for each entity.
+ * and is meant to be extended for each entity.
+ *
  * @param <T> : the dao to perform operations on.
  */
-public abstract class AbstractHibernateDao< T extends Serializable> implements IGenericDao<T>{
+public abstract class AbstractHibernateDao<T extends Serializable> implements IGenericDao<T> {
 
     // == fields ==
-    private Class< T > clazz;
+    private Class<T> clazz;
 
     @Autowired
     private SessionFactory sessionFactory;
@@ -33,19 +34,21 @@ public abstract class AbstractHibernateDao< T extends Serializable> implements I
     /**
      * Name: setClazz
      * Purpose: set the clazz object to perform operations on
+     *
      * @param clazzToSet - the dao to perform operations on
      */
-    public void setClazz ( Class< T > clazzToSet ) {
+    public void setClazz(Class<T> clazzToSet) {
         this.clazz = clazzToSet;
     }
 
     /**
      * Name: findOne
      * Purpose: find the row with id passed
+     *
      * @param id - id to search the db for
      * @return - the row found from the query. If there is one.
      */
-    public T findOne( final long id ) {
+    public T findOne(final long id) {
         //return (T) getCurrentSession().get(clazz, id );
         return (T) getCurrentSession().get(clazz, id);
     }
@@ -53,45 +56,49 @@ public abstract class AbstractHibernateDao< T extends Serializable> implements I
     /**
      * Name: findAll
      * Purpose: findAll instances of clazz
+     *
      * @return - a List of all the instances of clazz in db
      */
-    public List< T > findAll(){
+    public List<T> findAll() {
         return getCurrentSession()
-                .createQuery( "from " + clazz.getName() ).list();
+                .createQuery("from " + clazz.getName()).list();
     }
 
     /**
      * Name: create
      * Purpose: Persist the passed entity  in the db
+     *
      * @param entity - the entity to persist.
      */
-    public void create( final T entity ){
-        getCurrentSession().persist( entity );
+    public void create(final T entity) {
+        getCurrentSession().persist(entity);
     }
 
     /**
      * Name: update
      * Purpose: update the entity passed
+     *
      * @param entity - the entity to update
      * @return - returns the updated entity
      */
-    public T update( final T entity ){
-        return (T) getCurrentSession().merge( entity );
+    public T update(final T entity) {
+        return (T) getCurrentSession().merge(entity);
     }
 
-    public void delete( final T entity ){
-        getCurrentSession().delete( entity );
-    }
-    public void deleteById( final long id ){
-        final T entity = findOne( id);
-        delete( entity );
+    public void delete(final T entity) {
+        getCurrentSession().delete(entity);
     }
 
-    protected final Session getCurrentSession(){
+    public void deleteById(final long id) {
+        final T entity = findOne(id);
+        delete(entity);
+    }
+
+    protected final Session getCurrentSession() {
         return sessionFactory.getCurrentSession();
     }
 
-    protected Criteria createEntityCriteria(){
+    protected Criteria createEntityCriteria() {
         return getCurrentSession().createCriteria(clazz);
     }
 }
