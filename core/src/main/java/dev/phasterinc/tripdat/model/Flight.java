@@ -41,12 +41,25 @@ public class Flight extends TripdatTripItem implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FlightSegment> flightSegments = new ArrayList<>();
 
-
+    /**
+     * Name: getType
+     * Purpose: To get the type of TripItem
+     * Synopsis: Return's a String representation of the item type
+     * <p>
+     *
+     * @return String, String representation of the item type.
+     */
     @Override
     public String getType() {
         return "F";
     }
 
+    /**
+     * Name: toString
+     * Purpose: Get String representation of Flight object.
+     * Synopsis: Returns String representatiion of Flight object.
+     * <p>
+     */
     @Override
     public String toString() {
         return "Flight{" +
@@ -55,11 +68,27 @@ public class Flight extends TripdatTripItem implements Serializable {
                 '}';
     }
 
+    /**
+     * Name: addSegment
+     * Purpose: To add a FlightSegment to the member variable flightSegments.
+     * Synopsis: Adds a FlightSegment object to the flightSegments member variable.
+     * <p>
+     *
+     * @param segment, FlightSegment object to add to the collection.
+     */
     public void addSegment(FlightSegment segment) {
         flightSegments.add(segment);
         segment.setFlight(this);
     }
 
+    /**
+     * Name: removeSegment
+     * Purpose: To remove the FlightSegment object passed from the member variable flightSegments.
+     * Synopsis: Removes the FlightSegment object passed from the member variable flightSegments.
+     * <p>
+     *
+     * @param segment FlightSegment to remove from the collection.
+     */
     public void removeSegment(FlightSegment segment) {
         flightSegments.remove(segment);
         segment.setFlight(null);

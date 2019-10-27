@@ -1,5 +1,5 @@
 
-esquid:CallToDeprecatedMethod_"6Remove this use of "createCriteria"; it is deprecated.(œ›∏õ8‹¡∆ø¿-
-isquid:CommentedOutCodeLine1"<This block of commented-out lines of code should be removed.(Œ‡’Ò8‹¡∆ø¿-
-Gsquid:S19052"$Remove this unnecessary cast to "T".(Ç¸ßÀ¸ˇˇˇˇ8‹¡∆ø¿-
-Gsquid:S1905O"$Remove this unnecessary cast to "T".(È¢¬¢˛ˇˇˇˇ8‹¡∆ø¿-
+Gsquid:S1905U"$Remove this unnecessary cast to "T".(È¢¬¢˛ˇˇˇˇ8‹¡∆ø¿-
+Gsquid:S19055"$Remove this unnecessary cast to "T".(Ç¸ßÀ¸ˇˇˇˇ8‹¡∆ø¿-
+esquid:CallToDeprecatedMethodf"6Remove this use of "createCriteria"; it is deprecated.(œ›∏õ8‹¡∆ø¿-
+isquid:CommentedOutCodeLine4"<This block of commented-out lines of code should be removed.(Œ‡’Ò8‹¡∆ø¿-

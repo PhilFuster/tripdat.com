@@ -1,8 +1,8 @@
 
-wsquid:S1488R"[Immediately return this expression instead of assigning it to the temporary variable "set".(´¦È³ıÿÿÿÿ
-ssquid:S11927"WDefine a constant instead of duplicating this literal "from TripdatTrip trip " 3 times.(Á¡Í›şÿÿÿÿ
-usquid:S2293R"YReplace the type specification in this constructor call with the diamond operator ("<>").(´¦È³ıÿÿÿÿ
-ssquid:S1488'"\Immediately return this expression instead of assigning it to the temporary variable "trip".(ßÇÛ³
-_squid:S1854v"CRemove this useless assignment to local variable "conflictingTrip".(®‡ª¢ûÿÿÿÿ
-ssquid:S1488?"\Immediately return this expression instead of assigning it to the temporary variable "list".(šÃÁâ
-Psquid:S1481s"4Remove this unused "conflictingTrip" local variable.(ÙâÕıÿÿÿÿ
+_squid:S1854z"CRemove this useless assignment to local variable "conflictingTrip".(®‡ª¢ûÿÿÿÿ
+ssquid:S1488A"\Immediately return this expression instead of assigning it to the temporary variable "list".(šÃÁâ
+wsquid:S1488U"[Immediately return this expression instead of assigning it to the temporary variable "set".(´¦È³ıÿÿÿÿ
+ssquid:S11929"WDefine a constant instead of duplicating this literal "from TripdatTrip trip " 3 times.(Á¡Í›şÿÿÿÿ
+ssquid:S1488("\Immediately return this expression instead of assigning it to the temporary variable "trip".(ßÇÛ³
+usquid:S2293U"YReplace the type specification in this constructor call with the diamond operator ("<>").(´¦È³ıÿÿÿÿ
+Psquid:S1481w"4Remove this unused "conflictingTrip" local variable.(ÙâÕıÿÿÿÿ

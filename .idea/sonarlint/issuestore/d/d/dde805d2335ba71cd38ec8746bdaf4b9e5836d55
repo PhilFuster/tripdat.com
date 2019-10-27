@@ -1,4 +1,5 @@
 
-®squid:S44497"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(—…Ûíıÿÿÿÿ
-osquid:S3753"XAdd a call to "setComplete()" on the SessionStatus object in a "@RequestMapping" method.(Ó…Ê
-®squid:S44493"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(ÒÓçùÿÿÿÿ
+®squid:S4449^"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(ÒÓçùÿÿÿÿ
+squid:S14888"cImmediately return this expression instead of assigning it to the temporary variable "settingsDto".(ˆ¯Úë8¼¿ˆ¼Ü-
+Msquid:S1481Z"/Remove this unused "userEntity" local variable.(¾¥ÃŠ8¬ıÖ¼Ü-
+\squid:S1854Z">Remove this useless assignment to local variable "userEntity".(¾¥ÃŠ8õÏÖ¼Ü-

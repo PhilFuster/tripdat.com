@@ -1,19 +1,19 @@
 
-°squid:S4449¸"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(Á—8ÌÉ†ãÊ-
+gsquid:S4488£"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‚’Ñ‹úÿÿÿÿ
+osquid:S3776¤"RRefactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.(…¶šşÿÿÿÿ
+±squid:S4449ñ"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(Õ“‘¾8ÌÉ†ãÊ-
+¶squid:S4449û"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(îşÛüÿÿÿÿ8ÌÉ†ãÊ-
+Ssquid:S1066İ"/Merge this if statement with the enclosing one.(ú’Ûøÿÿÿÿ8ƒ¸®âÊ-
+¶squid:S4449ı"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(ÿ´’¼üÿÿÿÿ8ÌÉ†ãÊ-
+¶squid:S4449Á"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(¾ÑÕ´ıÿÿÿÿ8ÌÉ†ãÊ-
 ¶squid:S4449ï"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(ã¡ºƒüÿÿÿÿ8ÌÉ†ãÊ-
-ƒsquid:S1192à"fDefine a constant instead of duplicating this literal "Time Conflict with other item in trip" 4 times.(ÊÙûÃüÿÿÿÿ
+°squid:S4449¸"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(Á—8ÌÉ†ãÊ-
+Ssquid:S1066î"/Merge this if statement with the enclosing one.(›“¿Çıÿÿÿÿ8ƒ¸®âÊ-
+]squid:S4973È"9Use the "equals" method if value comparison was intended.(¼Ëêáıÿÿÿÿ8ƒ¸®âÊ-
 w
 squid:S135Æ"YReduce the total number of break and continue statements in this loop to use at most one.(èí»8ƒ¸®âÊ-
+ƒsquid:S1192à"fDefine a constant instead of duplicating this literal "Time Conflict with other item in trip" 4 times.(ÊÙûÃüÿÿÿÿ
 Nsquid:S1066Ü"/Merge this if statement with the enclosing one.(à°€Õ8ƒ¸®âÊ-
-]squid:S4973È"9Use the "equals" method if value comparison was intended.(¼Ëêáıÿÿÿÿ8ƒ¸®âÊ-
-¶squid:S4449Á"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(¾ÑÕ´ıÿÿÿÿ8ÌÉ†ãÊ-
-Ssquid:S1066İ"/Merge this if statement with the enclosing one.(ú’Ûøÿÿÿÿ8ƒ¸®âÊ-
-¶squid:S4449º"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(¾ÑÕ´ıÿÿÿÿ8ÌÉ†ãÊ-
-±squid:S4449ñ"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(Õ“‘¾8ÌÉ†ãÊ-
-gsquid:S4488£"JReplace "@RequestMapping(method = RequestMethod.POST)" with "@PostMapping"(‚’Ñ‹úÿÿÿÿ
-¶squid:S4449ı"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(ÿ´’¼üÿÿÿÿ8ÌÉ†ãÊ-
-¶squid:S4449û"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(îşÛüÿÿÿÿ8ÌÉ†ãÊ-
 Vsquid:S3752™">Add a "method" parameter to this "@RequestMapping" annotation.(Ó¹øä
-osquid:S3776¤"RRefactor this method to reduce its Cognitive Complexity from 58 to the 15 allowed.(…¶šşÿÿÿÿ
-Ssquid:S1066î"/Merge this if statement with the enclosing one.(›“¿Çıÿÿÿÿ8ƒ¸®âÊ-
 °squid:S4449¿"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(Á—8ÌÉ†ãÊ-
+¶squid:S4449º"‘Annotate the parameter with @javax.annotation.Nullable in method 'rejectValue' declaration, or make sure that null can not be passed as argument.(¾ÑÕ´ıÿÿÿÿ8ÌÉ†ãÊ-

@@ -1,5 +1,5 @@
 
 |
-squid:S135Á"YReduce the total number of break and continue statements in this loop to use at most one.(±ø±Ãøÿÿÿÿ8ÆªÅôÉ-
-psquid:S3776H"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(ûÄ•8ÆªÅôÉ-
-Nsquid:S5411Ì"*Use the primitive boolean expression here.(ûû£Ñøÿÿÿÿ8ÆªÅôÉ-
+squid:S135ğ"YReduce the total number of break and continue statements in this loop to use at most one.(±ø±Ãøÿÿÿÿ8ÑÖ‰“ß-
+psquid:S3776Y"RRefactor this method to reduce its Cognitive Complexity from 28 to the 15 allowed.(ûÄ•8ÆªÅôÉ-
+Nsquid:S5411û"*Use the primitive boolean expression here.(ûû£Ñøÿÿÿÿ8ÑÖ‰“ß-

@@ -1,13 +1,23 @@
 package dev.phasterinc.tripdat.model;
 
-import dev.phasterinc.tripdat.model.dto.FlightItemDto;
-import dev.phasterinc.tripdat.model.dto.FlightSegmentDto;
 import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
+/**
+ * Name: FlightSegment
+ * Purpose: Represents a FlightSegment instance.
+ */
 
 @Entity(name = "FlightSegment")
 @Table(name = "flight_segment")
@@ -110,6 +120,14 @@ public class FlightSegment implements Serializable {
     @JoinColumn(name = "trip_item_id")
     private Flight flight;
 
+    /**
+     * Name: equals
+     * Purpose: Overriding the default equals method.
+     * Synopsis: Does a comparison between the caller's ID and the passed in objects id.
+     * <p>
+     *
+     * @param o Object that the comparison will be done on.
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

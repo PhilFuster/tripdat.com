@@ -1,4 +1,3 @@
 
-ƒsquid:S14881"`Immediately return this expression instead of assigning it to the temporary variable "supplier".(ÿ“˜İøÿÿÿÿ8ô­¼È-
-rsquid:S1488%"[Immediately return this expression instead of assigning it to the temporary variable "dto".(¼ªÏˆ
-vsquid:UselessImportCheck"FRemove this unused import 'dev.phasterinc.tripdat.model.TravelAgency'.(‘äà™üÿÿÿÿ8 ä‰¼È-
+rsquid:S1488*"[Immediately return this expression instead of assigning it to the temporary variable "dto".(¼ªÏˆ
+ƒsquid:S1488@"`Immediately return this expression instead of assigning it to the temporary variable "supplier".(ÿ“˜İøÿÿÿÿ8ô­¼È-
