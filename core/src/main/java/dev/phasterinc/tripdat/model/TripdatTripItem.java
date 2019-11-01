@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.model;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,28 +15,22 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: TripdatTripItemDao - model the database table tripdat_trip_item
  */
 
 @Data
-@EqualsAndHashCode(of="tripItemId")
+@EqualsAndHashCode(of = "tripItemId")
 @Entity(name = "TripdatTripItem")
 @Inheritance(strategy = InheritanceType.JOINED)
-@Table(name="tripdat_trip_item")
+@Table(name = "tripdat_trip_item")
 public abstract class TripdatTripItem implements Serializable {
 
     // == fields ==
     @Id
     @SequenceGenerator(name = "tripItem_generator", sequenceName = "tripdat_trip_item_trip_item_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "tripItem_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tripItem_generator")
     @Column(name = "trip_item_id", columnDefinition = "BIGINT")
     private Long tripItemId;
 
@@ -45,7 +45,7 @@ public abstract class TripdatTripItem implements Serializable {
     @Column(name = "trip_item_note", columnDefinition = "TEXT")
     private String tripItemNote;
 
-    @Column(name = "trip_item_photo_link", columnDefinition="TEXT")
+    @Column(name = "trip_item_photo_link", columnDefinition = "TEXT")
     private String tripItemPhotoLink;
 
     @OneToMany(
@@ -79,8 +79,6 @@ public abstract class TripdatTripItem implements Serializable {
     private String tripItemType;
 
 
-    // TODO: must implement later :o (Is implemented as far as I am concerned. Leaving as a note for now
-    // helpful link: https://vladmihalcea.com/the-best-way-to-map-a-onetomany-association-with-jpa-and-hibernate/
     public void addAttendee(Attendee attendee) {
         attendees.add(attendee);
         attendee.setTripItem(this);
@@ -95,6 +93,40 @@ public abstract class TripdatTripItem implements Serializable {
 
     public abstract String getType();
 
+    /**
+     * Name: equals
+     * Purpose: Overriding the default implementation of equals method to ensure validity of comparison
+     * Synopsis: When using database-generated unique identifiers, a comparison between the two objects' id
+     * is what is needed.
+     * <p>
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TripdatTripItem)) return false;
+        TripdatTripItem item = (TripdatTripItem) o;
+        return tripItemId != null && tripItemId.equals(((TripdatTripItem) o).getTripItemId());
+    }
+
+    /**
+     * Name: hashCode
+     * Purpose: Overrides default implementation of hashCode
+     * Synopsis: When using database-generated unique identifiers, the hashcode needs to
+     * be consistent across state transitions, thus the reason for returing 31.
+     * <p>
+     */
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    /**
+     * Name: toString
+     * Purpose: Overrides default implementation of toString method.
+     * <p>
+     *
+     * @return String representation of a TripdatTripItem.
+     */
     @Override
     public String toString() {
         return "TripdatTripItem{" +
@@ -110,4 +142,5 @@ public abstract class TripdatTripItem implements Serializable {
                 ", tripItemType='" + tripItemType + '\'' +
                 '}';
     }
+
 }

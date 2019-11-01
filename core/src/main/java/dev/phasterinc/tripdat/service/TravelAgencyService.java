@@ -17,9 +17,14 @@ import java.util.List;
  */
 public interface TravelAgencyService {
     List<TravelAgency> findAll();
+
     TravelAgency findOne(final long id);
+
     void create(final TravelAgency entity);
+
     TravelAgency update(final TravelAgency entity);
+
     void delete(final TravelAgency entity);
+
     void deleteById(final long entityId);
 }

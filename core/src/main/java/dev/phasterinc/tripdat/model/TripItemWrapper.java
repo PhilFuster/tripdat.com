@@ -1,6 +1,4 @@
 package dev.phasterinc.tripdat.model;
-
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -22,12 +20,11 @@ import java.util.List;
 
 /**
  * Name: TripItemWrapper - A wrapper class to model trip information for TripItems with segments.
- *                         This wrapper will have a field, tripItem of type Object. This Object will
- *                         be casted by checking the field tripItemTypeCode:String which will identify the type
- *                         of the tripItem.
- *Purpose: To be able to store all the types of tripItems in one collection and order them by date and time.
- *         This will make it possible to render in the view.
- *
+ * This wrapper will have a field, tripItem of type Object. This Object will
+ * be casted by checking the field tripItemTypeCode:String which will identify the type
+ * of the tripItem.
+ * Purpose: To be able to store all the types of tripItems in one collection and order them by date and time.
+ * This will make it possible to render in the view.
  */
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
@@ -78,8 +75,6 @@ public class TripItemWrapper {
 
     // == public methods ==
 
-
-
     public TripItemWrapper(String tripItemTypeCode, LocalDate startDate, LocalTime startTime) {
         this.tripItemTypeCode = tripItemTypeCode;
         this.startDate = startDate;
@@ -88,10 +83,23 @@ public class TripItemWrapper {
 
     }
 
+    /**
+     * Name: getSmallIconDate
+     * Purpose: To retrieve a formatted Time String for smallIcons.
+     * Synopsis: Formats a Date in the following format:
+     * First three letters of the day of the week. (ex. TUE)
+     * Inserts a comma followed by first three letters of the Month
+     * Followed by the day of the month
+     *
+     *
+     * <p>
+     *
+     * @return String, Formatted Date for presentation of a small Icon EXAMPLE: TUE, MAR 23
+     */
     public String getSmallIconDate() {
         StringBuilder builder = new StringBuilder();
-        if(null != this.startDate) {
-            builder.append(startDate.getDayOfWeek().toString().substring(0,3)).append(", ").append(startDate.getMonth().toString().substring(0,3)).append(" ").append(startDate.getDayOfMonth());
+        if (null != this.startDate) {
+            builder.append(startDate.getDayOfWeek().toString().substring(0, 3)).append(", ").append(startDate.getMonth().toString().substring(0, 3)).append(" ").append(startDate.getDayOfMonth());
         }
         return builder.toString();
     }
@@ -100,33 +108,59 @@ public class TripItemWrapper {
         return "DEPART";
     }
 
+    /**
+     * Name: getDepartTimeFormatted
+     * Purpose: Gets the departure time formatted.
+     * Synopsis: performs null check. Then formats the time
+     * <p>
+     *
+     * @return String, formatted departure time. Example: 6:05PM
+     */
     public String getDepartTimeFormatted() {
-        if(startTime==null) {
+        if (startTime == null) {
             return "";
         }
         return startTime.format(DateTimeFormatter.ofPattern("h:mma"));
     }
 
+    /**
+     * Name: getArriveTimeFormatted
+     * Purpose: Gets the arrival time formatted.
+     * Synopsis: Performs null check, then formats the time.
+     * <p>
+     *
+     * @return String, formatted depart time. Example: 6:06AM
+     */
     public String getArriveTimeFormatted() {
-        if(endTime==null) {
+        if (endTime == null) {
             return "";
         }
         return endTime.format(DateTimeFormatter.ofPattern("h:mma"));
     }
 
+    /**
+     * Name: getMainTitle
+     * Purpose: Generates the MainTitle component's String depending on the time of TripItem this Wrapper contains
+     * Synopsis: Depending on the tripItemTypeCode the function will return a String containing the Main
+     * Title
+     *
+     * <p>
+     *
+     * @return String representatin of the Main Title for a specific Item.
+     */
     public String getMainTitle() {
         StringBuilder builder = new StringBuilder();
 
         switch (tripItemTypeCode) {
             case "F":
                 FlightSegmentDto segment = (FlightSegmentDto) tripItem;
-                if(segment.getDepartureAirport() != null && segment.getArrivalAirport() !=  null) {
+                if (segment.getDepartureAirport() != null && segment.getArrivalAirport() != null) {
                     builder.append(segment.getDepartureAirport()).append(" to ").append("\n").append(segment.getArrivalAirport());
                 }
                 break;
             case "CR":
                 CarRentalDto rental = (CarRentalDto) tripItem;
-                if(rental.getSupplierDto().getSupplierName() != null) {
+                if (rental.getSupplierDto().getSupplierName() != null) {
                     builder.append(rental.getSupplierDto().getSupplierName());
                 }
                 break;
@@ -134,21 +168,29 @@ public class TripItemWrapper {
         return builder.toString();
     }
 
+    /**
+     * Name: getSubTitle
+     * Purpose: To generate the sub title component's String depending on the tripItemTypeCode
+     * Synopsis: Gets the subtitle for a specific tripItem.
+     * <p>
+     *
+     * @return String containing the subtitle pertaining to the item this wrapper contains.
+     */
     public String getSubTitle() {
         StringBuilder builder = new StringBuilder();
         switch (tripItemTypeCode) {
             case "F":
                 FlightSegmentDto segment = (FlightSegmentDto) tripItem;
-                if(segment.getAirlineName()!= null) {
+                if (segment.getAirlineName() != null) {
                     builder.append(segment.getAirlineName()).append(" ");
                 }
-                if(segment.getFlightNumber() != null) {
+                if (segment.getFlightNumber() != null) {
                     builder.append(segment.getFlightNumber());
                 }
                 break;
             case "CR":
                 CarRentalDto rental = (CarRentalDto) tripItem;
-                if(rental.getPickUpLocationName() != null) {
+                if (rental.getPickUpLocationName() != null) {
                     builder.append(rental.getPickUpLocationName());
                 }
                 break;
@@ -158,18 +200,33 @@ public class TripItemWrapper {
 
     }
 
+    /**
+     * Name: getIdAsString
+     * Purpose: Return the item's Id as a String
+     * Synopsis: Ids are stored in a Long datatype. The id is converted using the toString method.
+     * <p>
+     *
+     * @return String, representing the id of the item.
+     */
     public String getIdAsString() {
         return Long.toString(id);
 
     }
 
+    /**
+     * Name: getDurationOfSegment
+     * Purpose: To return the Duration of a segment
+     * Synopsis: Calculates the duration, starting by getting the days between startDate and endDate.
+     * Then gets the hours in a day between startTime & endTime.
+     * Then gets the minutes in between the startTime & endTime.
+     * Then performs some cosmetic styling.
+     *
+     * <p>
+     */
     public String getDurationOfSegment() {
         String duration = new String();
         StringBuilder builder = new StringBuilder();
-        if(startDate != null && startTime != null && endDate != null && endTime != null) {
-            /*DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            LocalDateTime startDT = LocalDateTime.parse(startDate.toString() + startTime.toString(), formatter);
-            LocalDateTime endDT = LocalDateTime.parse(endDate.toString() + endTime.toString(), formatter);*/
+        if (startDate != null && startTime != null && endDate != null && endTime != null) {
             // calculating the total number of hours and minutes between two dateTime objects.
 
             // get days between startDate and endDate in hours
@@ -180,17 +237,16 @@ public class TripItemWrapper {
             Long hoursInDayBetween = startTime.until(endTime, ChronoUnit.HOURS);
             hours = hours + hoursInDayBetween;
 
-            // get minutes between starTime and endTime
-            LocalTime startMins = LocalTime.of(0,startTime.getMinute());
+            // get minutes between startTime and endTime
+            LocalTime startMins = LocalTime.of(0, startTime.getMinute());
             LocalTime endMins = LocalTime.of(0, endTime.getMinute());
             String minutes = Long.toString(Math.abs(Duration.between(startMins, endMins).toMinutes()));
 
-            // LocalTime localTime = LocalTime.of(Integer.parseInt(Long.toString(hours)), Integer.parseInt(Long.toString(minutes)));
-            if(!hours.equals("0")) {
+            if (!hours.equals("0")) {
                 builder.append(hours.toString()).append("h");
             }
-            if(!minutes.equals("0")) {
-                if(!hours.equals("0")) {
+            if (!minutes.equals("0")) {
+                if (!hours.equals("0")) {
                     builder.append(", ");
                 }
                 builder.append(minutes).append("m");
@@ -199,7 +255,7 @@ public class TripItemWrapper {
             duration = builder.toString();
             return duration;
         }
-
+        // When any piece of the date or time is null, just return a dash.
         return builder.append("-").toString();
     }
 
@@ -213,11 +269,11 @@ public class TripItemWrapper {
     public String getDepartureTerminalAndGate() {
         FlightSegmentDto segment = (FlightSegmentDto) tripItem;
         StringBuilder build = new StringBuilder();
-        if(segment.getDepartureTerminal() != null) {
+        if (segment.getDepartureTerminal() != null) {
             build.append(segment.getDepartureTerminal());
         }
         build.append("/");
-        if(segment.getDepartureGate()!=null) {
+        if (segment.getDepartureGate() != null) {
             build.append(segment.getDepartureGate());
         }
 
@@ -225,25 +281,23 @@ public class TripItemWrapper {
 
     }
 
+    /**
+     * Name: getSeat
+     * Purpose: Returns the seat information for items that have a seat property.
+     * Synopsis: Gets the seat property for items that contain it.
+     * <p>
+     *
+     * @return String, the seats for the calling item. Otherwise will return a dash.
+     */
     public String getSeat() {
-        if(tripItemTypeCode == "F") {
+        if (tripItemTypeCode == "F") {
             FlightSegmentDto segment = (FlightSegmentDto) tripItem;
-            if(segment.getSeat() != null && !segment.getSeat().isEmpty()) {
+            if (segment.getSeat() != null && !segment.getSeat().isEmpty()) {
                 return segment.getSeat();
             }
         }
         return "-";
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

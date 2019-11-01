@@ -1,18 +1,16 @@
 package dev.phasterinc.tripdat.model.dto;
-
-import dev.phasterinc.tripdat.model.TripdatUser;
-import dev.phasterinc.tripdat.validation.FieldMatch;
-import lombok.*;
-
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
  * Class : CMPS 450 Senior Project                          *
  * Date : 3/1/2019                                          *
  ************************************************************/
+
+import dev.phasterinc.tripdat.model.TripdatUser;
+import dev.phasterinc.tripdat.validation.FieldMatch;
+import lombok.*;
+
+import javax.validation.constraints.NotEmpty;
 
 /**
  * Name: UserSettingsDto
@@ -33,13 +31,6 @@ public class UserSettingsDto {
     @NotEmpty
     private String login;
 
-    @Email
-    @NotEmpty
-    private String email;
-
-    @Email
-    @NotEmpty
-    private String confirmEmail;
 
     @NotEmpty
     private String firstName;
@@ -64,7 +55,6 @@ public class UserSettingsDto {
     public static UserSettingsDto buildDto(TripdatUser user) {
         UserSettingsDto dto = UserSettingsDto.builder()
                 .login(user.getUserLogin())
-                .email(user.getUserEmail())
                 .displayName(user.getUserDisplayName())
                 .firstName(user.getUserFirstName())
                 .lastName(user.getUserLastName())
@@ -85,7 +75,6 @@ public class UserSettingsDto {
     public static TripdatUser buildEntity(UserSettingsDto settingsDto) {
         return TripdatUser.builder()
                 .userLogin(settingsDto.getLogin())
-                .userEmail(settingsDto.getEmail())
                 .userDisplayName(settingsDto.getDisplayName())
                 .userFirstName(settingsDto.getFirstName())
                 .userLastName(settingsDto.getLastName())
@@ -105,7 +94,6 @@ public class UserSettingsDto {
      */
     public static void updateEntity(TripdatUser tripdatUser, UserSettingsDto userSettingsDto) {
         tripdatUser.setUserLogin(userSettingsDto.login);
-        tripdatUser.setUserEmail(userSettingsDto.email);
         tripdatUser.setUserDisplayName(userSettingsDto.displayName);
         tripdatUser.setUserFirstName(userSettingsDto.firstName);
         tripdatUser.setUserLastName(userSettingsDto.lastName);

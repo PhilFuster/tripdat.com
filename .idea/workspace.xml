@@ -1,39 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9f40609e-15e7-4e51-960a-4b3848a1ca61" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/0/00f699dc76642887ebe5da3f801d57eca37458c6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/0/00f699dc76642887ebe5da3f801d57eca37458c6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/a/0a495b47cd2e6d7e52abc2ab007ee158b7d48558" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/0/a/0a495b47cd2e6d7e52abc2ab007ee158b7d48558" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/b/1b5dc13f267b9c84074b43402c3e7d2b61ad5f74" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/b/1b5dc13f267b9c84074b43402c3e7d2b61ad5f74" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/c/1c55376b15a048fe43d092f3b375f2296b0038cf" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/c/1c55376b15a048fe43d092f3b375f2296b0038cf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/e/1e419bc746e5a86e7f16815c63e3c8778285fb34" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/1/e/1e419bc746e5a86e7f16815c63e3c8778285fb34" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/4/2412c3eec55a9189c252aaf2f047bc86ad835ae4" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/2/4/2412c3eec55a9189c252aaf2f047bc86ad835ae4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/3/4334b861b4e546112f5e798a1365b67200aca0d6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/4/3/4334b861b4e546112f5e798a1365b67200aca0d6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/3/639e41686e024ee21b0edac7c7a2e60311d605f4" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/6/3/639e41686e024ee21b0edac7c7a2e60311d605f4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/6/86cdd8252474e61520cadad4ed6a512ab162bc03" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/6/86cdd8252474e61520cadad4ed6a512ab162bc03" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/b/8b150a02780f51127c214bba468cc05e2df16249" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/b/8b150a02780f51127c214bba468cc05e2df16249" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/b/8b1e6f76536edbabb9a026999179d60bdde2ab82" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/b/8b1e6f76536edbabb9a026999179d60bdde2ab82" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/f/8fa5c4f2c5e669100378adf59e34db165c5e3401" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/8/f/8fa5c4f2c5e669100378adf59e34db165c5e3401" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/b/9b020cbc5e3cece8c8b82417c77dfb99bc422662" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/b/9b020cbc5e3cece8c8b82417c77dfb99bc422662" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/9/a978756ac33f597390890582fde455af58a49999" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/9/a978756ac33f597390890582fde455af58a49999" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/ab93e9e5b88d8b82f119891f4faaa4b5608e6fea" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/b/ab93e9e5b88d8b82f119891f4faaa4b5608e6fea" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/d/adb6c4deb3a740b65c167c5f568baf2391a7368e" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/a/d/adb6c4deb3a740b65c167c5f568baf2391a7368e" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/7/b711223c5e4312b35988795568fa9576d859946b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/b/7/b711223c5e4312b35988795568fa9576d859946b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/8/c8011a4b1a370d26b94d36a579c3559e26739daa" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/8/c8011a4b1a370d26b94d36a579c3559e26739daa" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5d95bb33a848614a3bed2eefc3f0e84e262af39" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/5/d5d95bb33a848614a3bed2eefc3f0e84e262af39" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db569044111a8586aa1d34856146d9c3ce0ca891" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/b/db569044111a8586aa1d34856146d9c3ce0ca891" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/d/dde805d2335ba71cd38ec8746bdaf4b9e5836d55" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/d/dde805d2335ba71cd38ec8746bdaf4b9e5836d55" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/f/df206857aa1ead78fb65ed2102a2d3823ca4a029" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/d/f/df206857aa1ead78fb65ed2102a2d3823ca4a029" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/9/e98c18d743bda67e408d7c2bd51403f7e0c242cd" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/9/e98c18d743bda67e408d7c2bd51403f7e0c242cd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/e/eefdcbca6d955adddae06b719aae148dfc2789e0" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/e/eefdcbca6d955adddae06b719aae148dfc2789e0" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/f/efe5dc48e016c6a47b9305c897347bad70ede4a6" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/e/f/efe5dc48e016c6a47b9305c897347bad70ede4a6" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/5/f5251628d8faccab008e1800931ab6dd74b1590b" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/5/f5251628d8faccab008e1800931ab6dd74b1590b" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/c/fcbb269a07f9918f48f999286c4ae39336888c63" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/f/c/fcbb269a07f9918f48f999286c4ae39336888c63" afterDir="false" />
+    <list default="true" id="9f40609e-15e7-4e51-960a-4b3848a1ca61" name="Default Changelist" comment="f">
+      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/file-layout.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Attendee.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Attendee.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/BookingDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/BookingDetail.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/CarRental.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/CarRental.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Flight.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment$FlightSegmentBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment$FlightSegmentBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier$SupplierBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier$SupplierBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TravelAgency.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TravelAgency.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper$TripItemWrapperBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper$TripItemWrapperBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTrip.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTrip.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTripItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTripItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser$TripdatUserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser$TripdatUserBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto$UserSettingsDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto$UserSettingsDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/AbstractHibernateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/AbstractHibernateDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/CruiseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/CruiseDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/GenericHibernateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/GenericHibernateDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/IGenericDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/IGenericDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDaoImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/FlightFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/FlightFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Attendee.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/BookingDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/BookingDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Cruise.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Cruise.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CruiseStop.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CruiseStop.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Flight.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/FlightSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/FlightSegment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Supplier.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TravelAgency.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TravelAgency.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripItemWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripItemWrapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTrip.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTrip.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTripItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTripItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUserPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUserPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/AttendeeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/AttendeeDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/BookingDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/BookingDetailDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/CarRentalDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/CarRentalDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangeEmailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangeEmailDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangePasswordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangePasswordDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightItemDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightSegmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightSegmentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/SupplierDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/SupplierDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TravelAgencyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TravelAgencyDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TripDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TripDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserRegistrationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserRegistrationDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserSettingsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserSettingsDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripItemServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/CarItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/CarItemController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/UserSettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/UserSettingsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/user/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/user/trip-item/edit/edit-car-rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/user/trip-item/edit/edit-car-rental.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/UserSettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/UserSettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/user/settings.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/user/trip-item/edit/edit-car-rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/user/trip-item/edit/edit-car-rental.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -143,6 +198,7 @@
         <option value="Interface" />
         <option value="Class" />
         <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -160,8 +216,10 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA" />
     <property name="database.console.LAST_STATE" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/src/main/resources/templates/user" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/web/src/main/resources/templates/fragments" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -179,11 +237,11 @@
       <recent name="dev.phasterinc.tripdat.controller" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Philip\Documents\SP2019\tripdat.com\web\src\main\resources\templates\fragments" />
       <recent name="C:\Users\Philip\Documents\SP2019\tripdat.com\web\src\main\resources\templates\user" />
       <recent name="C:\Users\Philip\Documents\SP2019\tripdat.com\core\src\main\java\dev\phasterinc\tripdat\service" />
       <recent name="C:\Users\Philip\Documents\SP2019\tripdat.com\web\src\main\resources\templates\user\trip-item\create" />
       <recent name="C:\Users\Philip\Documents\SP2019\tripdat.com\web\src\main\resources\templates\user\trip-item\edit" />
-      <recent name="C:\Users\Philip\Documents\SP2019\tripdat.com\web\src\main\resources\templates\fragments\item-fragments" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -237,25 +295,6 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="tripdat.com [build]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="build" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
-      <method v="2" />
-    </configuration>
     <configuration name="tripdat.com [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -294,6 +333,13 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TripdatApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="tripdat.web.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="dev.phasterinc.tripdat.TripdatApplication" />
@@ -303,11 +349,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Java Scratch.Scratch" />
         <item itemvalue="Gradle.tripdat.com [jar]" />
         <item itemvalue="Gradle.tripdat.com [bootRun]" />
         <item itemvalue="Gradle.tripdat.com [clean]" />
         <item itemvalue="Gradle.tripdat.com [bootJar]" />
-        <item itemvalue="Gradle.tripdat.com [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -365,7 +411,9 @@
       <workItem from="1570385050508" duration="26067000" />
       <workItem from="1570762202360" duration="5179000" />
       <workItem from="1570883966731" duration="46465000" />
-      <workItem from="1572195158673" duration="222000" />
+      <workItem from="1572195158673" duration="327000" />
+      <workItem from="1572195841588" duration="17029000" />
+      <workItem from="1572482063564" duration="5092000" />
     </task>
     <servers />
   </component>

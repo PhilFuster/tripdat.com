@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.model;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import lombok.*;
 
@@ -9,12 +15,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: CarRental
@@ -28,15 +28,8 @@ import java.time.LocalTime;
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "CarRental")
 @Table(name = "car_rental")
-/*@PrimaryKeyJoinColumn(name = "trip_item_id", referencedColumnName = "trip_item_id")*/
 public class CarRental extends TripdatTripItem implements Serializable {
     // == fields ==
-    /*
-    @Id
-    @SequenceGenerator(name = "carRental_generator", sequenceName = "car_rental_car_rental_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "carRental_generator")
-    @Column(name = "car_rental_id", columnDefinition = "BIGINT")
-    private long carRentalId;*/
 
 
     @Column(name = "car_rental_confirmation_number", columnDefinition = "TEXT")

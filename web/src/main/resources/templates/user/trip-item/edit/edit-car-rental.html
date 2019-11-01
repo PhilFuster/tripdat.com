@@ -4,12 +4,12 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="'Edit a Car Rental'"></title>
+    <title th:text="|Edit a Car Rental|"></title>
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
     <div th:class="|edit-item-header|">
-        <div th:insert="~{fragments/date-header::date-header('Edit a Car Rental')}" ></div>
+        <div th:insert="~{fragments/date-header::date-header('Edit Car Rental')}" ></div>
         <p th:text="'Here you can store Car Rental details'"></p>
     </div>
     <main th:class="edit-item-main">

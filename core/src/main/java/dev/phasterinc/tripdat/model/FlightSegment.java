@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.model;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import lombok.*;
 
@@ -7,12 +13,6 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: FlightSegment
@@ -31,7 +31,7 @@ public class FlightSegment implements Serializable {
     // == fields ==
     @Id
     @SequenceGenerator(name = "flightSegment_generator", sequenceName = "flight_segment_flight_segment_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "flightSegment_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "flightSegment_generator")
     @Column(name = "flight_segment_id", columnDefinition = "BIGINT")
     private Long flightSegmentId;
 
@@ -86,7 +86,7 @@ public class FlightSegment implements Serializable {
     @Column(name = "flight_baggage_claim", columnDefinition = "TEXT")
     private String flightBaggageClaim;
 
-    @Column(name ="flight_entertainment", columnDefinition = "TEXT")
+    @Column(name = "flight_entertainment", columnDefinition = "TEXT")
     private String flightEntertainment;
 
     @Column(name = "flight_on_time_percentage", columnDefinition = "TEXT")
@@ -131,19 +131,30 @@ public class FlightSegment implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof FlightSegment )) return false;
+        if (!(o instanceof FlightSegment)) return false;
 
         return flightSegmentId != null && flightSegmentId.equals((((FlightSegment) o).getFlightSegmentId()));
 
 
     }
 
+    /**
+     * Name: hashCode
+     * Purpose: Override's default hashCode implementation.
+     * Synopsis: By giving all instances of FlightSegment the same Hashcode, comparison is possible.
+     * <p>
+     */
     @Override
     public int hashCode() {
         return 31;
     }
 
 
+    /**
+     * Name: toString
+     * Purpose: Overrides the default implementation of toString method
+     * <p>
+     */
     @Override
     public String toString() {
         return "FlightSegment{" +

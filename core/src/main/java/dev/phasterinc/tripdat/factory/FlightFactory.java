@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.factory;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.TripdatTripItem;
@@ -6,12 +12,6 @@ import dev.phasterinc.tripdat.model.dto.FlightSegmentDto;
 
 import java.time.LocalDate;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: FlightFactor

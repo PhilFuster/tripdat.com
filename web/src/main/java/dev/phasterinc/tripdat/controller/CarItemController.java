@@ -181,16 +181,16 @@ public class CarItemController {
             //
             // pickUp date cannot be after dropOff Date
             if( rentalDto.getPickUpDate().isAfter(rentalDto.getDropOffDate())) {
-                result.rejectValue("rentalDto.pickUpDate", null,
+                result.rejectValue("pickUpDate", null,
                         "Pick up date must be before drop off date.");
-                result.rejectValue("rentalDto.dropOffDate", null,
+                result.rejectValue("dropOffDate", null,
                         "Drop off date must be after pick up date.");
             }
             // TripItem must be within Trips date range
             if(rentalDto.getPickUpDate().isBefore(tripStartDate) || rentalDto.getDropOffDate().isAfter(tripEndDate)) {
-                result.rejectValue("rentalDto.pickUpDate", null,
+                result.rejectValue("pickUpDate", null,
                         "Date range does not fall within Trip's date range.");
-                result.rejectValue("rentalDto.dropOffDate", null,
+                result.rejectValue("dropOffDate", null,
                         "Date range does not fall within Trip's date range.");
             }
             //
@@ -220,9 +220,9 @@ public class CarItemController {
                         if(!isTimeRangeNull && (currentItem.getStartTime() != null && currentItem.getEndTime() != null)) {
                             if(rentalDto.getDropOffTime().isAfter(currentItem.getStartTime())
                                     || rentalDto.getPickUpTime().isBefore(currentItem.getEndTime())) {
-                                result.rejectValue("rentalDto.pickUpTime", null,
+                                result.rejectValue("pickUpTime", null,
                                         "Time Conflict with other item in trip");
-                                result.rejectValue("rentalDto.pickUpDropOffTime", null,
+                                result.rejectValue("dropOffTime", null,
                                         "Time Conflict with other item in trip");
                             }
                         }
@@ -236,21 +236,21 @@ public class CarItemController {
                     // newItem must end before currentItem starts.
                     // if newItem endTime is not before currentItem's end time report error
                     if((rentalDto.getDropOffTime() != null && currentItem.getStartTime() != null) && !rentalDto.getDropOffTime().isBefore(currentItem.getStartTime())) {
-                        result.rejectValue("carRental.pickUpTime", null,
+                        result.rejectValue("pickUpTime", null,
                                 "Time Conflict with other item in trip");
-                        result.rejectValue("carRental.DropOffTime", null,
+                        result.rejectValue("dropOffTime", null,
                                 "Time Conflict with other item in trip");
 
                     }
                 }
                 // newItem does not start on same day as currentItem
-                // if newItem's arrivaleDate is not before the currentItem's startDate
+                // if newItem's pickUpDate is not before the currentItem's startDate
                 // OR newItem's departureDate is not after currentItems endDate there is overlap
                 if( (currentItem.getStartDate() != null && currentItem.getEndDate() != null) && !(rentalDto.getPickUpDate().isBefore(currentItem.getStartDate())
                         || rentalDto.getDropOffDate().isAfter(currentItem.getEndDate()))) {
-                    result.rejectValue("carRental.pickUpDate", null,
+                    result.rejectValue("pickUpDate", null,
                             "Date Conflict with other item in trip");
-                    result.rejectValue("carRental.dropOffDate", null,
+                    result.rejectValue("dropOffDate", null,
                             "Date Conflict with other item in trip");
                 }
             }
@@ -261,8 +261,8 @@ public class CarItemController {
             return  itemId == -1 ? ViewNames.CREATE_CAR_RENTAL:ViewNames.EDIT_CAR_RENTAL;
         }
 
-        // FlightItemDto has made it through the validation process
-        // Create an entity from the flightItemDto
+        // carRentalDto has made it through the validation process
+        // Create an entity from the carItemDto
         TripdatTripItem carRental;
         if(itemId == -1) {
             carRental = CarRentalDto.buildEntity(rentalDto,trip);

@@ -39,7 +39,7 @@ public class UserSettingsController {
     private CustomUserDetailsService userService;
 
 
-    /**
+/*    *//**
      * name: userSettingsDto
      * purpose: To create a userSettingsDto from the currently logged in user.
      *
@@ -48,14 +48,14 @@ public class UserSettingsController {
      *
      *
      * @return UserSettingsDto instance
-     */
+     *//*
     @ModelAttribute("user")
     public UserSettingsDto userSettingsDto() {
         TripdatUserPrincipal userPrincipal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatUser user = userPrincipal.getTripdatUser();
         UserSettingsDto settingsDto = UserSettingsDto.buildDto(user);
         return settingsDto;
-    }
+    }*/
 
     /**
      * Name: showSettingsForm
@@ -67,7 +67,10 @@ public class UserSettingsController {
      */
     @GetMapping
     public String showSettingsForm(Model model) {
-
+        TripdatUserPrincipal userPrincipal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TripdatUser user = userPrincipal.getTripdatUser();
+        UserSettingsDto settingsDto = UserSettingsDto.buildDto(user);
+        model.addAttribute("user",settingsDto);
         return ViewNames.SETTINGS;
     }
 
@@ -86,17 +89,10 @@ public class UserSettingsController {
     @PostMapping
     public String saveUserSettings(@ModelAttribute("user") @Valid UserSettingsDto userDto,
                                       BindingResult result) {
+        log.info("In saveUserSettings.");
         TripdatUserPrincipal userPrincipal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatUser userEntity = userPrincipal.getTripdatUser();
 
-        TripdatUser existing = userService.findByEmail(userDto.getEmail());
-        if (existing != null) {
-            result.rejectValue("email", null, "There is already an account registered with that email ");
-        }
-
-        if(result.hasErrors()) {
-            return ViewNames.SETTINGS;
-        }
         userService.updateUserInformation(userDto);
         return "redirect:" + ViewNames.SETTINGS_SUCCESS;
     }

@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
 <th:block th:fragment="header">
-    <nav class="navbar navbar-dark navbar-static-top navbar-expand-md">
+    <nav role="navigation" class="header navbar navbar-dark navbar-static-top navbar-expand-md">
         <div class="container">
             <div class="navbar-header">
                 <a class="navbar-brand" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">

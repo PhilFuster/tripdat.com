@@ -1,21 +1,20 @@
 package dev.phasterinc.tripdat.model.dto;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.validation.FieldMatch;
 import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-/************************************************************
- * currentEmail:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Class: ChangeEmailDto
  * Purpose: Data Transfer Object used for changing a user's email
- *
  */
 @FieldMatch.List({
         @FieldMatch(first = "newEmail", second = "confirmNewEmail", message = "The email fields must match"),
@@ -46,9 +45,9 @@ public class ChangeEmailDto {
      */
     public boolean isEmpty() {
         boolean allEmpty = true;
-        if(this.currentEmail != null && !currentEmail.isEmpty()) allEmpty = false;
-        if(this.newEmail != null && !newEmail.isEmpty()) allEmpty = false;
-        if(this.confirmNewEmail != null && !confirmNewEmail.isEmpty()) allEmpty = false;
+        if (this.currentEmail != null && !currentEmail.isEmpty()) allEmpty = false;
+        if (this.newEmail != null && !newEmail.isEmpty()) allEmpty = false;
+        if (this.confirmNewEmail != null && !confirmNewEmail.isEmpty()) allEmpty = false;
         return allEmpty;
     }
 }

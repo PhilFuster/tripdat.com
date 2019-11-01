@@ -1,5 +1,4 @@
 package dev.phasterinc.tripdat.service;
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -17,9 +16,14 @@ import java.util.List;
  */
 public interface SupplierService {
     List<Supplier> findAll();
+
     Supplier findOne(final long id);
+
     void create(final Supplier entity);
+
     Supplier update(final Supplier entity);
+
     void delete(final Supplier entity);
+
     void deleteById(final long entityId);
 }

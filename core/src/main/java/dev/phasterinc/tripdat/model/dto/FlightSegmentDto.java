@@ -5,16 +5,16 @@ import dev.phasterinc.tripdat.model.Flight;
 import dev.phasterinc.tripdat.model.FlightSegment;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
  * Class : CMPS 450 Senior Project                          *
  * Date : 3/1/2019                                          *
  ************************************************************/
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 
 /**
  * Name: FlightSemgentDto

@@ -1,7 +1,12 @@
 package dev.phasterinc.tripdat.model;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,28 +15,20 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: TripdatTrip - models the tripdat_trip table
- *
  */
 
 @Data
-@EqualsAndHashCode(of="tripId")
 @Entity(name = "TripdatTrip")
-@Table(name="tripdat_trip")
+@Table(name = "tripdat_trip")
 public class TripdatTrip implements Serializable {
 
     // == fields ===
     @Id
     @SequenceGenerator(name = "trip_generator", sequenceName = "tripdat_trip_trip_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "trip_generator")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "trip_generator")
     @Column(name = "trip_id", columnDefinition = "BIGINT")
     private Long tripId;
 
@@ -41,10 +38,10 @@ public class TripdatTrip implements Serializable {
             orphanRemoval = true,
             fetch = FetchType.EAGER
     )
-    private Set< TripdatTripItem > tripItems = new HashSet<>();
+    private Set<TripdatTripItem> tripItems = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private TripdatUser user;
 
 
@@ -82,6 +79,40 @@ public class TripdatTrip implements Serializable {
         tripItem.setTripdatTrip(null);
     }
 
+    /**
+     * Name: equals
+     * Purpose: Overriding the default implementation of equals method to ensure validity of comparison
+     * Synopsis: When using database-generated unique identifiers, a comparison between the two objects' id
+     * is what is required.
+     * <p>
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TripdatTrip)) return false;
+        TripdatTrip trip = (TripdatTrip) o;
+        return tripId != null && tripId.equals(((TripdatTrip) o).getTripId());
+    }
+
+    /**
+     * Name: hashCode
+     * Purpose: Overrides default implementation of hashCode
+     * Synopsis: When using database-generated unique identifiers, the hashcode needs to
+     * be consistent across state transitions, thus the reason for returing 31.
+     * <p>
+     */
+    @Override
+    public int hashCode() {
+        return 31;
+    }
+
+    /**
+     * Name: toString
+     * Purpose: Overrides default implementation of toString method.
+     * <p>
+     *
+     * @return String representation of a TripdatTrip object.
+     */
     @Override
     public String toString() {
         return "TripdatTrip{" +

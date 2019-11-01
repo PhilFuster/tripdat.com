@@ -1,9 +1,4 @@
 package dev.phasterinc.tripdat.model.dto;
-
-import dev.phasterinc.tripdat.model.TravelAgency;
-import dev.phasterinc.tripdat.model.TripdatTripItem;
-import lombok.*;
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -11,11 +6,14 @@ import lombok.*;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
+import dev.phasterinc.tripdat.model.TravelAgency;
+import dev.phasterinc.tripdat.model.TripdatTripItem;
+import lombok.*;
+
+
 /**
  * ClassName: TravelAgencyDto
  * Purpose: Data Transfer Object for TravelAgency
- *
- *
  */
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -61,7 +59,7 @@ public class TravelAgencyDto {
      * <p>
      *
      * @param agencyDto TravelAgency Data Transfer Object the Entity will be modeled after.
-     * @param item The TripdatTripItem the TravelAgency belongs to.
+     * @param item      The TripdatTripItem the TravelAgency belongs to.
      * @return the built TravelAgency dto.
      */
     public static TravelAgency buildEntity(TravelAgencyDto agencyDto, TripdatTripItem item) {
@@ -83,7 +81,7 @@ public class TravelAgencyDto {
      * Synopsis: Updates a TravelAgency entity with the information from the DTO.
      * <p>
      *
-     * @param agency The TravelAgency entity that will be updated.
+     * @param agency    The TravelAgency entity that will be updated.
      * @param agencyDto The TravelAgencyDTO where the information is coming from.
      */
     public static void updateEntity(TravelAgency agency, TravelAgencyDto agencyDto) {

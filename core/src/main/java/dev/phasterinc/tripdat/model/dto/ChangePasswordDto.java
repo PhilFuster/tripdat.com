@@ -1,16 +1,16 @@
 package dev.phasterinc.tripdat.model.dto;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.validation.FieldMatch;
 import dev.phasterinc.tripdat.validation.ValidPassword;
 import lombok.*;
 
 import javax.validation.constraints.NotEmpty;
-/************************************************************
- * currentPassword:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Class: ChangePasswordDto

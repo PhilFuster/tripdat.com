@@ -1,16 +1,16 @@
 package dev.phasterinc.tripdat.model;
-
-import lombok.*;
-
-import javax.persistence.*;
-import java.io.Serializable;
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
  * Class : CMPS 450 Senior Project                          *
  * Date : 3/1/2019                                          *
  ************************************************************/
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+
 
 /**
  * Name: Attendee
@@ -68,9 +68,9 @@ public class Attendee implements Serializable {
     /**
      * Name: hashCode
      * Purpose: hashCode Override
-     * Synopsis: Makes it easier to differentiate between Attendee Objects.
+     * Synopsis: Object hashes must remain consistent across state changes, thus the
+     * reason for returning a default value.
      * <p>
-     *
      */
     @Override
     public int hashCode() {

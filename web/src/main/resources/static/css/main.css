@@ -1190,5 +1190,11 @@ summary.add-plan-modal-summary{
     display:none;
 }
 
+#settings-main-content {
+    display:flex;
+    flex-direction: column;
+
+}
+
 
 

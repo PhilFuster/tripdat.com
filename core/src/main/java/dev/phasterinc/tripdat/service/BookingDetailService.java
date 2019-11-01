@@ -17,9 +17,14 @@ import java.util.List;
  */
 public interface BookingDetailService {
     List<BookingDetail> findAll();
+
     BookingDetail findOne(final long id);
+
     void create(final BookingDetail entity);
+
     BookingDetail update(final BookingDetail entity);
+
     void delete(final BookingDetail entity);
+
     void deleteById(final long entityId);
 }

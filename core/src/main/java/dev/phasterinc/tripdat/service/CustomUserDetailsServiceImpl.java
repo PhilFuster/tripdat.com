@@ -7,6 +7,7 @@ import dev.phasterinc.tripdat.model.dto.ChangeEmailDto;
 import dev.phasterinc.tripdat.model.dto.ChangePasswordDto;
 import dev.phasterinc.tripdat.model.dto.UserRegistrationDto;
 import dev.phasterinc.tripdat.model.dto.UserSettingsDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -32,6 +33,7 @@ import java.util.stream.Collectors;
  *          in the application
  */
 
+@Slf4j
 @Service
 @Transactional
 public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
@@ -152,14 +154,15 @@ public class CustomUserDetailsServiceImpl implements CustomUserDetailsService {
      */
     @Override
     public TripdatUser updateUserInformation(UserSettingsDto settingsDto) {
-        TripdatUser user = new TripdatUser();
+        TripdatUserPrincipal principal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TripdatUser user = principal.getTripdatUser();
         user.setUserFirstName(settingsDto.getFirstName());
         user.setUserLastName(settingsDto.getLastName());
-        user.setUserEmail(settingsDto.getEmail());
         user.setUserLogin(settingsDto.getLogin());
         user.setUserCity(settingsDto.getCity());
         user.setUserDisplayName(settingsDto.getDisplayName());
         user.setUserHomeAirport(settingsDto.getHomeAirport());
+        log.info("User to be updated: ", user);
         tripdatUserService.update(user);
         return user;
     }

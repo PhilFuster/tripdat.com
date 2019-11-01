@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.dao;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.model.TripdatTrip;
 import lombok.extern.slf4j.Slf4j;
@@ -11,12 +17,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: TripdatTripDaoImpl

@@ -16,7 +16,6 @@ import java.io.Serializable;
  * Name: Supplier
  * Purpose: Model the table supplier in the db. Stores information of the supplier of a trip item
  */
-// @EqualsAndHashCode(of = "supplierId")// unsure after removing supplierId ref TravelAgency.java
 @Entity(name = "Supplier")
 @Builder(toBuilder = true)
 @AllArgsConstructor
@@ -49,6 +48,11 @@ public class Supplier implements Serializable {
     @Column(name = "supplier_url", columnDefinition = "TEXT")
     private String supplierUrl;
 
+    /**
+     * Name: toString
+     * Purpose: Overrides default implementation of toString method.
+     * <p>
+     */
     @Override
     public String toString() {
         return "Supplier{" +

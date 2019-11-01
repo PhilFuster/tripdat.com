@@ -1,15 +1,15 @@
 package dev.phasterinc.tripdat.model;
-
-import lombok.*;
-
-import javax.persistence.*;
-import java.io.Serializable;
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
  * Class : CMPS 450 Senior Project                          *
  * Date : 3/1/2019                                          *
  ************************************************************/
+
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Name: TravelAgency - models TravelAgency table in db
@@ -21,7 +21,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Setter
 @Getter
-//@EqualsAndHashCode(of = "travelAgencyId") // I believe it will now be of="tripItemId") but not sure
 @Entity(name = "TravelAgency")
 @Table(name = "travel_agency")
 public class TravelAgency implements Serializable {
@@ -52,6 +51,13 @@ public class TravelAgency implements Serializable {
     @Column(name = "travel_agency_email", columnDefinition = "TEXT")
     private String travelAgencyEmail;
 
+    /**
+     * Name: toString
+     * Purpose: Overrides default toString implementation.
+     * <p>
+     *
+     * @return String representation of a TravelAgency object.
+     */
     @Override
     public String toString() {
         return "TravelAgency{" +
