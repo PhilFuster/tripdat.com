@@ -1,5 +1,12 @@
 package dev.phasterinc.tripdat.config;
 
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
+
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +23,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 import javax.sql.DataSource;
 import java.util.Properties;
 
-
+/**
+ * Name: HibernateConfig
+ * Purpose: Configuration for the Hibernate ORM framework
+ */
 @Configuration
 @EnableTransactionManagement
 @PropertySource({"classpath:persistence-postgresql.properties"})
@@ -25,6 +35,16 @@ public class HibernateConfig {
     @Autowired
     private Environment env;
 
+    /**
+     * Name: sessionFactory
+     * Purpose: Creates a Hibernate SessionFactory.
+     * Synopsis: This is the usual way to set up a shared Hibernate SessionFactory in a
+     * Spring application context. This enables the SessionFactory to then be passed to
+     * data access objects via dependency injection.
+     * <p>
+     *
+     * @return LocalSessionFactoryBean to be passed to data access objects via dependency injection.
+     */
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
@@ -34,6 +54,14 @@ public class HibernateConfig {
         return sessionFactory;
     }
 
+    /**
+     * Name: transactionManager
+     * Purpose: To implement a single Hibernate SessionFactory
+     * Synopsis: Binds a Hibernate Session from the specified factory to the thread.
+     * <p>
+     *
+     * @return HibernateTransactionManager
+     */
     @Bean
     @Autowired
     public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
@@ -42,11 +70,30 @@ public class HibernateConfig {
         return transactionManager;
     }
 
+    /**
+     * Name: exceptionTranslation
+     * Purpose: To translate native Hibernate resource exceptions to Spring's
+     * DataAccessException hierarchy.
+     * Synopsis: Bean post-processor that automatically applies persistence exception
+     * translation to any bean marked with {@code Repository} annotation.
+     * <p>
+     *
+     * @return PersistenceExceptionTranslationPostProcessor
+     */
     @Bean
     public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
         return new PersistenceExceptionTranslationPostProcessor();
     }
 
+    /**
+     * Name: dataSource
+     * Purpose: To connect to the physical data source for the application.
+     * Synopsis: A factory for connections to the physical data source (PostGRESQL) that
+     * the DataSource object represents.
+     * <p>
+     *
+     * @return DataSource
+     */
     @Bean
     public DataSource dataSource() {
         BasicDataSource dataSource = new BasicDataSource();
@@ -58,7 +105,12 @@ public class HibernateConfig {
         return dataSource;
     }
 
-    Properties hibernateProperties(){
+    /**
+     * Name: hibernateProperties
+     * Purpose: To set Hibernate Configuration properties.
+     * <p>
+     */
+    Properties hibernateProperties() {
         return new Properties() {
             {
                 setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));

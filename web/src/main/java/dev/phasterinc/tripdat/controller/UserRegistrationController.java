@@ -51,6 +51,7 @@ public class UserRegistrationController {
      */
     @GetMapping
     public String showRegistrationForm(Model model) {
+
         return ViewNames.REGISTRATION;
     }
 

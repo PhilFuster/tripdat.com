@@ -2,93 +2,62 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f40609e-15e7-4e51-960a-4b3848a1ca61" name="Default Changelist" comment="f">
-      <change afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/file-layout.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/dao/AbstractHibernateDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/dao/AbstractHibernateDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Attendee.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Attendee.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/BookingDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/BookingDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/CarRental.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/CarRental.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Flight.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Flight.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment$FlightSegmentBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment$FlightSegmentBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/FlightSegment.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Role.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier$SupplierBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier$SupplierBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/Supplier.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TravelAgency.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TravelAgency.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper$TripItemWrapperBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper$TripItemWrapperBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripItemWrapper.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTrip.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTrip.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTripItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatTripItem.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser$TripdatUserBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser$TripdatUserBuilder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUserPrincipal.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/TripdatUserPrincipal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/ChangeEmailDto$ChangeEmailDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/ChangeEmailDto$ChangeEmailDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/ChangeEmailDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/ChangeEmailDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/TravelAgencyDto$TravelAgencyDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/TravelAgencyDto$TravelAgencyDtoBuilder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/TravelAgencyDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/TravelAgencyDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto$UserSettingsDtoBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto$UserSettingsDtoBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/model/dto/UserSettingsDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/AbstractHibernateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/AbstractHibernateDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/CruiseDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/CruiseDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/GenericHibernateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/GenericHibernateDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/IGenericDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/IGenericDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/RoleDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatTripItemDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDaoImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDaoImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/FlightFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/FlightFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Attendee.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Attendee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/BookingDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/BookingDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Cruise.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Cruise.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CruiseStop.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CruiseStop.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Flight.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Flight.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/FlightSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/FlightSegment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Supplier.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/Supplier.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TravelAgency.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TravelAgency.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripItemWrapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripItemWrapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTrip.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTrip.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTripItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatTripItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUserPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/TripdatUserPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/AttendeeDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/AttendeeDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/BookingDetailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/BookingDetailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/CarRentalDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/CarRentalDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangeEmailDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangeEmailDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangePasswordDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/ChangePasswordDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightItemDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightItemDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightSegmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/FlightSegmentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/SupplierDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/SupplierDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TravelAgencyDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TravelAgencyDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TripDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/TripDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserRegistrationDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserRegistrationDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserSettingsDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/dto/UserSettingsDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/BookingDetailServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/RoleServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/SupplierServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TravelAgencyServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripItemServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripItemServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/CarItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/CarItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/UserSettingsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/UserSettingsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/RoleServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/RoleServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/SupplierServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/SupplierServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TravelAgencyServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TravelAgencyServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripItemWrapperService.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripItemWrapperService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripItemWrapperServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripItemWrapperServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripdatTripItemServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripdatTripItemServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripdatTripServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripdatTripServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripdatUserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/service/TripdatUserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/validation/FieldMatchValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/validation/FieldMatchValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/validation/PasswordConstraintValidator.class" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/classes/dev/phasterinc/tripdat/validation/PasswordConstraintValidator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/out/production/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/out/production/resources/logback-spring.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripItemWrapperService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripItemWrapperService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripItemWrapperServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripItemWrapperServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatTripServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/service/TripdatUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/FieldMatch.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/FieldMatch.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/FieldMatchValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/FieldMatchValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/PasswordConstraintValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/PasswordConstraintValidator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/ValidPassword.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/validation/ValidPassword.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/logback-spring.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/config/AppInitializer.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/config/AppInitializer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/DemoController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/DemoController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/UserRegistrationController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/UserRegistrationController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/user/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/user/trip-item/edit/edit-car-rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/user/trip-item/edit/edit-car-rental.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/UserSettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/UserSettingsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/config/AppInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/config/AppInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/config/HibernateConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/config/HibernateConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/DemoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/DemoController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/UserRegistrationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/UserRegistrationController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/fragments/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/fragments/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/fragments/item-fragments/car-nextup-fragment.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/fragments/item-fragments/car-nextup-fragment.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/registration.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/user/settings.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/user/settings.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/user/trip-item/edit/edit-car-rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/user/trip-item/edit/edit-car-rental.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -228,7 +197,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
+    <property name="settings.editor.selected.configurable" value="SonarLintApp" />
     <property name="sql.rename.search.for.storage.occurrences" value="true" />
   </component>
   <component name="RecentsManager">
@@ -413,7 +382,7 @@
       <workItem from="1570883966731" duration="46465000" />
       <workItem from="1572195158673" duration="327000" />
       <workItem from="1572195841588" duration="17029000" />
-      <workItem from="1572482063564" duration="5092000" />
+      <workItem from="1572482063564" duration="27134000" />
     </task>
     <servers />
   </component>
@@ -432,6 +401,20 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/DemoController.java</url>
+          <line>32</line>
+          <properties class="dev.phasterinc.tripdat.controller.DemoController" method="demo">
+            <option name="EMULATED" value="true" />
+          </properties>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

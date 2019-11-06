@@ -1,6 +1,5 @@
 package dev.phasterinc.tripdat.service;
 
-
 /************************************************************
  * Name:  Philip Fuster                                     *
  * Project : Tripdat Travel Itinerary Application           *
@@ -18,8 +17,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * TripItemWrapperService - TripItemWrapperService will perform all the logic for preparing
- *                         the tripItems to be added to the model to pass to the userIndex view.
+ * Name: TripItemWrapperService
+ * Purpose: TripItemWrapperService will perform all the logic for preparing
+ * the tripItems to be added to the model to pass to the userIndex view.
  */
 public interface TripItemWrapperService {
 
@@ -35,18 +35,10 @@ public interface TripItemWrapperService {
 
     List<TripItemWrapper> unwrapTripItemsIntoWrappers(Set<TripdatTripItem> items);
 
-    void orderItemWrappersByAscDateAndTime(List<TripItemWrapper>  wrappers);
+    void orderItemWrappersByAscDateAndTime(List<TripItemWrapper> wrappers);
 
     List<TripItemWrapper> getItemsInItemWrapper(TripdatTrip trip);
+
     HashMap<LocalDate, List<TripItemWrapper>> getWrappersInMapByDate(List<TripItemWrapper> wrappers, LocalDate startDate, LocalDate endDate);
-    TripItemWrapper getOneItemById(Long tripItemId);
-
-
-
-
-
-
-
-
 
 }
