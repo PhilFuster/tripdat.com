@@ -9,6 +9,11 @@
 <body>
 <div th:class="container" layout:fragment="content" th:remove="tag">
     <div id="settings-main-content" class="wrapper">
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully changed your password!
+            </div>
+        </div>
         <h1 th:text="|Change Password|">Change Password</h1>
         <div class="content">
             <!-- User Settings Form -->

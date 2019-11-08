@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.controller;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.model.TripdatUser;
 import dev.phasterinc.tripdat.model.TripdatUserPrincipal;
@@ -19,12 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: ChangePassword Controller
@@ -40,7 +40,7 @@ public class ChangePasswordController {
 
 
     /**
-     * name: userSettingsDto
+     * name: changePasswordDto
      * purpose: To create a userSettingsDto from the currently logged in user.
      *
      * Synopsis: Creates a user Principal object and retrieves the TripdatUser object.
@@ -49,7 +49,6 @@ public class ChangePasswordController {
      *
      * @return UserSettingsDto instance
      */
-    @ModelAttribute("passwordDto")
     public ChangePasswordDto changePasswordDto() {
         TripdatUserPrincipal userPrincipal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatUser user = userPrincipal.getTripdatUser();
@@ -68,7 +67,7 @@ public class ChangePasswordController {
      */
     @GetMapping
     public String showSettingsForm(Model model) {
-
+        model.addAttribute("passwordDto",changePasswordDto());
         return ViewNames.CHANGE_PW;
     }
 

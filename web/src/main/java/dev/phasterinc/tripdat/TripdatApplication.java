@@ -6,15 +6,17 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 
 /**
  * TripDat Travel Itinerary application
- * Author: Philip Fuster
+ * Entry point of the application.
+ *
+ * @Author: Philip Fuster
  */
 
 
 @SpringBootApplication(exclude = HibernateJpaAutoConfiguration.class)
 public class TripdatApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TripdatApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TripdatApplication.class, args);
+    }
 
 }

@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.controller;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.model.TripdatUser;
 import dev.phasterinc.tripdat.model.dto.UserRegistrationDto;
@@ -13,17 +19,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: UserRegistrationController
  * Purpose: Process registration form, enforce constraints, register user if valid entry
- *
  */
 
 @SessionAttributes("trip")
@@ -57,10 +56,11 @@ public class UserRegistrationController {
 
     /**
      * Name: registerUserAccount
+     *
      * @param userDto - data transfer object for user details
-     * @param result - contains errors if present
+     * @param result  - contains errors if present
      * @return either the registration page when invalid credentials are entered.
-     *          registration success page if registration is successful
+     * registration success page if registration is successful
      */
     @PostMapping
     public String registerUserAccount(@ModelAttribute("user") @Valid UserRegistrationDto userDto,
@@ -73,7 +73,7 @@ public class UserRegistrationController {
         if (existing1 != null) {
             result.rejectValue("login", null, "There is already an account registered with that login ");
         }
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             return ViewNames.REGISTRATION;
         }
 

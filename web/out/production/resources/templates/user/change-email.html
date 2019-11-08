@@ -9,6 +9,11 @@
 <body>
 <div th:class="container" layout:fragment="content" th:remove="tag">
     <div id="settings-main-content" class="wrapper">
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully changed your email!
+            </div>
+        </div>
         <h1 th:text="|Change Email|">Change Email</h1>
         <div class="content">
             <!-- User Settings Form -->
@@ -36,8 +41,7 @@
                     <label for="newEmail" class="control-label">New Email</label>
                     <input id="newEmail"
                            class="form-control"
-                           th:field="*{newEmail}"
-                           th:type="text"/>
+                           th:field="*{newEmail}"/>
                     <p class="error-message alert alert-danger"
                        th:each="error : ${#fields.errors('newEmail')}"
                        th:text="${error}">Validation error</p>
@@ -48,7 +52,6 @@
                     <label for="confirmNewEmail" class="control-label">Confirm New Email</label>
                     <input id="confirmNewEmail"
                            class="form-control"
-                           type="Text"
                            th:field="*{confirmNewEmail}"/>
                     <p class="error-message alert alert-danger"
                        th:each="error : ${#fields.errors('confirmNewEmail')}"

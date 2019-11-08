@@ -1,9 +1,9 @@
 
+psquid:S3776V"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(ë´öî8¨×‰ÛÈ-
+Hsquid:S5411o"*Use the primitive boolean expression here.(¥¢èª8¸ıúÄÈ-
+Nsquid:S5411‘"*Use the primitive boolean expression here.(ûû£Ñøÿÿÿÿ8ï“‘ÛÈ-
 v
 squid:S135…"YReduce the total number of break and continue statements in this loop to use at most one.(ë¶Û58™íìÀÈ-
 Hsquid:S1905À")Remove this unnecessary cast to "Flight".(ÀÍÈƒ8˜˜ˆ†É-
-Nsquid:S5411‘"*Use the primitive boolean expression here.(ûû£Ñøÿÿÿÿ8ï“‘ÛÈ-
-psquid:S3776V"RRefactor this method to reduce its Cognitive Complexity from 29 to the 15 allowed.(ë´öî8¨×‰ÛÈ-
-Hsquid:S5411o"*Use the primitive boolean expression here.(¥¢èª8¸ıúÄÈ-
 v
 squid:S135_"YReduce the total number of break and continue statements in this loop to use at most one.(¥•¤8Íû›ÀÈ-

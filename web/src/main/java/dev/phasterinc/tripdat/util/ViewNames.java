@@ -9,11 +9,11 @@ package dev.phasterinc.tripdat.util;
 
 /**
  * Name: ViewNames
- * Purpose: Holds constants for all the View Names for TripdatTrip
+ * Purpose: Maintain constants for all the View Names for TripdatTrip
  */
 public final class ViewNames {
     // == constants ==
-    public static final String HOME ="home";
+    public static final String HOME = "home";
     public static final String REGISTRATION = "/registration";
     public static final String REGISTRATION_SUCCESS = "/registration?success";
     public static final String SIGN_IN = "sign-in";
@@ -35,6 +35,8 @@ public final class ViewNames {
     public static final String CREATE_FLIGHT = "/user/trip-item/create/create-flight";
     public static final String EDIT_CAR_RENTAL = "/user/trip-item/edit/edit-car-rental";
     public static final String CREATE_CAR_RENTAL = "/user/trip-item/create/create-car-rental";
+
     // == constructors ==
-    private ViewNames() {}
+    private ViewNames() {
+    }
 }

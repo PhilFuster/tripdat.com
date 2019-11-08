@@ -1,4 +1,10 @@
 package dev.phasterinc.tripdat.controller;
+/************************************************************
+ * Name:  Philip Fuster                                     *
+ * Project : Tripdat Travel Itinerary Application           *
+ * Class : CMPS 450 Senior Project                          *
+ * Date : 3/1/2019                                          *
+ ************************************************************/
 
 import dev.phasterinc.tripdat.model.TripdatUser;
 import dev.phasterinc.tripdat.model.TripdatUserPrincipal;
@@ -19,12 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
 
-/************************************************************
- * Name:  Philip Fuster                                     *
- * Project : Tripdat Travel Itinerary Application           *
- * Class : CMPS 450 Senior Project                          *
- * Date : 3/1/2019                                          *
- ************************************************************/
 
 /**
  * Name: UserSettingsController
@@ -39,7 +39,7 @@ public class UserSettingsController {
     private CustomUserDetailsService userService;
 
 
-/*    *//**
+    /*    *//**
      * name: userSettingsDto
      * purpose: To create a userSettingsDto from the currently logged in user.
      *
@@ -60,7 +60,6 @@ public class UserSettingsController {
     /**
      * Name: showSettingsForm
      * Purpose: display the settings form to the user
-     * Synopsis:
      *
      * @param model
      * @return
@@ -70,7 +69,7 @@ public class UserSettingsController {
         TripdatUserPrincipal userPrincipal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatUser user = userPrincipal.getTripdatUser();
         UserSettingsDto settingsDto = UserSettingsDto.buildDto(user);
-        model.addAttribute("user",settingsDto);
+        model.addAttribute("user", settingsDto);
         return ViewNames.SETTINGS;
     }
 
@@ -80,15 +79,14 @@ public class UserSettingsController {
      * Synopsis: Saves a user settings. If there are errors they will be displayed.
      * When a save is successful the user will be told.
      *
-     *
      * @param userDto - data transfer object for user details
-     * @param result - contains errors if present
+     * @param result  - contains errors if present
      * @return either the registration page when invalid credentials are entered.
-     *          registration success page if registration is successful
+     * registration success page if registration is successful
      */
     @PostMapping
     public String saveUserSettings(@ModelAttribute("user") @Valid UserSettingsDto userDto,
-                                      BindingResult result) {
+                                   BindingResult result) {
         log.info("In saveUserSettings.");
         TripdatUserPrincipal userPrincipal = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatUser userEntity = userPrincipal.getTripdatUser();

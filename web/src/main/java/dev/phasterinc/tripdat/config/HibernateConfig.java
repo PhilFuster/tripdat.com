@@ -87,9 +87,10 @@ public class HibernateConfig {
 
     /**
      * Name: dataSource
-     * Purpose: To connect to the physical data source for the application.
-     * Synopsis: A factory for connections to the physical data source (PostGRESQL) that
-     * the DataSource object represents.
+     * Purpose: Connects to the physical data source for the application.
+     * Synopsis: A factory for connections to the physical data source (PostGreSQL) that
+     * the DataSource object represents. Sets configuration properties for connecting to the
+     * database.
      * <p>
      *
      * @return DataSource
@@ -107,7 +108,7 @@ public class HibernateConfig {
 
     /**
      * Name: hibernateProperties
-     * Purpose: To set Hibernate Configuration properties.
+     * Purpose: Sets Hibernate Configuration properties.
      * <p>
      */
     Properties hibernateProperties() {

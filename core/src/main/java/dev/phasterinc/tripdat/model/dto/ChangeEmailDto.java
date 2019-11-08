@@ -17,7 +17,7 @@ import javax.validation.constraints.NotEmpty;
  * Purpose: Data Transfer Object used for changing a user's email
  */
 @FieldMatch.List({
-        @FieldMatch(first = "newEmail", second = "confirmNewEmail", message = "The email fields must match"),
+        @FieldMatch(first = "newEmail", second = "confirmNewEmail", message = "The email fields must match")
 })
 @Builder(toBuilder = true)
 @AllArgsConstructor
