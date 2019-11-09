@@ -1,65 +1,75 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--
+    Information that all Trip Items Will have.
+    Includes Travel Agency Details, Supplier Details, Booking Details, and Traveler information
+ -->
 <body>
-    <th:block th:fragment="other-details(travelAgency, supplier, bookingSite, notes)">
-        <details th:class="|travel-agency-information grey-border|" th:object="${travelAgency}">
-            <summary th:text="|Travel Agency|">Travel Agency</summary>
-            <div th:class="|travel-agency-details|">
-                <ul>
-                    <li th:text="|Travel Agency Name: *{agencyName?:'-'}|">Travel Agency Name</li>
-                    <li th:text="|Travel Agency Confirmation#: *{confirmationNumber?:'-'} |">Travel Agency Confirmation #</li>
-                    <li th:text="|Travel Agency URL: *{url?:'-'} |">Travel Agency URL</li>
-                    <li th:text="|Travel Agency Phone: *{phoneNumber?:'-'}|">Travel Agency Phone #</li>
-                    <li th:text="|Travel Agency Email: *{email?:'-'}|">Travel Agency Email</li>
-                    <li th:text="|Travel Agency Contact: *{contactName?:'-'}|"></li>
-                </ul>
+<th:block th:fragment="other-details(travelAgency, supplier, bookingSite, notes)">
+    <!-- Travel Agency Details -->
+    <details th:class="|travel-agency-information grey-border|" th:object="${travelAgency}">
+        <summary th:text="|Travel Agency|">Travel Agency</summary>
+        <div th:class="|travel-agency-details|">
+            <ul>
+                <li th:text="|Travel Agency Name: *{agencyName?:'-'}|">Travel Agency Name</li>
+                <li th:text="|Travel Agency Confirmation#: *{confirmationNumber?:'-'} |">Travel Agency Confirmation #
+                </li>
+                <li th:text="|Travel Agency URL: *{url?:'-'} |">Travel Agency URL</li>
+                <li th:text="|Travel Agency Phone: *{phoneNumber?:'-'}|">Travel Agency Phone #</li>
+                <li th:text="|Travel Agency Email: *{email?:'-'}|">Travel Agency Email</li>
+                <li th:text="|Travel Agency Contact: *{contactName?:'-'}|"></li>
+            </ul>
+        </div>
+    </details>
+    <!-- Supplier Information -->
+    <details th:class="|supplier-information grey-border|" th:object="${supplier}">
+        <summary th:text="|Supplier Info|">Supplier Info</summary>
+        <div th:class="|supplier-details|">
+            <ul>
+                <li th:text="|Supplier Name: *{supplierName?:'-'}|">Supplier Name</li>
+                <li th:text="|Supplier Url: *{url?:'-'}|">Supplier Url</li>
+                <li th:text="|Supplier Email: *{email?:'-'}|">Supplier Email</li>
+                <li th:text="|Suppler Phone #: *{phoneNumber?:'-'}|">Supplier Phone #</li>
+                <li th:text="|Supplier Contact: *{contactName?:'-'}|">Supplier Contact Name</li>
+            </ul>
+        </div>
+    </details>
+    <!-- Booking Detail Information -->
+    <details th:class="|booking-detail-information grey-border|" th:object="${bookingSite}">
+        <summary th:text="|Booking Site|"></summary>
+        <div th:class="|booking-details|">
+            <ul>
+                <li th:text="|Booking Reference #: *{referenceNumber?:'-'} |">Booking Reference #</li>
+                <li th:text="|Booking Site: *{siteName?:'-'}|"></li>
+                <li th:text="'Booking Date:' + *{#temporals.format(bookingDate, 'MM/dd/yyyy')?:' -'}">Booking Date</li>
+                <li th:text="|Booking Site URL: *{url?:'-'}|">Booking Site Url</li>
+                <li th:text="|Booking Site Phone: *{phoneNumber?:'-'}|">Booking Site Phone #</li>
+                <li th:text="|Booking Site Email: *{email?:'-'}|">Booking Site Email</li>
+                <li th:text="|Total Cost: *{totalCost?:'-'}|"></li>
+                <li th:text="|Reservation Purchased: *{isPurchased?:'-'}|"></li>
+            </ul>
+        </div>
+    </details>
+    <details th:class="|item-notes-info grey-border|">
+        <summary th:text="Notes">Notes</summary>
+        <div th:class="|item-notes-details|">
+            <p th:text="|${notes?:'No notes added'}|"></p>
+        </div>
+    </details>
+</th:block>
+<!-- Traveler Information -->
+<th:block th:fragment="traveler-info-fragment(travelers,description)">
+    <details th:class="|traveler-info-details grey-border|">
+        <summary th:text="|Traveler Info|"></summary>
+        <th:block th:each="attendee, iter : ${travelers}">
+            <div th:class="|traveler-details|">
+                <span th:class="|traveler-name|" th:text="${attendee.name?:''}">Name</span>
+                <span th:class="|other-traverler-details|"
+                      th:text="'Frequent' + ${description} + ' #' + ${attendee.loyaltyProgramNumber?:''}">Frequent Flyer #: </span>
+                <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.ticketNumber?:''}|"></span>
             </div>
-        </details>
-        <details th:class="|supplier-information grey-border|" th:object="${supplier}">
-            <summary th:text="|Supplier Info|">Supplier Info</summary>
-            <div th:class="|supplier-details|">
-                <ul>
-                    <li th:text="|Supplier Name: *{supplierName?:'-'}|">Supplier Name</li>
-                    <li th:text="|Supplier Url: *{url?:'-'}|">Supplier Url</li>
-                    <li th:text="|Supplier Email: *{email?:'-'}|">Supplier Email</li>
-                    <li th:text="|Suppler Phone #: *{phoneNumber?:'-'}|">Supplier Phone #</li>
-                    <li th:text="|Supplier Contact: *{contactName?:'-'}|">Supplier Contact Name</li>
-                </ul>
-            </div>
-        </details>
-        <details th:class="|booking-detail-information grey-border|" th:object="${bookingSite}">
-            <summary th:text="|Booking Site|"></summary>
-            <div th:class="|booking-details|">
-                <ul>
-                    <li th:text="|Booking Reference #: *{referenceNumber?:'-'} |">Booking Reference #</li>
-                    <li th:text="|Booking Site: *{siteName?:'-'}|"></li>
-                    <li th:text="'Booking Date:' + *{#temporals.format(bookingDate, 'MM/dd/yyyy')?:' -'}">Booking Date</li>
-                    <li th:text="|Booking Site URL: *{url?:'-'}|">Booking Site Url</li>
-                    <li th:text="|Booking Site Phone: *{phoneNumber?:'-'}|">Booking Site Phone #</li>
-                    <li th:text="|Booking Site Email: *{email?:'-'}|">Booking Site Email</li>
-                    <li th:text="|Total Cost: *{totalCost?:'-'}|"></li>
-                    <li th:text="|Reservation Purchased: *{isPurchased?:'-'}|"></li>
-                </ul>
-            </div>
-        </details>
-        <details th:class="|item-notes-info grey-border|" >
-            <summary th:text="Notes">Notes</summary>
-            <div th:class="|item-notes-details|">
-                <p th:text="|${notes?:'No notes added'}|"></p>
-            </div>
-        </details>
-    </th:block>
-    <th:block th:fragment="traveler-info-fragment(travelers,description)">
-        <details th:class="|traveler-info-details grey-border|">
-            <summary th:text="|Traveler Info|"></summary>
-            <th:block th:each="attendee, iter : ${travelers}">
-                <div th:class="|traveler-details|">
-                    <span th:class="|traveler-name|" th:text="${attendee.name?:''}">Name</span>
-                    <span th:class="|other-traverler-details|" th:text="'Frequent' + ${description} + ' #' + ${attendee.loyaltyProgramNumber?:''}">Frequent Flyer #: </span>
-                    <span th:class="|other-traverler-details|" th:text="|Ticket#: ${attendee.ticketNumber?:''}|"></span>
-                </div>
-            </th:block>
-        </details>
-    </th:block>
+        </th:block>
+    </details>
+</th:block>
 </body>
 </html>

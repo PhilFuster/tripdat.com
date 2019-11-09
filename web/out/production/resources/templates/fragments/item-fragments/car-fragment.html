@@ -1,112 +1,121 @@
 <!DOCTYPE html>
+<!--
+    Car Rental Fragment.
+ -->
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <body>
-    <th:block th:fragment="car-fragment(itemId, tripId)">
-        <div th:id="'trip-item-' + ${item.id}">
-            <div th:class="|trip-item-object|">
-                <div th:class="|trip-item-row|">
-                    <div th:class="|trip-item-icon|">
-                        <span class="car-trip-item-icon-m"></span>
-                    </div>
-                    <!-- Summary of Car -->
-                    <div th:class="|trip-item-object-pane|">
-                        <div th:class="|trip-item-header|">
-                            <div th:class="item-bar">
-                                <div th:class="date" th:text="${#temporals.format(item.tripItem.pickUpDate, 'MM/dd/yyyy')}"></div>
-                            </div>
-                            <div th:class="main-info">
-                                <span th:text="${item.tripItem.supplierDto.supplierName }"></span>
-                                <span th:class="|more-info|" th:utext="${ '<br/>' + item.tripItem.pickUpLocationName }"></span>
-                            </div>
-                            <div th:class="other-info">
-                                Confirmation #:
-                                <strong th:text="${item.confirmationNumber}">confirmation number</strong>
-                            </div>
+<th:block th:fragment="car-fragment(itemId, tripId)">
+    <div th:id="'trip-item-' + ${item.id}">
+        <div th:class="|trip-item-object|">
+            <div th:class="|trip-item-row|">
+                <div th:class="|trip-item-icon|">
+                    <span class="car-trip-item-icon-m"></span>
+                </div>
+                <!-- Summary of Car -->
+                <div th:class="|trip-item-object-pane|">
+                    <div th:class="|trip-item-header|">
+                        <div th:class="item-bar">
+                            <div th:class="date"
+                                 th:text="${#temporals.format(item.tripItem.pickUpDate, 'MM/dd/yyyy')}"></div>
+                        </div>
+                        <div th:class="main-info">
+                            <span th:text="${item.tripItem.supplierDto.supplierName }"></span>
+                            <span th:class="|more-info|"
+                                  th:utext="${ '<br/>' + item.tripItem.pickUpLocationName }"></span>
+                        </div>
+                        <div th:class="other-info">
+                            Confirmation #:
+                            <strong th:text="${item.confirmationNumber}">confirmation number</strong>
                         </div>
                     </div>
                 </div>
-                <div th:id="${item.id}" >
-                    <!-- Actions to perform on a Trip -->
-                    <div th:class="|trip-item-row|">
-                        <div th:class="|object-actions|">
-                            <ul>
-                                <li>
-                                    <a th:text="|Edit|" th:h th:class="|edit-trip-item|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_CAR_RENTAL}__(itemId=${item.id}, tripId=${tripId})}">
-                                        Edit
-                                        <span th:class="|icon edit-icon|"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:text="|Copy|" th:class="|copy-trip-item|" th:href="@{/edit/id/}">
-                                        Copy
-                                        <span th:class="|icon copy-icon|"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:text="|Move|" th:class="|move-trip-item|" th:href="@{/updateMove/id/}">
-                                        Move
-                                        <span th:class="|icon move-icon|"></span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a th:text="|Delete|" th:class="|delete-trip-item|" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).DELETE_FLIGHT}__(itemId=${item.id}, tripId=${tripId})}">
-                                        Delete
-                                        <span th:class="|icon delete-icon|"></span>
-                                    </a>
-                                </li>
-                            </ul>
+            </div>
+            <div th:id="${item.id}">
+                <!-- Actions to perform on Car Rental Item -->
+                <div th:class="|trip-item-row|">
+                    <div th:class="|object-actions|">
+                        <ul>
+                            <li>
+                                <a th:text="|Edit|" th:h th:class="|edit-trip-item|"
+                                   th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_CAR_RENTAL}__(itemId=${item.id}, tripId=${tripId})}">
+                                    Edit
+                                    <span th:class="|icon edit-icon|"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:text="|Copy|" th:class="|copy-trip-item|" th:href="@{/edit/id/}">
+                                    Copy
+                                    <span th:class="|icon copy-icon|"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:text="|Move|" th:class="|move-trip-item|" th:href="@{/updateMove/id/}">
+                                    Move
+                                    <span th:class="|icon move-icon|"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a th:text="|Delete|" th:class="|delete-trip-item|"
+                                   th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).DELETE_FLIGHT}__(itemId=${item.id}, tripId=${tripId})}">
+                                    Delete
+                                    <span th:class="|icon delete-icon|"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div th:class="|trip-item-object-pane|">
+                        <!-- Pick Up Details -->
+                        <div th:class="|checkpoint car-description-column|">
+                            <h6 th:class="|item-fragment-p|" th:text="|Pick Up|">Pick Up</h6>
+                            <p th:class="|item-fragment-p pickup-time |" th:text="${item.tripItem.pickUpTime}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpAddress}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpPhoneNumber}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpHoursOfOperation}"></p>
                         </div>
-                        <div th:class="|trip-item-object-pane|">
-                            <!-- Pick Up Details -->
-                            <div th:class="|checkpoint car-description-column|">
-                                <h6 th:class="|item-fragment-p|"  th:text="|Pick Up|">Pick Up</h6>
-                                <p th:class="|item-fragment-p pickup-time |" th:text="${item.tripItem.pickUpTime}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpAddress}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpPhoneNumber}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpHoursOfOperation}"></p>
-                            </div>
-                            <!-- Drop Off Details -->
-                            <div th:class="|checkpoint car-description-column|">
-                                <h6 th:class="|item-fragment-p|" th:text="|Drop Off|">Drop Off</h6>
-                                <p th:class="|item-fragment-p|" th:text="${#temporals.format(item.tripItem.dropOffDate, 'MM/dd/yyyy')}" ></p>
-                                <p th:class="|item-fragment-p dropoff-time|" th:text="${item.tripItem.dropOffTime}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffLocationName}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffAddress}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffPhoneNumber}"></p>
-                                <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffHoursOfOperation}"></p>
-                            </div>
+                        <!-- Drop Off Details -->
+                        <div th:class="|checkpoint car-description-column|">
+                            <h6 th:class="|item-fragment-p|" th:text="|Drop Off|">Drop Off</h6>
+                            <p th:class="|item-fragment-p|"
+                               th:text="${#temporals.format(item.tripItem.dropOffDate, 'MM/dd/yyyy')}"></p>
+                            <p th:class="|item-fragment-p dropoff-time|" th:text="${item.tripItem.dropOffTime}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffLocationName}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffAddress}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffPhoneNumber}"></p>
+                            <p th:class="|item-fragment-p|" th:text="${item.tripItem.dropOffHoursOfOperation}"></p>
                         </div>
                     </div>
-                    <div th:class="|trip-item-row|">
-                        <div th:class="|trip-item-time-cell|">
+                </div>
+                <div th:class="|trip-item-row|">
+                    <div th:class="|trip-item-time-cell|">
                             <span th:class="|trip-item-time|">
-
                             </span>
-                        </div>
-                        <div th:class="|trip-item-object-pane|">
-                            <div th:class="trip-item-content">
-                                <!-- Traveler Information -->
-                                <th:block th:replace="~{fragments/other-item-details::traveler-info-fragment(travelers=${item.attendees}, description=${'Renter'})}">
-                                </th:block>
-                                <details th:class="|car-rental-details grey-border|" th:object="${item.tripItem}">
-                                    <summary th:text="|Car Rental Details|">Car Rental Details</summary>
-                                    <div th:class="|details-list|">
-                                        <ul>
-                                            <li th:text="|Car Type:  *{carRentalType?:'-'}|"></li>
-                                            <li th:text="|Mileage Charges:  *{mileageCharges?:'-'}|"></li>
-                                            <li th:text="|Car Details:  *{carDetails?:'-'}|"></li>
-                                        </ul>
-                                    </div>
-                                </details>
-                                <!-- Travel Agency, Supplier, Booking Details -->
-                                <th:block th:replace="~{fragments/other-item-details::other-details(${item.travelAgency}, ${item.supplier}, ${item.bookingDetail}, ${item.notes})}">
-                                </th:block>
-                            </div>
+                    </div>
+                    <div th:class="|trip-item-object-pane|">
+                        <div th:class="trip-item-content">
+                            <!-- Traveler Information -->
+                            <th:block
+                                    th:replace="~{fragments/other-item-details::traveler-info-fragment(travelers=${item.attendees}, description=${'Renter'})}">
+                            </th:block>
+                            <details th:class="|car-rental-details grey-border|" th:object="${item.tripItem}">
+                                <summary th:text="|Car Rental Details|">Car Rental Details</summary>
+                                <div th:class="|details-list|">
+                                    <ul>
+                                        <li th:text="|Car Type:  *{carRentalType?:'-'}|"></li>
+                                        <li th:text="|Mileage Charges:  *{mileageCharges?:'-'}|"></li>
+                                        <li th:text="|Car Details:  *{carDetails?:'-'}|"></li>
+                                    </ul>
+                                </div>
+                            </details>
+                            <!-- Travel Agency, Supplier, Booking Details -->
+                            <th:block
+                                    th:replace="~{fragments/other-item-details::other-details(${item.travelAgency}, ${item.supplier}, ${item.bookingDetail}, ${item.notes})}">
+                            </th:block>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </th:block>
+    </div>
+</th:block>
 </body>
 </html>

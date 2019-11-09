@@ -1,7 +1,10 @@
 <!DOCTYPE HTML>
-<html lang="en" xmlns:th= "http://www.thymeleaf.org"
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
+<!--
+    Footer Fragment
+-->
 <th:block th:fragment="footer">
     <footer>
         <div class="container, footer-content">
@@ -12,7 +15,7 @@
                     Roles: <span sec:authentication="principal.authorities"></span> |
                     <a th:href="@{/logout}">Sign Out</a>
                 </span>
-               | logo by <a target="_blank" href="https://www.vecteezy.com">Vecteezy</a>
+                | logo by <a target="_blank" href="https://www.vecteezy.com">Vecteezy</a>
             </p>
         </div>
     </footer>
@@ -20,7 +23,6 @@
     <script type="text/javascript" th:src="@{/webjars/jquery/3.3.1-2/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/4.3.1/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/popper.js/1.14.3/popper.min.js}"></script>
-
 </th:block>
 </body>
 </html>

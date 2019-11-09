@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-
+<!--
+    Flight next Up view for UserIndex page.
+-->
 <body>
-    <th:block th:fragment="flight-nextup-fragment(item, tripId)" th:remove="tag">
-        <details class="trip-item-details">
-            <summary class="details-small">
-                <div class="nextUp-trip-item-icon">
-                    <div class="small-icon-date" th:text="${item.getSmallIconDate()}"></div>
-                    <!--<div class="date" th:text="${#temporals.dayOfWeekNameShort(item.startDate) + ', ' +
-                    #temporals.monthNameShort(item.startDate) + ' ' + #temporals.day(item.startDate)}?:''"></div>-->
-                    <span th:style="'display:inline'" class="flight-trip-item-icon-sm"></span>
-                </div>
-                <div class="nextUp-trip-item-header">
-                    <div class="primary-info">
-                        <div class="item-header-detail">
-                            <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${tripId})}" th:class="|item-header-detail|" href="" th:text="${item.getMainTitle()}">
-                            </a>
-                        </div>
-                        <div class="item-header-detail" th:text="${item.getSubTitle()}?:''" >
-                        </div>
+<th:block th:fragment="flight-nextup-fragment(item, tripId)" th:remove="tag">
+    <details class="trip-item-details">
+        <summary class="details-small">
+            <div class="nextUp-trip-item-icon">
+                <div class="small-icon-date" th:text="${item.getSmallIconDate()}"></div>
+                <!--<div class="date" th:text="${#temporals.dayOfWeekNameShort(item.startDate) + ', ' +
+                #temporals.monthNameShort(item.startDate) + ' ' + #temporals.day(item.startDate)}?:''"></div>-->
+                <span th:style="'display:inline'" class="flight-trip-item-icon-sm"></span>
+            </div>
+            <div class="nextUp-trip-item-header">
+                <div class="primary-info">
+                    <div class="item-header-detail">
+                        <a th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).TRIP_DETAILS}__(tripId=${tripId})}"
+                           th:class="|item-header-detail|" href="" th:text="${item.getMainTitle()}">
+                        </a>
                     </div>
-                </div>
-            </summary>
-            <div class="more-details">
-                <div class="info">
-                    <div class="legend"th:text="|DEPART|">DEPART</div>
-                    <div class="item-expanded-detail" th:text="${item.getDepartTimeFormatted()}?:''">
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="legend"th:text="|ARRIVE|">ARRIVE</div>
-                    <div class="item-expanded-detail" th:text="${item.getArriveTimeFormatted()}">
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="legend"th:text="|DURATION|">DURATION</div>
-                    <div class="item-expanded-detail" th:text="${item.getDurationOfSegment()}">
-                    </div>
-                </div>
-                <div class="info">
-                    <div class="legend"th:text="|CONFIRMATION#|">CONFIRMATION#</div>
-                    <div class="item-expanded-detail" th:text="${item.getConfirmationNumber()}">
-                    </div>
-                </div>
-                <div th:class="info">
-                    <div class="legend"th:text="|TERMINAL/GATE#|">TERMINAL/GATE#</div>
-                    <div class="item-expanded-detail" th:text="${item.getDepartureTerminalAndGate()}">
-                    </div>
-                </div>
-                <div th:class="info">
-                    <div class="legend"th:text="|SEAT|">SEAT</div>
-                    <div class="item-expanded-detail" th:text="${item.getSeat()}">
+                    <div class="item-header-detail" th:text="${item.getSubTitle()}?:''">
                     </div>
                 </div>
             </div>
-        </details>
-    </th:block>
+        </summary>
+        <div class="more-details">
+            <div class="info">
+                <div class="legend" th:text="|DEPART|">DEPART</div>
+                <div class="item-expanded-detail" th:text="${item.getDepartTimeFormatted()}?:''">
+                </div>
+            </div>
+            <div class="info">
+                <div class="legend" th:text="|ARRIVE|">ARRIVE</div>
+                <div class="item-expanded-detail" th:text="${item.getArriveTimeFormatted()}">
+                </div>
+            </div>
+            <div class="info">
+                <div class="legend" th:text="|DURATION|">DURATION</div>
+                <div class="item-expanded-detail" th:text="${item.getDurationOfSegment()}">
+                </div>
+            </div>
+            <div class="info">
+                <div class="legend" th:text="|CONFIRMATION#|">CONFIRMATION#</div>
+                <div class="item-expanded-detail" th:text="${item.getConfirmationNumber()}">
+                </div>
+            </div>
+            <div th:class="info">
+                <div class="legend" th:text="|TERMINAL/GATE#|">TERMINAL/GATE#</div>
+                <div class="item-expanded-detail" th:text="${item.getDepartureTerminalAndGate()}">
+                </div>
+            </div>
+            <div th:class="info">
+                <div class="legend" th:text="|SEAT|">SEAT</div>
+                <div class="item-expanded-detail" th:text="${item.getSeat()}">
+                </div>
+            </div>
+        </div>
+    </details>
+</th:block>
 
 </body>
 </html>

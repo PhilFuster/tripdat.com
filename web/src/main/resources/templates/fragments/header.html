@@ -2,6 +2,9 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
+<!--
+    Header
+-->
 <th:block th:fragment="header">
     <nav role="navigation" class="header navbar navbar-dark navbar-static-top navbar-expand-md">
         <div class="container">
@@ -10,30 +13,36 @@
                     <img th:class="|navbar-img|" th:src="@{/images/globe.png}" alt="globe logo"/>
                 </a>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbar-list">
                 <ul class="navbar-nav mr-auto main-nav">
                     <li role="presentation" class="active nav-item">
-                        <a class="nav-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">Home</a>
+                        <a class="nav-item"
+                           th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_INDEX}__}">Home</a>
                     </li>
                     <li role="presentation" class="active nav-item">
-                        <a class="nav-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_TRIPS}__}">Trips</a>
+                        <a class="nav-item"
+                           th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).USER_TRIPS}__}">Trips</a>
                     </li>
                 </ul>
                 <ul class="navbar-nav mr-left user-dropdown">
                     <div th:if="${#authorization.expression('isAuthenticated()')}" class="dropdown user-dropdown">
-                        <a class="nav-link user-dropdown nav-item dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link user-dropdown nav-item dropdown-toggle" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span sec:authentication="name"></span>
                         </a>
                         <div class="dropdown-menu user-dropdown" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="#">Profile</a>
-                            <a class="dropdown-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).SETTINGS}__}">Settings</a>
-                            <a class="dropdown-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).LOGOUT}__}">Sign Out</a>
+                            <a class="dropdown-item"
+                               th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).SETTINGS}__}">Settings</a>
+                            <a class="dropdown-item" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).LOGOUT}__}">Sign
+                                Out</a>
                         </div>
                     </div>
-                    <div th:if="${#authorization.expression('!isAuthenticated()')}" >
+                    <div th:if="${#authorization.expression('!isAuthenticated()')}">
                         <a href="/signin" th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).LOGIN}__}">
                             <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;Sign in
                         </a>

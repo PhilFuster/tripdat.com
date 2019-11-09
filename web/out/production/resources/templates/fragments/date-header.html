@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!--
+    Date Header fragment
+ -->
 <head>
     <meta charset="UTF-8">
 </head>
 <body>
-    <div th:fragment="date-header(date)" th:class="|date-header|">
-        <div th:class="|ribbon|">
-            <div th:class="|date-ribbon|" th:text="${date}">
-            </div>
+<div th:fragment="date-header(date)" th:class="|date-header|">
+    <div th:class="|ribbon|">
+        <div th:class="|date-ribbon|" th:text="${date}">
         </div>
     </div>
+</div>
 </body>
 </html>
