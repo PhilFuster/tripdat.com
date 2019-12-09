@@ -155,7 +155,6 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
     @Override
     public List<TripItemWrapper> getNextUpItemsInItemWrapper(TripdatTrip nextTrip) {
         Set<TripdatTripItem> items = tripItemService.getMax4ItemsById(nextTrip.getTripId());
-
         return unwrapTripItemsIntoWrappers(items);
     }
 
@@ -300,6 +299,28 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
                             .tripItemTypeCode(item.getType())
                             .tripItem(CarRentalDto.buildDto(rental, AttendeeDto.buildDtoList(rental.getAttendees())))
                             .build();
+                    // add a return car wrapper
+                    TripItemWrapper returnWrapper;
+                    if (wrapper.getStartDate() != wrapper.getEndDate()) {
+                        returnWrapper = TripItemWrapper.builder()
+                                .attendees(AttendeeDto.buildDtoList(rental.getAttendees()))
+                                .bookingDetail(BookingDetailDto.buildDto(rental.getBookingDetail()))
+                                .confirmationNumber(rental.getCarRentalConfirmationNumber())
+                                .endDate(rental.getCarRentalDropOffDate())
+                                .endTime(rental.getCarRentalDropOffTime())
+                                .id(item.getTripItemId())
+                                .isArrival(true)
+                                .notes(item.getTripItemNote())
+                                .startDate(rental.getCarRentalPickUpDate())
+                                .startTime(rental.getCarRentalPickUpTime())
+                                .supplier(SupplierDto.buildDto(rental.getSupplier()))
+                                .travelAgency(TravelAgencyDto.buildDto(rental.getTravelAgency()))
+                                .tripItemTypeCode(item.getType())
+                                .tripItem(CarRentalDto.buildDto(rental, AttendeeDto.buildDtoList(rental.getAttendees())))
+                                .build();
+                        itemWrappers.add(returnWrapper);
+                    }
+
                     itemWrappers.add(wrapper);
                     break;
                 // Lodging
@@ -365,18 +386,19 @@ public class TripItemWrapperServiceImpl implements TripItemWrapperService {
 
         // for each itemWrapper get the ArrayList from itemsMap with key item.startDate, add item to that ArrayList
         // if that date hasn't been added to the map yet create an arrayList for tripItems scheduled for that day
-        wrappers.forEach((item) -> {
+        wrappers.forEach(item -> {
             List<TripItemWrapper> items;
             if (item.getStartDate() == null) {
                 items = itemsMap.getOrDefault(LocalDate.of(9999, 12, 31), new ArrayList<>());
             } else {
                 // For items that span over a few days, the end date will be displayed
-                // in the Item List view. Enter the Item in the array list containing
-                // the items end date.
-                if (item.isArrival()) {
+                // in the Item List view.
+                // Enter the Item in the array list containing the items end date.
+                if (item.getIsArrival()) {
                     items = itemsMap.getOrDefault(item.getEndDate(), new ArrayList<>());
+                } else {
+                    items = itemsMap.getOrDefault(item.getStartDate(), new ArrayList<>());
                 }
-                items = itemsMap.getOrDefault(item.getStartDate(), new ArrayList<>());
             }
             log.info("Items from getWrappersInMap {}", items.toString());
             items.add(item);

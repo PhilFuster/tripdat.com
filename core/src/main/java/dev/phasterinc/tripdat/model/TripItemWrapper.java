@@ -70,7 +70,7 @@ public class TripItemWrapper {
     private String notes;
 
     // A flag telling the front end to use the arrival component when displaying an item
-    private boolean isArrival;
+    private Boolean isArrival;
 
 
     // == public methods ==
@@ -98,8 +98,10 @@ public class TripItemWrapper {
      */
     public String getSmallIconDate() {
         StringBuilder builder = new StringBuilder();
-        if (null != this.startDate) {
+        if (null != this.startDate && !this.isArrival) {
             builder.append(startDate.getDayOfWeek().toString().substring(0, 3)).append(", ").append(startDate.getMonth().toString().substring(0, 3)).append(" ").append(startDate.getDayOfMonth());
+        } else if (null != this.endDate && this.isArrival) {
+            builder.append(endDate.getDayOfWeek().toString().substring(0, 3)).append(", ").append(endDate.getMonth().toString().substring(0, 3)).append(" ").append(endDate.getDayOfMonth());
         }
         return builder.toString();
     }
@@ -276,7 +278,6 @@ public class TripItemWrapper {
         if (segment.getDepartureGate() != null) {
             build.append(segment.getDepartureGate());
         }
-
         return build.toString();
 
     }

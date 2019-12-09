@@ -4,17 +4,19 @@
       layout:decorate="~{fragments/layout}">
 <head>
     <meta charset="UTF-8">
-    <title th:text="|Edit a Car Rental|"></title>
+    <title th:text="|Edit Car Rental|"></title>
 </head>
 <body>
 <div layout:fragment="content" th:remove="tag">
     <div th:class="|edit-item-header|">
-        <div th:insert="~{fragments/date-header::date-header('Edit Car Rental')}" ></div>
-        <p th:text="'Here you can store Car Rental details'"></p>
+        <div th:insert="~{fragments/date-header::date-header('Edit Car Rental')}"></div>
+        <p th:text="'Here you can manage Car Rental details'"></p>
     </div>
     <main th:class="edit-item-main">
         <h2 th:class="|section-header|" th:text="|How are you traveling?|"></h2>
-        <form action="#" th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_CAR_RENTAL}__(itemId=${carRental.itemId}, tripId=${carRental.tripId})}" th:object="${carRental}" method="post">
+        <form
+                th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).EDIT_CAR_RENTAL}__(itemId=${carRental.itemId}, tripId=${carRental.tripId})}"
+                th:object="${carRental}" method="post">
             <p class="error-message alert alert-danger"
                th:if="${#fields.hasGlobalErrors()}"
                th:each="error : ${#fields.errors('global')}"
@@ -31,12 +33,13 @@
                        th:text="${error}">Validation error</p>
                 </div>
             </div>
-            <!-- Pick UP Details -->
+            <!-- Pick Up Details -->
             <div th:class="${'pickUp-details'}">
                 <h2 th:style="|display:inline|" th:text="|Pick Up|"></h2>
                 <div th:class="|form-group|"
                      th:id="|pickUpLocationName|">
-                    <label th:for="|pickUpLocationName|" th:class="|control-label|" th:text="|Name|">Pick Up location Name</label>
+                    <label th:for="|pickUpLocationName|" th:class="|control-label|" th:text="|Name|">Pick Up location
+                        Name</label>
                     <input th:type="text"
                            th:class="|form-control|"
                            th:field="*{pickUpLocationName}"/>
@@ -76,7 +79,8 @@
                 </div>
                 <div th:class="|form-group|"
                      th:id="|pickUpHoursOfOperation|">
-                    <label th:for="|pickUpHoursOfOperation|" th:class="|control-label|" th:text="|Pickup Hours of Operation|">Pickup Hours of Operation</label>
+                    <label th:for="|pickUpHoursOfOperation|" th:class="|control-label|"
+                           th:text="|Pickup Hours of Operation|">Pickup Hours of Operation</label>
                     <input th:type="time"
                            th:class="|form-control|"
                            th:field="*{pickUpHoursOfOperation}"/>
@@ -86,7 +90,8 @@
                 </div>
                 <div th:class="|form-group|"
                      th:id="|pickUpPhoneNumber|">
-                    <label th:for="|pickUpPhoneNumber|" th:class="|control-label|" th:text="|Phone Number|">Phone Number</label>
+                    <label th:for="|pickUpPhoneNumber|" th:class="|control-label|" th:text="|Phone Number|">Phone
+                        Number</label>
                     <input th:type="time"
                            th:class="|form-control|"
                            th:field="*{pickUpPhoneNumber}"/>
@@ -100,7 +105,8 @@
                 <h2 th:style="|display:inline|" th:text="|Drop Off|"></h2>
                 <div th:class="|form-group|"
                      th:id="|dropOffLocationName|">
-                    <label th:for="|dropOffLocationName|" th:class="|control-label|" th:text="|Name|">Drop off location Name</label>
+                    <label th:for="|dropOffLocationName|" th:class="|control-label|" th:text="|Name|">Drop off location
+                        Name</label>
                     <input th:type="text"
                            th:class="|form-control|"
                            th:field="*{dropOffLocationName}"/>
@@ -120,7 +126,8 @@
                 </div>
                 <div th:class="|form-group|"
                      th:id="|dropOffDate|">
-                    <label th:for="|dropOffDate|" th:class="|control-label|" th:text="|Drop off Date|">Drop off Date</label>
+                    <label th:for="|dropOffDate|" th:class="|control-label|" th:text="|Drop off Date|">Drop off
+                        Date</label>
                     <input th:type="text"
                            th:class="|form-control|"
                            th:field="*{dropOffDate}"/>
@@ -130,7 +137,8 @@
                 </div>
                 <div th:class="|form-group|"
                      th:id="|dropOffTime|">
-                    <label th:for="|dropOffTime|" th:class="|control-label|" th:text="|Drop off Time|">Pickup Time</label>
+                    <label th:for="|dropOffTime|" th:class="|control-label|" th:text="|Drop off Time|">Pickup
+                        Time</label>
                     <input th:type="time"
                            th:class="|form-control|"
                            th:field="*{dropOffTime}"/>
@@ -140,7 +148,8 @@
                 </div>
                 <div th:class="|form-group|"
                      th:id="|dropOffHoursOfOperation|">
-                    <label th:for="|dropOffHoursOfOperation|" th:class="|control-label|" th:text="|dropOff Hours of Operation|">dropOff Hours of Operation</label>
+                    <label th:for="|dropOffHoursOfOperation|" th:class="|control-label|"
+                           th:text="|dropOff Hours of Operation|">dropOff Hours of Operation</label>
                     <input th:type="time"
                            th:class="|form-control|"
                            th:field="*{dropOffHoursOfOperation}"/>
@@ -150,7 +159,8 @@
                 </div>
                 <div th:class="|form-group|"
                      th:id="|dropOffPhoneNumber|">
-                    <label th:for="|dropOffPhoneNumber|" th:class="|control-label|" th:text="|Phone Number|">Phone Number</label>
+                    <label th:for="|dropOffPhoneNumber|" th:class="|control-label|" th:text="|Phone Number|">Phone
+                        Number</label>
                     <input th:type="time"
                            th:class="|form-control|"
                            th:field="*{dropOffPhoneNumber}"/>
@@ -181,7 +191,8 @@
                             </div>
                             <div th:class="|form-group|"
                                  th:id="|attendeeLoyaltyProgramNumber|">
-                                <label th:for="|attendeeLoyaltyProgramNumber|" th:class="|control-label|">Frequent Renter #</label>
+                                <label th:for="|attendeeLoyaltyProgramNumber|" th:class="|control-label|">Frequent
+                                    Renter #</label>
                                 <input th:type="text"
                                        th:class="|form-control|"
                                        th:field="*{attendees[__${iter.index}__].loyaltyProgramNumber}"/>
@@ -222,7 +233,8 @@
                         </div>
                         <div th:class="|form-group|"
                              th:id="|confirmationNumber|">
-                            <label th:for="|confirmationNumber|" th:class="|control-label|">Travel Agency Confirmation #</label>
+                            <label th:for="|confirmationNumber|" th:class="|control-label|">Travel Agency Confirmation
+                                #</label>
                             <input th:type="text"
                                    th:class="|form-control|"
                                    th:field="*{travelAgencyDto.confirmationNumber}"/>
@@ -321,7 +333,8 @@
                         </div>
                         <div th:class="|form-group|"
                              th:id="|bookingSitePhoneNumber|">
-                            <label th:for="|bookingSitePhoneNumber|" th:class="|control-label|">Booking Site Phone</label>
+                            <label th:for="|bookingSitePhoneNumber|" th:class="|control-label|">Booking Site
+                                Phone</label>
                             <input th:type="text"
                                    th:class="|form-control|"
                                    th:field="*{bookingDetailDto.phoneNumber}"/>
@@ -341,7 +354,8 @@
                                    th:field="*{bookingDetailDto.totalCost}"/>
                         </div>
                         <div th:class="|form-group|">
-                            <label th:for="${#ids.next('isPurchased')}" th:text="|Reservation is Purchased|">Reservation is Purchased</label>
+                            <label th:for="${#ids.next('isPurchased')}" th:text="|Reservation is Purchased|">Reservation
+                                is Purchased</label>
                             <input type="checkbox" th:field="*{bookingDetailDto.isPurchased}"/>
                         </div>
                     </div>
@@ -349,7 +363,9 @@
             </div>
             <div th:class="|form-group|">
                 <button th:type="|submit|" th:class="|btn btn-success btn-sub|">Save</button>
-                <button th:name="|cancel|" th:value="|cancel|" th:type="|cancel|" th:class="|btn btn-danger btn-cancel|">Cancel</button>
+                <button th:name="|cancel|" th:value="|cancel|" th:type="|cancel|"
+                        th:class="|btn btn-danger btn-cancel|">Cancel
+                </button>
             </div>
         </form>
     </main>

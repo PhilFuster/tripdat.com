@@ -15,15 +15,15 @@
       <Owner>postgres</Owner>
       <IntrospectionStateNumber>683</IntrospectionStateNumber>
       <Current>1</Current>
-      <Relations>sequence|table|16695|16697|1
+      <Relations>sequence|table|16907|16909|1
+sequence|table|16941|16943|1
+sequence|table|16682|16684|1
 sequence|table|16721|16723|1
 sequence|table|16737|16739|1
+sequence|table|16695|16697|1
 sequence|table|16797|16799|1
 sequence|table|16881|16883|1
 sequence|table|16839|16841|1
-sequence|table|16907|16909|1
-sequence|table|16941|16943|1
-sequence|table|16682|16684|1
 </Relations>
     </database>
     <role id="4" parent="1" name="pg_execute_server_program">

@@ -22,8 +22,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Name: HomeController
@@ -116,21 +118,46 @@ public class HomeController {
         List<String> durationOfTrips = tripItemWrapperService.getDurationOfTrips(tripsInAscendingOrder);
         TripdatTrip nextTrip;
         List<TripItemWrapper> nextUpItems = new ArrayList<>();
+        List<TripItemWrapper> result = new ArrayList<>();
         if (!tripsInAscendingOrder.isEmpty()) {
             nextTrip = tripsInAscendingOrder.get(0);
             nextUpItems = tripItemWrapperService.getNextUpItemsInItemWrapper(nextTrip);
-            tripItemWrapperService.orderItemWrappersByAscDateAndTime(nextUpItems);
-        }
 
+            // Next 4 items are retrieved. Filter items that have already occurred.
+            result = nextUpItems.stream()
+                    .filter(item -> displayNextUpItem(item))
+                    .collect(Collectors.toList());
+            tripItemWrapperService.orderItemWrappersByAscDateAndTime(result);
+        }
         model.addAttribute("trips", tripsInAscendingOrder);
         model.addAttribute("formattedDateStrings", formattedDateStrings);
         model.addAttribute("durationOfTrips", durationOfTrips);
-        if (nextUpItems.size() > 4) {
-            model.addAttribute("nextUpItems", nextUpItems.subList(0, 4));
+        if (result.size() > 4) {
+            model.addAttribute("nextUpItems", result.subList(0, 4));
         } else {
-            model.addAttribute("nextUpItems", nextUpItems);
+            model.addAttribute("nextUpItems", result);
         }
         return ViewNames.USER_INDEX;
+    }
+
+    /**
+     * Name: displayNextUpItem
+     * Purpose: Helper function to determine if a nextUpItem should be displayed
+     * Synopsis: A next up Item should not be displayed if the item has already happened.
+     * If a next up item has already started, but it has not ended and this item is the arrival(end date version of it)
+     * it should be displayed to the user as a next up item.
+     *
+     * @return boolean, true if item should be displayed, false if not
+     */
+    boolean displayNextUpItem(TripItemWrapper item) {
+        // Item starts after today
+        if(!item.getStartDate().isBefore(LocalDate.now())) {
+            return true;
+            // item does not end before today and it is an arrival item. Thus
+            // should be displayed to user so they know when this item ends
+        } else if(!item.getEndDate().isBefore(LocalDate.now()) && item.getIsArrival()) {
+            return true;
+        } else return false;
     }
 
 }

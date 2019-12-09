@@ -5,6 +5,7 @@ h1 {
 html {
     box-sizing: border-box;
 }
+
 /*
     header and Footer styling
 */
@@ -16,6 +17,7 @@ html {
     color: #fff;
     margin-bottom: 30px;
 }
+
 .navbar-img {
     width: 45px;
     height: 45px;
@@ -27,6 +29,7 @@ ul.main-nav li a.nav-item {
     color: #ffffff;
     font-weight: 600;
 }
+
 .nav-item:hover {
     color: maroon;
 }
@@ -35,6 +38,7 @@ ul.main-nav li a.nav-item {
     font-size: 14px;
 
 }
+
 .tip {
     width: 0;
     height: 0;
@@ -52,8 +56,9 @@ ul.main-nav li a.nav-item {
     -moz-border-radius: 1px;
     border-radius: 5px;
 }
+
 footer a:hover, .navbar a:hover {
-    color:white;
+    color: white;
     text-decoration: none;
 }
 
@@ -61,26 +66,30 @@ a.dropdown-item:hover {
     color: blue;
 
 }
+
 footer {
     position: fixed;
     height: 50px;
     bottom: 0;
     width: 100%;
     background-color: darkslategrey;
-    margin-top:-3em;
+    margin-top: -3em;
     color: #fff;
 }
 
 .footer-content {
-    text-align:center;
+    text-align: center;
 }
+
 body {
     margin-bottom: 100px;
-    color:#333;
+    color: #333;
 }
+
 footer p {
     padding: 15px;
 }
+
 div.trip > p {
     line-height: 22px;
     margin-bottom: 5px;
@@ -88,10 +97,11 @@ div.trip > p {
     margin-right: 0px;
     margin-top: 0px;
 }
+
 /*
     Styling for Upcoming Trips
 */
-.trip-actions{
+.trip-actions {
     border-width: 0 0 1px 0;
     border-style: solid none solid none;
     border-color: lightgrey;
@@ -112,9 +122,10 @@ div.trip > p {
 
 .separator {
     margin: 0 5px;
-    color:#CCC;
+    color: #CCC;
     font-weight: bold;
 }
+
 .separator::before {
     content: '|';
 }
@@ -126,7 +137,6 @@ div.trip > p {
     max-width: 210px;
     text-align: right;
 }
-
 
 
 div.container {
@@ -148,9 +158,10 @@ div.container {
 .card-group {
     display: inline;
 }
+
 div.content {
-    display:grid;
-    grid-template-columns:30% 70%;
+    display: grid;
+    grid-template-columns: 30% 70%;
     grid-template-rows: 100%;
     grid-column-gap: 25px;
 }
@@ -159,10 +170,12 @@ div.content {
     grid-column-start: 2;
     grid-column-end: 3;
 }
+
 .no-trips {
     margin-left: auto;
     margin-right: auto;
 }
+
 .trip-footer-action {
     display: flex;
     justify-content: flex-end;
@@ -173,6 +186,7 @@ div.content {
     grid-column-end: 2;
 
 }
+
 .main-info {
     margin-left: -15px;
     margin-right: -15px;
@@ -195,13 +209,16 @@ div.content {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
 .card-body {
     font-size: 14px;
 }
+
 .container-dark {
     background-color: darkslategrey;
     color: white;
 }
+
 .trip-title:hover {
     text-decoration: none;
 }
@@ -213,17 +230,20 @@ div.card-header {
     align-content: center;
     padding: 20px;
 }
+
 div.card-header p {
     align-self: center;
     margin-bottom: 0;
     font-size: 20px;
     font-weight: 700;
 }
+
 .info {
     font-size: 18px;
     align-self: center;
 
 }
+
 .details-small {
     display: grid;
     grid-template-columns: 16% 74% 5%;
@@ -268,25 +288,28 @@ details.trip-item-details summary:before {
     align-content: stretch;
 
 }
+
 .nextUp-trip-item-header {
     /*grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: 2;*/
     grid-column: auto;
-    grid-row:auto;
+    grid-row: auto;
 }
+
 .item-bar {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
+
 .nextUp-trip-item {
     margin-top: 10px;
 }
 
 .more-details {
-    display:grid;
-    grid-template-columns: 1fr 1fr 1fr ;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     grid-row-gap: 8px;
     margin-bottom: 10px;
     margin-top: 10px;
@@ -301,24 +324,27 @@ details.trip-item-details summary:before {
     grid-column: auto;
 
 }
-.nextUp-trip-item .trip-item-details-collapsed .details-small .date
-{
+
+.nextUp-trip-item .trip-item-details-collapsed .details-small .date {
 
     margin-bottom: 5px;
     font-size: 12px;
 
 
 }
+
 .nextUp-trip-item div[class*="details-"]:first-child {
 
     margin-top: 0;
 
 }
+
 .item-header-detail {
     font-size: 19px;
     font-weight: 600;
     align-self: auto;
 }
+
 .nextUp-items-list {
     display: flex;
     flex-direction: column;
@@ -331,11 +357,12 @@ details.trip-item-details summary:before {
     padding-right: 15px;
 }
 
-.nextUp-trip-item .legend{
+.nextUp-trip-item .legend {
     color: #999;
     line-height: 20px;
     font-size: 14px;
 }
+
 .next-up-depart {
     line-height: 1.42857143;
 }
@@ -353,12 +380,12 @@ details.trip-item-details summary:before {
     float: left
 
 }
+
 .trip-item-view-link {
     float: right;
     text-align: center;
 
 }
-
 
 
 .trip-item {
@@ -401,7 +428,7 @@ details.trip-item-details summary:before {
     height: 0;
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
-    border-right:5px solid blue;
+    border-right: 5px solid blue;
 }
 
 /*
@@ -413,40 +440,45 @@ details.trip-item-details summary:before {
 }
 
 .ribbon {
-    padding-left:50px;
+    padding-left: 50px;
     max-height: 50px;
 }
+
 .ribbon-background {
-    position:absolute;
-    top:0;
-    right:0;
-    font-size:8px;
-    color:#cccccc;
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 8px;
+    color: #cccccc;
 }
+
 .ribbon-background a {
-    color:#cccccc;
-    text-decoration:none;
-    font-weight:normal;
+    color: #cccccc;
+    text-decoration: none;
+    font-weight: normal;
 }
+
 .ribbon-background a:hover {
-    color:#cccccc;
-    text-decoration:none;
-    font-weight:normal;
+    color: #cccccc;
+    text-decoration: none;
+    font-weight: normal;
 }
-.the-ribbon{
-     position: relative;
-     width: 250px;
-     font-size: 18px;
-     font-weight: bold;
-     padding: 6px 20px 6px 30px;
-     margin: 30px 10px 10px -71px;
-     color: white;
-     background-color: dodgerblue;
-     text-shadow: 0px 1px 2px #bbb;
-     -webkit-box-shadow: 0px 2px 4px #888;
-     -moz-box-shadow: 0px 2px 4px #888;
-     box-shadow: 0px 2px 4px #888;
- }
+
+.the-ribbon {
+    position: relative;
+    width: 250px;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 6px 20px 6px 30px;
+    margin: 30px 10px 10px -71px;
+    color: white;
+    background-color: dodgerblue;
+    text-shadow: 0px 1px 2px #bbb;
+    -webkit-box-shadow: 0px 2px 4px #888;
+    -moz-box-shadow: 0px 2px 4px #888;
+    box-shadow: 0px 2px 4px #888;
+}
+
 .the-ribbon:before, .the-ribbon:after {
     content: ' ';
     position: absolute;
@@ -454,7 +486,7 @@ details.trip-item-details summary:before {
     height: 0;
 }
 
-.the-ribbon:after{
+.the-ribbon:after {
     left: 0px;
     top: 100%;
     border-width: 5px 10px;
@@ -462,7 +494,7 @@ details.trip-item-details summary:before {
     border-color: #666666 #666666 transparent transparent;
 }
 
-.date-ribbon{
+.date-ribbon {
     position: relative;
     width: 175px;
     font-size: 18px;
@@ -476,6 +508,7 @@ details.trip-item-details summary:before {
     -moz-box-shadow: 0px 2px 4px #888;
     box-shadow: 0px 2px 4px #888;
 }
+
 .date-ribbon:before, .date-ribbon:after {
     content: ' ';
     position: absolute;
@@ -483,7 +516,7 @@ details.trip-item-details summary:before {
     height: 0;
 }
 
-.date-ribbon:after{
+.date-ribbon:after {
     left: 0px;
     top: 100%;
     border-width: 5px 10px;
@@ -491,7 +524,7 @@ details.trip-item-details summary:before {
     border-color: #666666 #666666 transparent transparent;
 }
 
-#trip-navigation-container{
+#trip-navigation-container {
     height: 46px;
     margin: 0px;
     padding: 0px;
@@ -504,7 +537,7 @@ details.trip-item-details summary:before {
 
 #trip-navigation {
     padding-top: 9px;
-    display:flex;
+    display: flex;
     justify-content: left;
 }
 
@@ -517,14 +550,17 @@ details.trip-item-details summary:before {
     text-overflow: ellipsis;
 
 }
+
 #trip-header {
     background-color: #e3e3e3;
     padding: 0 0 5px 0;
 
 }
+
 #trip-content {
     max-width: 658px;
 }
+
 .arrow-separator {
     display: block;
     height: 32px;
@@ -532,21 +568,24 @@ details.trip-item-details summary:before {
     clear: both;
     position: relative;
 }
+
 .arrow-separator .content .body {
 
     text-indent: 5px;
     max-width: 560px;
 
 }
+
 div.trip-meta-data p {
     margin: 5px;
     padding: 5px;
 
 }
+
 details.trip-settings summary.gear-summary {
-    display:inline-block;
-    width:28px;
-    height:28px;
+    display: inline-block;
+    width: 28px;
+    height: 28px;
     content: '';
     border-radius: 5px;
     background: url("../images/gear.png");
@@ -554,9 +593,10 @@ details.trip-settings summary.gear-summary {
     background-size: 100% 100%;
 
 }
+
 details.trip-settings > div.trip-settings-modal {
 
-    margin-top: 15px ;
+    margin-top: 15px;
     max-height: 80vh;
     max-width: 20vw;
     position: absolute;
@@ -572,7 +612,7 @@ details.trip-settings > div.trip-settings-modal {
     font-size: 2em;
     font-weight: bold;
     font-family: Arial;
-    box-shadow: 5px 5px 5px rgba(1,1,1,1);
+    box-shadow: 5px 5px 5px rgba(1, 1, 1, 1);
     border: 1px solid black;
 
 }
@@ -581,7 +621,7 @@ details.trip-settings > div.trip-settings-modal {
     Triangle that goes over the modal. points to the gear button
 */
 div.trip-settings-modal::before {
-    content:" ";
+    content: " ";
     position: absolute;
     top: -15px;
     right: 0;
@@ -593,6 +633,7 @@ div.trip-settings-modal::before {
     border-right: 15px solid transparent;
     border-bottom: 15px solid black;
 }
+
 div.trip-settings-modal p {
     margin: 0;
     padding: 0;
@@ -607,20 +648,24 @@ a.trip-settings-link {
     text-align: left;
     margin-left: 10px;
     padding: 0;
-    margin:5px;
+    margin: 5px;
     display: block;
 
 }
 
 @keyframes fadein {
-    from { opacity: 0; }
-    to   { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 
 #options, #gear, #print, #printer {
 
-    width:28px;
-    height:28px;
+    width: 28px;
+    height: 28px;
     display: inline;
     border-radius: 5px;
     margin-left: 5px;
@@ -633,12 +678,13 @@ a.trip-settings-link {
 #trip-item-list {
 
 }
+
 .trip-item-object {
     margin-bottom: 35px;
 }
 
 .trip-item-row {
-    display:grid;
+    display: grid;
     justify-content: left;
     grid-template-columns: 17% 83%;
 }
@@ -657,7 +703,6 @@ a.trip-settings-link {
     font-weight: normal;
     justify-content: flex-end;
 }
-
 
 
 .trip-item-header {
@@ -703,8 +748,11 @@ a.trip-settings-link {
     line-height: 11px;
 }
 
+/*
+    Icons
+*/
 span.flight-trip-item-icon-sm {
-    content:url('../images/plane.png');
+    content: url('../images/plane.png');
     max-width: 100%;
     display: inline;
     align-self: baseline;
@@ -712,17 +760,18 @@ span.flight-trip-item-icon-sm {
 }
 
 span.flight-trip-item-icon-m {
-    content:url('../images/plane.png');
-    width:70px;
-    height:70px;
+    content: url('../images/plane.png');
+    width: 70px;
+    height: 70px;
     display: inline-block;
     background-color: dodgerblue;
     border-radius: 5px;
     align-self: self-end;
     justify-self: center;
 }
+
 span.car-trip-item-icon-sm {
-    content:url('../images/car-front.png');
+    content: url('../images/car-front.png');
     max-width: 100%;
     display: inline;
     align-self: baseline;
@@ -730,15 +779,19 @@ span.car-trip-item-icon-sm {
 }
 
 span.car-trip-item-icon-m {
-    content:url('../images/car-front.png');
-    width:70px;
-    height:70px;
+    content: url('../images/car-front.png');
+    width: 70px;
+    height: 70px;
     display: inline-block;
     background-color: dodgerblue;
     border-radius: 5px;
     align-self: self-end;
     justify-self: center;
 }
+
+/*
+    Item display area.
+*/
 .trip-item-object-pane {
     display: grid;
     grid-template-columns: 100%;
@@ -752,7 +805,6 @@ span.car-trip-item-icon-m {
     font-weight: normal;
     background-color: #e3e3e3;
     justify-content: flex-end;
-
 }
 
 .checkpoint {
@@ -776,26 +828,33 @@ span.car-trip-item-icon-m {
     font-size: 18px;
     font-weight: 500;
 }
+
 .gate-location {
     display: flex;
     justify-content: flex-end;
 }
+
 .terminal {
     margin-right: 5px;
 }
+
 .checkpoint, .checkpoint-type, .airport-name, .terminal-section, .gate-section {
     margin-bottom: 1px;
 }
+
 .terminal, .gate {
     font-size: 20px;
     font-weight: 600;
 }
+
 .gate-location {
     line-height: 10px;
 }
+
 .start-flex {
-     justify-self: flex-start;
+    justify-self: flex-start;
 }
+
 .object-actions {
     display: inline-grid;
     grid-template-columns: 100%;
@@ -810,24 +869,27 @@ span.car-trip-item-icon-m {
 
 
 }
+
 div.object-actions ul {
     list-style-type: none;
     padding: 0;
     margin: 0;
 
 }
-div.object-actions ul li{
+
+div.object-actions ul li {
     padding: 0;
-    margin:0;
+    margin: 0;
     line-height: 15px;
     display: flex;
     justify-content: flex-end;
 
 
 }
-div.object-actions ul li a{
+
+div.object-actions ul li a {
     padding: 0;
-    margin:0;
+    margin: 0;
 
 }
 
@@ -836,6 +898,7 @@ div.object-actions ul li a{
 
 
 }
+
 .duration-checkpoint {
     display: flex;
     justify-content: flex-end;
@@ -848,6 +911,7 @@ div.object-actions ul li a{
     margin-bottom: 0;
     padding: 5px;
 }
+
 .seats-section {
     margin-left: 5px;
     padding: 5px;
@@ -868,12 +932,13 @@ div.object-actions ul li a{
 .supplier-information, .car-rental-details, .booking-detail-information, .item-notes-info {
     padding: 5px;
 }
+
 /*
     Setting the details marker for specific details tags to rtl
 */
 details.traveler-info-details summary, details.aircraft-service-info summary,
 details.travel-agency-information summary, details.supplier-information summary, details.booking-detail-information summary,
-details.item-notes-info summary, details.car-rental-details summary{
+details.item-notes-info summary, details.car-rental-details summary {
     direction: rtl;
 }
 
@@ -889,18 +954,22 @@ div.traveler-details {
     padding: 5px;
     justify-content: space-between;
 }
+
 .traveler-name {
     flex-wrap: nowrap;
     justify-self: flex-start;
 }
+
 .other-traveler-details {
     flex-wrap: nowrap;
     justify-self: flex-end;
 }
+
 div.aircraft-service-details, div.travel-agency-details, div.supplier-details, div.booking-details,
 div.item-notes-details, div.details-list {
     padding: 5px;
 }
+
 .aircraft-service-details ul, div.travel-agency-details ul, div.supplier-details ul,
 div.booking-details ul, div.details-list ul {
     list-style: none;
@@ -923,34 +992,41 @@ div.trip-tab-view {
     padding: 5px;
     margin: 0;
 }
+
 div.trip-tab-view * {
     padding: 5px;
 }
+
 div.trip-tab-details {
     display: flex;
     flex-direction: column;
     padding-bottom: 0;
 
 }
+
 div.trip-tab-details p {
     padding: 0;
-    margin:0 0 2px 0;
+    margin: 0 0 2px 0;
     line-height: 15px;
 
 }
+
 div.trip-tab-details div.trip-actions {
     border: 0;
     line-height: 8px;
     justify-content: flex-start;
     padding-left: 0;
 }
+
 div.edit-trip-header {
     background-color: #e3e3e3;
     border-bottom: #666666 2px solid;
 }
+
 div.edit-trip-background p {
     padding: 5px;
 }
+
 .end-date-details {
     justify-self: flex-end;
 }
@@ -962,8 +1038,9 @@ div.trip-description, div.other-trip-details {
     justify-content: space-around;
 
 }
+
 div.other-trip-details {
-    display:grid;
+    display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     flex-wrap: wrap;
 }
@@ -975,6 +1052,7 @@ div.other-trip-details {
 #tripDescription {
     min-height: 38px;
 }
+
 .btn-sub {
     background-color: dodgerblue;
 }
@@ -983,17 +1061,17 @@ div.other-trip-details {
     == flightItem Style ==
  */
 .airline-info {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
 
 #confirmationNumber {
-    width:auto;
+    width: auto;
     min-width: 60px;
 }
 
 .departure-details {
-    display:grid;
+    display: grid;
     grid-template-columns: 40% auto;
     grid-template-rows: auto auto;
     justify-content: space-between;
@@ -1006,7 +1084,7 @@ div.other-trip-details {
 }
 
 .arrival-details {
-    display:grid;
+    display: grid;
     grid-template-columns: 60% auto;
     grid-template-rows: auto auto;
     justify-content: space-between;
@@ -1020,7 +1098,7 @@ div.other-trip-details {
 }
 
 .service-details {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto;
     justify-content: space-between;
@@ -1028,14 +1106,14 @@ div.other-trip-details {
 }
 
 .aircraft-details {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto;
     justify-content: space-between;
 }
 
 .time-and-distance {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto;
     justify-content: space-between;
@@ -1049,6 +1127,7 @@ div.other-trip-details {
     flex-direction: column;
     justify-content: flex-start;
 }
+
 .item-fragment-p {
     margin-bottom: 0;
 }
@@ -1056,25 +1135,26 @@ div.other-trip-details {
 .heavy-font {
     font-weight: 800;
 }
+
 /*
     Other-item-details form grid styles
 */
 .travel-agency-form {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto;
     justify-content: space-between;
 }
 
 .supplier-form {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto;
     justify-content: space-between;
 }
 
 .booking-detail-form {
-    display:grid;
+    display: grid;
     grid-template-columns: auto auto auto;
     grid-template-rows: auto auto;
     justify-content: space-between;
@@ -1091,18 +1171,20 @@ div.other-trip-details {
     border-bottom: 1px solid;
     justify-content: center;
 }
+
 details.add-plan-modal-details summary.add-plan-modal-summary {
     border-radius: 5px;
     margin-left: 5px;
     background-size: 100% 100%;
 }
+
 details.add-plan-modal-details > div.add-plan-modal {
     max-height: 500vh;
     max-width: 500vw;
     position: fixed;
     margin-top: 12px;
-    right:50%;
-    left:40%;
+    right: 50%;
+    left: 40%;
     height: 30%;
     width: 30%;
     z-index: 999;
@@ -1114,7 +1196,7 @@ details.add-plan-modal-details > div.add-plan-modal {
     font-size: 2em;
     font-weight: bold;
     font-family: Arial;
-    box-shadow: 5px 5px 5px rgba(1,1,1,1);
+    box-shadow: 5px 5px 5px rgba(1, 1, 1, 1);
     border: 1px solid black;
 }
 
@@ -1123,13 +1205,14 @@ div.add-plan-modal p {
     padding: 0;
 }
 
-summary.add-plan-modal-summary{
+summary.add-plan-modal-summary {
     font-size: 1rem;
     font-weight: 400;
     color: dodgerblue;
-    display:flex;
+    display: flex;
     text-align: left;
 }
+
 /*
     items-table styles
     Styles for the items-table in add-plan-modal
@@ -1139,13 +1222,16 @@ summary.add-plan-modal-summary{
     grid-template-columns: 50% 50%;
     grid-template-rows: 50% 50%;
 }
+
 .transportation-items {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
+
 .table-item {
-    font-size:12px;
+    font-size: 12px;
 }
+
 .activity-items {
     display: flex;
     flex-direction: column;
@@ -1155,7 +1241,7 @@ summary.add-plan-modal-summary{
     Passenger styles
 */
 .passenger {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -1163,19 +1249,20 @@ summary.add-plan-modal-summary{
     Display Inline Checkbox
 */
 .inline-checkbox {
-    display:flex;
+    display: flex;
     justify-content: flex-start;
     align-items: center;
 }
+
 .inline-input {
-    display:flex;
+    display: flex;
     align-items: center;
     width: auto !important;
     margin-left: 5px;
 }
 
 .inline-summary {
-    display:flex;
+    display: flex;
     justify-content: space-between;
 }
 
@@ -1183,7 +1270,18 @@ summary.add-plan-modal-summary{
     margin-left: 20px;
 }
 
+/**
+    Settings Styles
+ */
+#change-password-detail summary.change-password-summary::marker {
+    display: none;
+}
 
+#settings-main-content {
+    display: flex;
+    flex-direction: column;
+
+}
 
 
 

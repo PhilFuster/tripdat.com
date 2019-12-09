@@ -361,6 +361,7 @@ details.trip-item-details summary:before {
     color: #999;
     line-height: 20px;
     font-size: 14px;
+    alignment: top;
 }
 
 .next-up-depart {

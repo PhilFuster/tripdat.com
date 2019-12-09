@@ -190,7 +190,20 @@ public class FlightItemController {
     public String showFlightItemForm(Model model,
                                      @RequestParam(required = false, defaultValue = "-1") Long tripItemId,
                                      @RequestParam(defaultValue = "-1", required = false) Long tripId) {
-        model.addAttribute("flight", flightItemDto(tripItemId, tripId));
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TripdatTripItem tripItem = tripItemService.findByItemId(tripItemId);
+        TripdatTrip trip = tripService.findOne(tripId);
+        // if item or trip is null, return bad link item or trip not found.
+        if((tripItemId != -1 && tripItem == null) || (tripId != -1 && trip == null)) {
+            return ViewNames.BAD_LINK;
+        }
+        // If the trip or tripItem do not belong to the user direct to access denied page
+        if ((tripItemId != -1 && !tripItem.getUser().getUserId().equals(user.getUserId()))
+             || (tripId != -1 && !trip.getUser().getUserId().equals(user.getUserId()))) {
+            return ViewNames.ACCESS_DENIED;
+        }
+        FlightItemDto flight = flightItemDto(tripItemId,tripId);
+        model.addAttribute("flight", flight);
         // == local variables ==
         return tripItemId == -1 ? ViewNames.CREATE_FLIGHT : ViewNames.EDIT_FLIGHT;
     }
@@ -339,10 +352,15 @@ public class FlightItemController {
      * @param tripId Long, id of the Trip that contains the item to be deleted.
      * @param itemId Long, id of the item to be deleted.
      */
-    @RequestMapping(value = {Mappings.DELETE_FLIGHT}, params = {"itemId", "tripId"})
+    @RequestMapping(value = {Mappings.DELETE_FLIGHT}, params = {"itemId", "tripId"}, method = RequestMethod.POST)
     public String deleteFlightItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
                                    @RequestParam Long tripId) {
         Flight flight = (Flight) tripItemService.findByItemId(itemId);
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // If the tripItem or trip does not belong to the user direct to access denied page
+        if (!flight.getUser().getUserId().equals(user.getUserId()) || !flight.getTripdatTrip().getUser().getUserId().equals(user.getUserId())) {
+            return ViewNames.ACCESS_DENIED;
+        }
         tripItemService.delete(flight);
         return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }

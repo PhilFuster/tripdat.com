@@ -26,9 +26,14 @@
         </summary>
         <!-- More Details -->
         <div class="more-details">
-            <div class="info">
+            <div th:if="${!item.isArrival}" class="info">
                 <div class="legend" th:text="|PICK-UP ADDRESS|">PICK-UP ADDRESS</div>
                 <div class="item-expanded-detail" th:text="${item.getTripItem().getPickUpAddress()}?:''">
+                </div>
+            </div>
+            <div th:if="${item.isArrival}" class="info">
+                <div class="legend" th:text="|DROP-OFF ADDRESS|">DROP-OFF ADDRESS</div>
+                <div class="item-expanded-detail" th:text="${item.getTripItem().getDropOffAddress()}?:''">
                 </div>
             </div>
             <div class="info">
@@ -46,9 +51,14 @@
                 <div class="item-expanded-detail" th:text="${item.getConfirmationNumber()}">
                 </div>
             </div>
-            <div th:class="info">
+            <div th:if="${!item.isArrival}" th:class="info">
                 <div class="legend" th:text="|PICK-UP|">PICK-UP</div>
                 <div class="item-expanded-detail" th:text="${item.getTripItem().getPickUpTime()}">
+                </div>
+            </div>
+            <div th:if="${item.isArrival}" th:class="info">
+                <div class="legend" th:text="|DROP-OFF|">DROP-OFF</div>
+                <div class="item-expanded-detail" th:text="${item.getTripItem().getDropOffTime()}">
                 </div>
             </div>
             <div th:class="info">

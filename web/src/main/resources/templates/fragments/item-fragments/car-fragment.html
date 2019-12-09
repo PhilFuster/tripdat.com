@@ -16,12 +16,20 @@
                     <div th:class="|trip-item-header|">
                         <div th:class="item-bar">
                             <div th:class="date"
+                                 th:if="${!item.isArrival}"
                                  th:text="${#temporals.format(item.tripItem.pickUpDate, 'MM/dd/yyyy')}"></div>
+                            <div th:class="date"
+                                 th:if="${item.isArrival}"
+                                 th:text="${#temporals.format(item.tripItem.dropOffDate, 'MM/dd/yyyy')}"></div>
                         </div>
                         <div th:class="main-info">
                             <span th:text="${item.tripItem.supplierDto.supplierName }"></span>
                             <span th:class="|more-info|"
+                                  th:if="${!item.isArrival}"
                                   th:utext="${ '<br/>' + item.tripItem.pickUpLocationName }"></span>
+                            <span th:class="|more-info|"
+                                  th:if="${item.isArrival}"
+                                  th:utext="${ '<br/>' + item.tripItem.dropOffLocationName }"></span>
                         </div>
                         <div th:class="other-info">
                             Confirmation #:
@@ -65,7 +73,7 @@
                     </div>
                     <div th:class="|trip-item-object-pane|">
                         <!-- Pick Up Details -->
-                        <div th:class="|checkpoint car-description-column|">
+                        <div th:if="${!item.isArrival}" th:class="|checkpoint car-description-column|">
                             <h6 th:class="|item-fragment-p|" th:text="|Pick Up|">Pick Up</h6>
                             <p th:class="|item-fragment-p pickup-time |" th:text="${item.tripItem.pickUpTime}"></p>
                             <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpAddress}"></p>
@@ -73,7 +81,7 @@
                             <p th:class="|item-fragment-p|" th:text="${item.tripItem.pickUpHoursOfOperation}"></p>
                         </div>
                         <!-- Drop Off Details -->
-                        <div th:class="|checkpoint car-description-column|">
+                        <div th:if="${item.isArrival}" th:class="|checkpoint car-description-column|">
                             <h6 th:class="|item-fragment-p|" th:text="|Drop Off|">Drop Off</h6>
                             <p th:class="|item-fragment-p|"
                                th:text="${#temporals.format(item.tripItem.dropOffDate, 'MM/dd/yyyy')}"></p>

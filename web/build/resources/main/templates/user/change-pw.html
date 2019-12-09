@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}"
+      lang="en">
+<head>
+    <title>Change Password</title>
+</head>
+<body>
+<div th:class="container" layout:fragment="content" th:remove="tag">
+    <div id="settings-main-content" class="wrapper">
+        <div th:if="${param.success}">
+            <div class="alert alert-info">
+                You have successfully changed your password!
+            </div>
+        </div>
+        <h1 th:text="|Change Password|">Change Password</h1>
+        <div class="content">
+            <!-- User Settings Form -->
+            <form th:action="@{__${T(dev.phasterinc.tripdat.util.Mappings).CHANGE_PW}__}" th:object="${passwordDto}" method="post">
+                <p class="error-message alert alert-danger"
+                   th:if="${#fields.hasGlobalErrors()}"
+                   th:each="error : ${#fields.errors('global')}"
+                   th:text="${error}">Validation error</p>
+
+                    <!-- password -->
+                    <div class="form-group"
+                         th:classappend="${#fields.hasErrors('currentPassword')}? 'has-error':''">
+                        <label for="currentPassword" class="control-label">Current Password</label>
+                        <input id="currentPassword"
+                               class="form-control"
+                               type="password"
+                               th:field="*{currentPassword}"/>
+                        <p class="error-message alert alert-danger"
+                           th:each="error : ${#fields.errors('currentPassword')}"
+                           th:text="${error}">Validation error</p>
+                    </div>
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('newPassword')}? 'has-error':''">
+                    <label for="newPassword" class="control-label">New password</label>
+                    <input id="newPassword"
+                           class="form-control"
+                           th:field="*{newPassword}"
+                           th:type="password"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error : ${#fields.errors('newPassword')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <!-- Confirm Password -->
+                <div class="form-group"
+                     th:classappend="${#fields.hasErrors('confirmNewPassword')}? 'has-error':''">
+                    <label for="confirmNewPassword" class="control-label">Confirm New Password</label>
+                    <input id="confirmNewPassword"
+                           class="form-control"
+                           type="password"
+                           th:field="*{confirmNewPassword}"/>
+                    <p class="error-message alert alert-danger"
+                       th:each="error : ${#fields.errors('confirmNewPassword')}"
+                       th:text="${error}">Validation error</p>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success">Save</button>
+                </div>
+                <div class="form-group">
+                    <a th:text="|Go back to Settings|"  th:href="@{__${T(dev.phasterinc.tripdat.util.Mappings).SETTINGS}__}">Go back to Settings</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -6,6 +6,7 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
+import dev.phasterinc.tripdat.IDateAndTimeSpan;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,7 +24,7 @@ import java.time.LocalTime;
 @Entity(name = "CruiseStop")
 @Table(name = "cruise_stop")
 @Data
-public class CruiseStop implements Serializable {
+public class CruiseStop implements Serializable, IDateAndTimeSpan {
 
     // == fields ==
     @Id
@@ -54,6 +55,51 @@ public class CruiseStop implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_item_id")
     private Cruise cruise;
+
+    /**
+     * Name: getStartDate
+     * Purpose: To retrieve the start date of Cruise Stop
+     * Synopsis: Implements the IDateAndTimeSpan interface method getStartDate
+     * <p>
+     *
+     * @return LocalDate, the start date of cruise stop
+     */
+    @Override
+    public LocalDate getStartDate() {
+        return cruiseStopArrivalDate;
+    }
+
+    /**
+     * Name: getEndDate
+     * Purpose: Retrieve the departure date for a cruise stop
+     * Synopsis: Implements the IDateAndTimeSpan interface method getEndDate
+     * <p>
+     *
+     * @return LocalDate, the departure date of a cruise stop
+     */
+    @Override
+    public LocalDate getEndDate() {
+        return cruiseStopDepartureDate;
+    }
+
+    /**
+     * Name: getStartTime
+     * Purpose: Retrieve the arrival time for a cruise stop
+     * Synopsis: Implements the IDateAndTimeSpan interface method getStartTime
+     * <p>
+     *
+     * @return LocalTime, the arrival time for a cruise stop
+     */
+    @Override
+    public LocalTime getStartTime() {
+        return cruiseStopArrivalTime;
+    }
+
+    
+    @Override
+    public LocalTime getEndTime() {
+        return null;
+    }
 
     /**
      * Name: equals

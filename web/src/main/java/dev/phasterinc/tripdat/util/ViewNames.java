@@ -16,7 +16,6 @@ public final class ViewNames {
     public static final String HOME = "home";
     public static final String REGISTRATION = "/registration";
     public static final String REGISTRATION_SUCCESS = "/registration?success";
-    public static final String SIGN_IN = "sign-in";
     public static final String INDEX = "/index";
     public static final String USER_INDEX = "/user/index";
     public static final String LOGIN = "/login";
@@ -27,6 +26,7 @@ public final class ViewNames {
     public static final String CHANGE_EMAIL = "/user/change-email";
     public static final String CHANGE_EMAIL_SUCCESS = "/user/change-email?success";
     public static final String ACCESS_DENIED = "/error/access-denied";
+    public static final String BAD_LINK = "/error/404";
     public static final String USER_TRIPS = "/user/trip/show/trips";
     public static final String TRIP_DETAILS = "/user/trip/show/trip-details";
     public static final String EDIT_TRIP = "/user/trip/edit/edit-trip";

@@ -31,7 +31,8 @@ subprojects {
 		compile group: 'org.hibernate', name: 'hibernate-core', version: '5.4.2.Final'
 		compile group: 'org.springframework', name: 'spring-orm', version: '5.1.6.RELEASE'
 		compile group: 'org.javassist', name: 'javassist', version: '3.24.1-GA'
-		runtimeOnly 'org.postgresql:postgresql'
+		// https://mvnrepository.com/artifact/org.postgresql/postgresql
+		compile group: 'org.postgresql', name: 'postgresql', version: '42.2.8'
 		compile group: 'org.hibernate', name: 'hibernate-validator', version: '6.1.0.Alpha4'
 		compile group: 'org.apache.tomcat', name: 'tomcat-dbcp', version: '9.0.17'
 		compile group: 'org.springframework.boot', name: 'spring-boot-starter-security', version: '2.1.4.RELEASE'

@@ -88,9 +88,17 @@ public class TripdatTripController {
      */
     @GetMapping(value = Mappings.TRIP_DETAILS, params = {"tripId"})
     public String tripDetailsPage(Model model, @RequestParam("tripId") String tripId) {
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         log.info("TripDetails tripId passed:" + tripId);
         // find the trip to display with the tripId passed with the url
         TripdatTrip trip = tripService.findOne(Long.parseLong(tripId));
+        if (trip == null) {
+            return ViewNames.BAD_LINK;
+        }
+        // If trip does not belong to the user direct to access denied page
+        if(!trip.getUser().getUserId().equals(user.getUserId())) {
+            return ViewNames.ACCESS_DENIED;
+        }
         model.addAttribute("trip", trip);
         model.addAttribute("tripId", tripId);
         model.addAttribute("tripFormattedDate", tripItemWrapperService.getFormattedDate(trip.getTripStartDate(), trip.getTripEndDate()));
@@ -185,9 +193,17 @@ public class TripdatTripController {
     public String showTripForm(@RequestParam(required = false, defaultValue = "-1") Long tripId,
                                Model model) {
         // == local variables ==
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         TripdatTrip trip = tripService.findOne(tripId);
         TripDto tripDto;
-
+        // find the trip to display with the tripId passed with the url
+        if (tripId != -1 && trip == null) {
+            return ViewNames.BAD_LINK;
+        }
+        // If trip does not belong to the user direct to access denied page
+        if(tripId != -1 &&  !trip.getUser().getUserId().equals(user.getUserId())) {
+            return ViewNames.ACCESS_DENIED;
+        }
         log.info("editing id = {}", tripId);
         if (tripId == -1) {
             // No trip found.
@@ -338,6 +354,16 @@ public class TripdatTripController {
         // Check to see if the user is Ok with deleting all items associated with this trip.
         // If so delete the trip in its entirety or allow them to move the items to the
         // un-filed sections
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TripdatTrip trip = tripService.findOne(tripId);
+        // find the trip to display with the tripId passed with the url
+        if (trip == null) {
+            return ViewNames.BAD_LINK;
+        }
+        // If trip does not belong to the user direct to access denied page
+        if(!trip.getUser().getUserId().equals(user.getUserId())) {
+            return ViewNames.ACCESS_DENIED;
+        }
         tripService.deleteById(tripId);
         return "redirect:" + ViewNames.USER_TRIPS;
     }

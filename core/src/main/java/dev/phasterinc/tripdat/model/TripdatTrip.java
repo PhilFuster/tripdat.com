@@ -98,7 +98,7 @@ public class TripdatTrip implements Serializable {
      * Name: hashCode
      * Purpose: Overrides default implementation of hashCode
      * Synopsis: When using database-generated unique identifiers, the hashcode needs to
-     * be consistent across state transitions, thus the reason for returing 31.
+     * be consistent across state transitions, thus the reason for returning 31.
      * <p>
      */
     @Override

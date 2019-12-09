@@ -165,6 +165,18 @@ public class CarItemController {
     public String showCarRentalForm(Model model,
                                     @RequestParam(required = false, defaultValue = "-1", name = "itemId") Long tripItemId,
                                     @RequestParam(defaultValue = "-1", required = false, name = "tripId") Long tripId) {
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        TripdatTripItem tripItem = tripItemService.findByItemId(tripItemId);
+        TripdatTrip trip = tripService.findOne(tripId);
+        // if item or trip is null, return bad link item or trip not found.
+        if((tripItemId != -1 && tripItem == null) || (tripId != -1 && trip == null)) {
+            return ViewNames.BAD_LINK;
+        }
+        // If the tripItem or trip do not belong to the user direct to access denied page
+        if ((tripItemId != -1 && !tripItem.getUser().getUserId().equals(user.getUserId()))
+                || (tripId != -1 && !trip.getUser().getUserId().equals(user.getUserId())) ) {
+            return ViewNames.ACCESS_DENIED;
+        }
         model.addAttribute("carRental", carRentalDto(tripItemId, tripId));
         // == local variables ==
         return tripItemId == -1 ? ViewNames.CREATE_CAR_RENTAL : ViewNames.EDIT_CAR_RENTAL;
@@ -290,10 +302,10 @@ public class CarItemController {
         if (itemId == -1) {
             carRental = CarRentalDto.buildEntity(rentalDto, trip);
             carRental.setUser(user.getTripdatUser());
-            // create the flight
+            // create the car Rental
             tripItemService.create(carRental);
         } else {
-            // updating a flight
+            // updating a car Rental
             carRental = tripItemService.findByItemId(itemId);
             CarRentalDto.updateEntity((CarRental) carRental, rentalDto);
             tripItemService.update(carRental);
@@ -314,7 +326,11 @@ public class CarItemController {
     public String deleteCarRentalItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
                                       @RequestParam Long tripId) {
         CarRental rental = (CarRental) tripItemService.findByItemId(itemId);
-
+        TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        // If the tripItem or trip does not belong to the user direct to access denied page
+        if (!rental.getUser().getUserId().equals(user.getUserId()) || !rental.getTripdatTrip().getUser().getUserId().equals(user.getUserId())) {
+            return ViewNames.ACCESS_DENIED;
+        }
         tripItemService.delete(rental);
         return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }

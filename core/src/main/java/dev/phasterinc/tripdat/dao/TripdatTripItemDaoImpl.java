@@ -64,9 +64,10 @@ public class TripdatTripItemDaoImpl extends AbstractHibernateDao<TripdatTripItem
 
         Query query = getCurrentSession().createQuery(
                 "from TripdatTripItem as item " +
-                        "where item.tripdatTrip.tripId = :id "
+                        " where item.tripdatTrip.tripId = :id "
 
-        ).setParameter("id", id).setMaxResults(4);
+        ).setParameter("id", id)
+                .setMaxResults(4);
         HashSet<TripdatTripItem> set = new HashSet<TripdatTripItem>(query.getResultList());
         return set;
     }
