@@ -22,6 +22,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -159,6 +160,8 @@ public class CarItemController {
      * @param model      supplies attributes used for rendering the view
      * @param tripId     id of the {@code TripdatTrip} to reference. -1 if no id passed.
      * @param tripItemId id of the {@code TripdatTripItem} to reference. -1 if no id passed.
+     *
+     * @throws NoResultException when the item or trip id passed cannot be found.
      * @return String, name of view to render.
      */
     @GetMapping(value = {Mappings.EDIT_CAR_RENTAL, Mappings.CREATE_CAR_RENTAL})
@@ -166,16 +169,38 @@ public class CarItemController {
                                     @RequestParam(required = false, defaultValue = "-1", name = "itemId") Long tripItemId,
                                     @RequestParam(defaultValue = "-1", required = false, name = "tripId") Long tripId) {
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TripdatTripItem tripItem = tripItemService.findByItemId(tripItemId);
-        TripdatTrip trip = tripService.findOne(tripId);
-        // if item or trip is null, return bad link item or trip not found.
-        if((tripItemId != -1 && tripItem == null) || (tripId != -1 && trip == null)) {
-            return ViewNames.BAD_LINK;
+        TripdatTripItem tripItem = null;
+        TripdatTrip trip = null;
+        // editing tripItem. Make sure it is valid & belongs to user.
+        if(tripItemId != -1) {
+            try {
+                tripItem = tripItemService.findByItemId(tripItemId);
+                if(!tripItem.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip Item");
+                    return ViewNames.ACCESS_DENIED;
+                }
+                // Check that itemId is valid to the type of form being accessed.
+                if(tripItem.getType() != "CR") {
+                    log.info("Trip Item ID passed is not of type car rental.");
+                    return ViewNames.BAD_LINK;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip Item could not be found");
+                return ViewNames.BAD_LINK;
+            }
         }
-        // If the tripItem or trip do not belong to the user direct to access denied page
-        if ((tripItemId != -1 && !tripItem.getUser().getUserId().equals(user.getUserId()))
-                || (tripId != -1 && !trip.getUser().getUserId().equals(user.getUserId())) ) {
-            return ViewNames.ACCESS_DENIED;
+        // Validate that TripId passed is valid, and belong to user.
+        if(tripId != -1) {
+            try {
+                trip = tripService.findOne(tripId);
+                if(!trip.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip");
+                    return ViewNames.ACCESS_DENIED;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip could not be found");
+                return ViewNames.BAD_LINK;
+            }
         }
         model.addAttribute("carRental", carRentalDto(tripItemId, tripId));
         // == local variables ==
@@ -321,17 +346,47 @@ public class CarItemController {
      *
      * @param tripId Long, id of trip to reference for the item.
      * @param itemId Long, id of item to delete.
+     *
+     * @throws NoResultException when the itemId or tripId passed cannot be found.
      */
     @RequestMapping(value = {Mappings.DELETE_CAR_RENTAL}, params = {"itemId", "tripId"})
     public String deleteCarRentalItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
                                       @RequestParam Long tripId) {
-        CarRental rental = (CarRental) tripItemService.findByItemId(itemId);
+        TripdatTripItem tripItem = null;
+        TripdatTrip trip = null;
+        // editing tripItem. Make sure it is valid & belongs to user.
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // If the tripItem or trip does not belong to the user direct to access denied page
-        if (!rental.getUser().getUserId().equals(user.getUserId()) || !rental.getTripdatTrip().getUser().getUserId().equals(user.getUserId())) {
-            return ViewNames.ACCESS_DENIED;
+        if(itemId != -1) {
+            try {
+                tripItem = tripItemService.findByItemId(itemId);
+                if(!tripItem.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip Item");
+                    return ViewNames.ACCESS_DENIED;
+                }
+                // Check that itemId is valid to the type of form being accessed.
+                if(tripItem.getType() != "CR") {
+                    log.info("Trip Item ID passed is not of type car rental.");
+                    return ViewNames.BAD_LINK;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip Item could not be found");
+                return ViewNames.BAD_LINK;
+            }
         }
-        tripItemService.delete(rental);
+        // Validate that TripId passed is valid, and belong to user.
+        if(tripId != -1) {
+            try {
+                trip = tripService.findOne(tripId);
+                if(!trip.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip");
+                    return ViewNames.ACCESS_DENIED;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip could not be found");
+                return ViewNames.BAD_LINK;
+            }
+        }
+        tripItemService.delete((CarRental) tripItem);
         return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }
 }

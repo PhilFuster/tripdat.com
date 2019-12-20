@@ -467,7 +467,7 @@ details.trip-item-details summary:before {
 
 .the-ribbon {
     position: relative;
-    width: 250px;
+    max-width: max-content;
     font-size: 18px;
     font-weight: bold;
     padding: 6px 20px 6px 30px;
@@ -555,6 +555,7 @@ details.trip-item-details summary:before {
 #trip-header {
     background-color: #e3e3e3;
     padding: 0 0 5px 0;
+    max-width: 1200px;
 
 }
 
@@ -573,12 +574,14 @@ details.trip-item-details summary:before {
 .arrow-separator .content .body {
 
     text-indent: 5px;
-    max-width: 560px;
+    max-width: 900px;
 
 }
 
+
 div.trip-meta-data p {
-    margin: 5px;
+
+    margin:  5px;
     padding: 5px;
 
 }

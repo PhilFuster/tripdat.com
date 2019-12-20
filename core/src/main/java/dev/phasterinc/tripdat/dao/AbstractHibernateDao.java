@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  * Name: AbstractHibernateDAO
- * Purpose: An abstract parameterized DAO which supports the common generic operations
+ * Purpose: An abstract parameterized DAO which supports common generic operations
  * and is meant to be extended for each entity.
  *
  * @param <T> : the dao to perform operations on.

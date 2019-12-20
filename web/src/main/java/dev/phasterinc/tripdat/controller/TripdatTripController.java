@@ -24,6 +24,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NoResultException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.time.LocalDate;
@@ -176,6 +177,8 @@ public class TripdatTripController {
      *
      * @param model  - model to be referenced in the view
      * @param tripId - id of the trip to edit
+     *
+     * @throws NoResultException when tripId passed cannot be found
      * @return trip form view
      * Algorithm:
      * 1. declare the local variable trip
@@ -194,15 +197,21 @@ public class TripdatTripController {
                                Model model) {
         // == local variables ==
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TripdatTrip trip = tripService.findOne(tripId);
+        TripdatTrip trip = null;
         TripDto tripDto;
-        // find the trip to display with the tripId passed with the url
-        if (tripId != -1 && trip == null) {
-            return ViewNames.BAD_LINK;
-        }
-        // If trip does not belong to the user direct to access denied page
-        if(tripId != -1 &&  !trip.getUser().getUserId().equals(user.getUserId())) {
-            return ViewNames.ACCESS_DENIED;
+        // ensure the Trip id passed is valid and belong to the logged in user.
+        if (tripId != -1) {
+            try{
+                trip = tripService.findOne(tripId);
+                if(!trip.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have access to this Trip.");
+                    return ViewNames.ACCESS_DENIED;
+                }
+
+            } catch (NoResultException e) {
+                log.info("Trip could not be found.");
+                return ViewNames.BAD_LINK;
+            }
         }
         log.info("editing id = {}", tripId);
         if (tripId == -1) {
@@ -316,6 +325,7 @@ public class TripdatTripController {
         trip.setDestinationCity(tripDto.getDestinationCity());
         trip.setTripName(tripDto.getTripName());
         trip.setTripDescription(tripDto.getTripDescription());
+        trip.setIsUserTraveler(tripDto.getIsUserTraveler());
         // If tripId is not -1 then update this Trip
         if (tripId != -1) {
             tripService.update(trip);
@@ -355,14 +365,19 @@ public class TripdatTripController {
         // If so delete the trip in its entirety or allow them to move the items to the
         // un-filed sections
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TripdatTrip trip = tripService.findOne(tripId);
-        // find the trip to display with the tripId passed with the url
-        if (trip == null) {
-            return ViewNames.BAD_LINK;
-        }
-        // If trip does not belong to the user direct to access denied page
-        if(!trip.getUser().getUserId().equals(user.getUserId())) {
-            return ViewNames.ACCESS_DENIED;
+        TripdatTrip trip = null;
+        if (tripId != -1) {
+            try{
+                trip = tripService.findOne(tripId);
+                if(!trip.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have access to this Trip.");
+                    return ViewNames.ACCESS_DENIED;
+                }
+
+            } catch (NoResultException e) {
+                log.info("Trip could not be found.");
+                return ViewNames.BAD_LINK;
+            }
         }
         tripService.deleteById(tripId);
         return "redirect:" + ViewNames.USER_TRIPS;

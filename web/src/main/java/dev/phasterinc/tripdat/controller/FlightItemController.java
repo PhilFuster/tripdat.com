@@ -21,6 +21,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.NoResultException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -185,22 +186,46 @@ public class FlightItemController {
      * @param model      Model to add attributes to for rendering in the view.
      * @param tripId     Long,id of trip to retrieve the FlightItem from.
      * @param tripItemId Long, id of the Flight to retrieve.
+     *
+     * @throws NoResultException when the itemId or tripId passed is invalid.
      */
     @GetMapping(value = {Mappings.EDIT_FLIGHT, Mappings.CREATE_FLIGHT})
     public String showFlightItemForm(Model model,
                                      @RequestParam(required = false, defaultValue = "-1") Long tripItemId,
                                      @RequestParam(defaultValue = "-1", required = false) Long tripId) {
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        TripdatTripItem tripItem = tripItemService.findByItemId(tripItemId);
-        TripdatTrip trip = tripService.findOne(tripId);
-        // if item or trip is null, return bad link item or trip not found.
-        if((tripItemId != -1 && tripItem == null) || (tripId != -1 && trip == null)) {
-            return ViewNames.BAD_LINK;
+        TripdatTripItem tripItem = null;
+        TripdatTrip trip = null;
+        // editing tripItem. Make sure it is valid & belongs to user.
+        if(tripItemId != -1) {
+            try {
+                tripItem = tripItemService.findByItemId(tripItemId);
+                if(!tripItem.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip Item");
+                    return ViewNames.ACCESS_DENIED;
+                }
+                // Check that itemId is valid to the type of form being accessed.
+                if(tripItem.getType() != "F") {
+                    log.info("Trip Item ID passed is not of type Flight.");
+                    return ViewNames.BAD_LINK;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip Item could not be found");
+                return ViewNames.BAD_LINK;
+            }
         }
-        // If the trip or tripItem do not belong to the user direct to access denied page
-        if ((tripItemId != -1 && !tripItem.getUser().getUserId().equals(user.getUserId()))
-             || (tripId != -1 && !trip.getUser().getUserId().equals(user.getUserId()))) {
-            return ViewNames.ACCESS_DENIED;
+        // Validate that TripId passed is valid, and belong to user.
+        if(tripId != -1) {
+            try {
+                trip = tripService.findOne(tripId);
+                if(!trip.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip");
+                    return ViewNames.ACCESS_DENIED;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip could not be found");
+                return ViewNames.BAD_LINK;
+            }
         }
         FlightItemDto flight = flightItemDto(tripItemId,tripId);
         model.addAttribute("flight", flight);
@@ -351,17 +376,47 @@ public class FlightItemController {
      *
      * @param tripId Long, id of the Trip that contains the item to be deleted.
      * @param itemId Long, id of the item to be deleted.
+     *
+     * @throws NoResultException when tripItemId or tripId passed cannot be found.
      */
     @RequestMapping(value = {Mappings.DELETE_FLIGHT}, params = {"itemId", "tripId"}, method = RequestMethod.POST)
     public String deleteFlightItem(@RequestParam(required = false, defaultValue = "-1") Long itemId,
                                    @RequestParam Long tripId) {
-        Flight flight = (Flight) tripItemService.findByItemId(itemId);
+        TripdatTrip trip = null;
+        TripdatTripItem tripItem = null;
         TripdatUserPrincipal user = (TripdatUserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        // If the tripItem or trip does not belong to the user direct to access denied page
-        if (!flight.getUser().getUserId().equals(user.getUserId()) || !flight.getTripdatTrip().getUser().getUserId().equals(user.getUserId())) {
-            return ViewNames.ACCESS_DENIED;
+        // attempting to delete a tripItem. Make sure it is valid & belongs to user.
+        if(itemId != -1) {
+            try {
+                tripItem = tripItemService.findByItemId(itemId);
+                if(!tripItem.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip Item");
+                    return ViewNames.ACCESS_DENIED;
+                }
+                // Check that itemId is valid to the type of form being accessed.
+                if(tripItem.getType() != "F") {
+                    log.info("Attempting to delete an item not of type flight.");
+                    return ViewNames.BAD_LINK;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip Item could not be found");
+                return ViewNames.BAD_LINK;
+            }
         }
-        tripItemService.delete(flight);
+        // Validate that tripId passed is valid, and belongs to user.
+        if(tripId != -1) {
+            try {
+                trip = tripService.findOne(tripId);
+                if(!trip.getUser().getUserId().equals(user.getUserId())) {
+                    log.info("User does not have permission to access this Trip");
+                    return ViewNames.ACCESS_DENIED;
+                }
+            } catch (NoResultException e) {
+                log.info("Trip could not be found");
+                return ViewNames.BAD_LINK;
+            }
+        }
+        tripItemService.delete((Flight) tripItem);
         return "redirect:" + ViewNames.TRIP_DETAILS + "?tripId=" + tripId.toString();
     }
 

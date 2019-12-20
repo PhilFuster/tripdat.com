@@ -40,7 +40,7 @@
                     <label th:for="|tripName|" th:class="|control-label|">Trip Name*</label>
                     <input th:type="text"
                            th:class="|form-control|"
-                           th:field="*{tripName}"/>
+                           th:field="*{tripName}" th:maxlength="30"/>
                     <p class="error-message alert alert-danger"
                        th:each="error: ${#fields.errors('tripName')}"
                        th:text="${error}">Validation error</p>

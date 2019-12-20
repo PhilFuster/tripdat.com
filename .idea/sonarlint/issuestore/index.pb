@@ -35,8 +35,6 @@ n
 >core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java,2\4\2412c3eec55a9189c252aaf2f047bc86ad835ae4
 p
 @core/src/main/java/dev/phasterinc/tripdat/model/TripdatTrip.java,f\2\f2dd181da6fad2f1169684aaf5bb80370a43ef3d
-}
-Mcore/src/main/java/dev/phasterinc/tripdat/factory/TripdatTripItemFactory.java,c\8\c8011a4b1a370d26b94d36a579c3559e26739daa
 l
 <core/src/main/java/dev/phasterinc/tripdat/dao/CruiseDao.java,4\a\4ac4c1e49835174da088b2ce63e0c46c8119e9f9
 t
@@ -53,8 +51,6 @@ Score/src/main/java/dev/phasterinc/tripdat/service/CustomUserDetailsServiceImpl.
 Mcore/src/main/java/dev/phasterinc/tripdat/service/TripdatUserServiceImpl.java,8\6\86d7f50009bf5c4e68f1a69e2a194f4571dff3b7
 u
 Ecore/src/main/java/dev/phasterinc/tripdat/dao/TripdatUserDaoImpl.java,a\9\a978756ac33f597390890582fde455af58a49999
-t
-Dcore/src/main/java/dev/phasterinc/tripdat/factory/FlightFactory.java,9\b\9b020cbc5e3cece8c8b82417c77dfb99bc422662
 v
 Fcore/src/main/java/dev/phasterinc/tripdat/model/dto/FlightItemDto.java,e\f\efe5dc48e016c6a47b9305c897347bad70ede4a6
 y
