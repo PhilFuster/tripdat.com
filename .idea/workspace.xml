@@ -2,31 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9f40609e-15e7-4e51-960a-4b3848a1ca61" name="Default Changelist" comment="f">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/postgres.edMnLQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/postgres.edMnLQ/schema/public.abK9xQ.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/information_schema.FNRwLQ.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/pg_catalog.0S1ZNQ.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/pg_temp_1.zkWuFg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/pg_toast.33HYYw.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/pg_toast_temp_1.5ixBaA.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/public.abK9xQ.meta" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/a97709f2-22be-443b-a23c-4ec00c1e22d9/storage_v2/_src_/database/tripdat.UmHXwA/schema/public.abK9xQ.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/9/b/9b020cbc5e3cece8c8b82417c77dfb99bc422662" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/c/8/c8011a4b1a370d26b94d36a579c3559e26739daa" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/AbstractHibernateDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/dao/AbstractHibernateDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/resources/logback-spring.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/resources/logback-spring.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/CarItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/CarItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/FlightItemController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/FlightItemController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/TripdatTripController.class" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/classes/dev/phasterinc/tripdat/controller/TripdatTripController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/out/production/resources/templates/user/trip/edit/edit-trip.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/out/production/resources/templates/user/trip/edit/edit-trip.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/CarItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/FlightItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/FlightItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/TripdatTripController.java" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/java/dev/phasterinc/tripdat/controller/TripdatTripController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web/src/main/resources/templates/user/trip/edit/edit-trip.html" beforeDir="false" afterPath="$PROJECT_DIR$/web/src/main/resources/templates/user/trip/edit/edit-trip.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/IDateAndTimeSpan.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CarRental.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CruiseStop.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/CruiseStop.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/FlightSegment.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/dev/phasterinc/tripdat/model/FlightSegment.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -367,7 +346,7 @@
       <workItem from="1573083398054" duration="20739000" />
       <workItem from="1574335674639" duration="9989000" />
       <workItem from="1575366538340" duration="57382000" />
-      <workItem from="1576311146386" duration="8029000" />
+      <workItem from="1576311146386" duration="8494000" />
     </task>
     <servers />
   </component>

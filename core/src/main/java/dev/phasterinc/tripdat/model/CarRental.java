@@ -6,7 +6,6 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import dev.phasterinc.tripdat.IDateAndTimeSpan;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -29,7 +28,7 @@ import java.time.LocalTime;
 @EqualsAndHashCode(callSuper = true)
 @Entity(name = "CarRental")
 @Table(name = "car_rental")
-public class CarRental extends TripdatTripItem implements Serializable, IDateAndTimeSpan {
+public class CarRental extends TripdatTripItem implements Serializable {
     // == fields ==
 
 
@@ -97,55 +96,4 @@ public class CarRental extends TripdatTripItem implements Serializable, IDateAnd
         return "CR";
     }
 
-    /**
-     * Name: getStartDate
-     * Purpose: Retrieve the car rental pick up date
-     * Synopsis: Implements the IDateAndTimeSpan interface method getStartDate
-     * <p>
-     *
-     * @return LocalDate, pick up date for a car rental
-     */
-    @Override
-    public LocalDate getStartDate() {
-        return carRentalPickUpDate;
-    }
-
-    /**
-     * Name: getEndDate
-     * Purpose: Retrieve the car rental drop off date
-     * Synopsis: Implements the IDateAndTimeSpan interface method getStartDate
-     * <p>
-     *
-     * @return LocalDate, drop off date for car rental
-     */
-    @Override
-    public LocalDate getEndDate() {
-        return carRentalDropOffDate;
-    }
-
-    /**
-     * Name: getStartTime
-     * Purpose: Retrieve the car rental pick up time
-     * Synopsis: Implements the IDateAndTimeSpan interface method getStartTime
-     * <p>
-     *
-     * @return LocalTime, pick up time for the car rental
-     */
-    @Override
-    public LocalTime getStartTime() {
-        return carRentalPickUpTime;
-    }
-
-    /**
-     * Name: getEndTime
-     * Purpose: Retrieve the car rental drop off time
-     * Synopsis: Implements the IDateAndTimeSpan interface method get EndTime
-     * <p>
-     *
-     * @return LocalTime, time to drop off the car rental
-     */
-    @Override
-    public LocalTime getEndTime() {
-        return carRentalDropOffTime;
-    }
 }

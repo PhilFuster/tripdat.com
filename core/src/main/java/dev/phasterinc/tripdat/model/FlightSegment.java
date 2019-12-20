@@ -6,7 +6,6 @@ package dev.phasterinc.tripdat.model;
  * Date : 3/1/2019                                          *
  ************************************************************/
 
-import dev.phasterinc.tripdat.IDateAndTimeSpan;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,7 +26,7 @@ import java.time.LocalTime;
 @NoArgsConstructor()
 @Setter
 @Getter
-public class FlightSegment implements Serializable, IDateAndTimeSpan {
+public class FlightSegment implements Serializable{
 
     // == fields ==
     @Id
@@ -122,57 +121,6 @@ public class FlightSegment implements Serializable, IDateAndTimeSpan {
     private Flight flight;
 
 
-    /**
-     * Name: getStartDate
-     * Purpose: Retrieve the departure date of a flight segment
-     * Synopsis: Implements the IDateAndTimeSpan interface method getStartDate
-     * <p>
-     *
-     * @return LocalDate, date of flight departure
-     */
-    @Override
-    public LocalDate getStartDate() {
-        return flightDepartureDate;
-    }
-
-    /**
-     * Name: getEndDate
-     * Purpose: Retrieve the arrival date of a flight segment
-     * Synopsis: Implements the IDateAndTimeSpan interface method getEndDate
-     * <p>
-     *
-     * @return LocalDate, the flight arrival date
-     */
-    @Override
-    public LocalDate getEndDate() {
-        return flightArrivalDate;
-    }
-
-    /**
-     * Name: getStartTime
-     * Purpose: Retrieve the departure time of a flight
-     * Synopsis: Implements the IDateAndTimeSpan interface method getStartTime
-     * <p>
-     *
-     * @return LocalTime, time the flight departs
-     */
-    @Override
-    public LocalTime getStartTime() {
-        return flightDepartureTime;
-    }
-
-    /**
-     * Name: getEndTime
-     * Purpose: Retrieve the arrival time of a flight
-     * Synopsis: Implements the IDateAndTime Span interface method getEndTime
-     * <p>
-     *
-     * @return LocalTime, arrival time of a flight
-     */
-    @Override
-    public LocalTime getEndTime() {
-        return flightArrivalTime;
-    }
 
     /**
      * Name: equals
